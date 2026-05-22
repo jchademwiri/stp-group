@@ -9,6 +9,10 @@ Turborepo monorepo with two [Astro v6](https://astro.build) sites.
 
 Requires Node 22.12+.
 
+### Shared packages
+
+- `@repo/tailwind` — Tailwind CSS v4 (Vite plugin), global styles, and `BaseLayout.astro`
+
 ## Commands
 
 ```sh

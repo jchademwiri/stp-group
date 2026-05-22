@@ -1,16 +1,14 @@
 ---
+import BaseLayout from "@repo/tailwind/layouts/BaseLayout.astro";
+
 const title = "LME";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<title>{title}</title>
-	</head>
-	<body>
-		<h1>{title}</h1>
-		<p>Edit apps/lme/src/pages/index.astro to get started.</p>
-	</body>
-</html>
+<BaseLayout title={title}>
+  <main class="mx-auto max-w-3xl px-6 py-16">
+    <h1 class="text-4xl font-bold tracking-tight text-brand-900">{title}</h1>
+    <p class="mt-4 text-lg text-neutral-600">
+      Edit <code class="rounded bg-neutral-100 px-1.5 py-0.5 text-sm">apps/lme/src/pages/index.astro</code> to get started.
+    </p>
+  </main>
+</BaseLayout>
