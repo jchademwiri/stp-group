@@ -1,0 +1,59 @@
+---
+import BaseLayout from "@repo/tailwind/layouts/BaseLayout.astro";
+import WhatsAppButton from "../components/WhatsAppButton.astro";
+import StickyMobileBar from "../components/StickyMobileBar.astro";
+import LocalBusinessSchema from "../components/LocalBusinessSchema.astro";
+import { SITE } from "../data/site";
+
+interface Props {
+  title: string;
+  description?: string;
+  whatsappMessage?: string;
+}
+
+const { title, description = "", whatsappMessage } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  bodyClass="bg-charcoal text-neutral-100"
+>
+  <LocalBusinessSchema slot="head" />
+  <slot name="head" slot="head" />
+  <header class="border-b border-white/10 bg-charcoal/90">
+    <div
+      class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6"
+    >
+      <a href="/" class="text-lg font-bold text-white">{SITE.name}</a>
+      <nav class="flex items-center gap-4 text-sm font-medium">
+        <a href="/plant-hire" class="text-neutral-300 hover:text-safety">Plant Hire</a>
+        <a href="/services/grass-cutting" class="text-neutral-300 hover:text-safety"
+          >Grass Cutting</a
+        >
+        <a
+          href={`tel:${SITE.phoneTel}`}
+          class="hidden rounded-lg bg-safety px-3 py-1.5 font-semibold text-charcoal hover:bg-safety-hover sm:inline-block"
+        >
+          Call now
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="border-t border-white/10 bg-charcoal py-10 pb-24 md:pb-10">
+    <div class="mx-auto max-w-6xl px-4 text-sm text-neutral-400 md:px-6">
+      <p class="font-semibold text-white">{SITE.legalName}</p>
+      <p class="mt-2">Serving {SITE.region}</p>
+      <p class="mt-1">{SITE.businessHours}</p>
+      <p class="mt-4 text-xs text-neutral-500">
+        CIDB Grades 6 CE, 6 EP, 6 SH · COIDA registered · Public liability insured
+      </p>
+    </div>
+  </footer>
+
+  <WhatsAppButton message={whatsappMessage} />
+  <StickyMobileBar />
+</BaseLayout>

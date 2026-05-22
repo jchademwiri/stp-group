@@ -36,15 +36,15 @@ This document details the functional, design, content, and search optimization r
 
 *   **Hero Block**:
     *   Industrial background visual.
-    *   Header strings and buttons matching the specifications in [copy.md](file:///d:/dev/websites/sithembe-official-website/docs/copy.md#2-plant-hire-landing-page-copy).
+    *   Header strings and buttons matching the specifications in [copy.md](./copy.md#2-plant-hire-landing-page-copy).
 *   **Fleet Category Display**:
-    *   Responsive layout rendering cards for the 8 fleet items detailed in [data-schema.md](file:///d:/dev/websites/sithembe-official-website/docs/data-schema.md#3-fleet-inventory-data-the-8-items).
+    *   Responsive layout rendering cards for the 8 fleet items detailed in [data-schema.md](./data-schema.md#3-fleet-inventory-data-the-8-items).
     *   Each card displays: Primary WebP image, Title, Short Description, Availability Badge, and a CTA button linking to that item's details.
 *   **Central Inquiry Form**:
     *   Positioned at the base of the page.
     *   Collects: Name, Phone, Email, Selected Equipment, Start Date, Duration, and Location.
 *   **Floating WhatsApp Icon**:
-    *   Static widget in the viewport corner linking to the primary WhatsApp line, pre-filled with the message template in [copy.md](file:///d:/dev/websites/sithembe-official-website/docs/copy.md#1-global-components-copy).
+    *   Static widget in the viewport corner linking to the primary WhatsApp line, pre-filled with the message template in [copy.md](./copy.md#1-global-components-copy).
 
 ### B. Plant Details Page
 *Goal: Provide detailed specifications to enterprise and municipal buyers.*
@@ -52,7 +52,7 @@ This document details the functional, design, content, and search optimization r
 *   **Layout Elements**:
     *   **Main Media Area**: Large viewport rendering the primary image of the equipment.
     *   **Static Grid Gallery**: Render a layout grid of 2-3 supporting static photos directly underneath the main image (no complex carousels in MVP).
-    *   **Technical Specifications Table**: Clean table listing key mechanical capacities (weight, reach, horsepower) as specified in [data-schema.md](file:///d:/dev/websites/sithembe-official-website/docs/data-schema.md#3-fleet-inventory-data-the-8-items).
+    *   **Technical Specifications Table**: Clean table listing key mechanical capacities (weight, reach, horsepower) as specified in [data-schema.md](./data-schema.md#3-fleet-inventory-data-the-8-items).
     *   **Inquiry Anchor**: CTA buttons that load the contact form or trigger a custom WhatsApp chat for that specific item.
 
 ### C. Grass Cutting Services Page
@@ -73,8 +73,8 @@ This document details the functional, design, content, and search optimization r
     *   Static Grass Cutting service page with custom quote inquiry forms.
     *   Floating WhatsApp action button active across all pages.
 *   **Acceptance Criteria**:
-    1.  All routing matches the paths defined in [routes.md](file:///d:/dev/websites/sithembe-official-website/docs/routes.md#1-canonical-url-map-navigation-structure).
-    2.  All visual copies match the exact strings specified in [copy.md](file:///d:/dev/websites/sithembe-official-website/docs/copy.md).
+    1.  All routing matches the paths defined in [routes.md](./routes.md#1-canonical-url-map-navigation-structure).
+    2.  All visual copies match the exact strings specified in [copy.md](./copy.md).
     3.  All images are WebP format and load under 250ms on mobile viewports.
     4.  Forms validate required fields (Name, Phone, Location) before submission.
     5.  Clicking WhatsApp links launches a chat with the correct pre-filled query text.

@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
 
-  --color-brand-50: oklch(0.97 0.02 250);
-  --color-brand-500: oklch(0.55 0.15 250);
-  --color-brand-900: oklch(0.25 0.08 250);
+  --color-charcoal: #1e1e24;
+  --color-slate: #2a2a32;
+  --color-safety: #ff9f1c;
+  --color-safety-hover: #e88f10;
+  --color-whatsapp: #25d366;
 }

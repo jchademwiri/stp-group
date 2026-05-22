@@ -1,4 +1,6 @@
-# Development & Implementation Plan: Sithembe Plant Hire & Grass Cutting
+# Development & Implementation Plan (Legacy — Next.js)
+
+> **Use [implementation_plan_astro.md](./implementation_plan_astro.md)** for the active Astro build in `apps/stp`. This file is kept for reference only.
 
 This document outlines the phased development plan for the Sithembe website expansion, mapping technical details, folder layouts, and implementation boundaries.
 
@@ -35,7 +37,7 @@ src/
 ## 2. Phase 1: MVP Technical Implementation Details
 
 ### A. Fleet Data Source (`src/data/plantFleet.ts`)
-*   **Source of Truth**: Maps directly to the definitions in [data-schema.md](file:///d:/dev/websites/sithembe-official-website/docs/data-schema.md#3-fleet-inventory-data-the-8-items).
+*   **Source of Truth**: Maps directly to the definitions in [data-schema.md](./data-schema.md#3-fleet-inventory-data-the-8-items).
 *   **Properties**: `id`, `slug`, `title`, `category`, `shortDescription`, `longDescription`, `primaryImage`, `galleryImages`, `rates`, `specifications`, `availability`.
 *   **Implementation**: Create this file at `src/data/plantFleet.ts` exporting the array of 8 equipment types exactly as defined.
 
@@ -59,7 +61,7 @@ src/
 ### C. Floating WhatsApp Component (`src/components/ui/WhatsAppButton.tsx`)
 *   **Link Generation**:
     *   Renders a static floating anchor element.
-    *   Constructs the URL using the pre-filled template from [copy.md](file:///d:/dev/websites/sithembe-official-website/docs/copy.md#1-global-components-copy):
+    *   Constructs the URL using the pre-filled template from [copy.md](./copy.md#1-global-components-copy):
         `https://wa.me/27128803155?text=[EncodedMessage]`
 *   **Styling**: Fixed positioning (`fixed bottom-6 right-6`), `z-index: 50`, `bg-[#25D366]` (WhatsApp Green), custom hover pulses, and a sliding text tooltip on hover.
 
@@ -97,6 +99,6 @@ src/
    npx tsc --noEmit
    ```
 2. **Dynamic Routing Validation**:
-   *   Confirm each individual slug in [data-schema.md](file:///d:/dev/websites/sithembe-official-website/docs/data-schema.md#3-fleet-inventory-data-the-8-items) builds correctly.
-   *   Verify metadata output matches the values in [routes.md](file:///d:/dev/websites/sithembe-official-website/docs/routes.md#2-seo-metadata-specifications).
+   *   Confirm each individual slug in [data-schema.md](./data-schema.md#3-fleet-inventory-data-the-8-items) builds correctly.
+   *   Verify metadata output matches the values in [routes.md](./routes.md#2-seo-metadata-specifications).
 3. **Core Web Vitals**: Test LCP and CLS on the plant listing and detail pages, ensuring webp assets keep PageSpeed scores above 90.

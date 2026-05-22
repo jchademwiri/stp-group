@@ -4,8 +4,10 @@ Turborepo monorepo with two [Astro v6](https://astro.build) sites.
 
 | App | Path | Dev URL |
 | --- | --- | --- |
-| STP | `apps/stp` | http://localhost:4321 |
+| STP (Sithembe) | `apps/stp` | http://localhost:4321 |
 | LME | `apps/lme` | http://localhost:4322 |
+
+STP routes: `/`, `/plant-hire`, `/plant-hire/[slug]`, `/services/grass-cutting`. See [docs/](./docs/).
 
 Requires Node 22.12+.
 

@@ -1,0 +1,20 @@
+---
+import { SITE } from "../data/site";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: SITE.legalName,
+  url: Astro.site ?? SITE.url,
+  telephone: SITE.phoneTel,
+  email: SITE.email,
+  areaServed: {
+    "@type": "AdministrativeArea",
+    name: "Pretoria and Gauteng, South Africa",
+  },
+  description:
+    "Construction and plant hire — dropside trucks, vacuum tankers, bobcats, tractors, mowers and tools with qualified operators.",
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
