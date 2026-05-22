@@ -5,11 +5,16 @@
   "type": "module",
   "exports": {
     "./styles.css": "./src/styles.css",
+    "./theme.css": "./src/theme.css",
+    "./tailwind.config": "./tailwind.config.mjs",
     "./vite": "./vite.mjs",
     "./layouts/BaseLayout.astro": "./src/layouts/BaseLayout.astro"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
     "tailwindcss": "^4.3.0"
+  },
+  "peerDependencies": {
+    "astro": "^6.0.0"
   }
 }

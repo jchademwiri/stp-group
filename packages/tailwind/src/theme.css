@@ -1,0 +1,14 @@
+/**
+ * Shared Tailwind v4 theme — edit design tokens here.
+ * Imported by styles.css; consumed by all apps via BaseLayout.
+ */
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  /* Sithembe industrial palette */
+  --color-charcoal: #1e1e24;
+  --color-slate: #2a2a32;
+  --color-safety: #ff9f1c;
+  --color-safety-hover: #e88f10;
+  --color-whatsapp: #25d366;
+}

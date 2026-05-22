@@ -1,11 +1,7 @@
 @import "tailwindcss";
+@import "./theme.css";
 
-@theme {
-  --font-sans: "Inter", system-ui, sans-serif;
-
-  --color-charcoal: #1e1e24;
-  --color-slate: #2a2a32;
-  --color-safety: #ff9f1c;
-  --color-safety-hover: #e88f10;
-  --color-whatsapp: #25d366;
-}
+/* Scan class names in monorepo apps + this package */
+@source "../../../apps/stp/src/**/*.{astro,html,js,ts}";
+@source "../../../apps/lme/src/**/*.{astro,html,js,ts}";
+@source "./**/*.{astro,html,js,ts}";

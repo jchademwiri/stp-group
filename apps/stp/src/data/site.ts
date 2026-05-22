@@ -8,7 +8,8 @@ export const SITE = {
   email: "admin@sithembe.co.za",
   region: "Pretoria & Gauteng",
   responseTime: "within 2 hours during business hours",
-  businessHours: "Mon–Fri 07:00–17:00, Sat 08:00–13:00",
+  businessHours: "Mon-Fri 07:00-17:00"
+  // Sat 08:00-13:00, Sun 08:00-12:00
 } as const;
 
 export const WHATSAPP_DEFAULT_MESSAGE =
