@@ -1,4 +1,4 @@
-import type { FleetCategory, FleetItem } from "../types/fleet";
+import type { FleetCategory, FleetItem } from "@/types/fleet";
 
 export const FLEET_CATEGORIES: { id: FleetCategory | "all"; label: string }[] = [
   { id: "all", label: "All Equipment" },

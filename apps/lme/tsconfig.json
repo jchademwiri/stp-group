@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/*": ["./src/*"],
       "@repo/tailwind": ["../../packages/tailwind"],
       "@repo/tailwind/*": ["../../packages/tailwind/src/*", "../../packages/tailwind/*"]
     }

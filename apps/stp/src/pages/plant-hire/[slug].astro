@@ -1,9 +1,9 @@
 ---
-import StpLayout from "../../layouts/StpLayout.astro";
-import FleetImage from "../../components/FleetImage.astro";
-import QuoteForm from "../../components/QuoteForm.astro";
-import { plantFleet, imageAlt } from "../../data/plantFleet";
-import { equipmentWhatsappMessage, whatsappUrl } from "../../data/site";
+import StpLayout from "@/layouts/StpLayout.astro";
+import FleetImage from "@/components/FleetImage.astro";
+import QuoteForm from "@/components/QuoteForm.astro";
+import { plantFleet, imageAlt } from "@/data/plantFleet";
+import { equipmentWhatsappMessage, whatsappUrl } from "@/data/site";
 
 export function getStaticPaths() {
   return plantFleet.map((item) => ({
