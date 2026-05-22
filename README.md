@@ -7,7 +7,7 @@ Turborepo monorepo with two [Astro v6](https://astro.build) sites.
 | STP (Sithembe) | `apps/stp` | http://localhost:4321 |
 | LME | `apps/lme` | http://localhost:4322 |
 
-STP routes: `/`, `/plant-hire`, `/plant-hire/[slug]`, `/services/grass-cutting`. See [docs/](./docs/).
+STP routes: `/`, `/plant-hire`, `/plant-hire/[slug]`, `/services/grass-cutting`. Quote forms use **Resend** via `POST /api/quote` (Node adapter). See [docs/](./docs/) and `apps/stp/.env.example`.
 
 Requires Node 22.12+.
 

@@ -16,5 +16,5 @@
 1. `copy.md` + `data-schema.md` — content truth
 2. `apps/stp/src/data/plantFleet.ts` — implements schema
 3. Plant hire landing → detail pages → grass cutting
-4. Add `PUBLIC_WEB3FORMS_ACCESS_KEY` in `apps/stp/.env`
+4. Add Resend env vars in `apps/stp/.env` (see `.env.example`)
 5. Replace placeholder fleet photos in `apps/stp/public/images/plant-hire/`

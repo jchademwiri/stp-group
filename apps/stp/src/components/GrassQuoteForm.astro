@@ -1,0 +1,151 @@
+---
+import { SITE } from "@/data/site";
+
+const areaOptions = [
+  "Under 1,000 m²",
+  "1,000 m² - 5,000 m²",
+  "0.5 Hectares - 1 Hectare",
+  "1 - 5 Hectares",
+  "5 Hectares+",
+];
+
+const frequencyOptions = [
+  "Once-off Clearing / Reclamation",
+  "Bi-weekly Maintenance",
+  "Monthly Maintenance Contract",
+  "Seasonal Clearing / Firebreak",
+];
+---
+
+<div class="rounded-2xl border border-white/10 bg-slate p-6 md:p-10">
+  <h2 class="text-2xl font-bold text-white">Book a Grass Cutting Consultation</h2>
+  <p class="mt-2 text-neutral-400">
+    Tell us about your site — we'll respond {SITE.responseTime}.
+  </p>
+
+  <form id="grass-quote-form" class="mt-6 grid gap-4 md:grid-cols-2">
+    <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+    <label class="flex flex-col gap-1.5 text-sm">
+      <span class="font-medium text-neutral-200">Your Full Name *</span>
+      <input
+        type="text"
+        name="name"
+        required
+        autocomplete="name"
+        class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white"
+      />
+    </label>
+
+    <label class="flex flex-col gap-1.5 text-sm">
+      <span class="font-medium text-neutral-200">Email *</span>
+      <input
+        type="email"
+        name="email"
+        required
+        autocomplete="email"
+        class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white"
+      />
+    </label>
+
+    <label class="flex flex-col gap-1.5 text-sm">
+      <span class="font-medium text-neutral-200">Phone *</span>
+      <input
+        type="tel"
+        name="phone"
+        required
+        autocomplete="tel"
+        class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white"
+      />
+    </label>
+
+    <label class="flex flex-col gap-1.5 text-sm">
+      <span class="font-medium text-neutral-200">Site location</span>
+      <input
+        type="text"
+        name="location"
+        class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white"
+        placeholder="City / suburb / estate"
+      />
+    </label>
+
+    <label class="flex flex-col gap-1.5 text-sm">
+      <span class="font-medium text-neutral-200">Estimated area</span>
+      <select name="area" class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white">
+        <option value="">Select area</option>
+        {areaOptions.map((o) => <option value={o}>{o}</option>)}
+      </select>
+    </label>
+
+    <label class="flex flex-col gap-1.5 text-sm">
+      <span class="font-medium text-neutral-200">Service frequency</span>
+      <select name="frequency" class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white">
+        <option value="">Select frequency</option>
+        {frequencyOptions.map((o) => <option value={o}>{o}</option>)}
+      </select>
+    </label>
+
+    <label class="flex flex-col gap-1.5 text-sm md:col-span-2">
+      <span class="font-medium text-neutral-200">Message (optional)</span>
+      <textarea
+        name="message"
+        rows={3}
+        class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white"
+        placeholder="Access, terrain, deadlines…"
+      ></textarea>
+    </label>
+
+    <p class="text-xs text-neutral-500 md:col-span-2">
+      By submitting, you agree we may contact you about this inquiry. We process data in line with POPIA.
+    </p>
+
+    <div class="md:col-span-2">
+      <button
+        type="submit"
+        class="rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover disabled:opacity-60"
+      >
+        Send inquiry
+      </button>
+      <p id="grass-form-status" class="mt-3 hidden text-sm" role="status"></p>
+    </div>
+  </form>
+</div>
+
+<script>
+  import { setFormStatus, submitQuote } from "@/scripts/submit-quote";
+
+  const form = document.getElementById("grass-quote-form") as HTMLFormElement | null;
+  const status = document.getElementById("grass-form-status");
+  const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form) return;
+
+    const fd = new FormData(form);
+    setFormStatus(status, "Sending…", "pending");
+    submitBtn?.setAttribute("disabled", "true");
+
+    const result = await submitQuote({
+      type: "grass-cutting",
+      name: String(fd.get("name") ?? ""),
+      email: String(fd.get("email") ?? ""),
+      phone: String(fd.get("phone") ?? ""),
+      location: String(fd.get("location") ?? "") || undefined,
+      area: String(fd.get("area") ?? "") || undefined,
+      frequency: String(fd.get("frequency") ?? "") || undefined,
+      message: String(fd.get("message") ?? "") || undefined,
+      website: String(fd.get("website") ?? ""),
+    });
+
+    submitBtn?.removeAttribute("disabled");
+
+    if (result.ok) {
+      setFormStatus(status, "Thank you — we'll respond soon.", "success");
+      form.reset();
+      return;
+    }
+
+    setFormStatus(status, result.message, "error");
+  });
+</script>

@@ -1,7 +1,8 @@
 ---
 import StpLayout from "@/layouts/StpLayout.astro";
 import TrustBadges from "@/components/TrustBadges.astro";
-import { SITE, whatsappUrl } from "@/data/site";
+import GrassQuoteForm from "@/components/GrassQuoteForm.astro";
+import { SITE } from "@/data/site";
 
 const title = "Commercial Grass Cutting & Plot Clearing Services | Sithembe";
 const description =
@@ -20,21 +21,6 @@ const services = [
     title: "Overgrown Plot Clearing",
     text: "Heavy-duty land reclamation of wild, overgrown properties, utilizing brush cutters and chainsaws to remove thick shrubs and tree hazards.",
   },
-];
-
-const areaOptions = [
-  "Under 1,000 m²",
-  "1,000 m² - 5,000 m²",
-  "0.5 Hectares - 1 Hectare",
-  "1 - 5 Hectares",
-  "5 Hectares+",
-];
-
-const frequencyOptions = [
-  "Once-off Clearing / Reclamation",
-  "Bi-weekly Maintenance",
-  "Monthly Maintenance Contract",
-  "Seasonal Clearing / Firebreak",
 ];
 ---
 
@@ -81,61 +67,6 @@ const frequencyOptions = [
   </section>
 
   <section id="grass-quote" class="mx-auto max-w-6xl scroll-mt-8 px-4 py-12 pb-20 md:px-6">
-    <div class="rounded-2xl border border-white/10 bg-slate p-6 md:p-10">
-      <h2 class="text-2xl font-bold text-white">Book a Grass Cutting Consultation</h2>
-      <p class="mt-2 text-neutral-400">
-        Tell us about your site — we'll respond {SITE.responseTime}. For urgent quotes, use WhatsApp.
-      </p>
-      <form
-        class="mt-6 grid gap-4 md:grid-cols-2"
-        action={whatsappUrl(
-          "Hi Sithembe, I'd like a grass cutting / plot clearing quote. Please contact me.",
-        )}
-        method="get"
-        target="_blank"
-      >
-        <label class="flex flex-col gap-1.5 text-sm">
-          <span class="font-medium text-neutral-200">Your Full Name *</span>
-          <input
-            type="text"
-            name="from"
-            required
-            class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white"
-          />
-        </label>
-        <label class="flex flex-col gap-1.5 text-sm">
-          <span class="font-medium text-neutral-200">Phone *</span>
-          <input
-            type="tel"
-            required
-            class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white"
-          />
-        </label>
-        <label class="flex flex-col gap-1.5 text-sm">
-          <span class="font-medium text-neutral-200">Estimated area</span>
-          <select class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white">
-            {areaOptions.map((o) => <option>{o}</option>)}
-          </select>
-        </label>
-        <label class="flex flex-col gap-1.5 text-sm">
-          <span class="font-medium text-neutral-200">Service frequency</span>
-          <select class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white">
-            {frequencyOptions.map((o) => <option>{o}</option>)}
-          </select>
-        </label>
-        <p class="text-xs text-neutral-500 md:col-span-2">
-          Full online submission (Web3Forms) ships with plant hire form — use WhatsApp for grass
-          quotes in MVP.
-        </p>
-        <div class="md:col-span-2">
-          <button
-            type="submit"
-            class="rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover"
-          >
-            Request via WhatsApp
-          </button>
-        </div>
-      </form>
-    </div>
+    <GrassQuoteForm />
   </section>
 </StpLayout>

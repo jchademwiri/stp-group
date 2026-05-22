@@ -37,11 +37,13 @@ Shared Tailwind theme: `packages/tailwind/src/styles.css` (charcoal, safety oran
 | `/plant-hire/[slug]` | `src/pages/plant-hire/[slug].astro` |
 | `/services/grass-cutting` | `src/pages/services/grass-cutting.astro` |
 
-## Forms
+## Forms (Resend)
 
-- **Plant hire**: Web3Forms via `PUBLIC_WEB3FORMS_ACCESS_KEY` in `apps/stp/.env` (see `.env.example`).
-- **Fallback**: `mailto:admin@sithembe.co.za` when key is unset.
-- **Grass cutting (MVP)**: WhatsApp CTA; full Web3Forms parity optional later.
+- **Endpoint**: `POST /api/quote` (`src/pages/api/quote.ts`, `prerender = false`)
+- **Email**: [Resend](https://resend.com) via `src/lib/quote.ts` — keys stay server-side
+- **Env** (see `apps/stp/.env.example`): `RESEND_API_KEY`, `QUOTE_FROM_EMAIL`, `QUOTE_TO_EMAIL`
+- **Deploy**: `@astrojs/node` adapter — static pages + on-demand `/api/quote` (`prerender = false`)
+- **Components**: `QuoteForm.astro` (plant hire), `GrassQuoteForm.astro` (grass cutting)
 
 ## Commands
 
