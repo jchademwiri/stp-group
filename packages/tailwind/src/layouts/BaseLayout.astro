@@ -5,9 +5,14 @@ interface Props {
   title: string;
   description?: string;
   bodyClass?: string;
+  ogImage?: string;
+  canonical?: string;
 }
 
-const { title, description = "", bodyClass = "" } = Astro.props;
+const { title, description = "", bodyClass = "", ogImage = "/og-image.svg", canonical } = Astro.props;
+
+const canonicalUrl = canonical ?? Astro.url.href;
+const imageUrl = new URL(ogImage, Astro.site ?? Astro.url).href;
 ---
 
 <!doctype html>
@@ -17,6 +22,16 @@ const { title, description = "", bodyClass = "" } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

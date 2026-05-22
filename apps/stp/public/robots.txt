@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sithembe.co.za/sitemap-index.xml

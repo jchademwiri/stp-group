@@ -231,6 +231,27 @@ export function getFleetBySlug(slug: string): FleetItem | undefined {
   return plantFleet.find((item) => item.slug === slug);
 }
 
+export function getCategoryCounts(): Record<string, number> {
+  return FLEET_CATEGORIES.reduce(
+    (acc, cat) => {
+      acc[cat.id] =
+        cat.id === "all"
+          ? plantFleet.length
+          : plantFleet.filter((i) => i.category === cat.id).length;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+}
+
+export function getRelatedFleet(item: FleetItem, limit = 3): FleetItem[] {
+  const sameCategory = plantFleet.filter(
+    (i) => i.id !== item.id && i.category === item.category,
+  );
+  if (sameCategory.length >= 2) return sameCategory.slice(0, limit);
+  return plantFleet.filter((i) => i.id !== item.id).slice(0, limit);
+}
+
 export function imageAlt(title: string): string {
   return `${title} for hire in Pretoria, Gauteng - Sithembe Plant Hire`;
 }

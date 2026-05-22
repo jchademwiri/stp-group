@@ -10,6 +10,7 @@ interface Props {
 
 const { src, title, class: className = "", priority = false } = Astro.props;
 const alt = imageAlt(title);
+const imgId = `fleet-img-${src.replace(/\W/g, "-")}`;
 ---
 
 <div
@@ -20,12 +21,19 @@ const alt = imageAlt(title);
 >
   <div
     class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-slate to-charcoal p-6 text-center"
+    aria-hidden="true"
   >
-    <span class="text-4xl opacity-40" aria-hidden="true">🚜</span>
+    <svg class="h-16 w-16 text-neutral-500 opacity-30" viewBox="0 0 24 24" fill="currentColor">
+      <path
+        d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"
+      ></path>
+    </svg>
     <p class="text-sm font-medium text-neutral-300">{title}</p>
-    <p class="text-xs text-neutral-500">Photo coming soon</p>
+    <p class="text-xs tracking-wide text-neutral-500 uppercase">Photo coming soon</p>
   </div>
   <img
+    id={imgId}
+    data-fleet-img
     src={src}
     alt={alt}
     width={1200}
@@ -33,6 +41,13 @@ const alt = imageAlt(title);
     loading={priority ? "eager" : "lazy"}
     decoding="async"
     class="relative z-10 h-full w-full object-cover"
-    onerror="this.remove()"
   />
 </div>
+
+<script>
+  document.querySelectorAll("img[data-fleet-img]").forEach((img) => {
+    if (!(img instanceof HTMLImageElement)) return;
+    if (img.complete && img.naturalHeight === 0) img.remove();
+    else img.addEventListener("error", () => img.remove());
+  });
+</script>

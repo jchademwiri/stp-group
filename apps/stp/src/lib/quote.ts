@@ -89,7 +89,33 @@ export async function sendQuoteEmail(payload: QuotePayload): Promise<{ id: strin
   if (error) throw new Error(error.message);
   if (!data?.id) throw new Error("Failed to send email");
 
+  try {
+    await resend.emails.send({
+      from,
+      to: [payload.email],
+      subject: "We received your inquiry — Sithembe",
+      html: buildConfirmationHtml(payload),
+      text: buildConfirmationText(payload),
+    });
+  } catch (err) {
+    console.error("[quote] confirmation email failed:", err);
+  }
+
   return { id: data.id };
+}
+
+function buildConfirmationText(p: QuotePayload): string {
+  return `Hi ${p.name},\n\nThank you for contacting Sithembe. We have received your inquiry and will respond ${SITE.responseTime}.\n\n--- Your submission ---\n${buildQuoteText(p)}\n\nSithembe Plant Hire\n${SITE.phone}`;
+}
+
+function buildConfirmationHtml(p: QuotePayload): string {
+  return `
+    <p>Hi ${escapeHtml(p.name)},</p>
+    <p>Thank you for contacting <strong>Sithembe</strong>. We have received your inquiry and will respond ${SITE.responseTime}.</p>
+    <h3>Your submission</h3>
+    ${buildQuoteHtml(p)}
+    <p style="margin-top:24px;color:#666;font-size:14px">Sithembe Plant Hire · ${SITE.phone}</p>
+  `.trim();
 }
 
 function buildQuoteText(p: QuotePayload): string {

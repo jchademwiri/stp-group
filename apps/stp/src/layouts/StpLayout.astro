@@ -3,22 +3,21 @@ import BaseLayout from "@repo/tailwind/layouts/BaseLayout.astro";
 import WhatsAppButton from "@/components/WhatsAppButton.astro";
 import StickyMobileBar from "@/components/StickyMobileBar.astro";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema.astro";
-import { SITE } from "@/data/site";
+import { SITE, formatBusinessHours } from "@/data/site";
 
 interface Props {
   title: string;
   description?: string;
   whatsappMessage?: string;
+  ogImage?: string;
 }
 
-const { title, description = "", whatsappMessage } = Astro.props;
+const { title, description = "", whatsappMessage, ogImage } = Astro.props;
+const currentPath = Astro.url.pathname;
+const hours = formatBusinessHours();
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  bodyClass="bg-charcoal text-neutral-100"
->
+<BaseLayout {title} {description} {ogImage} canonical={Astro.url.href} bodyClass="bg-charcoal text-neutral-100">
   <LocalBusinessSchema slot="head" />
   <slot name="head" slot="head" />
   <header class="border-b border-white/10 bg-charcoal/90">
@@ -26,11 +25,27 @@ const { title, description = "", whatsappMessage } = Astro.props;
       class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6"
     >
       <a href="/" class="text-lg font-bold text-white">{SITE.name}</a>
-      <nav class="flex items-center gap-4 text-sm font-medium">
-        <a href="/plant-hire" class="text-neutral-300 hover:text-safety">Plant Hire</a>
-        <a href="/services/grass-cutting" class="text-neutral-300 hover:text-safety"
-          >Grass Cutting</a
+      <nav class="flex items-center gap-4 text-sm font-medium" aria-label="Main">
+        <a
+          href="/plant-hire"
+          class:list={[
+            "transition-colors hover:text-safety",
+            currentPath.startsWith("/plant-hire") ? "font-semibold text-safety" : "text-neutral-300",
+          ]}
         >
+          Plant Hire
+        </a>
+        <a
+          href="/services/grass-cutting"
+          class:list={[
+            "transition-colors hover:text-safety",
+            currentPath.startsWith("/services/grass-cutting")
+              ? "font-semibold text-safety"
+              : "text-neutral-300",
+          ]}
+        >
+          Grass Cutting
+        </a>
         <a
           href={`tel:${SITE.phoneTel}`}
           class="hidden rounded-lg bg-safety px-3 py-1.5 font-semibold text-charcoal hover:bg-safety-hover sm:inline-block"
@@ -44,13 +59,34 @@ const { title, description = "", whatsappMessage } = Astro.props;
   <slot />
 
   <footer class="border-t border-white/10 bg-charcoal py-10 pb-24 md:pb-10">
-    <div class="mx-auto max-w-6xl px-4 text-sm text-neutral-400 md:px-6">
-      <p class="font-semibold text-white">{SITE.legalName}</p>
-      <p class="mt-2">Serving {SITE.region}</p>
-      <p class="mt-1">{SITE.businessHours}</p>
-      <p class="mt-4 text-xs text-neutral-500">
-        CIDB Grades 6 CE, 6 EP, 6 SH · COIDA registered · Public liability insured
-      </p>
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <div class="grid gap-8 md:grid-cols-2">
+        <div class="text-sm text-neutral-400">
+          <p class="font-semibold text-white">{SITE.legalName}</p>
+          <p class="mt-2">Serving {SITE.region}</p>
+          <p class="mt-1">{hours}</p>
+          <p class="mt-4">
+            <a href={`tel:${SITE.phoneTel}`} class="text-safety hover:underline">{SITE.phone}</a>
+            ·
+            <a href={`mailto:${SITE.email}`} class="text-safety hover:underline">{SITE.email}</a>
+          </p>
+          <p class="mt-4 text-xs text-neutral-500">
+            CIDB Grades 6 CE, 6 EP, 6 SH · COIDA registered · Public liability insured
+          </p>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-white">Service area</p>
+          <a
+            href={SITE.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-3 flex min-h-[140px] flex-col items-center justify-center rounded-lg border border-white/10 bg-slate/80 p-6 text-center transition hover:border-safety/40 hover:bg-slate"
+          >
+            <span class="text-sm font-medium text-neutral-200">Pretoria &amp; Gauteng</span>
+            <span class="mt-2 text-xs text-safety">Open in Google Maps →</span>
+          </a>
+        </div>
+      </div>
     </div>
   </footer>
 

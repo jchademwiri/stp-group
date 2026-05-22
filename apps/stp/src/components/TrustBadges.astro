@@ -1,17 +1,43 @@
 ---
 const badges = [
-  "Qualified Operators Included (TETA / SAMA certified)",
-  "Public Liability Insured",
-  "COIDA Registered",
-  "CIDB Registered: Grades 6 CE, 6 EP, 6 SH, 5 GB, 4 SK",
-];
+  {
+    text: "Qualified Operators Included (TETA / SAMA certified)",
+    icon: "shield-check",
+  },
+  { text: "Public Liability Insured", icon: "shield" },
+  { text: "COIDA Registered", icon: "check" },
+  { text: "CIDB Registered: Grades 6 CE, 6 EP, 6 SH, 5 GB, 4 SK", icon: "building" },
+] as const;
 ---
 
 <ul class="flex flex-wrap gap-2" role="list">
   {
     badges.map((badge) => (
-      <li class="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-neutral-200">
-        {badge}
+      <li class="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-neutral-200">
+        {badge.icon === "shield-check" && (
+          <svg class="h-4 w-4 shrink-0 text-safety" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+        )}
+        {badge.icon === "shield" && (
+          <svg class="h-4 w-4 shrink-0 text-safety" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+        )}
+        {badge.icon === "check" && (
+          <svg class="h-4 w-4 shrink-0 text-safety" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+        )}
+        {badge.icon === "building" && (
+          <svg class="h-4 w-4 shrink-0 text-safety" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="4" y="2" width="16" height="20" rx="2" />
+            <path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01" />
+          </svg>
+        )}
+        <span>{badge.text}</span>
       </li>
     ))
   }

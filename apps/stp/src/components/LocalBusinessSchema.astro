@@ -8,12 +8,37 @@ const schema = {
   url: Astro.site ?? SITE.url,
   telephone: SITE.phoneTel,
   email: SITE.email,
+  priceRange: SITE.priceRange,
+  description: SITE.description,
   areaServed: {
     "@type": "AdministrativeArea",
     name: "Pretoria and Gauteng, South Africa",
   },
-  description:
-    "Construction and plant hire — dropside trucks, vacuum tankers, bobcats, tractors, mowers and tools with qualified operators.",
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: SITE.geo.latitude,
+    longitude: SITE.geo.longitude,
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "07:00",
+      closes: "17:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Saturday"],
+      opens: "08:00",
+      closes: "13:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Sunday"],
+      opens: "08:00",
+      closes: "12:00",
+    },
+  ],
 };
 ---
 

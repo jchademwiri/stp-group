@@ -1,9 +1,14 @@
 ---
 import StpLayout from "@/layouts/StpLayout.astro";
 import FleetImage from "@/components/FleetImage.astro";
+import FleetCard from "@/components/FleetCard.astro";
 import QuoteForm from "@/components/QuoteForm.astro";
-import { plantFleet, imageAlt } from "@/data/plantFleet";
-import { equipmentWhatsappMessage, whatsappUrl } from "@/data/site";
+import {
+  getRelatedFleet,
+  plantFleet,
+  imageAlt,
+} from "@/data/plantFleet";
+import { SITE, absoluteUrl, equipmentWhatsappMessage, whatsappUrl } from "@/data/site";
 
 export function getStaticPaths() {
   return plantFleet.map((item) => ({
@@ -18,15 +23,68 @@ const hireType = item.rates.operatorCostIncluded ? "Wet hire" : "Dry hire";
 const hireExplainer = item.rates.operatorCostIncluded
   ? "Wet Hire rates include a fully licensed, SAMA/TETA accredited operator and basic insurance."
   : "Dry Hire rates exclude operators and fuel; standard operator certification checks apply before handover.";
+const related = getRelatedFleet(item);
+const showGrassLink =
+  item.category === "landscaping-mowers" || item.category === "handheld-tools";
+const pageUrl = absoluteUrl(`/plant-hire/${item.slug}`, Astro.site);
+const imageUrl = absoluteUrl(item.primaryImage, Astro.site);
+
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: item.title,
+  description: item.longDescription,
+  image: imageUrl,
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/InStock",
+    seller: { "@type": "Organization", name: SITE.legalName },
+    priceSpecification: {
+      "@type": "PriceSpecification",
+      priceCurrency: "ZAR",
+      description: item.rates.indicator,
+    },
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/", Astro.site) },
+    { "@type": "ListItem", position: 2, name: "Plant Hire", item: absoluteUrl("/plant-hire", Astro.site) },
+    { "@type": "ListItem", position: 3, name: item.title, item: pageUrl },
+  ],
+};
 ---
 
-<StpLayout title={item.metaTitle} description={item.metaDescription} whatsappMessage={equipmentWhatsappMessage(item.title, item.slug)}>
+<StpLayout
+  title={item.metaTitle}
+  description={item.metaDescription}
+  whatsappMessage={equipmentWhatsappMessage(item.title, item.slug)}
+  ogImage={item.primaryImage}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
   <main class="mx-auto max-w-6xl px-4 py-10 md:px-6">
-    <nav class="text-sm text-neutral-400">
+    <nav class="text-sm text-neutral-400" aria-label="Breadcrumb">
       <a href="/plant-hire" class="hover:text-safety">Plant Hire</a>
       <span aria-hidden="true"> / </span>
       <span class="text-neutral-200">{item.title}</span>
     </nav>
+
+    {
+      showGrassLink && (
+        <p class="mt-4">
+          <a href="/services/grass-cutting" class="text-sm font-medium text-safety hover:underline">
+            Also offer commercial grass cutting & plot clearing →
+          </a>
+        </p>
+      )
+    }
 
     <div class="mt-8 grid gap-10 lg:grid-cols-2">
       <div>
@@ -76,18 +134,42 @@ const hireExplainer = item.rates.operatorCostIncluded
     <section class="mt-12">
       <h2 class="text-xl font-semibold text-white">Technical specifications</h2>
       <table class="mt-4 w-full max-w-xl overflow-hidden rounded-lg border border-white/10 text-left text-sm">
+        <caption class="sr-only">Specifications for {item.title}</caption>
         <tbody>
           {
-            Object.entries(item.specifications).map(([key, value]) => (
-              <tr class="border-b border-white/10 last:border-0">
-                <th class="bg-slate/80 px-4 py-3 font-medium text-neutral-200">{key}</th>
-                <td class="px-4 py-3 text-neutral-300">{value}</td>
+            Object.entries(item.specifications).map(([key, value], i) => (
+              <tr
+                class:list={[
+                  "border-b border-white/10 last:border-0",
+                  i % 2 === 0 ? "bg-slate/60" : "bg-slate/30",
+                ]}
+              >
+                <th
+                  scope="row"
+                  class="w-40 px-4 py-3 text-left text-xs font-semibold tracking-wider text-neutral-400 uppercase"
+                >
+                  {key}
+                </th>
+                <td class="px-4 py-3 text-sm text-neutral-200">{value}</td>
               </tr>
             ))
           }
         </tbody>
       </table>
     </section>
+
+    {
+      related.length > 0 && (
+        <section class="mt-12">
+          <h2 class="text-xl font-semibold text-white">You might also need</h2>
+          <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {related.map((r) => (
+              <FleetCard item={r} />
+            ))}
+          </div>
+        </section>
+      )
+    }
 
     <section class="mt-12">
       <QuoteForm selectedEquipment={item.title} />

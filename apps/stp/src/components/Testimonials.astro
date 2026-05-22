@@ -1,0 +1,19 @@
+---
+import { testimonials } from "@/data/testimonials";
+---
+
+<section class="border-y border-white/10 bg-slate/40 py-12">
+  <div class="mx-auto max-w-6xl px-4 md:px-6">
+    <h2 class="text-xl font-semibold text-white">What clients say</h2>
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      {
+        testimonials.map((t) => (
+          <blockquote class="rounded-xl border border-white/10 bg-charcoal/60 p-6">
+            <p class="text-sm leading-relaxed text-neutral-300">&ldquo;{t.quote}&rdquo;</p>
+            <footer class="mt-4 text-xs font-medium text-neutral-500">— {t.author}</footer>
+          </blockquote>
+        ))
+      }
+    </div>
+  </div>
+</section>

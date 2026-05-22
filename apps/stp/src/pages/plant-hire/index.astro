@@ -3,12 +3,15 @@ import StpLayout from "@/layouts/StpLayout.astro";
 import TrustBadges from "@/components/TrustBadges.astro";
 import FleetCard from "@/components/FleetCard.astro";
 import QuoteForm from "@/components/QuoteForm.astro";
-import { FLEET_CATEGORIES, plantFleet } from "@/data/plantFleet";
+import Testimonials from "@/components/Testimonials.astro";
+import { FLEET_CATEGORIES, getCategoryCounts, plantFleet } from "@/data/plantFleet";
 import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE } from "@/data/site";
 
 const title = "Plant Hire & Equipment Rental Pretoria & JHB | Sithembe";
 const description =
   "Affordable construction and plant hire services. Rent dropside trucks, honey suckers, bobcats, utility tractors, ride-on mowers, and tools. Qualified operators included.";
+
+const counts = getCategoryCounts();
 ---
 
 <StpLayout {title} {description}>
@@ -30,16 +33,20 @@ const description =
           Browse Fleet
         </a>
         <a
-          href={whatsappUrl(WHATSAPP_DEFAULT_MESSAGE)}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#quote-form"
           class="rounded-lg border border-white/20 px-6 py-3 font-semibold text-white hover:bg-white/5"
         >
           Request Custom Quote
         </a>
         <a
-          href={`tel:${SITE.phoneTel}`}
+          href="/services/grass-cutting"
           class="rounded-lg border border-safety/40 px-6 py-3 font-semibold text-safety hover:bg-safety/10"
+        >
+          Grass cutting services
+        </a>
+        <a
+          href={`tel:${SITE.phoneTel}`}
+          class="rounded-lg border border-white/20 px-6 py-3 font-semibold text-neutral-200 hover:bg-white/5"
         >
           Call {SITE.phone}
         </a>
@@ -71,7 +78,7 @@ const description =
 
   <section id="fleet" class="mx-auto max-w-6xl px-4 py-12 md:px-6">
     <h2 class="text-2xl font-bold text-white">Our fleet</h2>
-    <p class="mt-2 text-neutral-400">Filter by category or view all 8 items.</p>
+    <p class="mt-2 text-neutral-400">Filter by category or view all {plantFleet.length} items.</p>
 
     <div class="mt-6 flex flex-wrap gap-2" role="tablist" aria-label="Fleet categories">
       {
@@ -79,6 +86,7 @@ const description =
           <button
             type="button"
             data-filter={cat.id}
+            aria-selected={i === 0 ? "true" : "false"}
             class:list={[
               "rounded-full px-4 py-2 text-sm font-medium transition",
               i === 0
@@ -86,7 +94,7 @@ const description =
                 : "border border-white/15 text-neutral-300 hover:bg-white/5",
             ]}
           >
-            {cat.label}
+            {cat.label} ({counts[cat.id]})
           </button>
         ))
       }
@@ -94,18 +102,16 @@ const description =
 
     <div id="fleet-grid" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {plantFleet.map((item) => <FleetCard item={item} />)}
+      <p id="fleet-empty" class="col-span-full hidden py-12 text-center text-neutral-400">
+        No equipment in this category.
+        <button type="button" data-filter-all class="text-safety underline hover:no-underline">
+          View all
+        </button>
+      </p>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-4 py-8 md:px-6">
-    <a
-      href="/services/grass-cutting"
-      class="block rounded-xl border border-safety/30 bg-safety/10 p-6 text-center hover:bg-safety/15"
-    >
-      <p class="font-semibold text-safety">Also need grass cutting or plot clearing?</p>
-      <p class="mt-1 text-sm text-neutral-300">Commercial mowing, verge maintenance & bush reclamation →</p>
-    </a>
-  </section>
+  <Testimonials />
 
   <section class="mx-auto max-w-6xl px-4 py-12 pb-20 md:px-6">
     <QuoteForm />
@@ -137,27 +143,6 @@ const description =
 </StpLayout>
 
 <script>
-  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
-  const cards = document.querySelectorAll<HTMLElement>(".fleet-card");
-
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.dataset.filter ?? "all";
-
-      buttons.forEach((b) => {
-        const active = b === btn;
-        b.classList.toggle("bg-safety", active);
-        b.classList.toggle("text-charcoal", active);
-        b.classList.toggle("border", !active);
-        b.classList.toggle("border-white/15", !active);
-        b.classList.toggle("text-neutral-300", !active);
-      });
-
-      cards.forEach((card) => {
-        const category = card.dataset.category;
-        const show = filter === "all" || category === filter;
-        card.style.display = show ? "" : "none";
-      });
-    });
-  });
+  import { initFleetFilter } from "@/scripts/fleet-filter";
+  initFleetFilter();
 </script>
