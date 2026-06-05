@@ -5,7 +5,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "dev:stp": "turbo run dev --filter=stp",
-    "dev:lme": "turbo run dev --filter=lme"
+    "dev:lme": "turbo run dev --filter=lme",
+    "dev:lme-investments": "turbo run dev --filter=lme-investments"
   },
   "devDependencies": {
     "turbo": "^2.9.14"

@@ -16,6 +16,14 @@
         "astro": "^6.3.7",
       },
     },
+    "apps/lme-investments": {
+      "name": "lme-investments",
+      "version": "0.0.1",
+      "dependencies": {
+        "@repo/tailwind": "workspace:*",
+        "astro": "^6.3.7",
+      },
+    },
     "apps/stp": {
       "name": "stp",
       "version": "0.0.1",
@@ -526,6 +534,8 @@
     "lightningcss-win32-x64-msvc": ["lightningcss-win32-x64-msvc@1.32.0", "", { "os": "win32", "cpu": "x64" }, "sha512-Amq9B/SoZYdDi1kFrojnoqPLxYhQ4Wo5XiL8EVJrVsB8ARoC1PWW6VGtT0WKCemjy8aC+louJnjS7U18x3b06Q=="],
 
     "lme": ["lme@workspace:apps/lme"],
+
+    "lme-investments": ["lme-investments@workspace:apps/lme-investments"],
 
     "longest-streak": ["longest-streak@3.1.0", "", {}, "sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g=="],
 
