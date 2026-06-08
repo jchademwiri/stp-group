@@ -50,7 +50,7 @@ const tankSizeOptions = [
     <div class="mt-4 grid gap-4 md:grid-cols-2" data-step-panel="2" hidden>
       <label class="flex flex-col gap-1.5 text-sm">
         <span class="font-medium text-neutral-200">Service needed *</span>
-        <select name="service" required class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white">
+        <select name="service" id="desludge-service" required class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white">
           <option value="">Select service</option>
           {serviceOptions.map((o) => <option value={o}>{o}</option>)}
         </select>
@@ -62,13 +62,19 @@ const tankSizeOptions = [
           {tankSizeOptions.map((o) => <option value={o}>{o}</option>)}
         </select>
       </label>
+      <div id="desludge-quantity-field" class="hidden md:col-span-2">
+        <label class="flex flex-col gap-1.5 text-sm">
+          <span class="font-medium text-neutral-200">Number of toilets / units</span>
+          <input type="number" name="quantity" min="1" class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white" placeholder="e.g. 5" />
+        </label>
+      </div>
       <label class="flex flex-col gap-1.5 text-sm md:col-span-2">
         <span class="font-medium text-neutral-200">Site location *</span>
         <input type="text" name="location" required class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white" placeholder="City / suburb / estate" />
       </label>
       <label class="flex flex-col gap-1.5 text-sm md:col-span-2">
         <span class="font-medium text-neutral-200">Message (optional)</span>
-        <textarea name="message" rows={3} class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white" placeholder="Access details, urgency, number of toilets / units…"></textarea>
+        <textarea name="message" rows={3} class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white" placeholder="Access details, urgency…"></textarea>
       </label>
     </div>
 
@@ -97,6 +103,17 @@ const tankSizeOptions = [
   const form = document.getElementById("desludge-quote-form") as HTMLFormElement | null;
   const status = document.getElementById("desludge-form-status");
   const submitBtn = form?.querySelector("[data-step-submit]") as HTMLButtonElement | null;
+  const serviceSelect = document.getElementById("desludge-service") as HTMLSelectElement | null;
+  const quantityField = document.getElementById("desludge-quantity-field");
+
+  // Toggle quantity field when service selection changes
+  const toggleQuantityField = () => {
+    const isToiletHire = serviceSelect?.value === "Mobile Toilet Hire";
+    quantityField?.classList.toggle("hidden", !isToiletHire);
+  };
+  serviceSelect?.addEventListener("change", toggleQuantityField);
+  // Re-check when navigating to step 2 (service select value is already set)
+  form?.querySelector("[data-step-next]")?.addEventListener("click", toggleQuantityField);
 
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -119,6 +136,7 @@ const tankSizeOptions = [
       location: String(fd.get("location") ?? "") || undefined,
       service: String(fd.get("service") ?? "") || undefined,
       tankSize: String(fd.get("tankSize") ?? "") || undefined,
+      quantity: String(fd.get("quantity") ?? "") || undefined,
       message: String(fd.get("message") ?? "") || undefined,
       website: String(fd.get("website") ?? ""),
     });
@@ -130,6 +148,7 @@ const tankSizeOptions = [
       setFormStatus(status, "Thank you - we'll respond soon.", "success");
       clearFormPersistence("desludge-quote-form");
       form.reset();
+      toggleQuantityField();
       return;
     }
 

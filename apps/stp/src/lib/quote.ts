@@ -17,6 +17,7 @@ export interface QuotePayload {
   frequency?: string;
   service?: string;
   tankSize?: string;
+  quantity?: string;
   /** Honeypot - must be empty */
   website?: string;
 }
@@ -65,6 +66,7 @@ export function parseQuotePayload(body: unknown): QuotePayload | null {
       location: location2,
       service: trim(o.service) || undefined,
       tankSize: trim(o.tankSize) || undefined,
+      quantity: trim(o.quantity) || undefined,
     };
   }
 
@@ -153,6 +155,7 @@ function buildQuoteText(p: QuotePayload): string {
     lines.push(
       `Service: ${p.service ?? "Not specified"}`,
       `Tank size: ${p.tankSize ?? "Not specified"}`,
+      `Units: ${p.quantity ?? "Not specified"}`,
       `Location: ${p.location}`,
     );
   } else {
@@ -184,6 +187,7 @@ function buildQuoteHtml(p: QuotePayload): string {
     rows = [
       row("Service", p.service),
       row("Tank / pit size", p.tankSize),
+      row("Number of units", p.quantity),
       row("Location", p.location),
     ];
   } else {
