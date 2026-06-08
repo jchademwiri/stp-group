@@ -80,13 +80,13 @@ const counts = getCategoryCounts();
     <h2 class="text-2xl font-bold text-white">Our fleet</h2>
     <p class="mt-2 text-neutral-400">Filter by category or view all {plantFleet.length} items.</p>
 
-    <div class="mt-6 flex flex-wrap gap-2" role="tablist" aria-label="Fleet categories">
+    <div class="mt-6 flex flex-wrap gap-2" role="group" aria-label="Fleet categories">
       {
         FLEET_CATEGORIES.map((cat, i) => (
           <button
             type="button"
             data-filter={cat.id}
-            aria-selected={i === 0 ? "true" : "false"}
+            aria-pressed={i === 0 ? "true" : "false"}
             class:list={[
               "rounded-full px-4 py-2 text-sm font-medium transition",
               i === 0

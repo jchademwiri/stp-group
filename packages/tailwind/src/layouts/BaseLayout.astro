@@ -10,13 +10,14 @@ interface Props {
 }
 
 const { title, description = "", bodyClass = "", ogImage = "/og-image.svg", canonical } = Astro.props;
+// TODO: Create /og-image.svg in public/ (1200×630px) for social sharing
 
 const canonicalUrl = canonical ?? Astro.url.href;
 const imageUrl = new URL(ogImage, Astro.site ?? Astro.url).href;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-ZA">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -39,9 +40,10 @@ const imageUrl = new URL(ogImage, Astro.site ?? Astro.url).href;
       rel="stylesheet"
     />
     <title>{title}</title>
+    <meta name="theme-color" content="#1e1e24" />
     <slot name="head" />
   </head>
-  <body class:list={["min-h-screen font-sans antialiased", bodyClass]}>
+  <body class:list={["min-h-screen font-sans antialiased scroll-pb-16", bodyClass]}>
     <slot />
   </body>
 </html>
