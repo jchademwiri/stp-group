@@ -1,6 +1,6 @@
 # 🟢 Low Priority Issues
 
-Nice-to-haves — fix when you have spare time or during a cleanup pass.
+Nice-to-haves - fix when you have spare time or during a cleanup pass.
 
 ---
 

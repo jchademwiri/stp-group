@@ -1,5 +1,5 @@
 /**
- * Tailwind v4 — theme tokens live in src/theme.css (@theme).
+ * Tailwind v4 - theme tokens live in src/theme.css (@theme).
  * This file documents content paths; the Vite plugin is wired in each app's astro.config.mjs.
  */
 export default {

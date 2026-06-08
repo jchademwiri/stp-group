@@ -54,7 +54,7 @@ export const POST: APIRoute = async ({ request }) => {
     return json({ error: "Missing or invalid fields" }, 400);
   }
 
-  // Honeypot — pretend success for bots
+  // Honeypot - pretend success for bots
   if (payload.website) {
     return json({ success: true, id: "ok" });
   }

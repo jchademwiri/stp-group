@@ -3,7 +3,7 @@ export const SITE = {
   legalName: "Sithembe Plant Hire",
   url: "https://sithembe.co.za",
   description:
-    "Construction and plant hire — dropside trucks, vacuum tankers, bobcats, tractors, mowers and tools with qualified operators in Pretoria and Gauteng.",
+    "Construction and plant hire - dropside trucks, vacuum tankers, bobcats, tractors, mowers and tools with qualified operators in Pretoria and Gauteng.",
   phone: "012 880 3155",
   phoneTel: "+27128803155",
   whatsapp: "27128803155",

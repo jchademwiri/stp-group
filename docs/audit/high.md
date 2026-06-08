@@ -1,6 +1,6 @@
 # 🟠 High Priority Issues
 
-Fix these before the next deployment — they significantly impact user experience or accessibility.
+Fix these before the next deployment - they significantly impact user experience or accessibility.
 
 ---
 
@@ -11,7 +11,7 @@ Fix these before the next deployment — they significantly impact user experien
 
 ### Problem
 
-The sticky mobile bar (`fixed inset-x-0 bottom-0`) covers the bottom ~50px of every page on mobile. The footer only has `pb-24 md:pb-10`, but this only affects the footer section — any content above it (form submit buttons, FAQ answers, map links) can be permanently hidden behind the bar.
+The sticky mobile bar (`fixed inset-x-0 bottom-0`) covers the bottom ~50px of every page on mobile. The footer only has `pb-24 md:pb-10`, but this only affects the footer section - any content above it (form submit buttons, FAQ answers, map links) can be permanently hidden behind the bar.
 
 ### Impact
 
@@ -44,7 +44,7 @@ Or in `BaseLayout.astro`:
 
 ### Problem
 
-The fleet category filter buttons use `role="tablist"` with `aria-selected`, but these aren't tabs — they're toggle filters. The tablist pattern implies:
+The fleet category filter buttons use `role="tablist"` with `aria-selected`, but these aren't tabs - they're toggle filters. The tablist pattern implies:
 
 - Tabpanel semantics (which don't exist here)
 - Arrow-key navigation between tabs (not implemented)

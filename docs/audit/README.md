@@ -2,7 +2,7 @@
 
 **Date:** June 8, 2026  
 **Scope:** All sites in the STP Group monorepo  
-**Primary focus:** STP (Sithembe Plant Hire) — `apps/stp/`
+**Primary focus:** STP (Sithembe Plant Hire) - `apps/stp/`
 
 ---
 
@@ -11,8 +11,8 @@
 | Site | Status | Notes |
 |------|--------|-------|
 | **STP (Sithembe)** | Production-ready | Full Astro 6 site with SSR, Tailwind v4, Resend email |
-| **LME** | Placeholder | Empty shell — only a default `index.astro` |
-| **LME Investments** | Placeholder | Empty shell — only a default `index.astro` |
+| **LME** | Placeholder | Empty shell - only a default `index.astro` |
+| **LME Investments** | Placeholder | Empty shell - only a default `index.astro` |
 
 The LME and LME Investments sites are identical boilerplate with no real content. The audit focuses entirely on **STP**.
 
@@ -45,9 +45,9 @@ The LME and LME Investments sites are identical boilerplate with no real content
 
 ## Quick Links
 
-- [Critical Issues →](./critical.md) — Fix immediately
-- [High Issues →](./high.md) — Fix before next deploy
-- [Medium Issues →](./medium.md) — Fix soon
-- [Low Issues →](./low.md) — Nice to have
-- [What's Working →](./whats-working.md) — Don't break these
-- [Action Plan →](./action-plan.md) — Prioritized roadmap
+- [Critical Issues →](./critical.md) - Fix immediately
+- [High Issues →](./high.md) - Fix before next deploy
+- [Medium Issues →](./medium.md) - Fix soon
+- [Low Issues →](./low.md) - Nice to have
+- [What's Working →](./whats-working.md) - Don't break these
+- [Action Plan →](./action-plan.md) - Prioritized roadmap

@@ -57,9 +57,9 @@ Not urgent but worth considering.
 |-----|-------------|-------|
 | [#19](./low.md#19-consoleerror-in-production-code) | Structured logging (replace `console.error`) | Consider Axiom or Logtail |
 | [#15](./medium.md#15-hardcoded-geo-coordinates) | Move geo coords to env vars | If multi-location planned |
-| — | Add Lighthouse CI to GitHub Actions | Catch regressions automatically |
-| — | Add axe-core to test suite | Automated accessibility testing |
-| — | Implement Content Security Policy headers | Defense in depth |
+| - | Add Lighthouse CI to GitHub Actions | Catch regressions automatically |
+| - | Add axe-core to test suite | Automated accessibility testing |
+| - | Implement Content Security Policy headers | Defense in depth |
 
 ---
 

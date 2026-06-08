@@ -1,4 +1,4 @@
-# Development & Implementation Plan (Legacy — Next.js)
+# Development & Implementation Plan (Legacy - Next.js)
 
 > **Use [implementation_plan_astro.md](./implementation_plan_astro.md)** for the active Astro build in `apps/stp`. This file is kept for reference only.
 

@@ -1,4 +1,4 @@
-# Implementation plan (Astro) — `apps/stp`
+# Implementation plan (Astro) - `apps/stp`
 
 Active technical plan for the Sithembe site. Replaces the legacy Next.js structure in `implementation_plan.md`.
 
@@ -40,9 +40,9 @@ Shared Tailwind theme: `packages/tailwind/src/styles.css` (charcoal, safety oran
 ## Forms (Resend)
 
 - **Endpoint**: `POST /api/quote` (`src/pages/api/quote.ts`, `prerender = false`)
-- **Email**: [Resend](https://resend.com) via `src/lib/quote.ts` — keys stay server-side
+- **Email**: [Resend](https://resend.com) via `src/lib/quote.ts` - keys stay server-side
 - **Env** (see `apps/stp/.env.example`): `RESEND_API_KEY`, `QUOTE_FROM_EMAIL`, `QUOTE_TO_EMAIL`
-- **Deploy**: `@astrojs/node` adapter — static pages + on-demand `/api/quote` (`prerender = false`)
+- **Deploy**: `@astrojs/node` adapter - static pages + on-demand `/api/quote` (`prerender = false`)
 - **Components**: `QuoteForm.astro` (plant hire), `GrassQuoteForm.astro` (grass cutting)
 
 ## Commands
@@ -62,6 +62,6 @@ bun run build --filter=stp
 
 ## Verification
 
-1. `bun run build --filter=stp` — 10 static routes (hub + landing + 8 slugs + grass cutting)
+1. `bun run build --filter=stp` - 10 static routes (hub + landing + 8 slugs + grass cutting)
 2. Manual: WhatsApp links, `tel:` links, fleet filters, form validation
 3. Lighthouse on `/plant-hire` after real WebP assets are added

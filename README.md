@@ -13,7 +13,7 @@ Requires Node 22.12+.
 
 ### Shared packages
 
-- `@repo/tailwind` — see [packages/tailwind/README.md](./packages/tailwind/README.md)
+- `@repo/tailwind` - see [packages/tailwind/README.md](./packages/tailwind/README.md)
   - **Config:** `packages/tailwind/src/theme.css` (design tokens)
   - **Styles:** `packages/tailwind/src/styles.css`
   - **Layout:** `packages/tailwind/src/layouts/BaseLayout.astro`

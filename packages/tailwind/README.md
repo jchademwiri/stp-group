@@ -6,7 +6,7 @@ Shared **Tailwind CSS v4** setup for the monorepo.
 
 | File | Purpose |
 | --- | --- |
-| `src/theme.css` | **Design tokens** (`@theme`) — colors, fonts |
+| `src/theme.css` | **Design tokens** (`@theme`) - colors, fonts |
 | `src/styles.css` | Tailwind entry + `@source` paths for all apps |
 | `tailwind.config.mjs` | Content paths reference (v4 uses CSS-first theme) |
 | `vite.mjs` | Re-exports `@tailwindcss/vite` plugin |

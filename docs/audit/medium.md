@@ -1,6 +1,6 @@
 # 🟡 Medium Priority Issues
 
-Fix these soon — they improve polish, accessibility, and SEO.
+Fix these soon - they improve polish, accessibility, and SEO.
 
 ---
 
@@ -77,7 +77,7 @@ The testimonials section uses `<blockquote>` elements but has no `Review` or `Ag
 ```astro
 <blockquote class="rounded-xl border border-white/10 bg-charcoal/60 p-6">
   <p class="text-sm leading-relaxed text-neutral-300">&ldquo;{t.quote}&rdquo;</p>
-  <footer class="mt-4 text-xs font-medium text-neutral-500">— {t.author}</footer>
+  <footer class="mt-4 text-xs font-medium text-neutral-500">- {t.author}</footer>
 </blockquote>
 ```
 

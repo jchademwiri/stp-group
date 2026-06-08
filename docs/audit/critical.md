@@ -1,6 +1,6 @@
 # 🔴 Critical Issues
 
-These must be fixed immediately — they pose security risks or cause functional failures.
+These must be fixed immediately - they pose security risks or cause functional failures.
 
 ---
 
