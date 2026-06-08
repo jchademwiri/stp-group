@@ -9,16 +9,16 @@ const description = SITE.description;
 ---
 
 <StpLayout {title} {description}>
-    <section class="border-b border-white/10 bg-gradient-to-b from-slate to-charcoal">
+    <section class="bg-gradient-to-b from-slate to-charcoal">
       <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
         <p class="text-sm font-medium tracking-wider text-safety uppercase">Sithembe Group</p>
         <h1 class="mt-4 max-w-2xl text-4xl font-bold tracking-tight text-white md:text-5xl">
-          Plant hire & clearing services you can trust
+          Equipment on site when you need it. Across Pretoria &amp; Gauteng.
         </h1>
         <p class="mt-4 max-w-2xl text-lg text-neutral-300">
-          Sithembe supplies wet and dry hire plant, commercial vehicles, and grounds maintenance
-          equipment across {SITE.region}. CIDB-registered, fully insured, with accredited operators
-          on major machinery.
+          Downtime costs money. That&rsquo;s why we deliver reliable wet and dry hire plant,
+          commercial vehicles, and grounds maintenance equipment &mdash; with accredited operators,
+          full insurance, and no runaround. CIDB-registered and ready to roll.
         </p>
         <div class="mt-6 flex flex-wrap gap-3">
           <a
@@ -48,13 +48,15 @@ const description = SITE.description;
       </div>
     </section>
 
+    <Testimonials />
+
     <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
       <h2 class="text-2xl font-bold text-white">Our services</h2>
-      <div class="mt-8 grid gap-6 md:grid-cols-2">
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
         <article class="rounded-xl border border-white/10 bg-slate/80 p-8">
           <h3 class="text-xl font-semibold text-white">Plant hire</h3>
           <p class="mt-3 text-neutral-400">
-            Dropside trucks, honey suckers, bobcats, tractors, mowers, and handheld tools — with wet
+            Dropside trucks, bobcats, tractors, mowers, and handheld tools - with wet
             hire operators where required.
           </p>
           <a href="/plant-hire" class="mt-6 inline-block font-semibold text-safety hover:underline">
@@ -74,8 +76,19 @@ const description = SITE.description;
             Grass cutting services →
           </a>
         </article>
+        <article class="rounded-xl border border-white/10 bg-slate/80 p-8">
+          <h3 class="text-xl font-semibold text-white">Septic & desludging</h3>
+          <p class="mt-3 text-neutral-400">
+            Septic tank emptying, toilet desludging, grease trap cleaning, and liquid
+            waste extraction with accredited operators.
+          </p>
+          <a
+            href="/services/desludging"
+            class="mt-6 inline-block font-semibold text-safety hover:underline"
+          >
+            Desludging services →
+          </a>
+        </article>
       </div>
     </section>
-
-    <Testimonials />
 </StpLayout>

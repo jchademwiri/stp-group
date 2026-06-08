@@ -153,8 +153,11 @@ const durations = ["1-3 Days", "4-7 Days", "1 Month+", "Long-term Contract"];
 <script>
   import { initFormSteps } from "@/scripts/form-steps";
   import { setFormStatus, submitQuote } from "@/scripts/submit-quote";
+  import { initFormPersistence, initInlineValidation, clearFormPersistence } from "@/scripts/form-utils";
 
   initFormSteps("hire-quote-form");
+  initFormPersistence("hire-quote-form");
+  initInlineValidation("hire-quote-form");
 
   const form = document.getElementById("hire-quote-form") as HTMLFormElement | null;
   const status = document.getElementById("hire-form-status");
@@ -166,6 +169,11 @@ const durations = ["1-3 Days", "4-7 Days", "1 Month+", "Long-term Contract"];
 
     const fd = new FormData(form);
     setFormStatus(status, "Sending…", "pending");
+    const originalBtnText = submitBtn?.innerHTML ?? "";
+    if (submitBtn) {
+      submitBtn.innerHTML =
+        '<span class="flex items-center gap-2"><svg class="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>Sending…</span>';
+    }
     submitBtn?.setAttribute("disabled", "true");
 
     const result = await submitQuote({
@@ -181,10 +189,12 @@ const durations = ["1-3 Days", "4-7 Days", "1 Month+", "Long-term Contract"];
       website: String(fd.get("website") ?? ""),
     });
 
+    if (submitBtn) submitBtn.innerHTML = originalBtnText;
     submitBtn?.removeAttribute("disabled");
 
     if (result.ok) {
-      setFormStatus(status, "Thank you — we'll respond soon.", "success");
+      setFormStatus(status, "Thank you - we'll respond soon.", "success");
+      clearFormPersistence("hire-quote-form");
       form.reset();
       return;
     }

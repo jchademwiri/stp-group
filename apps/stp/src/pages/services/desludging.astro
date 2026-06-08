@@ -1,0 +1,154 @@
+---
+import StpLayout from "@/layouts/StpLayout.astro";
+import TrustBadges from "@/components/TrustBadges.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import Accordion from "@/components/Accordion.astro";
+import DesludgeQuoteForm from "@/components/DesludgeQuoteForm.astro";
+import { SITE } from "@/data/site";
+
+const title = "Septic Tank & Toilet Desludging Services | Sithembe";
+const description =
+  "Professional septic tank emptying, toilet desludging, and liquid waste extraction in Pretoria & Gauteng. Accredited operators, industrial vacuum tankers.";
+
+const services = [
+  {
+    title: "Septic Tank Emptying",
+    text: "Scheduled and emergency septic tank pump-outs for residential estates, commercial properties, and smallholdings using high-capacity vacuum tankers.",
+  },
+  {
+    title: "Toilet & Pit Latrine Desludging",
+    text: "Municipal, construction-site, and portable toilet servicing. We handle pit latrines, chemical toilets, and temporary ablution facilities.",
+  },
+  {
+    title: "Grease Trap Cleaning",
+    text: "Restaurant and kitchen grease trap maintenance to prevent blockages and comply with municipal health regulations.",
+  },
+  {
+    title: "Industrial Liquid Waste",
+    text: "Factory sludge, process water, and industrial wastewater removal with proper disposal and compliance documentation.",
+  },
+  {
+    title: "Emergency Blocked Drains",
+    text: "Fast-response high-suction drain unblocking for blocked sewer lines, overflowing tanks, and drainage emergencies.",
+  },
+  {
+    title: "Site & Event Servicing",
+    text: "Construction site, market, and event toilet block servicing - regular collection schedules to keep facilities clean and functional.",
+  },
+];
+
+const process = [
+  { step: "1", title: "Enquire", text: "Submit the form or WhatsApp us with your site details and requirements." },
+  { step: "2", title: "Quote & schedule", text: "We assess your needs, provide a quote, and book a convenient time slot." },
+  { step: "3", title: "Service & confirm", text: "Our accredited operator arrives on schedule, completes the work, and provides documentation." },
+];
+
+const faqs = [
+  {
+    q: "How often should a septic tank be emptied?",
+    a: "Most residential tanks need emptying every 2–3 years, but this depends on tank size, household volume, and usage. Commercial or high-traffic sites may need quarterly or monthly servicing.",
+  },
+  {
+    q: "What areas do you cover?",
+    a: `We primarily serve ${SITE.region}. Contact us for large contracts or sites outside this area.`,
+  },
+  {
+    q: "Do you provide compliance documentation?",
+    a: "Yes - we provide waste removal certificates and disposal documentation for municipal compliance, CIDB sites, and health inspections.",
+  },
+  {
+    q: "How quickly can you respond to an emergency?",
+    a: "We aim to respond within 2 hours during business hours for urgent callouts such as overflowing tanks or blocked drains.",
+  },
+  {
+    q: "What size tanks can you handle?",
+    a: "Our 10,000-litre honey sucker vacuum tanker handles everything from small household septic tanks to large industrial waste containers.",
+  },
+];
+---
+
+<StpLayout {title} {description}>
+  <div class="mx-auto max-w-6xl px-4 pt-6 md:px-6">
+    <Breadcrumbs crumbs={[{ label: "Desludging" }]} />
+  </div>
+
+  <section class="border-b border-white/10 bg-gradient-to-b from-slate to-charcoal">
+    <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20">
+      <TrustBadges />
+      <h1 class="mt-8 text-4xl font-bold text-white md:text-5xl">
+        Septic Tank &amp; Toilet Desludging Services
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg text-neutral-300">
+        Professional vacuum extraction of septic tanks, pit latrines, grease traps, and liquid
+        waste across {SITE.region}. Accredited operators with industrial-grade equipment.
+      </p>
+      <a
+        href="#desludge-quote"
+        class="mt-8 inline-block rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover"
+      >
+        Get a Desludging Quote
+      </a>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-12 md:px-6">
+    <h2 class="text-2xl font-bold text-white">What we do</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        services.map((s) => (
+          <article class="rounded-xl border border-white/10 bg-slate/80 p-6">
+            <h3 class="font-semibold text-white">{s.title}</h3>
+            <p class="mt-2 text-sm text-neutral-400">{s.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-12 md:px-6">
+    <h2 class="text-2xl font-bold text-white">How it works</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-3">
+      {
+        process.map((p) => (
+          <div class="flex gap-4">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-safety text-sm font-bold text-charcoal">
+              {p.step}
+            </span>
+            <div>
+              <h3 class="font-semibold text-white">{p.title}</h3>
+              <p class="mt-1 text-sm text-neutral-400">{p.text}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-8 md:px-6">
+    <h2 class="text-xl font-semibold text-white">Equipment deployed</h2>
+    <p class="mt-2 text-neutral-400">
+      Our 10,000-litre vacuum tanker (honey sucker) is available from our{" "}
+      <a href="/plant-hire/septic-tank-truck" class="text-safety hover:underline">
+        plant hire fleet
+      </a>{" "}
+      - or book our full-service desludging with accredited operators included.
+    </p>
+  </section>
+
+  <section id="desludge-quote" class="mx-auto max-w-6xl scroll-mt-8 px-4 py-12 md:px-6">
+    <DesludgeQuoteForm />
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pb-16 md:px-6">
+    <h2 class="text-lg font-semibold text-white">Frequently asked questions</h2>
+    <div class="mt-4 flex flex-col gap-3">
+      {
+        faqs.map((f) => (
+          <Accordion question={f.q}>
+            {f.a}
+          </Accordion>
+        ))
+      }
+    </div>
+  </section>
+</StpLayout>

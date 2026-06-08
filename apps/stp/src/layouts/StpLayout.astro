@@ -15,46 +15,110 @@ interface Props {
 const { title, description = "", whatsappMessage, ogImage } = Astro.props;
 const currentPath = Astro.url.pathname;
 const hours = formatBusinessHours();
+
+// Determine the correct quote form anchor for the sticky mobile bar
+const quoteHref =
+  currentPath.startsWith("/services/grass-cutting")
+    ? "#grass-quote"
+    : currentPath.startsWith("/services/desludging")
+      ? "#desludge-quote"
+      : currentPath.startsWith("/plant-hire")
+        ? "#quote-form"
+        : undefined;
 ---
 
 <BaseLayout {title} {description} {ogImage} canonical={Astro.url.href} bodyClass="bg-charcoal text-neutral-100">
   <LocalBusinessSchema slot="head" />
   <slot name="head" slot="head" />
-  <header class="border-b border-white/10 bg-charcoal/90">
-    <div
-      class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6"
-    >
-      <a href="/" class="text-lg font-bold text-white">{SITE.name}</a>
-      <nav class="flex items-center gap-4 text-sm font-medium" aria-label="Main">
+  <header class="sticky top-0 z-30 border-b border-white/10 bg-charcoal/95 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
+      <a href="/" class="shrink-0">
+        <img src="/stp-logo.png" alt="STP - Sithembe Transportation and Projects" class="h-10 w-auto md:h-12" />
+      </a>
+
+      {/* Desktop nav */}
+      <nav class="hidden items-center gap-1 text-sm font-medium md:flex" aria-label="Main">
         <a
           href="/plant-hire"
-          class:list={[
-            "transition-colors hover:text-safety",
+          class:list={["rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-safety",
             currentPath.startsWith("/plant-hire") ? "font-semibold text-safety" : "text-neutral-300",
           ]}
-        >
-          Plant Hire
-        </a>
+        >Plant Hire</a>
         <a
           href="/services/grass-cutting"
-          class:list={[
-            "transition-colors hover:text-safety",
-            currentPath.startsWith("/services/grass-cutting")
-              ? "font-semibold text-safety"
-              : "text-neutral-300",
+          class:list={["rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-safety",
+            currentPath.startsWith("/services/grass-cutting") ? "font-semibold text-safety" : "text-neutral-300",
           ]}
-        >
-          Grass Cutting
-        </a>
+        >Grass Cutting</a>
+        <a
+          href="/services/desludging"
+          class:list={["rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-safety",
+            currentPath.startsWith("/services/desludging") ? "font-semibold text-safety" : "text-neutral-300",
+          ]}
+        >Desludging</a>
+        <a
+          href="/about"
+          class:list={["rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-safety",
+            currentPath.startsWith("/about") ? "font-semibold text-safety" : "text-neutral-300",
+          ]}
+        >About</a>
         <a
           href={`tel:${SITE.phoneTel}`}
-          class="hidden rounded-lg bg-safety px-3 py-1.5 font-semibold text-charcoal hover:bg-safety-hover sm:inline-block"
-        >
-          Call now
-        </a>
+          class="ml-2 rounded-lg bg-safety px-3 py-1.5 font-semibold text-charcoal hover:bg-safety-hover"
+        >Call now</a>
       </nav>
+
+      {/* Mobile hamburger */}
+      <button
+        type="button"
+        id="nav-toggle"
+        class="flex h-10 w-10 items-center justify-center rounded-lg text-neutral-300 transition-colors hover:bg-white/5 hover:text-white md:hidden"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path id="nav-icon-open" d="M4 6h16M4 12h16M4 18h16" />
+          <path id="nav-icon-close" class="hidden" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
     </div>
+
+    {/* Mobile nav panel */}
+    <nav
+      id="mobile-nav"
+      class="hidden border-t border-white/10 bg-charcoal px-4 pb-4 pt-2 md:hidden"
+      aria-label="Mobile navigation"
+    >
+      <a href="/plant-hire" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
+        currentPath.startsWith("/plant-hire") ? "text-safety" : "text-neutral-300",
+      ]}>Plant Hire</a>
+      <a href="/services/grass-cutting" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
+        currentPath.startsWith("/services/grass-cutting") ? "text-safety" : "text-neutral-300",
+      ]}>Grass Cutting</a>
+      <a href="/services/desludging" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
+        currentPath.startsWith("/services/desludging") ? "text-safety" : "text-neutral-300",
+      ]}>Desludging</a>
+      <a href="/about" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
+        currentPath.startsWith("/about") ? "text-safety" : "text-neutral-300",
+      ]}>About</a>
+      <a href={`tel:${SITE.phoneTel}`} class="mt-2 block rounded-lg bg-safety px-3 py-2.5 text-center text-sm font-semibold text-charcoal hover:bg-safety-hover">Call {SITE.phone}</a>
+    </nav>
   </header>
+
+  <script>
+    const toggle = document.getElementById("nav-toggle");
+    const panel = document.getElementById("mobile-nav");
+    const iconOpen = document.getElementById("nav-icon-open");
+    const iconClose = document.getElementById("nav-icon-close");
+    toggle?.addEventListener("click", () => {
+      const isHidden = panel?.toggleAttribute("hidden");
+      const isOpen = !isHidden;
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      iconOpen?.classList.toggle("hidden", isOpen);
+      iconClose?.classList.toggle("hidden", !isOpen);
+    });
+  </script>
 
   <main>
     <slot />
@@ -93,5 +157,5 @@ const hours = formatBusinessHours();
   </footer>
 
   <WhatsAppButton message={whatsappMessage} />
-  <StickyMobileBar />
+  <StickyMobileBar quoteHref={quoteHref} />
 </BaseLayout>

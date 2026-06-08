@@ -1,0 +1,29 @@
+---
+interface Props {
+  question: string;
+  class?: string;
+}
+
+const { question, class: className = "" } = Astro.props;
+---
+
+<details class:list={["group rounded-lg border border-white/10 bg-slate/50", className]}>
+  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-sm font-medium text-white transition-colors hover:bg-white/5 [&::-webkit-details-marker]:hidden">
+    <span>{question}</span>
+    <svg
+      class="h-4 w-4 shrink-0 text-neutral-400 transition-transform duration-200 group-open:rotate-180"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  </summary>
+  <div class="border-t border-white/10 px-5 pb-4 pt-3 text-sm text-neutral-400">
+    <slot />
+  </div>
+</details>

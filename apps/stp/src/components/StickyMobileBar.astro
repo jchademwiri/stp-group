@@ -1,5 +1,11 @@
 ---
 import { SITE, WHATSAPP_DEFAULT_MESSAGE, whatsappUrl } from "@/data/site";
+
+interface Props {
+  quoteHref?: string;
+}
+
+const { quoteHref = "#quote-form" } = Astro.props;
 ---
 
 <nav
@@ -23,7 +29,7 @@ import { SITE, WHATSAPP_DEFAULT_MESSAGE, whatsappUrl } from "@/data/site";
     WhatsApp
   </a>
   <a
-    href="#quote-form"
+    href={quoteHref}
     class="flex flex-col items-center justify-center gap-1 py-3 text-xs font-medium text-safety hover:bg-white/5"
   >
     <span aria-hidden="true">📋</span>

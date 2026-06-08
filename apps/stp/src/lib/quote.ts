@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import { SITE } from "@/data/site";
 
-export type QuoteType = "plant-hire" | "grass-cutting";
+export type QuoteType = "plant-hire" | "grass-cutting" | "desludging";
 
 export interface QuotePayload {
   type: QuoteType;
@@ -15,14 +15,16 @@ export interface QuotePayload {
   message?: string;
   area?: string;
   frequency?: string;
-  /** Honeypot — must be empty */
+  service?: string;
+  tankSize?: string;
+  /** Honeypot - must be empty */
   website?: string;
 }
 
 export function parseQuotePayload(body: unknown): QuotePayload | null {
   if (!body || typeof body !== "object") return null;
   const o = body as Record<string, unknown>;
-  const type = o.type === "grass-cutting" ? "grass-cutting" : o.type === "plant-hire" ? "plant-hire" : null;
+  const type = o.type === "grass-cutting" ? "grass-cutting" : o.type === "desludging" ? "desludging" : o.type === "plant-hire" ? "plant-hire" : null;
   if (!type) return null;
 
   const name = trim(o.name);
@@ -55,6 +57,17 @@ export function parseQuotePayload(body: unknown): QuotePayload | null {
     };
   }
 
+  if (type === "desludging") {
+    const location2 = trim(o.location);
+    if (!location2) return null;
+    return {
+      ...base,
+      location: location2,
+      service: trim(o.service) || undefined,
+      tankSize: trim(o.tankSize) || undefined,
+    };
+  }
+
   return {
     ...base,
     area: trim(o.area) || undefined,
@@ -74,8 +87,10 @@ export async function sendQuoteEmail(payload: QuotePayload): Promise<{ id: strin
   const resend = new Resend(apiKey);
   const subject =
     payload.type === "plant-hire"
-      ? `Plant hire inquiry — ${payload.equipment}`
-      : "Grass cutting / plot clearing inquiry";
+      ? `Plant hire inquiry - ${payload.equipment}`
+      : payload.type === "desludging"
+        ? `Desludging inquiry - ${payload.service ?? "general"}`
+        : "Grass cutting / plot clearing inquiry";
 
   const { data, error } = await resend.emails.send({
     from,
@@ -93,7 +108,7 @@ export async function sendQuoteEmail(payload: QuotePayload): Promise<{ id: strin
     await resend.emails.send({
       from,
       to: [payload.email],
-      subject: "We received your inquiry — Sithembe",
+      subject: "We received your inquiry - Sithembe",
       html: buildConfirmationHtml(payload),
       text: buildConfirmationText(payload),
     });
@@ -133,6 +148,12 @@ function buildQuoteText(p: QuotePayload): string {
       `Start date: ${p.startDate ?? "Not specified"}`,
       `Location: ${p.location}`,
     );
+  } else if (p.type === "desludging") {
+    lines.push(
+      `Service: ${p.service ?? "Not specified"}`,
+      `Tank size: ${p.tankSize ?? "Not specified"}`,
+      `Location: ${p.location}`,
+    );
   } else {
     lines.push(`Area: ${p.area ?? "Not specified"}`, `Frequency: ${p.frequency ?? "Not specified"}`);
   }
@@ -142,18 +163,31 @@ function buildQuoteText(p: QuotePayload): string {
 }
 
 function buildQuoteHtml(p: QuotePayload): string {
-  const rows =
-    p.type === "plant-hire"
-      ? [
-          row("Equipment", p.equipment),
-          row("Duration", p.duration),
-          row("Start date", p.startDate ?? "Not specified"),
-          row("Location", p.location),
-        ]
-      : [row("Estimated area", p.area), row("Frequency", p.frequency)];
+  let rows: string[];
+  let heading: string;
+
+  if (p.type === "plant-hire") {
+    heading = "Plant hire inquiry";
+    rows = [
+      row("Equipment", p.equipment),
+      row("Duration", p.duration),
+      row("Start date", p.startDate ?? "Not specified"),
+      row("Location", p.location),
+    ];
+  } else if (p.type === "desludging") {
+    heading = "Desludging inquiry";
+    rows = [
+      row("Service", p.service),
+      row("Tank / pit size", p.tankSize),
+      row("Location", p.location),
+    ];
+  } else {
+    heading = "Grass cutting inquiry";
+    rows = [row("Estimated area", p.area), row("Frequency", p.frequency)];
+  }
 
   return `
-    <h2>${p.type === "plant-hire" ? "Plant hire inquiry" : "Grass cutting inquiry"}</h2>
+    <h2>${heading}</h2>
     <table style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
       ${row("Name", p.name)}
       ${row("Email", p.email)}

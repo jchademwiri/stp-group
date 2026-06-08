@@ -1,7 +1,9 @@
 ---
 import StpLayout from "@/layouts/StpLayout.astro";
 import TrustBadges from "@/components/TrustBadges.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import FleetCard from "@/components/FleetCard.astro";
+import Accordion from "@/components/Accordion.astro";
 import QuoteForm from "@/components/QuoteForm.astro";
 import Testimonials from "@/components/Testimonials.astro";
 import { FLEET_CATEGORIES, getCategoryCounts, plantFleet } from "@/data/plantFleet";
@@ -15,6 +17,10 @@ const counts = getCategoryCounts();
 ---
 
 <StpLayout {title} {description}>
+  <div class="mx-auto max-w-6xl px-4 pt-6 md:px-6">
+    <Breadcrumbs crumbs={[{ label: "Plant Hire" }]} />
+  </div>
+
   <section class="relative overflow-hidden border-b border-white/10 bg-gradient-to-b from-slate to-charcoal">
     <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
       <TrustBadges />
@@ -67,7 +73,7 @@ const counts = getCategoryCounts();
       </li>
       <li class="rounded-lg border border-white/10 bg-slate/50 p-4">
         <strong class="text-white">CIDB registered</strong>
-        <p class="mt-1 text-sm">Grades 6 CE, 6 EP, 6 SH — enterprise-ready.</p>
+        <p class="mt-1 text-sm">Grades 6 CE, 6 EP, 6 SH - enterprise-ready.</p>
       </li>
       <li class="rounded-lg border border-white/10 bg-slate/50 p-4">
         <strong class="text-white">Local dispatch</strong>
@@ -119,26 +125,19 @@ const counts = getCategoryCounts();
 
   <section class="mx-auto max-w-6xl px-4 pb-16 md:px-6">
     <h2 class="text-lg font-semibold text-white">Frequently asked questions</h2>
-    <dl class="mt-4 space-y-4 text-sm text-neutral-300">
-      <div>
-        <dt class="font-medium text-white">What is wet hire vs dry hire?</dt>
-        <dd class="mt-1">
-          Wet hire includes a licensed operator and basic insurance. Dry hire is equipment only — operator
-          certification applies before handover.
-        </dd>
-      </div>
-      <div>
-        <dt class="font-medium text-white">What areas do you serve?</dt>
-        <dd class="mt-1">Primary coverage: {SITE.region}. Contact us for deliveries outside this area.</dd>
-      </div>
-      <div>
-        <dt class="font-medium text-white">How do I get rates?</dt>
-        <dd class="mt-1">
-          Rates vary by equipment and duration. WhatsApp or submit the quote form — we'll respond{" "}
-          {SITE.responseTime}.
-        </dd>
-      </div>
-    </dl>
+    <div class="mt-4 flex flex-col gap-3">
+      <Accordion question="What is wet hire vs dry hire?">
+        Wet hire includes a licensed operator and basic insurance. Dry hire is equipment only - operator
+        certification applies before handover.
+      </Accordion>
+      <Accordion question="What areas do you serve?">
+        Primary coverage: {SITE.region}. Contact us for deliveries outside this area.
+      </Accordion>
+      <Accordion question="How do I get rates?">
+        Rates vary by equipment and duration. WhatsApp or submit the quote form - we'll respond{" "}
+        {SITE.responseTime}.
+      </Accordion>
+    </div>
   </section>
 </StpLayout>
 

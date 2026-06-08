@@ -25,6 +25,11 @@ export function initFormSteps(formId: string): void {
   const validateStep = (n: number): boolean => {
     const panel = form.querySelector<HTMLElement>(`[data-step-panel="${n}"]`);
     if (!panel) return true;
+
+    // Trigger inline validation before native reportValidity
+    // so users see red borders + error text alongside the browser tooltip
+    form.dispatchEvent(new CustomEvent("stp:validate"));
+
     const fields = panel.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(
       "input, select, textarea",
     );

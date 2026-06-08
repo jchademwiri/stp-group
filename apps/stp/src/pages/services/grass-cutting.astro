@@ -1,6 +1,8 @@
 ---
 import StpLayout from "@/layouts/StpLayout.astro";
 import TrustBadges from "@/components/TrustBadges.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import Accordion from "@/components/Accordion.astro";
 import GrassQuoteForm from "@/components/GrassQuoteForm.astro";
 import { SITE } from "@/data/site";
 
@@ -25,6 +27,10 @@ const services = [
 ---
 
 <StpLayout {title} {description}>
+  <div class="mx-auto max-w-6xl px-4 pt-6 md:px-6">
+    <Breadcrumbs crumbs={[{ label: "Grass Cutting" }]} />
+  </div>
+
   <section class="border-b border-white/10 bg-gradient-to-b from-slate to-charcoal">
     <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20">
       <TrustBadges />
@@ -72,35 +78,23 @@ const services = [
 
   <section class="mx-auto max-w-6xl px-4 pb-16 md:px-6">
     <h2 class="text-lg font-semibold text-white">Frequently asked questions</h2>
-    <dl class="mt-4 space-y-4 text-sm text-neutral-300">
-      <div>
-        <dt class="font-medium text-white">What areas do you cover?</dt>
-        <dd class="mt-1">
-          We primarily serve {SITE.region}. Contact us for large contracts or sites outside this
-          area.
-        </dd>
-      </div>
-      <div>
-        <dt class="font-medium text-white">How is pricing calculated?</dt>
-        <dd class="mt-1">
-          Pricing depends on plot size, terrain, vegetation density, and service frequency. Submit
-          the form or WhatsApp us for a tailored quote.
-        </dd>
-      </div>
-      <div>
-        <dt class="font-medium text-white">Do you handle very large plots (10+ hectares)?</dt>
-        <dd class="mt-1">
-          Yes — we deploy tractors, ride-on mowers, and clearing crews suited to large-scale
-          reclamation and maintenance contracts.
-        </dd>
-      </div>
-      <div>
-        <dt class="font-medium text-white">How long does a typical clearing take?</dt>
-        <dd class="mt-1">
-          Once-off reclamation varies from one day to several days depending on acreage and
-          overgrowth. We'll estimate timelines when you enquire.
-        </dd>
-      </div>
-    </dl>
+    <div class="mt-4 flex flex-col gap-3">
+      <Accordion question="What areas do you cover?">
+        We primarily serve {SITE.region}. Contact us for large contracts or sites outside this
+        area.
+      </Accordion>
+      <Accordion question="How is pricing calculated?">
+        Pricing depends on plot size, terrain, vegetation density, and service frequency. Submit
+        the form or WhatsApp us for a tailored quote.
+      </Accordion>
+      <Accordion question="Do you handle very large plots (10+ hectares)?">
+        Yes - we deploy tractors, ride-on mowers, and clearing crews suited to large-scale
+        reclamation and maintenance contracts.
+      </Accordion>
+      <Accordion question="How long does a typical clearing take?">
+        Once-off reclamation varies from one day to several days depending on acreage and
+        overgrowth. We'll estimate timelines when you enquire.
+      </Accordion>
+    </div>
   </section>
 </StpLayout>
