@@ -70,6 +70,7 @@ export function parseQuotePayload(body: unknown): QuotePayload | null {
 
   return {
     ...base,
+    service: trim(o.service) || undefined,
     area: trim(o.area) || undefined,
     frequency: trim(o.frequency) || undefined,
   };
@@ -90,7 +91,7 @@ export async function sendQuoteEmail(payload: QuotePayload): Promise<{ id: strin
       ? `Plant hire inquiry - ${payload.equipment}`
       : payload.type === "desludging"
         ? `Desludging inquiry - ${payload.service ?? "general"}`
-        : "Grass cutting / plot clearing inquiry";
+        : `Grass cutting / garden services inquiry - ${payload.service ?? "general"}`;
 
   const { data, error } = await resend.emails.send({
     from,
@@ -155,7 +156,11 @@ function buildQuoteText(p: QuotePayload): string {
       `Location: ${p.location}`,
     );
   } else {
-    lines.push(`Area: ${p.area ?? "Not specified"}`, `Frequency: ${p.frequency ?? "Not specified"}`);
+    lines.push(
+      `Service: ${p.service ?? "Not specified"}`,
+      `Area: ${p.area ?? "Not specified"}`,
+      `Frequency: ${p.frequency ?? "Not specified"}`,
+    );
   }
 
   if (p.message) lines.push(`Message: ${p.message}`);
@@ -182,8 +187,12 @@ function buildQuoteHtml(p: QuotePayload): string {
       row("Location", p.location),
     ];
   } else {
-    heading = "Grass cutting inquiry";
-    rows = [row("Estimated area", p.area), row("Frequency", p.frequency)];
+    heading = "Grass cutting / garden services inquiry";
+    rows = [
+      row("Service", p.service),
+      row("Estimated area", p.area),
+      row("Frequency", p.frequency),
+    ];
   }
 
   return `

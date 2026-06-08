@@ -10,17 +10,23 @@ const areaOptions = [
 ];
 
 const frequencyOptions = [
+  "Weekly Maintenance",
   "Once-off Clearing / Reclamation",
   "Bi-weekly Maintenance",
   "Monthly Maintenance Contract",
   "Seasonal Clearing / Firebreak",
 ];
+
+const serviceTypeOptions = [
+  "Grass Cutting & Plot Clearing",
+  "Garden Services & Maintenance",
+];
 ---
 
 <div class="rounded-2xl border border-white/10 bg-slate p-6 md:p-10">
-  <h2 class="text-2xl font-bold text-white">Book a Grass Cutting Consultation</h2>
+  <h2 class="text-2xl font-bold text-white">Get a Quote</h2>
   <p class="mt-2 text-neutral-400">
-    Tell us about your site - we'll respond {SITE.responseTime}.
+    Tailored for grass cutting, plot clearing, and garden services — we'll respond {SITE.responseTime}.
   </p>
 
   <form id="grass-quote-form" class="mt-6">
@@ -46,6 +52,13 @@ const frequencyOptions = [
     </div>
 
     <div class="mt-4 grid gap-4 md:grid-cols-2" data-step-panel="2" hidden>
+      <label class="flex flex-col gap-1.5 text-sm md:col-span-2">
+        <span class="font-medium text-neutral-200">Service type *</span>
+        <select name="service" required class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white">
+          <option value="">Select service type</option>
+          {serviceTypeOptions.map((o) => <option value={o}>{o}</option>)}
+        </select>
+      </label>
       <label class="flex flex-col gap-1.5 text-sm">
         <span class="font-medium text-neutral-200">Site location</span>
         <input type="text" name="location" class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white" placeholder="City / suburb / estate" />
@@ -109,11 +122,14 @@ const frequencyOptions = [
     }
     submitBtn?.setAttribute("disabled", "true");
 
+    const service = String(fd.get("service") ?? "") || undefined;
+
     const result = await submitQuote({
       type: "grass-cutting",
       name: String(fd.get("name") ?? ""),
       email: String(fd.get("email") ?? ""),
       phone: String(fd.get("phone") ?? ""),
+      service,
       location: String(fd.get("location") ?? "") || undefined,
       area: String(fd.get("area") ?? "") || undefined,
       frequency: String(fd.get("frequency") ?? "") || undefined,

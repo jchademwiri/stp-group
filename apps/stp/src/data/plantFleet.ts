@@ -18,7 +18,7 @@ export const plantFleet: FleetItem[] = [
       "Robust dropside commercial carrier for bulk material delivery and site logistics.",
     longDescription:
       "Designed to transport large construction volumes and heavy building materials. Fitted with drop-down sides to facilitate effortless manual and mechanical loading.",
-    primaryImage: "/images/plant-hire/dropside-truck.webp",
+    primaryImage: "/images/plant-hire/dropside-truck.jpg",
     galleryImages: [],
     rates: {
       indicator: "Contact for Rates",
@@ -45,7 +45,7 @@ export const plantFleet: FleetItem[] = [
       "High-suction vacuum tanker for professional wastewater extraction and septic management.",
     longDescription:
       "Equipped with industrial-grade positive displacement vacuum pumps. Engineered to safely remove and transport sludge, septic tank wastewater, and industrial liquids.",
-    primaryImage: "/images/plant-hire/septic-tank-truck.webp",
+    primaryImage: "/images/plant-hire/septic-tank-truck.jpg",
     galleryImages: [],
     rates: {
       indicator: "Contact for Rates",
@@ -72,7 +72,7 @@ export const plantFleet: FleetItem[] = [
       "Compact, highly maneuverable skid steer loader for earthmoving and site preparation.",
     longDescription:
       "Perfect for earthmoving, grading, site clearing, and loading tasks in cramped conditions where full-size machinery cannot access.",
-    primaryImage: "/images/plant-hire/bobcat.webp",
+    primaryImage: "/images/plant-hire/bobcat.jpg",
     galleryImages: [],
     rates: {
       indicator: "Contact for Rates",
@@ -99,7 +99,7 @@ export const plantFleet: FleetItem[] = [
       "Versatile four-wheel-drive tractor for agricultural pulling and heavy plot clearing.",
     longDescription:
       "High-torque utility tractor designed to operate agricultural implements, pull heavy clearing attachments, and handle rough terrains.",
-    primaryImage: "/images/plant-hire/utility-tractor.webp",
+    primaryImage: "/images/plant-hire/utility-tractor.jpg",
     galleryImages: [],
     rates: {
       indicator: "Contact for Rates",
@@ -126,7 +126,7 @@ export const plantFleet: FleetItem[] = [
       "High-efficiency commercial lawn tractor for large lawns and sports fields.",
     longDescription:
       "Engineered for fast, clean grass-cutting across municipal parks, institutional grounds, and sports fields. Features a wide cutting deck.",
-    primaryImage: "/images/plant-hire/ride-on-mower.webp",
+    primaryImage: "/images/plant-hire/ride-on-mower.jpg",
     galleryImages: [],
     rates: {
       indicator: "Contact for Rates",
@@ -153,7 +153,7 @@ export const plantFleet: FleetItem[] = [
       "Handheld high-torque weed trimmer for thick weeds and dense roadside grass.",
     longDescription:
       "Professional-grade handheld cutter fitted with steel blade options or heavy nylon lines, perfect for clearing dense vegetation on slopes and site perimeters.",
-    primaryImage: "/images/plant-hire/brush-cutter.webp",
+    primaryImage: "/images/plant-hire/brush-cutter.jpg",
     galleryImages: [],
     rates: {
       indicator: "Contact for Rates",
@@ -180,7 +180,7 @@ export const plantFleet: FleetItem[] = [
       "High-performance petrol chainsaw for tree felling and branch clearing.",
     longDescription:
       "Heavy-duty chainsaw optimized for felling small to medium trees, cutting thick logs, and site clearing works.",
-    primaryImage: "/images/plant-hire/chainsaw.webp",
+    primaryImage: "/images/plant-hire/chainsaw.jpg",
     galleryImages: [],
     rates: {
       indicator: "Contact for Rates",
@@ -207,7 +207,7 @@ export const plantFleet: FleetItem[] = [
       "Extendable pole saw for trimming high branches safely from the ground.",
     longDescription:
       "Features a telescopic extendable shaft to trim branches at high elevations without requiring ladders, minimizing operator risk.",
-    primaryImage: "/images/plant-hire/tree-pruner.webp",
+    primaryImage: "/images/plant-hire/tree-pruner.jpg",
     galleryImages: [],
     rates: {
       indicator: "Contact for Rates",

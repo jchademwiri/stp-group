@@ -1,8 +1,9 @@
 ---
 import StpLayout from "@/layouts/StpLayout.astro";
-import TrustBadges from "@/components/TrustBadges.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import Accordion from "@/components/Accordion.astro";
+import BeforeAfter from "@/components/BeforeAfter.astro";
+import ProjectShowcase from "@/components/ProjectShowcase.astro";
 import GrassQuoteForm from "@/components/GrassQuoteForm.astro";
 import { SITE } from "@/data/site";
 
@@ -23,17 +24,67 @@ const services = [
     title: "Overgrown Plot Clearing",
     text: "Heavy-duty land reclamation of wild, overgrown properties, utilizing brush cutters and chainsaws to remove thick shrubs and tree hazards.",
   },
+  {
+    title: "Garden Services & Maintenance",
+    text: "Hedge trimming, flower bed maintenance, pruning, and general garden upkeep for residential estates, commercial complexes, and municipal parks.",
+  },
+];
+
+const projects = [
+  {
+    title: "Highway Verge Vegetation Control",
+    client: "Gauteng Provincial Roads Agency",
+    description:
+      "Industrial-scale roadside clearing and firebreak establishment along 12 km of highway median strips and shoulders. Completed ahead of schedule despite dense thorn bush and uneven terrain.",
+    stats: [
+      { label: "Distance cleared", value: "12 km" },
+      { label: "Crew size", value: "6 operators" },
+      { label: "Duration", value: "8 days" },
+    ],
+  },
+  {
+    title: "Overgrown Estate Plot Reclamation",
+    client: "Private residential estate — Pretoria East",
+    description:
+      "Full reclamation of a 3.5-hectare overgrown plot that had been left wild for over 5 years. The site was cleared, leveled, and prepared for landscaping. Brush cutters, chainsaws, and a utility tractor with flail mower were deployed.",
+    stats: [
+      { label: "Plot size", value: "3.5 ha" },
+      { label: "Vegetation", value: "Dense bush" },
+      { label: "Turnaround", value: "5 days" },
+    ],
+  },
+  {
+    title: "Corporate Park Lawn Maintenance",
+    client: "Midrand commercial estate management",
+    description:
+      "Bi-weekly precision mowing and edge maintenance for a large corporate park with multiple buildings, parking lots, and green spaces. Ride-on mowers and handheld trimmers used for a polished finish.",
+    stats: [
+      { label: "Total area", value: "8 ha" },
+      { label: "Frequency", value: "Bi-weekly" },
+      { label: "Contract", value: "12 months" },
+    ],
+  },
+];
+
+const beforeAfterProjects = [
+  {
+    title: "Plot clearing — before & after",
+    description:
+      "A heavily overgrown 2-hectare smallholding in Centurion. The site was reclaimed using a utility tractor, ride-on mower, and handheld brush cutters. All vegetation was cleared, and the property was left tidy and accessible within 4 days.",
+  },
+  {
+    title: "Highway verge — before & after",
+    description:
+      "Roadside vegetation overgrowth cleared along a 3 km municipal road. Firebreak strips established on both sides. The project improved visibility and reduced fire risk ahead of the dry season.",
+  },
 ];
 ---
 
 <StpLayout {title} {description}>
-  <div class="mx-auto max-w-6xl px-4 pt-6 md:px-6">
-    <Breadcrumbs crumbs={[{ label: "Grass Cutting" }]} />
-  </div>
+  <Breadcrumbs crumbs={[{ label: "Services", href: "/services" }, { label: "Grass Cutting" }]} />
 
   <section class="border-b border-white/10 bg-gradient-to-b from-slate to-charcoal">
     <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20">
-      <TrustBadges />
       <h1 class="mt-8 text-4xl font-bold text-white md:text-5xl">
         Industrial & Commercial Grass Cutting & Plot Clearing
       </h1>
@@ -64,6 +115,26 @@ const services = [
     </div>
   </section>
 
+  <!-- Before & After Gallery -->
+  <section class="border-y border-white/10 bg-slate/40 py-12">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <h2 class="text-2xl font-bold text-white">Before &amp; after — real results</h2>
+      <p class="mt-2 text-neutral-400">See the difference our equipment and crews make.</p>
+      <div class="mt-8 grid gap-8 md:grid-cols-2">
+        {beforeAfterProjects.map((p) => <BeforeAfter title={p.title} description={p.description} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Showcase -->
+  <section class="mx-auto max-w-6xl px-4 py-12 md:px-6">
+    <h2 class="text-2xl font-bold text-white">Recent projects</h2>
+    <p class="mt-2 text-neutral-400">Examples of recent grass cutting and clearing contracts we&rsquo;ve completed across {SITE.region}.</p>
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      {projects.map((p) => <ProjectShowcase title={p.title} client={p.client} description={p.description} stats={p.stats} />)}
+    </div>
+  </section>
+
   <section class="mx-auto max-w-6xl px-4 py-8 md:px-6">
     <h2 class="text-xl font-semibold text-white">Equipment deployed</h2>
     <p class="mt-2 text-neutral-400">
@@ -72,7 +143,7 @@ const services = [
     </p>
   </section>
 
-  <section id="grass-quote" class="mx-auto max-w-6xl scroll-mt-8 px-4 py-12 md:px-6">
+  <section id="grass-quote" class="mx-auto max-w-6xl scroll-mt-32 px-4 py-12 md:px-6">
     <GrassQuoteForm />
   </section>
 

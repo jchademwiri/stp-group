@@ -1,6 +1,5 @@
 ---
 import StpLayout from "@/layouts/StpLayout.astro";
-import TrustBadges from "@/components/TrustBadges.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import Accordion from "@/components/Accordion.astro";
 import DesludgeQuoteForm from "@/components/DesludgeQuoteForm.astro";
@@ -35,6 +34,10 @@ const services = [
     title: "Site & Event Servicing",
     text: "Construction site, market, and event toilet block servicing - regular collection schedules to keep facilities clean and functional.",
   },
+  {
+    title: "Mobile Toilet Hire",
+    text: "Portable toilet rental for construction sites, events, festivals, and temporary setups. Delivery, servicing, and collection included.",
+  },
 ];
 
 const process = [
@@ -68,13 +71,10 @@ const faqs = [
 ---
 
 <StpLayout {title} {description}>
-  <div class="mx-auto max-w-6xl px-4 pt-6 md:px-6">
-    <Breadcrumbs crumbs={[{ label: "Desludging" }]} />
-  </div>
+  <Breadcrumbs crumbs={[{ label: "Services", href: "/services" }, { label: "Desludging" }]} />
 
   <section class="border-b border-white/10 bg-gradient-to-b from-slate to-charcoal">
     <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20">
-      <TrustBadges />
       <h1 class="mt-8 text-4xl font-bold text-white md:text-5xl">
         Septic Tank &amp; Toilet Desludging Services
       </h1>
@@ -82,9 +82,34 @@ const faqs = [
         Professional vacuum extraction of septic tanks, pit latrines, grease traps, and liquid
         waste across {SITE.region}. Accredited operators with industrial-grade equipment.
       </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-4 rounded-xl border border-amber-600/30 bg-amber-500/10 px-5 py-4">
+        <div class="flex items-center gap-3">
+          <span class="flex h-9 w-9 items-center justify-center rounded-full bg-amber-500/20" aria-hidden="true">
+            <svg class="h-5 w-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+              <path d="M12 9v4M12 17h.01" />
+            </svg>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-amber-300">Emergency callout?</p>
+            <p class="text-xs text-amber-400/80">We respond within 2 hours during business hours</p>
+          </div>
+        </div>
+        <a
+          href={`tel:${SITE.phoneTel}`}
+          class="ml-auto flex items-center gap-2 rounded-lg bg-amber-500 px-4 py-2.5 font-bold text-charcoal transition-colors hover:bg-amber-400"
+        >
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+          </svg>
+          Call {SITE.phone}
+        </a>
+      </div>
+
       <a
         href="#desludge-quote"
-        class="mt-8 inline-block rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover"
+        class="mt-6 inline-block rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover"
       >
         Get a Desludging Quote
       </a>
@@ -135,7 +160,7 @@ const faqs = [
     </p>
   </section>
 
-  <section id="desludge-quote" class="mx-auto max-w-6xl scroll-mt-8 px-4 py-12 md:px-6">
+  <section id="desludge-quote" class="mx-auto max-w-6xl scroll-mt-32 px-4 py-12 md:px-6">
     <DesludgeQuoteForm />
   </section>
 

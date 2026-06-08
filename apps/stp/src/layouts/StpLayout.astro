@@ -33,7 +33,7 @@ const quoteHref =
   <header class="sticky top-0 z-30 border-b border-white/10 bg-charcoal/95 backdrop-blur">
     <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
       <a href="/" class="shrink-0">
-        <img src="/stp-logo.png" alt="STP - Sithembe Transportation and Projects" class="h-10 w-auto md:h-12" />
+        <img src="/logo-white.svg" alt="STP - Sithembe Transportation and Projects" class="h-10 w-auto md:h-12" />
       </a>
 
       {/* Desktop nav */}
@@ -44,6 +44,12 @@ const quoteHref =
             currentPath.startsWith("/plant-hire") ? "font-semibold text-safety" : "text-neutral-300",
           ]}
         >Plant Hire</a>
+        <a
+          href="/services"
+          class:list={["rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-safety",
+            currentPath === "/services" || currentPath === "/services/" ? "font-semibold text-safety" : "text-neutral-300",
+          ]}
+        >Services</a>
         <a
           href="/services/grass-cutting"
           class:list={["rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-safety",
@@ -62,11 +68,20 @@ const quoteHref =
             currentPath.startsWith("/about") ? "font-semibold text-safety" : "text-neutral-300",
           ]}
         >About</a>
+      </nav>
+
+      {/* Desktop CTAs */}
+      <div class="hidden items-center gap-2 md:flex">
+        <span class="h-5 w-px bg-white/10" aria-hidden="true"></span>
+        <a
+          href={quoteHref ?? "/services"}
+          class="rounded-lg border border-safety px-3 py-1.5 text-sm font-semibold text-safety transition-colors hover:bg-safety hover:text-charcoal"
+        >Get a quote</a>
         <a
           href={`tel:${SITE.phoneTel}`}
-          class="ml-2 rounded-lg bg-safety px-3 py-1.5 font-semibold text-charcoal hover:bg-safety-hover"
+          class="rounded-lg bg-safety px-3 py-1.5 font-semibold text-charcoal hover:bg-safety-hover"
         >Call now</a>
-      </nav>
+      </div>
 
       {/* Mobile hamburger */}
       <button
@@ -84,39 +99,72 @@ const quoteHref =
       </button>
     </div>
 
-    {/* Mobile nav panel */}
-    <nav
-      id="mobile-nav"
-      class="hidden border-t border-white/10 bg-charcoal px-4 pb-4 pt-2 md:hidden"
-      aria-label="Mobile navigation"
-    >
-      <a href="/plant-hire" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
-        currentPath.startsWith("/plant-hire") ? "text-safety" : "text-neutral-300",
-      ]}>Plant Hire</a>
-      <a href="/services/grass-cutting" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
-        currentPath.startsWith("/services/grass-cutting") ? "text-safety" : "text-neutral-300",
-      ]}>Grass Cutting</a>
-      <a href="/services/desludging" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
-        currentPath.startsWith("/services/desludging") ? "text-safety" : "text-neutral-300",
-      ]}>Desludging</a>
-      <a href="/about" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
-        currentPath.startsWith("/about") ? "text-safety" : "text-neutral-300",
-      ]}>About</a>
-      <a href={`tel:${SITE.phoneTel}`} class="mt-2 block rounded-lg bg-safety px-3 py-2.5 text-center text-sm font-semibold text-charcoal hover:bg-safety-hover">Call {SITE.phone}</a>
-    </nav>
+    <div id="mobile-nav" class="absolute left-0 right-0 top-full z-40 md:hidden">
+      <nav class="border-t border-white/10 bg-charcoal px-4 pb-4 pt-2" aria-label="Mobile navigation">
+        <a href="/plant-hire" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
+          currentPath.startsWith("/plant-hire") ? "text-safety" : "text-neutral-300",
+        ]}>Plant Hire</a>
+        <a href="/services" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
+          currentPath === "/services" || currentPath === "/services/" ? "text-safety" : "text-neutral-300",
+        ]}>Services</a>
+        <a href="/services/grass-cutting" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
+          currentPath.startsWith("/services/grass-cutting") ? "text-safety" : "text-neutral-300",
+        ]}>Grass Cutting</a>
+        <a href="/services/desludging" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
+          currentPath.startsWith("/services/desludging") ? "text-safety" : "text-neutral-300",
+        ]}>Desludging</a>
+        <a href="/about" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
+          currentPath.startsWith("/about") ? "text-safety" : "text-neutral-300",
+        ]}>About</a>
+      </nav>
+      <div class="border-t border-white/10 bg-charcoal px-4 pb-4 pt-3">
+        <a href={quoteHref ?? "/services"} class="block rounded-lg border border-safety px-3 py-2.5 text-center text-sm font-semibold text-safety transition-colors hover:bg-safety hover:text-charcoal">Get a quote</a>
+        <a href={`tel:${SITE.phoneTel}`} class="mt-2 block rounded-lg bg-safety px-3 py-2.5 text-center text-sm font-semibold text-charcoal hover:bg-safety-hover">Call {SITE.phone}</a>
+      </div>
+    </div>
   </header>
+
+  <style>
+    #mobile-nav {
+      opacity: 0;
+      transform: translateY(-100%);
+      visibility: hidden;
+      transition: opacity 300ms ease-in-out, transform 300ms ease-in-out, visibility 0s 300ms;
+      will-change: transform, opacity;
+    }
+    #mobile-nav.open {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+      transition: opacity 300ms ease-in-out, transform 300ms ease-in-out, visibility 0s;
+    }
+  </style>
 
   <script>
     const toggle = document.getElementById("nav-toggle");
     const panel = document.getElementById("mobile-nav");
     const iconOpen = document.getElementById("nav-icon-open");
     const iconClose = document.getElementById("nav-icon-close");
+    function closeMenu() {
+      panel?.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      iconOpen?.classList.remove("hidden");
+      iconClose?.classList.add("hidden");
+    }
+
     toggle?.addEventListener("click", () => {
-      const isHidden = panel?.toggleAttribute("hidden");
-      const isOpen = !isHidden;
+      const isOpen = panel?.classList.toggle("open");
       toggle.setAttribute("aria-expanded", String(isOpen));
       iconOpen?.classList.toggle("hidden", isOpen);
       iconClose?.classList.toggle("hidden", !isOpen);
+    });
+
+    // Close menu when any link inside mobile nav is clicked
+    panel?.addEventListener("click", (e) => {
+      const link = e.target.closest("a");
+      if (link && panel.classList.contains("open")) {
+        closeMenu();
+      }
     });
   </script>
 
@@ -131,10 +179,17 @@ const quoteHref =
           <p class="font-semibold text-white">{SITE.legalName}</p>
           <p class="mt-2">Serving {SITE.region}</p>
           <p class="mt-1">{hours}</p>
-          <p class="mt-4">
-            <a href={`tel:${SITE.phoneTel}`} class="text-safety hover:underline">{SITE.phone}</a>
-            ·
-            <a href={`mailto:${SITE.email}`} class="text-safety hover:underline">{SITE.email}</a>
+          <p class="mt-4 space-y-1">
+            <span class="block">
+              <a href={`tel:${SITE.phoneTel}`} class="text-safety hover:underline">{SITE.phone}</a>
+              <span class="ml-1.5 text-xs text-neutral-500">Mobile &amp; WhatsApp</span>
+            </span>
+            <span class="block text-sm text-neutral-400">
+              Office: <a href={`tel:${SITE.phoneOfficeTel}`} class="text-safety hover:underline">{SITE.phoneOffice}</a>
+            </span>
+            <span class="block">
+              <a href={`mailto:${SITE.email}`} class="text-safety hover:underline">{SITE.email}</a>
+            </span>
           </p>
           <p class="mt-4 text-xs text-neutral-500">
             CIDB Grades 6 CE, 6 EP, 6 SH · COIDA registered · Public liability insured
@@ -142,14 +197,26 @@ const quoteHref =
         </div>
         <div>
           <p class="text-sm font-semibold text-white">Service area</p>
+          <p class="mt-1 text-sm text-neutral-400">Pretoria &amp; Gauteng</p>
+          <div class="mt-3 overflow-hidden rounded-lg border border-white/10 bg-slate/80">
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=27.5%2C-26.5%2C29.5%2C-25.0&amp;layer=mapnik&amp;marker=-25.7479%2C28.2293"
+              width="100%"
+              height="220"
+              style="border:0;"
+              allowfullscreen
+              loading="lazy"
+              title="Map of Gauteng showing our service area"
+              class="block"
+            ></iframe>
+          </div>
           <a
             href={SITE.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-3 flex min-h-[140px] flex-col items-center justify-center rounded-lg border border-white/10 bg-slate/80 p-6 text-center transition hover:border-safety/40 hover:bg-slate"
+            class="mt-2 inline-block text-xs text-safety hover:underline"
           >
-            <span class="text-sm font-medium text-neutral-200">Pretoria &amp; Gauteng</span>
-            <span class="mt-2 text-xs text-safety">Open in Google Maps →</span>
+            Open in Google Maps →
           </a>
         </div>
       </div>
