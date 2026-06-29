@@ -21,5 +21,8 @@
   ],
   "overrides": {
     "vite": "^7"
+  },
+  "dependencies": {
+    "mammoth": "^1.12.0"
   }
 }
