@@ -3,7 +3,7 @@ import StpLayout from "@/layouts/StpLayout.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import Accordion from "@/components/Accordion.astro";
 import DesludgeQuoteForm from "@/components/DesludgeQuoteForm.astro";
-import { SITE, breadcrumbSchema } from "@/data/site";
+import { SITE, breadcrumbSchema, absoluteUrl } from "@/data/site";
 
 const title = "Septic Tank & Toilet Desludging Services | Sithembe";
 const description =
@@ -85,6 +85,52 @@ const faqs = [
 <StpLayout {title} {description}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema([{ label: "Services", href: "/services" }, { label: "Desludging" }], Astro.site))} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "How often should a septic tank be emptied?",
+          acceptedAnswer: { "@type": "Answer", text: "Most residential tanks need emptying every 2-3 years, but this depends on tank size, household volume, and usage. Commercial or high-traffic sites may need quarterly or monthly servicing." },
+        },
+        {
+          "@type": "Question",
+          name: "What areas do you cover?",
+          acceptedAnswer: { "@type": "Answer", text: `We primarily serve ${SITE.region}. Contact us for large contracts or sites outside this area.` },
+        },
+        {
+          "@type": "Question",
+          name: "Do you provide compliance documentation?",
+          acceptedAnswer: { "@type": "Answer", text: "Yes - we provide waste removal certificates and disposal documentation for municipal compliance, CIDB sites, and health inspections." },
+        },
+        {
+          "@type": "Question",
+          name: "How quickly can you respond to an emergency?",
+          acceptedAnswer: { "@type": "Answer", text: "We aim to respond within 2 hours during business hours for urgent callouts such as overflowing tanks or blocked drains." },
+        },
+        {
+          "@type": "Question",
+          name: "What size tanks can you handle?",
+          acceptedAnswer: { "@type": "Answer", text: "Our 10,000-litre honey sucker vacuum tanker handles everything from small household septic tanks to large industrial waste containers." },
+        },
+        {
+          "@type": "Question",
+          name: "Do you offer mobile toilet hire?",
+          acceptedAnswer: { "@type": "Answer", text: "Yes — we provide portable toilet rental for construction sites, events, festivals, and temporary setups. Delivery, regular servicing, and collection are all included." },
+        },
+        {
+          "@type": "Question",
+          name: "How many portable toilets do I need for my event or site?",
+          acceptedAnswer: { "@type": "Answer", text: "A general rule is 1 toilet per 50 people for events, and 1 per 15 workers on construction sites per shift. We can advise on the right number when you enquire." },
+        },
+        {
+          "@type": "Question",
+          name: "How often are hired toilets serviced?",
+          acceptedAnswer: { "@type": "Answer", text: "Weekly servicing is standard for ongoing hires. We clean, sanitise, and restock each unit on a set schedule. For peak events we can service daily if needed." },
+        },
+      ],
+    })} />
   </Fragment>
   <Breadcrumbs crumbs={[{ label: "Services", href: "/services" }, { label: "Desludging" }]} />
 

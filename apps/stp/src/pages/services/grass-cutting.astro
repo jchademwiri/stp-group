@@ -5,7 +5,7 @@ import Accordion from "@/components/Accordion.astro";
 import BeforeAfter from "@/components/BeforeAfter.astro";
 import ProjectShowcase from "@/components/ProjectShowcase.astro";
 import GrassQuoteForm from "@/components/GrassQuoteForm.astro";
-import { SITE, breadcrumbSchema } from "@/data/site";
+import { SITE, breadcrumbSchema, absoluteUrl } from "@/data/site";
 
 const title = "Commercial Grass Cutting & Plot Clearing Services | Sithembe";
 const description =
@@ -83,6 +83,32 @@ const beforeAfterProjects = [
 <StpLayout {title} {description}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema([{ label: "Services", href: "/services" }, { label: "Grass Cutting" }], Astro.site))} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What areas do you cover?",
+          acceptedAnswer: { "@type": "Answer", text: `We primarily serve ${SITE.region}. Contact us for large contracts or sites outside this area.` },
+        },
+        {
+          "@type": "Question",
+          name: "How is pricing calculated?",
+          acceptedAnswer: { "@type": "Answer", text: "Pricing depends on plot size, terrain, vegetation density, and service frequency. Submit the form or WhatsApp us for a tailored quote." },
+        },
+        {
+          "@type": "Question",
+          name: "Do you handle very large plots (10+ hectares)?",
+          acceptedAnswer: { "@type": "Answer", text: "Yes - we deploy tractors, ride-on mowers, and clearing crews suited to large-scale reclamation and maintenance contracts." },
+        },
+        {
+          "@type": "Question",
+          name: "How long does a typical clearing take?",
+          acceptedAnswer: { "@type": "Answer", text: "Once-off reclamation varies from one day to several days depending on acreage and overgrowth. We'll estimate timelines when you enquire." },
+        },
+      ],
+    })} />
   </Fragment>
   <Breadcrumbs crumbs={[{ label: "Services", href: "/services" }, { label: "Grass Cutting" }]} />
 
