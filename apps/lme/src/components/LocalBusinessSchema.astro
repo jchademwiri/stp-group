@@ -1,0 +1,43 @@
+---
+import { LME } from "@/data/site";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: LME.name,
+  url: Astro.site ?? LME.url,
+  telephone: LME.phoneTel,
+  email: LME.email,
+  priceRange: LME.priceRange,
+  description: LME.description,
+  foundingDate: String(LME.foundingYear),
+  founder: { "@type": "Person", name: LME.founder },
+  areaServed: {
+    "@type": "AdministrativeArea",
+    name: LME.serviceArea,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: LME.geo.latitude,
+    longitude: LME.geo.longitude,
+  },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: LME.address.street,
+    addressLocality: LME.address.city,
+    addressRegion: LME.address.province,
+    postalCode: LME.address.postal,
+    addressCountry: "ZA",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "07:30",
+      closes: "16:30",
+    },
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

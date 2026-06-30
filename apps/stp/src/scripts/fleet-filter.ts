@@ -12,6 +12,8 @@ export function initFleetFilter(): void {
       b.classList.toggle("border", !isActive);
       b.classList.toggle("border-white/15", !isActive);
       b.classList.toggle("text-neutral-300", !isActive);
+      b.classList.toggle("hover:bg-safety-hover", isActive);
+      b.classList.toggle("hover:bg-white/5", !isActive);
       b.setAttribute("aria-pressed", isActive ? "true" : "false");
     });
 
