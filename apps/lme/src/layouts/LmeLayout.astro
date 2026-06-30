@@ -20,6 +20,8 @@ const isHome = currentPath === "/" || currentPath === "";
 
 <BaseLayout {title} {description} {ogImage} canonical={Astro.url.href} bodyClass="bg-[#1e1e24] text-neutral-100">
   <LocalBusinessSchema slot="head" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="alternate icon" href="/lme-logo.png" type="image/png" sizes="68x68" />
   <slot name="head" slot="head" />
 
   <header class="sticky top-0 z-30 border-b border-white/10 bg-[#1e1e24]/95 backdrop-blur">
