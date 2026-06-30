@@ -115,7 +115,7 @@ const isHome = currentPath === "/" || currentPath === "";
       }
     });
 
-    // Active section tracking via IntersectionObserver
+    // Active section tracking — find section closest to viewport centre
     const navLinks = document.querySelectorAll<HTMLAnchorElement>("[data-nav]");
     const sections = Array.from(navLinks)
       .map((link) => {
@@ -125,33 +125,34 @@ const isHome = currentPath === "/" || currentPath === "";
       })
       .filter(Boolean);
 
-    if (navLinks.length > 0 && "IntersectionObserver" in window) {
-      const updateActive = () => {
-        const scrollY = window.scrollY;
-        let currentId = "home";
-        for (const section of sections) {
-          if (!section) continue;
-          const top = section.getBoundingClientRect().top + scrollY;
-          if (scrollY >= top - 120) {
-            currentId = section.id;
-          }
+    function updateActive() {
+      if (navLinks.length === 0) return;
+      const viewportCentre = window.innerHeight / 2;
+      let currentId = "home";
+      let minDistance = Infinity;
+
+      for (const section of sections) {
+        if (!section) continue;
+        const rect = section.getBoundingClientRect();
+        const sectionCentre = rect.top + rect.height / 2;
+        const distance = Math.abs(sectionCentre - viewportCentre);
+        if (distance < minDistance) {
+          minDistance = distance;
+          currentId = section.id;
         }
-        navLinks.forEach((link) => {
-          const isActive = link.dataset.nav === currentId;
-          link.classList.toggle("text-safety", isActive);
-          link.classList.toggle("font-semibold", isActive);
-          link.classList.toggle("text-neutral-400", !isActive);
-          link.classList.toggle("font-medium", !isActive);
-        });
-      };
+      }
 
-      const observer = new IntersectionObserver(updateActive, {
-        rootMargin: "-120px 0px -60% 0px",
-      });
-      sections.forEach((s) => s && observer.observe(s));
-
-      updateActive();
+      for (const link of navLinks) {
+        const isActive = link.dataset.nav === currentId;
+        link.classList.toggle("text-safety", isActive);
+        link.classList.toggle("font-semibold", isActive);
+        link.classList.toggle("text-neutral-400", !isActive);
+        link.classList.toggle("font-medium", !isActive);
+      }
     }
+
+    window.addEventListener("scroll", updateActive, { passive: true });
+    updateActive();
   </script>
 
   <main>
