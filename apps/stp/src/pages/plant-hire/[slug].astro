@@ -131,32 +131,6 @@ const breadcrumbSchema = {
       </div>
     </div>
 
-    <section class="mt-12">
-      <h2 class="text-xl font-semibold text-white">Technical specifications</h2>
-      <table class="mt-4 w-full max-w-xl overflow-hidden rounded-lg border border-white/10 text-left text-sm">
-        <caption class="sr-only">Specifications for {item.title}</caption>
-        <tbody>
-          {
-            Object.entries(item.specifications).map(([key, value], i) => (
-              <tr
-                class:list={[
-                  "border-b border-white/10 last:border-0",
-                  i % 2 === 0 ? "bg-slate/60" : "bg-slate/30",
-                ]}
-              >
-                <th
-                  scope="row"
-                  class="w-40 px-4 py-3 text-left text-xs font-semibold tracking-wider text-neutral-400 uppercase"
-                >
-                  {key}
-                </th>
-                <td class="px-4 py-3 text-sm text-neutral-200">{value}</td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
-    </section>
 
     {
       related.length > 0 && (
