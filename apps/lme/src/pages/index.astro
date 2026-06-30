@@ -5,7 +5,6 @@ import { LME, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE } from "@/data/site";
 const title = "Livhu and Musa Enterprise | Construction & Civil Engineering — Centurion, Gauteng";
 const description = LME.description;
 
-// Icon SVG paths
 const icons = {
   roads: "M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm12 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z",
   building: "M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11m16-11v11M8 14v.01M12 14v.01M16 14v.01M8 18v.01M12 18v.01M16 18v.01",
@@ -13,58 +12,58 @@ const icons = {
   clock: "M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM12 6v6l4 2",
   shield: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
   heart: "M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z",
-  check: "M20 6L9 17l-5-5",
   phone: "M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z",
   mail: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zM22 6l-10 7L2 6",
+
 };
 ---}
 
 <LmeLayout {title} {description}>
   <!-- Hero Section -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-[#0898c8] to-[#0a6a8a]">
-    <div class="absolute inset-0 opacity-10" aria-hidden="true"
+  <section class="relative overflow-hidden bg-gradient-to-br from-[#0898c8] to-[#065a7a]">
+    <div class="absolute inset-0 opacity-[0.06]" aria-hidden="true"
       style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&quot;);">
     </div>
     <div class="relative mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-28">
       <div class="flex items-center gap-3">
-        <img src="/lme-logo.png" alt="" class="h-12 w-12 rounded-lg bg-white/20 p-2" />
-        <p class="text-sm font-medium tracking-wider text-white/80 uppercase">{LME.name}</p>
+        <img src="/lme-logo.png" alt="" class="h-12 w-12 rounded-lg bg-white/15 p-2" />
+        <p class="text-sm font-medium tracking-wider text-white/60 uppercase">{LME.name}</p>
       </div>
       <h1 class="mt-6 max-w-3xl text-4xl font-bold tracking-tight text-white md:text-5xl">
         {LME.tagline}
       </h1>
-      <p class="mt-4 max-w-2xl text-lg text-white/80">
+      <p class="mt-4 max-w-2xl text-lg text-white/70">
         CIDB-registered contractor (1CE, 1GB, 1EP) serving {LME.region} with excellence, integrity, and innovation.
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
         <a href={`tel:${LME.phoneTel}`} class="rounded-lg bg-white px-6 py-3 font-semibold text-[#0898c8] transition-colors hover:bg-neutral-100">
           Call {LME.phone}
         </a>
-        <a href="#services" class="rounded-lg border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10">
+        <a href="#services" class="rounded-lg border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10">
           View Our Services
         </a>
-        <a href={whatsappUrl(WHATSAPP_DEFAULT_MESSAGE)} target="_blank" rel="noopener noreferrer" class="rounded-lg border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10">
+        <a href={whatsappUrl(WHATSAPP_DEFAULT_MESSAGE)} target="_blank" rel="noopener noreferrer" class="rounded-lg border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10">
           WhatsApp Us
         </a>
       </div>
       <!-- Trust Badges -->
       <div class="mt-10 flex flex-wrap gap-2">
         {LME.cidb.grades.map((g) => (
-          <span class="flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-white">
-            <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <span class="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white">
+            <svg class="h-3.5 w-3.5 shrink-0 text-[#0898c8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
               <path d="M9 12l2 2 4-4" />
             </svg>
             {g.code} — {g.name}
           </span>
         ))}
-        <span class="flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-white">
-          <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <span class="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white">
+          <svg class="h-3.5 w-3.5 shrink-0 text-[#0898c8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <path d="M9 12l2 2 4-4" />
           </svg>
           SARS Compliant
         </span>
-        <span class="flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-white">
-          <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <span class="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white">
+          <svg class="h-3.5 w-3.5 shrink-0 text-[#0898c8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <path d="M9 12l2 2 4-4" />
           </svg>
           Since {LME.foundingYear}
@@ -76,36 +75,36 @@ const icons = {
   <!-- Services Section -->
   <section id="services" class="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 md:px-6">
     <p class="text-sm font-semibold tracking-wider text-[#0898c8] uppercase">What we do</p>
-    <h2 class="mt-2 text-3xl font-bold text-neutral-800">Our Services</h2>
-    <p class="mt-3 max-w-2xl text-neutral-500">
+    <h2 class="mt-2 text-3xl font-bold text-white">Our Services</h2>
+    <p class="mt-3 max-w-2xl text-neutral-400">
       From infrastructure to electrical installations — we deliver quality construction services across {LME.region}.
     </p>
     <div class="mt-10 grid gap-6 md:grid-cols-3">
       {LME.services.map((s) => (
-        <article class="group rounded-xl border border-neutral-200 bg-white p-8 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[#0898c8]/30 hover:shadow-lg">
-          <span class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#0898c8]/10 transition-colors group-hover:bg-[#0898c8]/20">
+        <article class="group rounded-xl border border-white/10 bg-[#2a2a32] p-8 transition-all duration-200 hover:-translate-y-1 hover:border-[#0898c8]/30 hover:shadow-lg hover:shadow-black/30">
+          <span class="flex h-12 w-12 items-center justify-center rounded-lg bg-[#0898c8]/15 transition-colors group-hover:bg-[#0898c8]/25">
             <svg class="h-6 w-6 text-[#0898c8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d={icons[s.icon as keyof typeof icons] || icons.building} />
             </svg>
           </span>
-          <h3 class="mt-5 text-xl font-bold text-neutral-800">{s.title}</h3>
-          <p class="mt-3 text-sm leading-relaxed text-neutral-500">{s.description}</p>
+          <h3 class="mt-5 text-xl font-bold text-white">{s.title}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-neutral-400">{s.description}</p>
         </article>
       ))}
     </div>
   </section>
 
   <!-- Equipment Fleet Section -->
-  <section class="border-y border-neutral-200 bg-neutral-50">
-    <div class="mx-auto max-w-6xl px-4 py-16 md:px-6">
+  <section id="fleet" class="border-y border-white/10 bg-[#2a2a32]/50">
+    <div class="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 md:px-6">
       <p class="text-sm font-semibold tracking-wider text-[#0898c8] uppercase">Our capability</p>
-      <h2 class="mt-2 text-3xl font-bold text-neutral-800">Fleet &amp; Equipment</h2>
-      <p class="mt-3 max-w-2xl text-neutral-500">
+      <h2 class="mt-2 text-3xl font-bold text-white">Fleet &amp; Equipment</h2>
+      <p class="mt-3 max-w-2xl text-neutral-400">
         Over {LME.fleet.length} equipment items — from heavy machinery to handheld tools — ready for deployment.
       </p>
       <div class="mt-10 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {LME.fleet.map((item) => (
-          <div class="flex items-center gap-2 rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-600">
+          <div class="flex items-center gap-2 rounded-lg border border-white/10 bg-[#1e1e24] px-4 py-3 text-sm text-neutral-300">
             <svg class="h-4 w-4 shrink-0 text-[#0898c8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
               <path d="M20 6L9 17l-5-5" />
             </svg>
@@ -119,21 +118,21 @@ const icons = {
   <!-- Why LME Section -->
   <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
     <p class="text-sm font-semibold tracking-wider text-[#0898c8] uppercase">Why choose us</p>
-    <h2 class="mt-2 text-3xl font-bold text-neutral-800">Why Livhu and Musa Enterprise?</h2>
-    <p class="mt-3 max-w-2xl text-neutral-500">
+    <h2 class="mt-2 text-3xl font-bold text-white">Why Livhu and Musa Enterprise?</h2>
+    <p class="mt-3 max-w-2xl text-neutral-400">
       A decade of experience, municipal trust, and a commitment to quality — here's what sets us apart.
     </p>
     <div class="mt-10 grid gap-6 sm:grid-cols-2">
       {LME.values.map((v) => (
-        <div class="flex gap-4 rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
-          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0898c8]/10">
+        <div class="flex gap-4 rounded-xl border border-white/10 bg-[#2a2a32] p-6">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0898c8]/15">
             <svg class="h-6 w-6 text-[#0898c8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d={icons[v.icon as keyof typeof icons] || icons.building} />
             </svg>
           </span>
           <div>
-            <h3 class="font-semibold text-neutral-800">{v.title}</h3>
-            <p class="mt-1 text-sm text-neutral-500">{v.text}</p>
+            <h3 class="font-semibold text-white">{v.title}</h3>
+            <p class="mt-1 text-sm text-neutral-400">{v.text}</p>
           </div>
         </div>
       ))}
@@ -141,21 +140,21 @@ const icons = {
   </section>
 
   <!-- Active Projects / Credibility Section -->
-  <section id="projects" class="border-y border-neutral-200 bg-neutral-50">
+  <section id="projects" class="border-y border-white/10 bg-[#2a2a32]/50">
     <div class="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 md:px-6">
       <p class="text-sm font-semibold tracking-wider text-[#0898c8] uppercase">Contract awards</p>
-      <h2 class="mt-2 text-3xl font-bold text-neutral-800">Current &amp; Past Projects</h2>
-      <p class="mt-3 max-w-2xl text-neutral-500">
+      <h2 class="mt-2 text-3xl font-bold text-white">Current &amp; Past Projects</h2>
+      <p class="mt-3 max-w-2xl text-neutral-400">
         Active contracts with the City of Tshwane Metropolitan Municipality — our team is trusted with critical municipal infrastructure.
       </p>
       <div class="mt-10 grid gap-4 md:grid-cols-2">
         {LME.contracts.map((contract) => (
-          <div class="flex items-start gap-3 rounded-lg border border-neutral-200 bg-white px-5 py-4 shadow-sm">
+          <div class="flex items-start gap-3 rounded-lg border border-white/10 bg-[#1e1e24] px-5 py-4">
             <svg class="mt-0.5 h-5 w-5 shrink-0 text-[#0898c8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
               <path d="M22 4L12 14.01l-3-3" />
             </svg>
-            <span class="text-sm text-neutral-600">{contract}</span>
+            <span class="text-sm text-neutral-300">{contract}</span>
           </div>
         ))}
       </div>
@@ -165,47 +164,44 @@ const icons = {
   <!-- Contact Section -->
   <section id="contact" class="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 md:px-6">
     <p class="text-sm font-semibold tracking-wider text-[#0898c8] uppercase">Get in touch</p>
-    <h2 class="mt-2 text-3xl font-bold text-neutral-800">Contact Us</h2>
-    <p class="mt-3 max-w-2xl text-neutral-500">
+    <h2 class="mt-2 text-3xl font-bold text-white">Contact Us</h2>
+    <p class="mt-3 max-w-2xl text-neutral-400">
       Call, WhatsApp, or email us for tenders, equipment hire, or project inquiries.
     </p>
     <div class="mt-10 grid gap-8 md:grid-cols-3">
-      <!-- Phone -->
-      <a href={`tel:${LME.phoneTel}`} class="group flex items-start gap-4 rounded-xl border border-neutral-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-[#0898c8]/30 hover:shadow-lg">
-        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0898c8]/10 transition-colors group-hover:bg-[#0898c8]/20">
+      <a href={`tel:${LME.phoneTel}`} class="group flex items-start gap-4 rounded-xl border border-white/10 bg-[#2a2a32] p-6 transition-all hover:-translate-y-1 hover:border-[#0898c8]/30 hover:shadow-lg hover:shadow-black/30">
+        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0898c8]/15 transition-colors group-hover:bg-[#0898c8]/25">
           <svg class="h-6 w-6 text-[#0898c8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d={icons.phone} />
           </svg>
         </span>
         <div>
-          <h3 class="font-semibold text-neutral-800 group-hover:text-[#0898c8]">Call us</h3>
-          <p class="mt-1 text-sm text-neutral-500">{LME.phone}</p>
-          <p class="text-xs text-neutral-400">{LME.businessHours.weekdays}</p>
+          <h3 class="font-semibold text-white group-hover:text-[#0898c8]">Call us</h3>
+          <p class="mt-1 text-sm text-neutral-400">{LME.phone}</p>
+          <p class="text-xs text-neutral-500">{LME.businessHours.weekdays}</p>
         </div>
       </a>
-      <!-- Email -->
-      <a href={`mailto:${LME.email}`} class="group flex items-start gap-4 rounded-xl border border-neutral-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-[#0898c8]/30 hover:shadow-lg">
-        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0898c8]/10 transition-colors group-hover:bg-[#0898c8]/20">
+      <a href={`mailto:${LME.email}`} class="group flex items-start gap-4 rounded-xl border border-white/10 bg-[#2a2a32] p-6 transition-all hover:-translate-y-1 hover:border-[#0898c8]/30 hover:shadow-lg hover:shadow-black/30">
+        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0898c8]/15 transition-colors group-hover:bg-[#0898c8]/25">
           <svg class="h-6 w-6 text-[#0898c8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d={icons.mail} />
           </svg>
         </span>
         <div>
-          <h3 class="font-semibold text-neutral-800 group-hover:text-[#0898c8]">Email us</h3>
-          <p class="mt-1 text-sm text-neutral-500">{LME.email}</p>
+          <h3 class="font-semibold text-white group-hover:text-[#0898c8]">Email us</h3>
+          <p class="mt-1 text-sm text-neutral-400">{LME.email}</p>
         </div>
       </a>
-      <!-- Address -->
-      <div class="flex items-start gap-4 rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
-        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0898c8]/10">
+      <div class="flex items-start gap-4 rounded-xl border border-white/10 bg-[#2a2a32] p-6">
+        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0898c8]/15">
           <svg class="h-6 w-6 text-[#0898c8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
             <circle cx="12" cy="10" r="3" />
           </svg>
         </span>
         <div>
-          <h3 class="font-semibold text-neutral-800">Visit us</h3>
-          <p class="mt-1 text-sm leading-relaxed text-neutral-500">{LME.address.street}<br />{LME.address.suburb}<br />{LME.address.city}, {LME.address.province}</p>
+          <h3 class="font-semibold text-white">Visit us</h3>
+          <p class="mt-1 text-sm leading-relaxed text-neutral-400">{LME.address.street}<br />{LME.address.suburb}<br />{LME.address.city}, {LME.address.province}</p>
         </div>
       </div>
     </div>

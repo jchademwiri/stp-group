@@ -4,54 +4,47 @@ import { finished } from 'stream/promises';
 import sharp from 'sharp';
 
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+const logoSvgPath = 'apps/stp/public/logo-white.svg';
 
 const tasks = [
   {
     name: 'dropside-truck.jpg',
     type: 'copy',
-    src: 'C:\\Users\\Accounts Manager\\.gemini\\antigravity-cli\\brain\\2a3ddb02-cfb0-4fdc-8cf4-50da31a73b48\\dropside_truck_1782805834358.jpg',
-    logoType: 'white'
+    src: 'C:\\Users\\Accounts Manager\\.gemini\\antigravity-cli\\brain\\2a3ddb02-cfb0-4fdc-8cf4-50da31a73b48\\dropside_truck_1782805834358.jpg'
   },
   {
     name: 'septic-tank-truck.jpg',
     type: 'copy',
-    src: 'C:\\Users\\Accounts Manager\\.gemini\\antigravity-cli\\brain\\2a3ddb02-cfb0-4fdc-8cf4-50da31a73b48\\septic_tank_truck_1782805848464.jpg',
-    logoType: 'white'
+    src: 'C:\\Users\\Accounts Manager\\.gemini\\antigravity-cli\\brain\\2a3ddb02-cfb0-4fdc-8cf4-50da31a73b48\\septic_tank_truck_1782805848464.jpg'
   },
   {
     name: 'ride-on-mower.jpg',
     type: 'copy',
-    src: 'C:\\Users\\Accounts Manager\\.gemini\\antigravity-cli\\brain\\2a3ddb02-cfb0-4fdc-8cf4-50da31a73b48\\ride_on_mower_1782805904732.jpg',
-    logoType: 'white'
+    src: 'C:\\Users\\Accounts Manager\\.gemini\\antigravity-cli\\brain\\2a3ddb02-cfb0-4fdc-8cf4-50da31a73b48\\ride_on_mower_1782805904732.jpg'
   },
   {
     name: 'brush-cutter.jpg',
     type: 'copy',
-    src: 'C:\\Users\\Accounts Manager\\.gemini\\antigravity-cli\\brain\\2a3ddb02-cfb0-4fdc-8cf4-50da31a73b48\\brush_cutter_1782805915982.jpg',
-    logoType: 'white'
+    src: 'C:\\Users\\Accounts Manager\\.gemini\\antigravity-cli\\brain\\2a3ddb02-cfb0-4fdc-8cf4-50da31a73b48\\brush_cutter_1782805915982.jpg'
   },
   {
     name: 'chainsaw.jpg',
     type: 'download',
-    src: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Stihl_MS_192C_chainsaw_20190326.jpg',
-    logoType: 'dark'
+    src: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Stihl_MS_192C_chainsaw_20190326.jpg'
   },
   {
     name: 'tree-pruner.jpg',
     type: 'download',
-    src: 'https://www.coopsuperstores.ie/cdn/shop/files/1971168_2.jpg?v=1728505207&width=1500',
-    logoType: 'dark'
+    src: 'https://www.coopsuperstores.ie/cdn/shop/files/1971168_2.jpg?v=1728505207&width=1500'
   },
   {
     name: 'utility-tractor.jpg',
     type: 'download',
-    src: 'https://www.rdoequipment.com.au/wp-content/uploads/2023/08/Howard-Nugget-NUG150-Tractor-Slasher-2.jpg',
-    logoType: 'dark'
+    src: 'https://www.rdoequipment.com.au/wp-content/uploads/2023/08/Howard-Nugget-NUG150-Tractor-Slasher-2.jpg'
   },
   {
     name: 'bobcat.jpg',
-    type: 'git-restore',
-    logoType: 'white'
+    type: 'git-restore'
   }
 ];
 
@@ -64,9 +57,8 @@ async function download(url, outputPath) {
   console.log(`Downloaded ${outputPath}`);
 }
 
-async function applyWatermark(imagePath, logoType) {
-  console.log(`Applying watermark to ${imagePath}...`);
-  const logoSvgPath = logoType === 'dark' ? 'apps/stp/public/logo-dark.svg' : 'apps/stp/public/logo-white.svg';
+async function applyWatermark(imagePath) {
+  console.log(`Applying white watermark to ${imagePath}...`);
   const logoSvgContent = fs.readFileSync(logoSvgPath, 'utf8');
   
   const img = sharp(imagePath);
@@ -85,7 +77,7 @@ async function applyWatermark(imagePath, logoType) {
     `<svg width="${logoWidth}" height="${logoHeight}" `
   );
   
-  // Position higher up (12% padding from bottom, 5% padding from right) to avoid crop
+  // Position with 12% bottom padding, 5% right padding
   const paddingX = Math.round(imgWidth * 0.05);
   const paddingY = Math.round(imgHeight * 0.12);
   const left = imgWidth - logoWidth - paddingX;
@@ -130,7 +122,7 @@ async function run() {
     
     // Step 2: Apply watermark
     try {
-      await applyWatermark(outputPath, task.logoType);
+      await applyWatermark(outputPath);
     } catch (e) {
       console.error(`Error watermarking ${task.name}:`, e);
     }
