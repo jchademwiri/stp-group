@@ -1,6 +1,10 @@
 export const SITE = {
   name: "Sithembe",
-  legalName: "Sithembe Plant Hire",
+  legalName: "Sithembe Transportation and Projects (Pty) Ltd",
+  tradingName: "Sithembe Plant Hire",
+  socialLinks: {
+    facebook: "https://www.facebook.com/people/Sithembe-Plant-Hire/61574452205967/",
+  },
   url: "https://sithembe.co.za",
   description:
     "Construction and plant hire - dropside trucks, vacuum tankers, bobcats, tractors, mowers and tools with qualified operators in Pretoria and Gauteng.",

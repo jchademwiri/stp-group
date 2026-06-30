@@ -1,10 +1,14 @@
 ---
 import { SITE } from "@/data/site";
 
+const sameAs: string[] = [];
+if (SITE.socialLinks?.facebook) sameAs.push(SITE.socialLinks.facebook);
+
 const schema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: SITE.legalName,
+  name: SITE.tradingName ?? SITE.legalName,
+  legalName: SITE.legalName,
   url: Astro.site ?? SITE.url,
   telephone: SITE.phoneTel,
   email: SITE.email,
@@ -39,6 +43,7 @@ const schema = {
       closes: "12:00",
     },
   ],
+  sameAs: sameAs.length > 0 ? sameAs : undefined,
 };
 ---
 
