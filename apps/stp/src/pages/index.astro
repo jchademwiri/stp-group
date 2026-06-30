@@ -2,13 +2,31 @@
 import StpLayout from "@/layouts/StpLayout.astro";
 import TrustBadges from "@/components/TrustBadges.astro";
 import Testimonials from "@/components/Testimonials.astro";
-import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE } from "@/data/site";
+import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE, absoluteUrl } from "@/data/site";
 
 const title = "Sithembe | Plant Hire & Site Services";
 const description = SITE.description;
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE.tradingName,
+  legalName: SITE.legalName,
+  url: Astro.site ?? SITE.url,
+  logo: absoluteUrl("/logo-white.svg", Astro.site),
+  description: SITE.description,
+  telephone: SITE.phoneTel,
+  email: SITE.email,
+  areaServed: SITE.region,
+  foundingDate: "2020",
+  sameAs: Object.values(SITE.socialLinks ?? {}).filter(Boolean),
+};
 ---
 
 <StpLayout {title} {description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+  </Fragment>
     <section class="relative overflow-hidden bg-gradient-to-b from-slate to-charcoal">
       <!-- Subtle texture overlay -->
       <div class="pointer-events-none absolute inset-0 opacity-[0.04]" aria-hidden="true"
