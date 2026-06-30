@@ -1,152 +1,223 @@
 ---
-import { SITE } from "@/data/site";
+import { SITE } from '@/data/site';
 
 const areaOptions = [
-  "Under 1,000 m²",
-  "1,000 m² - 5,000 m²",
-  "0.5 Hectares - 1 Hectare",
-  "1 - 5 Hectares",
-  "5 Hectares+",
+  'Under 1,000 m²',
+  '1,000 m² - 5,000 m²',
+  '0.5 Hectares - 1 Hectare',
+  '1 - 5 Hectares',
+  '5 Hectares+',
 ];
 
 const frequencyOptions = [
-  "Weekly Maintenance",
-  "Once-off Clearing / Reclamation",
-  "Bi-weekly Maintenance",
-  "Monthly Maintenance Contract",
-  "Seasonal Clearing / Firebreak",
+  'Weekly Maintenance',
+  'Once-off Clearing / Reclamation',
+  'Bi-weekly Maintenance',
+  'Monthly Maintenance Contract',
+  'Seasonal Clearing / Firebreak',
 ];
 
 const serviceTypeOptions = [
-  "Grass Cutting & Plot Clearing",
-  "Garden Services & Maintenance",
+  'Grass Cutting & Plot Clearing',
+  'Garden Services & Maintenance',
 ];
 ---
 
-<div class="rounded-2xl border border-white/10 bg-slate p-6 md:p-10">
-  <h2 class="text-2xl font-bold text-white">Get a Quote</h2>
-  <p class="mt-2 text-neutral-400">
-    Tailored for grass cutting, plot clearing, and garden services — we'll respond {SITE.responseTime}.
+<div class='rounded-2xl border border-white/10 bg-slate p-6 md:p-10'>
+  <h2 class='text-2xl font-bold text-white'>Get a Quote</h2>
+  <p class='mt-2 text-neutral-400'>
+    Tailored for grass cutting, plot clearing, and garden services - we'll
+    respond {SITE.responseTime}.
   </p>
 
-  <form id="grass-quote-form" class="mt-6">
-    <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <form id='grass-quote-form' class='mt-6'>
+    <input
+      type='text'
+      name='website'
+      class='hidden'
+      tabindex='-1'
+      autocomplete='off'
+      aria-hidden='true'
+    />
 
-    <p class="mb-4 text-sm text-neutral-400">
+    <p class='mb-4 text-sm text-neutral-400'>
       Step <span data-step-current>1</span> of 2
     </p>
 
-    <div class="grid gap-4 md:grid-cols-2" data-step-panel="1">
-      <label class="flex flex-col gap-1.5 text-sm">
-        <span class="font-medium text-neutral-200">Your Full Name *</span>
-        <input type="text" name="name" required autocomplete="name" class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white" />
+    <div class='grid gap-4 md:grid-cols-2' data-step-panel='1'>
+      <label class='flex flex-col gap-1.5 text-sm'>
+        <span class='font-medium text-neutral-200'>Your Full Name *</span>
+        <input
+          type='text'
+          name='name'
+          required
+          autocomplete='name'
+          class='rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white'
+        />
       </label>
-      <label class="flex flex-col gap-1.5 text-sm">
-        <span class="font-medium text-neutral-200">Email *</span>
-        <input type="email" name="email" required autocomplete="email" class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white" />
+      <label class='flex flex-col gap-1.5 text-sm'>
+        <span class='font-medium text-neutral-200'>Email *</span>
+        <input
+          type='email'
+          name='email'
+          required
+          autocomplete='email'
+          class='rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white'
+        />
       </label>
-      <label class="flex flex-col gap-1.5 text-sm md:col-span-2">
-        <span class="font-medium text-neutral-200">Phone *</span>
-        <input type="tel" name="phone" required autocomplete="tel" class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white" />
+      <label class='flex flex-col gap-1.5 text-sm md:col-span-2'>
+        <span class='font-medium text-neutral-200'>Phone *</span>
+        <input
+          type='tel'
+          name='phone'
+          required
+          autocomplete='tel'
+          class='rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white'
+        />
       </label>
     </div>
 
-    <div class="mt-4 grid gap-4 md:grid-cols-2" data-step-panel="2" hidden>
-      <label class="flex flex-col gap-1.5 text-sm md:col-span-2">
-        <span class="font-medium text-neutral-200">Service type *</span>
-        <select name="service" required class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white">
-          <option value="">Select service type</option>
+    <div class='mt-4 grid gap-4 md:grid-cols-2' data-step-panel='2' hidden>
+      <label class='flex flex-col gap-1.5 text-sm md:col-span-2'>
+        <span class='font-medium text-neutral-200'>Service type *</span>
+        <select
+          name='service'
+          required
+          class='rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white'
+        >
+          <option value=''>Select service type</option>
           {serviceTypeOptions.map((o) => <option value={o}>{o}</option>)}
         </select>
       </label>
-      <label class="flex flex-col gap-1.5 text-sm">
-        <span class="font-medium text-neutral-200">Site location</span>
-        <input type="text" name="location" class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white" placeholder="City / suburb / estate" />
+      <label class='flex flex-col gap-1.5 text-sm'>
+        <span class='font-medium text-neutral-200'>Site location</span>
+        <input
+          type='text'
+          name='location'
+          class='rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white'
+          placeholder='City / suburb / estate'
+        />
       </label>
-      <label class="flex flex-col gap-1.5 text-sm">
-        <span class="font-medium text-neutral-200">Estimated area</span>
-        <select name="area" class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white">
-          <option value="">Select area</option>
+      <label class='flex flex-col gap-1.5 text-sm'>
+        <span class='font-medium text-neutral-200'>Estimated area</span>
+        <select
+          name='area'
+          class='rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white'
+        >
+          <option value=''>Select area</option>
           {areaOptions.map((o) => <option value={o}>{o}</option>)}
         </select>
       </label>
-      <label class="flex flex-col gap-1.5 text-sm">
-        <span class="font-medium text-neutral-200">Service frequency</span>
-        <select name="frequency" class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white">
-          <option value="">Select frequency</option>
+      <label class='flex flex-col gap-1.5 text-sm'>
+        <span class='font-medium text-neutral-200'>Service frequency</span>
+        <select
+          name='frequency'
+          class='rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white'
+        >
+          <option value=''>Select frequency</option>
           {frequencyOptions.map((o) => <option value={o}>{o}</option>)}
         </select>
       </label>
-      <label class="flex flex-col gap-1.5 text-sm md:col-span-2">
-        <span class="font-medium text-neutral-200">Message (optional)</span>
-        <textarea name="message" rows={3} class="rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white" placeholder="Access, terrain, deadlines…"></textarea>
+      <label class='flex flex-col gap-1.5 text-sm md:col-span-2'>
+        <span class='font-medium text-neutral-200'>Message (optional)</span>
+        <textarea
+          name='message'
+          rows={3}
+          class='rounded-lg border border-white/15 bg-charcoal px-4 py-2.5 text-white'
+          placeholder='Access, terrain, deadlines…'></textarea>
       </label>
     </div>
 
-    <p class="mt-4 text-xs text-neutral-500">
-      By submitting, you agree we may contact you about this inquiry. We process data in line with POPIA.
+    <p class='mt-4 text-xs text-neutral-500'>
+      By submitting, you agree we may contact you about this inquiry. We process
+      data in line with POPIA.
     </p>
 
-    <div class="mt-6 flex flex-wrap gap-3">
-      <button type="button" data-step-back hidden class="rounded-lg border border-white/20 px-6 py-3 font-semibold text-white hover:bg-white/5">Back</button>
-      <button type="button" data-step-next class="rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover">Next</button>
-      <button type="submit" data-step-submit hidden class="rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover disabled:opacity-60">Send inquiry</button>
+    <div class='mt-6 flex flex-wrap gap-3'>
+      <button
+        type='button'
+        data-step-back
+        hidden
+        class='rounded-lg border border-white/20 px-6 py-3 font-semibold text-white hover:bg-white/5'
+        >Back</button
+      >
+      <button
+        type='button'
+        data-step-next
+        class='rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover'
+        >Next</button
+      >
+      <button
+        type='submit'
+        data-step-submit
+        hidden
+        class='rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover disabled:opacity-60'
+        >Send inquiry</button
+      >
     </div>
-    <p id="grass-form-status" class="mt-3 hidden text-sm" role="status"></p>
+    <p id='grass-form-status' class='mt-3 hidden text-sm' role='status'></p>
   </form>
 </div>
 
 <script>
-  import { initFormSteps } from "@/scripts/form-steps";
-  import { setFormStatus, submitQuote } from "@/scripts/submit-quote";
-  import { initFormPersistence, initInlineValidation, clearFormPersistence } from "@/scripts/form-utils";
+  import { initFormSteps } from '@/scripts/form-steps';
+  import { setFormStatus, submitQuote } from '@/scripts/submit-quote';
+  import {
+    initFormPersistence,
+    initInlineValidation,
+    clearFormPersistence,
+  } from '@/scripts/form-utils';
 
-  initFormSteps("grass-quote-form");
-  initFormPersistence("grass-quote-form");
-  initInlineValidation("grass-quote-form");
+  initFormSteps('grass-quote-form');
+  initFormPersistence('grass-quote-form');
+  initInlineValidation('grass-quote-form');
 
-  const form = document.getElementById("grass-quote-form") as HTMLFormElement | null;
-  const status = document.getElementById("grass-form-status");
-  const submitBtn = form?.querySelector("[data-step-submit]") as HTMLButtonElement | null;
+  const form = document.getElementById(
+    'grass-quote-form',
+  ) as HTMLFormElement | null;
+  const status = document.getElementById('grass-form-status');
+  const submitBtn = form?.querySelector(
+    '[data-step-submit]',
+  ) as HTMLButtonElement | null;
 
-  form?.addEventListener("submit", async (e) => {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!form) return;
 
     const fd = new FormData(form);
-    setFormStatus(status, "Sending…", "pending");
-    const originalBtnText = submitBtn?.innerHTML ?? "";
+    setFormStatus(status, 'Sending…', 'pending');
+    const originalBtnText = submitBtn?.innerHTML ?? '';
     if (submitBtn) {
       submitBtn.innerHTML =
         '<span class="flex items-center gap-2"><svg class="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>Sending…</span>';
     }
-    submitBtn?.setAttribute("disabled", "true");
+    submitBtn?.setAttribute('disabled', 'true');
 
-    const service = String(fd.get("service") ?? "") || undefined;
+    const service = String(fd.get('service') ?? '') || undefined;
 
     const result = await submitQuote({
-      type: "grass-cutting",
-      name: String(fd.get("name") ?? ""),
-      email: String(fd.get("email") ?? ""),
-      phone: String(fd.get("phone") ?? ""),
+      type: 'grass-cutting',
+      name: String(fd.get('name') ?? ''),
+      email: String(fd.get('email') ?? ''),
+      phone: String(fd.get('phone') ?? ''),
       service,
-      location: String(fd.get("location") ?? "") || undefined,
-      area: String(fd.get("area") ?? "") || undefined,
-      frequency: String(fd.get("frequency") ?? "") || undefined,
-      message: String(fd.get("message") ?? "") || undefined,
-      website: String(fd.get("website") ?? ""),
+      location: String(fd.get('location') ?? '') || undefined,
+      area: String(fd.get('area') ?? '') || undefined,
+      frequency: String(fd.get('frequency') ?? '') || undefined,
+      message: String(fd.get('message') ?? '') || undefined,
+      website: String(fd.get('website') ?? ''),
     });
 
     if (submitBtn) submitBtn.innerHTML = originalBtnText;
-    submitBtn?.removeAttribute("disabled");
+    submitBtn?.removeAttribute('disabled');
 
     if (result.ok) {
-      setFormStatus(status, "Thank you - we'll respond soon.", "success");
-      clearFormPersistence("grass-quote-form");
+      setFormStatus(status, "Thank you - we'll respond soon.", 'success');
+      clearFormPersistence('grass-quote-form');
       form.reset();
       return;
     }
 
-    setFormStatus(status, result.message, "error");
+    setFormStatus(status, result.message, 'error');
   });
 </script>
