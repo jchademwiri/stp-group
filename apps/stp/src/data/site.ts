@@ -49,3 +49,26 @@ export function absoluteUrl(path: string, site?: URL | string): string {
   const base = site ? String(site).replace(/\/$/, "") : SITE.url;
   return `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }
+
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+export function breadcrumbSchema(crumbs: BreadcrumbItem[], site?: URL | string) {
+  const items = [
+    { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/", site) },
+    ...crumbs.map((crumb, i) => ({
+      "@type": "ListItem",
+      position: i + 2,
+      name: crumb.label,
+      ...(crumb.href ? { item: absoluteUrl(crumb.href, site) } : {}),
+    })),
+  ];
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items,
+  };
+}

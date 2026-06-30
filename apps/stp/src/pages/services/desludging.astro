@@ -3,7 +3,7 @@ import StpLayout from "@/layouts/StpLayout.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import Accordion from "@/components/Accordion.astro";
 import DesludgeQuoteForm from "@/components/DesludgeQuoteForm.astro";
-import { SITE } from "@/data/site";
+import { SITE, breadcrumbSchema } from "@/data/site";
 
 const title = "Septic Tank & Toilet Desludging Services | Sithembe";
 const description =
@@ -83,6 +83,9 @@ const faqs = [
 ---
 
 <StpLayout {title} {description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema([{ label: "Services", href: "/services" }, { label: "Desludging" }], Astro.site))} />
+  </Fragment>
   <Breadcrumbs crumbs={[{ label: "Services", href: "/services" }, { label: "Desludging" }]} />
 
   <section class="border-b border-white/10 bg-gradient-to-b from-slate to-charcoal">

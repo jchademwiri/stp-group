@@ -5,7 +5,7 @@ import Accordion from "@/components/Accordion.astro";
 import BeforeAfter from "@/components/BeforeAfter.astro";
 import ProjectShowcase from "@/components/ProjectShowcase.astro";
 import GrassQuoteForm from "@/components/GrassQuoteForm.astro";
-import { SITE } from "@/data/site";
+import { SITE, breadcrumbSchema } from "@/data/site";
 
 const title = "Commercial Grass Cutting & Plot Clearing Services | Sithembe";
 const description =
@@ -81,6 +81,9 @@ const beforeAfterProjects = [
 ---
 
 <StpLayout {title} {description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema([{ label: "Services", href: "/services" }, { label: "Grass Cutting" }], Astro.site))} />
+  </Fragment>
   <Breadcrumbs crumbs={[{ label: "Services", href: "/services" }, { label: "Grass Cutting" }]} />
 
   <section class="border-b border-white/10 bg-gradient-to-b from-slate to-charcoal">

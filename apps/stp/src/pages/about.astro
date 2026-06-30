@@ -2,7 +2,7 @@
 import StpLayout from "@/layouts/StpLayout.astro";
 import TrustBadges from "@/components/TrustBadges.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
-import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE } from "@/data/site";
+import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE, breadcrumbSchema } from "@/data/site";
 import { ABOUT } from "@/data/about";
 
 const title = "About Sithembe Plant Hire | Our Story & Team";
@@ -22,6 +22,9 @@ const iconPaths: Record<string, string> = {
 ---
 
 <StpLayout {title} {description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema([{ label: "About" }], Astro.site))} />
+  </Fragment>
   <Breadcrumbs crumbs={[{ label: "About" }]} />
 
   <section class="border-b border-white/10 bg-gradient-to-b from-slate to-charcoal">

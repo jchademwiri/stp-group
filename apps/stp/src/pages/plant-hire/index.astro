@@ -6,7 +6,7 @@ import Accordion from "@/components/Accordion.astro";
 import QuoteForm from "@/components/QuoteForm.astro";
 import Testimonials from "@/components/Testimonials.astro";
 import { FLEET_CATEGORIES, getCategoryCounts, plantFleet } from "@/data/plantFleet";
-import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE } from "@/data/site";
+import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE, breadcrumbSchema } from "@/data/site";
 
 const title = "Plant Hire & Equipment Rental Pretoria & JHB | Sithembe";
 const description =
@@ -16,6 +16,9 @@ const counts = getCategoryCounts();
 ---
 
 <StpLayout {title} {description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema([{ label: "Plant Hire" }], Astro.site))} />
+  </Fragment>
   <Breadcrumbs crumbs={[{ label: "Plant Hire" }]} />
 
   <section class="relative overflow-hidden border-b border-white/10 bg-gradient-to-b from-slate to-charcoal">

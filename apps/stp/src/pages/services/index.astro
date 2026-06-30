@@ -1,7 +1,7 @@
 ---
 import StpLayout from "@/layouts/StpLayout.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
-import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE } from "@/data/site";
+import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE, breadcrumbSchema, absoluteUrl } from "@/data/site";
 
 const title = "Our Services | Sithembe Plant Hire, Grass Cutting & Desludging";
 const description =
@@ -66,6 +66,9 @@ const iconSvgs: Record<string, string> = {
 ---
 
 <StpLayout {title} {description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema([{ label: "Services" }], Astro.site))} />
+  </Fragment>
   <Breadcrumbs crumbs={[{ label: "Services" }]} />
 
   <section class="border-b border-white/10 bg-gradient-to-b from-slate to-charcoal">
