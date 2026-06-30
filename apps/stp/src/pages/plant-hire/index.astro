@@ -3,10 +3,14 @@ import StpLayout from "@/layouts/StpLayout.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import FleetCard from "@/components/FleetCard.astro";
 import Accordion from "@/components/Accordion.astro";
+import ProjectShowcase from "@/components/ProjectShowcase.astro";
 import QuoteForm from "@/components/QuoteForm.astro";
 import Testimonials from "@/components/Testimonials.astro";
 import { FLEET_CATEGORIES, getCategoryCounts, plantFleet } from "@/data/plantFleet";
 import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE, breadcrumbSchema } from "@/data/site";
+import { getProjectsByCategory } from "@/data/projects";
+
+const plantHireProjects = getProjectsByCategory("plant-hire");
 
 const title = "Plant Hire & Equipment Rental Pretoria & JHB | Sithembe";
 const description =
@@ -134,6 +138,15 @@ const counts = getCategoryCounts();
           View all
         </button>
       </p>
+    </div>
+  </section>
+
+  <!-- Contract Awards -->
+  <section class="mx-auto max-w-6xl px-4 py-12 md:px-6">
+    <h2 class="text-2xl font-bold text-white">Contract awards</h2>
+    <p class="mt-2 text-neutral-400">Real municipal infrastructure and plant hire contracts we&rsquo;ve been awarded.</p>
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      {plantHireProjects.map((p) => <ProjectShowcase title={p.title} client={p.client} description={p.description} stats={p.stats} />)}
     </div>
   </section>
 

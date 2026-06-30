@@ -2,7 +2,11 @@
 import StpLayout from "@/layouts/StpLayout.astro";
 import TrustBadges from "@/components/TrustBadges.astro";
 import Testimonials from "@/components/Testimonials.astro";
+import ProjectShowcase from "@/components/ProjectShowcase.astro";
 import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE, absoluteUrl } from "@/data/site";
+import { getFeaturedProjects } from "@/data/projects";
+
+const featuredProjects = getFeaturedProjects(3);
 
 const title = "Sithembe | Plant Hire & Site Services";
 const description = SITE.description;
@@ -67,6 +71,15 @@ const orgSchema = {
         <div class="mt-8">
           <TrustBadges />
         </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="mx-auto max-w-6xl px-4 py-12 md:px-6">
+      <h2 class="text-2xl font-bold text-white">Featured contracts</h2>
+      <p class="mt-2 text-neutral-400">Real projects we&rsquo;re proud to have been awarded.</p>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {featuredProjects.map((p) => <ProjectShowcase title={p.title} client={p.client} description={p.description} stats={p.stats} />)}
       </div>
     </section>
 

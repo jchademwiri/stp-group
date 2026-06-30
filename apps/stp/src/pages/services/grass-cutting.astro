@@ -6,6 +6,7 @@ import BeforeAfter from "@/components/BeforeAfter.astro";
 import ProjectShowcase from "@/components/ProjectShowcase.astro";
 import GrassQuoteForm from "@/components/GrassQuoteForm.astro";
 import { SITE, breadcrumbSchema } from "@/data/site";
+import { getProjectsByCategory } from "@/data/projects";
 
 const title = "Commercial Grass Cutting & Plot Clearing Services | Sithembe";
 const description =
@@ -30,41 +31,7 @@ const services = [
   },
 ];
 
-const projects = [
-  {
-    title: "Highway Verge Vegetation Control",
-    client: "Gauteng Provincial Roads Agency",
-    description:
-      "Industrial-scale roadside clearing and firebreak establishment along 12 km of highway median strips and shoulders. Completed ahead of schedule despite dense thorn bush and uneven terrain.",
-    stats: [
-      { label: "Distance cleared", value: "12 km" },
-      { label: "Crew size", value: "6 operators" },
-      { label: "Duration", value: "8 days" },
-    ],
-  },
-  {
-    title: "Overgrown Estate Plot Reclamation",
-    client: "Private residential estate — Pretoria East",
-    description:
-      "Full reclamation of a 3.5-hectare overgrown plot that had been left wild for over 5 years. The site was cleared, leveled, and prepared for landscaping. Brush cutters, chainsaws, and a utility tractor with flail mower were deployed.",
-    stats: [
-      { label: "Plot size", value: "3.5 ha" },
-      { label: "Vegetation", value: "Dense bush" },
-      { label: "Turnaround", value: "5 days" },
-    ],
-  },
-  {
-    title: "Corporate Park Lawn Maintenance",
-    client: "Midrand commercial estate management",
-    description:
-      "Bi-weekly precision mowing and edge maintenance for a large corporate park with multiple buildings, parking lots, and green spaces. Ride-on mowers and handheld trimmers used for a polished finish.",
-    stats: [
-      { label: "Total area", value: "8 ha" },
-      { label: "Frequency", value: "Bi-weekly" },
-      { label: "Contract", value: "12 months" },
-    ],
-  },
-];
+const grassProjects = getProjectsByCategory("grass-cutting");
 
 const beforeAfterProjects = [
   {
@@ -157,10 +124,10 @@ const beforeAfterProjects = [
 
   <!-- Project Showcase -->
   <section class="mx-auto max-w-6xl px-4 py-12 md:px-6">
-    <h2 class="text-2xl font-bold text-white">Recent projects</h2>
-    <p class="mt-2 text-neutral-400">Examples of recent grass cutting and clearing contracts we&rsquo;ve completed across {SITE.region}.</p>
-    <div class="mt-8 grid gap-6 md:grid-cols-3">
-      {projects.map((p) => <ProjectShowcase title={p.title} client={p.client} description={p.description} stats={p.stats} />)}
+    <h2 class="text-2xl font-bold text-white">Contract awards</h2>
+    <p class="mt-2 text-neutral-400">Real municipal contracts we&rsquo;ve been awarded across {SITE.region} and beyond.</p>
+    <div class="mt-8 grid gap-6 md:grid-cols-2">
+      {grassProjects.map((p) => <ProjectShowcase title={p.title} client={p.client} description={p.description} stats={p.stats} />)}
     </div>
   </section>
 
