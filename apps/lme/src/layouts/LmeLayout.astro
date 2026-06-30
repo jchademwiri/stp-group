@@ -32,16 +32,16 @@ const isHome = currentPath === "/" || currentPath === "";
 
       {/* Desktop nav */}
       <nav class="hidden items-center gap-1 text-sm font-medium md:flex" aria-label="Main">
-        <a href="/" data-nav="home" class:list={["rounded-lg px-3 py-2 transition-colors hover:text-lme", isHome ? "font-semibold text-lme" : "text-neutral-400"]}>Home</a>
-        <a href="#services" data-nav="services" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-lme">Services</a>
-        <a href="#fleet" data-nav="fleet" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-lme">Fleet</a>
-        <a href="#projects" data-nav="projects" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-lme">Projects</a>
-        <a href="#contact" data-nav="contact" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-lme">Contact</a>
+        <a href="/" data-nav="home" class:list={["rounded-lg px-3 py-2 transition-colors hover:text-safety", isHome ? "font-semibold text-safety" : "text-neutral-400"]}>Home</a>
+        <a href="#services" data-nav="services" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-safety">Services</a>
+        <a href="#fleet" data-nav="fleet" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-safety">Fleet</a>
+        <a href="#projects" data-nav="projects" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-safety">Projects</a>
+        <a href="#contact" data-nav="contact" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-safety">Contact</a>
       </nav>
 
       {/* Desktop CTAs */}
       <div class="hidden items-center gap-2 md:flex">
-        <a href={`tel:${LME.phoneTel}`} class="rounded-lg bg-lme px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-lme-hover">
+        <a href={`tel:${LME.phoneTel}`} class="rounded-lg bg-safety px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-safety-hover">
           Call {LME.phone}
         </a>
       </div>
@@ -60,14 +60,14 @@ const isHome = currentPath === "/" || currentPath === "";
 
     <div id="mobile-nav" class="absolute left-0 right-0 top-full z-40 md:hidden">
       <nav class="border-t border-white/10 bg-charcoal px-4 pb-4 pt-2" aria-label="Mobile navigation">
-        <a href="/" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-lme">Home</a>
-        <a href="#services" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-lme">Services</a>
-        <a href="#fleet" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-lme">Fleet</a>
-        <a href="#projects" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-lme">Projects</a>
-        <a href="#contact" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-lme">Contact</a>
+        <a href="/" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-safety">Home</a>
+        <a href="#services" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-safety">Services</a>
+        <a href="#fleet" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-safety">Fleet</a>
+        <a href="#projects" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-safety">Projects</a>
+        <a href="#contact" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-safety">Contact</a>
       </nav>
       <div class="border-t border-white/10 bg-charcoal px-4 pb-4 pt-3">
-        <a href={`tel:${LME.phoneTel}`} class="block rounded-lg bg-lme px-3 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-lme-hover">Call {LME.phone}</a>
+        <a href={`tel:${LME.phoneTel}`} class="block rounded-lg bg-safety px-3 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-safety-hover">Call {LME.phone}</a>
       </div>
     </div>
   </header>
@@ -138,7 +138,7 @@ const isHome = currentPath === "/" || currentPath === "";
         }
         navLinks.forEach((link) => {
           const isActive = link.dataset.nav === currentId;
-          link.classList.toggle("text-lme", isActive);
+          link.classList.toggle("text-safety", isActive);
           link.classList.toggle("font-semibold", isActive);
           link.classList.toggle("text-neutral-400", !isActive);
           link.classList.toggle("font-medium", !isActive);
@@ -170,10 +170,10 @@ const isHome = currentPath === "/" || currentPath === "";
           <p class="mt-1">{hours}</p>
           <p class="mt-4 space-y-1">
             <span class="block">
-              <a href={`tel:${LME.phoneTel}`} class="text-lme hover:underline">{LME.phone}</a>
+              <a href={`tel:${LME.phoneTel}`} class="text-safety hover:underline">{LME.phone}</a>
             </span>
             <span class="block">
-              <a href={`mailto:${LME.email}`} class="text-lme hover:underline">{LME.email}</a>
+              <a href={`mailto:${LME.email}`} class="text-safety hover:underline">{LME.email}</a>
             </span>
           </p>
           <p class="mt-4 text-xs text-neutral-500">
@@ -185,7 +185,7 @@ const isHome = currentPath === "/" || currentPath === "";
           <p class="mt-2">{LME.address.street}</p>
           <p>{LME.address.suburb}</p>
           <p>{LME.address.city}, {LME.address.province}</p>
-          <a href={LME.mapsUrl} target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-xs text-lme hover:underline">
+          <a href={LME.mapsUrl} target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-xs text-safety hover:underline">
             Open in Google Maps →
           </a>
         </div>
