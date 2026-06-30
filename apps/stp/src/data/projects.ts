@@ -32,7 +32,7 @@ export const stpProjects: STPProject[] = [
     tenderRef: "SCM 20 of 22-23",
   },
   {
-    title: "Roads & Stormwater Verge Maintenance — ROC 07",
+    title: "Roads & Stormwater Verge Maintenance - ROC 07",
     client: "Municipal Roads Authority",
     description:
       "Roadside vegetation clearing, firebreak establishment, and drainage channel maintenance along major arterial roads. Crews deployed with tractors, flail mowers, and handheld equipment for precision verge management and safety clearance.",
@@ -61,7 +61,7 @@ export const stpProjects: STPProject[] = [
     tenderRef: "PU102-2022",
   },
   {
-    title: "Chemical Toilet Hire & Servicing — HS 02",
+    title: "Chemical Toilet Hire & Servicing - HS 02",
     client: "Municipal Health & Hygiene Services",
     description:
       "Hiring, servicing, and maintenance of chemical toilets across multiple municipal regions. Regular cleaning, waste extraction, and restocking schedules managed for events, construction sites, and public facilities. Region 2 and Region 5 allocations included.",
@@ -75,7 +75,7 @@ export const stpProjects: STPProject[] = [
     tenderRef: "HS 02-2025.26",
   },
   {
-    title: "Hygiene & Sanitation Services — HHS 10",
+    title: "Hygiene & Sanitation Services - HHS 10",
     client: "Municipal Health Services",
     description:
       "Provision of hygiene and sanitation services including portable toilet hire, servicing, and waste management for municipal facilities, public events, and construction sites. Accredited operators with high-capacity vacuum tankers.",
@@ -91,7 +91,7 @@ export const stpProjects: STPProject[] = [
 
   // ── Plant Hire & Equipment ──
   {
-    title: "Roads & Stormwater Contract — ROC 08",
+    title: "Roads & Stormwater Contract - ROC 08",
     client: "Municipal Infrastructure Department",
     description:
       "Plant hire and equipment rental for roads and stormwater infrastructure projects. Dropside trucks, excavators, and heavy machinery deployed with certified operators for road construction, drainage works, and bulk earthmoving.",
@@ -105,7 +105,7 @@ export const stpProjects: STPProject[] = [
     tenderRef: "ROC 08-2022.23",
   },
   {
-    title: "Roads & Stormwater Contract — ROC 20",
+    title: "Roads & Stormwater Contract - ROC 20",
     client: "Municipal Roads Authority",
     description:
       "Extended plant hire and materials supply contract for municipal roads and stormwater maintenance. Fleet of dropside trucks, utility tractors, and earthmoving equipment deployed for routine maintenance and emergency response.",
@@ -119,7 +119,7 @@ export const stpProjects: STPProject[] = [
     tenderRef: "ROC 20-2023.24",
   },
   {
-    title: "Sanitation Services Equipment — SS 02",
+    title: "Sanitation Services Equipment - SS 02",
     client: "Municipal Sanitation Department",
     description:
       "Vacuum tanker and equipment hire for municipal sanitation services. High-capacity honey suckers and support vehicles deployed for sewer maintenance, septic emptying, and liquid waste transport across service regions.",
@@ -148,7 +148,7 @@ export const stpProjects: STPProject[] = [
     tenderRef: "EED 11",
   },
   {
-    title: "Electrical Services — ES 06",
+    title: "Electrical Services - ES 06",
     client: "Municipal Electrical Department",
     description:
       "Electrical services contract providing plant hire, equipment, and operator support for municipal electrical maintenance and construction projects across the service region.",

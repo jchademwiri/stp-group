@@ -1,4 +1,4 @@
-# 📋 Updated Action Plan — June 2026
+# 📋 Updated Action Plan - June 2026
 
 Prioritized roadmap based on the re-audit. Builds on the original action plan; items marked ✅ are already resolved.
 
@@ -57,10 +57,10 @@ These deliver the highest ROI for search visibility.
 | Ref | Issue | Notes |
 |-----|-------|-------|
 | L1 | Self-host Google Fonts | Use `@fontsource/inter` for better performance and privacy |
-| — | Create OG image | 1200×630px SVG/PNG for social sharing |
-| — | Add Lighthouse CI to GitHub Actions | Catch regressions automatically |
-| — | Add axe-core to test suite | Automated accessibility testing |
-| — | Implement Content Security Policy headers | Defense in depth |
+| - | Create OG image | 1200×630px SVG/PNG for social sharing |
+| - | Add Lighthouse CI to GitHub Actions | Catch regressions automatically |
+| - | Add axe-core to test suite | Automated accessibility testing |
+| - | Implement Content Security Policy headers | Defense in depth |
 
 ---
 

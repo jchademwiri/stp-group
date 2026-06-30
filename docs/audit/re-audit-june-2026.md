@@ -1,4 +1,4 @@
-# 🔍 STP Site Re-Audit — June 2026
+# 🔍 STP Site Re-Audit - June 2026
 
 This is a follow-up audit to the original audit found in `docs/audit/`. It evaluates what has been fixed, what remains, and identifies new issues discovered during a fresh codebase review.
 
@@ -8,19 +8,19 @@ This is a follow-up audit to the original audit found in `docs/audit/`. It evalu
 
 | # | Issue | Severity | Status |
 |---|-------|----------|--------|
-| 1 | No CSRF Protection on `/api/quote` | 🔴 Critical | ✅ **Fixed** — Origin validation with `ALLOWED_ORIGINS` |
-| 2 | Missing escape for single quotes in `escapeHtml` | 🔴 Critical | ✅ **Fixed** — `.replace(/'/g, "&#39;")` added |
-| 3 | `robots.txt` references wrong sitemap URL | 🔴 Critical | ✅ **Fixed** — Now points to `sitemap.xml` |
-| 4 | Sticky mobile bar occludes content | 🟠 High | ✅ **Fixed** — `scroll-pb-16` on body |
-| 5 | `role="tablist"` misused on fleet filters | 🟠 High | ✅ **Fixed** — Changed to `role="group"` + `aria-pressed` |
-| 6 | Inconsistent `<main>` tag usage | 🟠 High | ✅ **Fixed** — `<main>` wraps slot in `StpLayout.astro` |
+| 1 | No CSRF Protection on `/api/quote` | 🔴 Critical | ✅ **Fixed** - Origin validation with `ALLOWED_ORIGINS` |
+| 2 | Missing escape for single quotes in `escapeHtml` | 🔴 Critical | ✅ **Fixed** - `.replace(/'/g, "&#39;")` added |
+| 3 | `robots.txt` references wrong sitemap URL | 🔴 Critical | ✅ **Fixed** - Now points to `sitemap.xml` |
+| 4 | Sticky mobile bar occludes content | 🟠 High | ✅ **Fixed** - `scroll-pb-16` on body |
+| 5 | `role="tablist"` misused on fleet filters | 🟠 High | ✅ **Fixed** - Changed to `role="group"` + `aria-pressed` |
+| 6 | Inconsistent `<main>` tag usage | 🟠 High | ✅ **Fixed** - `<main>` wraps slot in `StpLayout.astro` |
 | 7 | OG image defaults to non-existent file | 🟠 High | ❌ **Still outstanding** |
-| 8 | No rate limiting on quote API | 🟠 High | ✅ **Fixed** — In-memory rate limiter (5 req/min/IP) |
-| 9 | Form validation uses native browser tooltips | 🟡 Medium | ✅ **Partially fixed** — Inline validation added alongside native |
+| 8 | No rate limiting on quote API | 🟠 High | ✅ **Fixed** - In-memory rate limiter (5 req/min/IP) |
+| 9 | Form validation uses native browser tooltips | 🟡 Medium | ✅ **Partially fixed** - Inline validation added alongside native |
 | 10 | Testimonials lack review structured data | 🟡 Medium | ❌ **Still outstanding** |
-| 11 | No `prefers-reduced-motion` support | 🟡 Medium | ✅ **Fixed** — Added in `styles.css` |
-| 12 | Gallery images lack width/height | 🟡 Medium | ✅ **Fixed** — `FleetImage.astro` has width/height |
-| 13 | Missing `<meta name="theme-color">` | 🟡 Medium | ✅ **Fixed** — Added to `BaseLayout.astro` |
+| 11 | No `prefers-reduced-motion` support | 🟡 Medium | ✅ **Fixed** - Added in `styles.css` |
+| 12 | Gallery images lack width/height | 🟡 Medium | ✅ **Fixed** - `FleetImage.astro` has width/height |
+| 13 | Missing `<meta name="theme-color">` | 🟡 Medium | ✅ **Fixed** - Added to `BaseLayout.astro` |
 | 14 | `lang="en"` instead of `lang="en-ZA"` | 🟡 Medium | ✅ **Fixed** |
 | 15 | Hardcoded geo coordinates | 🟡 Medium | ⚠️ Still hardcoded (low priority) |
 | 16 | FleetImage flash of placeholder | 🟢 Low | ❌ **Still outstanding** |
@@ -35,7 +35,7 @@ This is a follow-up audit to the original audit found in `docs/audit/`. It evalu
 
 ### 🔴 Critical
 
-*None — all previous critical issues are resolved.*
+*None - all previous critical issues are resolved.*
 
 ### 🟠 High Priority
 
@@ -62,7 +62,7 @@ But `SITE.responseTime` is defined as **"within 2 hours during business hours"**
 
 **Category:** SEO
 
-All three pages render FAQ accordions using the `Accordion` component, but none include `FAQPage` JSON-LD schema. Google uses FAQ rich results in search snippets — this is a significant missed opportunity for SERP visibility.
+All three pages render FAQ accordions using the `Accordion` component, but none include `FAQPage` JSON-LD schema. Google uses FAQ rich results in search snippets - this is a significant missed opportunity for SERP visibility.
 
 **Fix:** Add a `<script type="application/ld+json">` block with `FAQPage` schema to each page that has FAQ sections.
 

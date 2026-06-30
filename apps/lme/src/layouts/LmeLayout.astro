@@ -18,13 +18,13 @@ const currentPath = Astro.url.pathname;
 const isHome = currentPath === "/" || currentPath === "";
 ---}
 
-<BaseLayout {title} {description} {ogImage} canonical={Astro.url.href} bodyClass="bg-[#1e1e24] text-neutral-100">
+<BaseLayout {title} {description} {ogImage} canonical={Astro.url.href} bodyClass="bg-charcoal text-neutral-100">
   <LocalBusinessSchema slot="head" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="alternate icon" href="/lme-logo.png" type="image/png" sizes="68x68" />
   <slot name="head" slot="head" />
 
-  <header class="sticky top-0 z-30 border-b border-white/10 bg-[#1e1e24]/95 backdrop-blur">
+  <header class="sticky top-0 z-30 border-b border-white/10 bg-charcoal/95 backdrop-blur">
     <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
       <a href="/" class="flex shrink-0 items-center gap-3">
         <img src="/lme-logo.png" alt="Livhu and Musa Enterprise" class="h-10 w-10 rounded-lg bg-white/10 p-1" />
@@ -33,16 +33,16 @@ const isHome = currentPath === "/" || currentPath === "";
 
       {/* Desktop nav */}
       <nav class="hidden items-center gap-1 text-sm font-medium md:flex" aria-label="Main">
-        <a href="/" data-nav="home" class:list={["rounded-lg px-3 py-2 transition-colors hover:text-[#0898c8]", isHome ? "font-semibold text-[#0898c8]" : "text-neutral-400"]}>Home</a>
-        <a href="#services" data-nav="services" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-[#0898c8]">Services</a>
-        <a href="#fleet" data-nav="fleet" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-[#0898c8]">Fleet</a>
-        <a href="#projects" data-nav="projects" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-[#0898c8]">Projects</a>
-        <a href="#contact" data-nav="contact" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-[#0898c8]">Contact</a>
+        <a href="/" data-nav="home" class:list={["rounded-lg px-3 py-2 transition-colors hover:text-lme", isHome ? "font-semibold text-lme" : "text-neutral-400"]}>Home</a>
+        <a href="#services" data-nav="services" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-lme">Services</a>
+        <a href="#fleet" data-nav="fleet" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-lme">Fleet</a>
+        <a href="#projects" data-nav="projects" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-lme">Projects</a>
+        <a href="#contact" data-nav="contact" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-lme">Contact</a>
       </nav>
 
       {/* Desktop CTAs */}
       <div class="hidden items-center gap-2 md:flex">
-        <a href={`tel:${LME.phoneTel}`} class="rounded-lg bg-[#0898c8] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0a6a8a]">
+        <a href={`tel:${LME.phoneTel}`} class="rounded-lg bg-lme px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-lme-hover">
           Call {LME.phone}
         </a>
       </div>
@@ -60,15 +60,15 @@ const isHome = currentPath === "/" || currentPath === "";
     </div>
 
     <div id="mobile-nav" class="absolute left-0 right-0 top-full z-40 md:hidden">
-      <nav class="border-t border-white/10 bg-[#1e1e24] px-4 pb-4 pt-2" aria-label="Mobile navigation">
-        <a href="/" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-[#0898c8]">Home</a>
-        <a href="#services" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-[#0898c8]">Services</a>
-        <a href="#fleet" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-[#0898c8]">Fleet</a>
-        <a href="#projects" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-[#0898c8]">Projects</a>
-        <a href="#contact" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-[#0898c8]">Contact</a>
+      <nav class="border-t border-white/10 bg-charcoal px-4 pb-4 pt-2" aria-label="Mobile navigation">
+        <a href="/" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-lme">Home</a>
+        <a href="#services" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-lme">Services</a>
+        <a href="#fleet" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-lme">Fleet</a>
+        <a href="#projects" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-lme">Projects</a>
+        <a href="#contact" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-lme">Contact</a>
       </nav>
-      <div class="border-t border-white/10 bg-[#1e1e24] px-4 pb-4 pt-3">
-        <a href={`tel:${LME.phoneTel}`} class="block rounded-lg bg-[#0898c8] px-3 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-[#0a6a8a]">Call {LME.phone}</a>
+      <div class="border-t border-white/10 bg-charcoal px-4 pb-4 pt-3">
+        <a href={`tel:${LME.phoneTel}`} class="block rounded-lg bg-lme px-3 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-lme-hover">Call {LME.phone}</a>
       </div>
     </div>
   </header>
@@ -139,7 +139,7 @@ const isHome = currentPath === "/" || currentPath === "";
         }
         navLinks.forEach((link) => {
           const isActive = link.dataset.nav === currentId;
-          link.classList.toggle("text-[#0898c8]", isActive);
+          link.classList.toggle("text-lme", isActive);
           link.classList.toggle("font-semibold", isActive);
           link.classList.toggle("text-neutral-400", !isActive);
           link.classList.toggle("font-medium", !isActive);
@@ -159,7 +159,7 @@ const isHome = currentPath === "/" || currentPath === "";
     <slot />
   </main>
 
-  <footer class="border-t border-white/10 bg-[#2a2a32] py-12 pb-24 md:pb-12">
+  <footer class="border-t border-white/10 bg-slate py-12 pb-24 md:pb-12">
     <div class="mx-auto max-w-6xl px-4 md:px-6">
       <div class="grid gap-8 md:grid-cols-3">
         <div class="text-sm text-neutral-400">
@@ -171,10 +171,10 @@ const isHome = currentPath === "/" || currentPath === "";
           <p class="mt-1">{hours}</p>
           <p class="mt-4 space-y-1">
             <span class="block">
-              <a href={`tel:${LME.phoneTel}`} class="text-[#0898c8] hover:underline">{LME.phone}</a>
+              <a href={`tel:${LME.phoneTel}`} class="text-lme hover:underline">{LME.phone}</a>
             </span>
             <span class="block">
-              <a href={`mailto:${LME.email}`} class="text-[#0898c8] hover:underline">{LME.email}</a>
+              <a href={`mailto:${LME.email}`} class="text-lme hover:underline">{LME.email}</a>
             </span>
           </p>
           <p class="mt-4 text-xs text-neutral-500">
@@ -186,7 +186,7 @@ const isHome = currentPath === "/" || currentPath === "";
           <p class="mt-2">{LME.address.street}</p>
           <p>{LME.address.suburb}</p>
           <p>{LME.address.city}, {LME.address.province}</p>
-          <a href={LME.mapsUrl} target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-xs text-[#0898c8] hover:underline">
+          <a href={LME.mapsUrl} target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-xs text-lme hover:underline">
             Open in Google Maps →
           </a>
         </div>

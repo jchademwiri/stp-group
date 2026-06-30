@@ -7,7 +7,7 @@ export const LME = {
   foundingYear: 2014,
   founder: "Johannes Mduduzi Mahlangu",
   employees: "10+",
-  tagline: "Reliable Construction & Civil Engineering — Since 2014",
+  tagline: "Reliable Construction & Civil Engineering - Since 2014",
   phone: "012 880 1893",
   phoneTel: "+27128801893",
   whatsapp: "27128801893",
@@ -52,12 +52,12 @@ export const LME = {
   values: [
     {
       title: "10+ Years Experience",
-      text: "Established 2014 with over 10 employees — we bring proven expertise to every project.",
+      text: "Established 2014 with over 10 employees - we bring proven expertise to every project.",
       icon: "clock",
     },
     {
       title: "CIDB Registered",
-      text: "Graded 1CE, 1GB, 1EP — fully compliant for public and private sector tenders.",
+      text: "Graded 1CE, 1GB, 1EP - fully compliant for public and private sector tenders.",
       icon: "shield",
     },
     {
@@ -67,7 +67,7 @@ export const LME = {
     },
     {
       title: "Core Values",
-      text: "Excellence, Partnership, Sustainability, Integrity — these guide every project we deliver.",
+      text: "Excellence, Partnership, Sustainability, Integrity - these guide every project we deliver.",
       icon: "heart",
     },
   ],
@@ -80,7 +80,7 @@ export const LME = {
     },
     {
       title: "General Building (1GB)",
-      description: "Residential and commercial construction — new builds, renovations, alterations, and maintenance.",
+      description: "Residential and commercial construction - new builds, renovations, alterations, and maintenance.",
       icon: "building",
     },
     {

@@ -58,7 +58,7 @@
 
 ### 3.2 Aesthetic Principles
 
-- **Dark industrial**: Charcoal backgrounds with bright safety-orange CTAs — communicates ruggedness and professionalism.
+- **Dark industrial**: Charcoal backgrounds with bright safety-orange CTAs - communicates ruggedness and professionalism.
 - **Clean & minimal**: Ample whitespace (dark negative space), one primary CTA per section, no visual clutter.
 - **Trust-first**: CIDB badges, insurance callouts, and response-time promises visible above the fold.
 - **Performance-obsessed**: Lighthouse score target ≥ 95 on mobile. WebP images, lazy loading, minimal JS.
@@ -69,16 +69,16 @@
 - **Background**: Full-width gradient from `slate` to `charcoal` with subtle texture/pattern overlay.
 - **Headline**: `"Equipment on site when you need it. Across Pretoria & Gauteng."`
 - **Subheadline**: Brief value prop covering all three services + trust signals (CIDB, insured).
-- **Primary CTA**: `"Call {phone}"` — tel link (highest converting action).
+- **Primary CTA**: `"Call {phone}"` - tel link (highest converting action).
 - **Secondary CTAs**: `"Browse plant hire"`, `"WhatsApp dispatch"`.
-- **Trust badges row**: CIDB grades, COIDA, Public Liability Insurance — rendered as compact badge row directly below CTAs.
+- **Trust badges row**: CIDB grades, COIDA, Public Liability Insurance - rendered as compact badge row directly below CTAs.
 
 ### 4.2 Services Overview
 - **Layout**: 3-column card grid (stacks on mobile).
 - **Cards**:
-  1. **Plant Hire** — "Dropside trucks, bobcats, tractors, mowers, and handheld tools — with wet hire operators where required." → `/plant-hire`
-  2. **Grass Cutting & Clearing** — "Commercial estates, highway verges, and overgrown plot reclamation." → `/services/grass-cutting`
-  3. **Septic & Desludging** — "Septic tank emptying, grease trap cleaning, liquid waste extraction." → `/services/desludging`
+  1. **Plant Hire** - "Dropside trucks, bobcats, tractors, mowers, and handheld tools - with wet hire operators where required." → `/plant-hire`
+  2. **Grass Cutting & Clearing** - "Commercial estates, highway verges, and overgrown plot reclamation." → `/services/grass-cutting`
+  3. **Septic & Desludging** - "Septic tank emptying, grease trap cleaning, liquid waste extraction." → `/services/desludging`
 - **Card styling**: Dark slate background, subtle border, safety-orange link/hover state.
 
 ### 4.3 Testimonials / Social Proof

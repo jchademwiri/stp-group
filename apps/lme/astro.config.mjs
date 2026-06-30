@@ -7,6 +7,7 @@ import { tailwindcss } from "@repo/tailwind/vite";
 const root = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+  site: "https://livhuandmusa.co.za",
   server: { port: 4322 },
   preview: { port: 4322 },
   vite: {

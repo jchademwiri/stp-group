@@ -11,4 +11,10 @@
   --color-safety: #ff9f1c;
   --color-safety-hover: #e88f10;
   --color-whatsapp: #25d366;
+
+  /* LME teal/blue palette */
+  --color-lme: #0898c8;
+  --color-lme-hover: #0a6a8a;
+  --color-lme-dark: #065a7a;
+  --color-lme-light: #e0f5fe;
 }

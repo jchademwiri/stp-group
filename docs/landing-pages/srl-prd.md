@@ -1,8 +1,8 @@
 # Product Requirements Document (PRD): SRL Landing Page
 
-**Site:** SRL Property and Projects Pty (Ltd) — new app (`apps/srl`)
+**Site:** SRL Property and Projects Pty (Ltd) - new app (`apps/srl`)
 **Goal:** Rapidly develop a minimal yet modern, professional landing page from scratch that showcases SRL's capabilities and generates client inquiries.
-**Status:** MVP / Phase 1 — Greenfield Development
+**Status:** MVP / Phase 1 - Greenfield Development
 
 ---
 
@@ -24,18 +24,18 @@
 | **Address** | 3131A Crane Street, Thatchfield Hills, Rua Vista X13, Centurion, Gauteng, 0157 |
 
 ### Core Values
-- **Reliability** — Dependable services, on time, every time.
-- **Integrity** — Honesty, transparency, and ethical practices.
-- **Excellence** — Highest standards of quality.
-- **Customer Focus** — Clients' goals shape our approach.
-- **Innovation** — Continuous improvement and smarter methods.
-- **Community** — Level 1 BBBEE contributor committed to transformation.
+- **Reliability** - Dependable services, on time, every time.
+- **Integrity** - Honesty, transparency, and ethical practices.
+- **Excellence** - Highest standards of quality.
+- **Customer Focus** - Clients' goals shape our approach.
+- **Innovation** - Continuous improvement and smarter methods.
+- **Community** - Level 1 BBBEE contributor committed to transformation.
 
 ### Past Project Experience (credibility signals)
-1. **City of Ekurhuleni** (sub-contract under Sithembe) — Supply & delivery of PPE, 2020–2023
-2. **Bela-Bela Local Municipality** — Supply & delivery of PPE for EPWP participants, 2019–2022
-3. **Thabazimbi Municipality** — Supply, delivery & distribution of PPE, 2021–2024
-4. **Capricorn District Municipality** — Specialised PPE for Energy Department, 2015–2018
+1. **City of Ekurhuleni** (sub-contract under Sithembe) - Supply & delivery of PPE, 2020–2023
+2. **Bela-Bela Local Municipality** - Supply & delivery of PPE for EPWP participants, 2019–2022
+3. **Thabazimbi Municipality** - Supply, delivery & distribution of PPE, 2021–2024
+4. **Capricorn District Municipality** - Specialised PPE for Energy Department, 2015–2018
 
 ## 2. Product Goals
 
@@ -58,11 +58,11 @@
 
 | Token | Suggestion | Rationale |
 | --- | --- | --- |
-| Palette | Clean professional — whites, warm greys, deep navy or forest green accent | Trust, stability, quality — distinct from STP's dark industrial |
-| Font | Inter (sans-serif) — shared via `@repo/tailwind` | Consistency across the monorepo |
+| Palette | Clean professional - whites, warm greys, deep navy or forest green accent | Trust, stability, quality - distinct from STP's dark industrial |
+| Font | Inter (sans-serif) - shared via `@repo/tailwind` | Consistency across the monorepo |
 | CTAs | Bold accent colour on clean backgrounds | High contrast for conversion |
 
-**Design Principle:** "Trusted & Capable" — clean, professional layout emphasising credentials (BBBEE, CIDB) and past municipal clients.
+**Design Principle:** "Trusted & Capable" - clean, professional layout emphasising credentials (BBBEE, CIDB) and past municipal clients.
 
 ### 4.2 Design Personality
 
@@ -79,33 +79,33 @@
 
 - **Background**: Full-width gradient or hero image (construction/cleaning services visual).
 - **Company name**: `"SRL Property and Projects"`
-- **Tagline**: `"Reliable Construction, Supply & Cleaning Services — Since 2017"`
-- **Subheadline**: "BBBEE Level 1 | CIDB Registered (CE & GB) | SARS Compliant — Serving Gauteng with integrity and excellence."
-- **Primary CTA**: `"Call 082 369 5294"` — tel link.
-- **Secondary CTA**: `"Our Services"` — scrolls to services.
-- **Trust badges row**: BBBEE Level 1, CIDB CE+GB, SARS Compliant, 7+ Years Experience — compact row below CTAs.
+- **Tagline**: `"Reliable Construction, Supply & Cleaning Services - Since 2017"`
+- **Subheadline**: "BBBEE Level 1 | CIDB Registered (CE & GB) | SARS Compliant - Serving Gauteng with integrity and excellence."
+- **Primary CTA**: `"Call 082 369 5294"` - tel link.
+- **Secondary CTA**: `"Our Services"` - scrolls to services.
+- **Trust badges row**: BBBEE Level 1, CIDB CE+GB, SARS Compliant, 7+ Years Experience - compact row below CTAs.
 
 ### 5.2 Services / What We Do
 
 - **Heading**: `"Our Services"`
 - **Layout**: 5-card responsive grid (2 rows on desktop, 1 column on mobile).
 - **Cards**:
-  1. 🏗️ **Civil Engineering (CE)** — "Design, construction, and maintenance of roads, bridges, water systems, earthworks, and infrastructure."
-  2. 🏠 **General Building (GB)** — "Residential, commercial, and industrial construction — new builds, renovations, and maintenance."
-  3. 🚚 **Supply & Delivery** — "Efficient procurement, supply, and timely delivery of quality materials, equipment, and goods."
-  4. 🧹 **Cleaning Services** — "Professional cleaning for municipalities, government facilities, and public spaces — street cleaning, waste management, park upkeep."
-  5. 🛣️ **Road Markings** — "High-quality road markings for highways, streets, parking lots, and municipal roads — safety and durability compliant."
+  1. 🏗️ **Civil Engineering (CE)** - "Design, construction, and maintenance of roads, bridges, water systems, earthworks, and infrastructure."
+  2. 🏠 **General Building (GB)** - "Residential, commercial, and industrial construction - new builds, renovations, and maintenance."
+  3. 🚚 **Supply & Delivery** - "Efficient procurement, supply, and timely delivery of quality materials, equipment, and goods."
+  4. 🧹 **Cleaning Services** - "Professional cleaning for municipalities, government facilities, and public spaces - street cleaning, waste management, park upkeep."
+  5. 🛣️ **Road Markings** - "High-quality road markings for highways, streets, parking lots, and municipal roads - safety and durability compliant."
 
 ### 5.3 Why Choose SRL
 
 - **Heading**: `"Why SRL Property and Projects?"`
 - **Layout**: 6 compact value props (icon + short text):
-  - 🏆 **BBBEE Level 1** — Maximum procurement recognition
-  - ✅ **CIDB Registered** — CE & GB classes
-  - 🏛️ **Municipal Experience** — City of Ekurhuleni, Bela-Bela, Thabazimbi, Capricorn
-  - 👥 **Skilled Team** — Small team, big accountability
-  - 🗣️ **Transparent Communication** — Regular updates, honest reporting
-  - 📍 **Centurion Based** — Serving all Gauteng
+  - 🏆 **BBBEE Level 1** - Maximum procurement recognition
+  - ✅ **CIDB Registered** - CE & GB classes
+  - 🏛️ **Municipal Experience** - City of Ekurhuleni, Bela-Bela, Thabazimbi, Capricorn
+  - 👥 **Skilled Team** - Small team, big accountability
+  - 🗣️ **Transparent Communication** - Regular updates, honest reporting
+  - 📍 **Centurion Based** - Serving all Gauteng
 
 ### 5.4 Past Projects / Track Record
 
@@ -141,7 +141,7 @@
 | Styling | Tailwind CSS v4 (`@repo/tailwind`) |
 | Icons | Inline SVGs or emoji |
 | Fonts | Inter (shared via `@repo/tailwind`) |
-| Deployment | Static (SSG) — no server needed for MVP |
+| Deployment | Static (SSG) - no server needed for MVP |
 
 ### 6.2 New App Scaffold
 
@@ -174,7 +174,7 @@ apps/srl/
 
 ### 6.4 SEO (MVP)
 
-- `<title>`: `"SRL Property and Projects | Construction, Supply & Cleaning — Centurion, Gauteng"`
+- `<title>`: `"SRL Property and Projects | Construction, Supply & Cleaning - Centurion, Gauteng"`
 - `<meta description>`: Summary of SRL's services, BBBEE Level 1, CIDB registration, and service area.
 - Semantic HTML: `<header>`, `<main>`, `<section>`, `<footer>`.
 - JSON-LD `LocalBusiness` schema (reuse pattern from STP).

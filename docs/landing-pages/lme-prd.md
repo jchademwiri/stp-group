@@ -2,7 +2,7 @@
 
 **Site:** Livhu & Musa Enterprise (`apps/lme`)
 **Goal:** Rapidly develop a minimal yet modern, professional landing page from scratch that establishes LME's brand presence and generates inquiries.
-**Status:** MVP / Phase 1 — Greenfield Development
+**Status:** MVP / Phase 1 - Greenfield Development
 
 ---
 
@@ -14,7 +14,7 @@
 | **Founding Year** | 2014 |
 | **Founder / CEO** | Johannes Mduduzi Mahlangu |
 | **Employees** | 10+ |
-| **Industry** | Construction — residential and commercial projects |
+| **Industry** | Construction - residential and commercial projects |
 | **CIDB Gradings** | 1CE (Civil Engineering), 1GB (General Building), 1EP (Electrical Engineering) |
 | **SARS Status** | Compliant |
 | **Core Values** | Excellence, Partnership, Sustainability, Integrity |
@@ -22,7 +22,7 @@
 | **Email** | info@livhuandmusa.co.za |
 | **Address** | 3138B Crane Street, Thatchfield Hills, Rua-Vista X13, Centurion, Gauteng, 0157 |
 
-### Ongoing Contracts (City of Tshwane — credibility signals)
+### Ongoing Contracts (City of Tshwane - credibility signals)
 - Supply, delivery & offloading of manhole covers (Water & Sanitation)
 - Hire of mobile drinking water tankers (10,000–15,000L) for informal settlements
 - Supply & delivery of emergency services rope rescue equipment
@@ -53,7 +53,7 @@
 
 ### 4.1 Visual Identity Options
 
-| Option A (Dark industrial — matches STP) | Option B (Light professional — differentiated) |
+| Option A (Dark industrial - matches STP) | Option B (Light professional - differentiated) |
 | --- | --- |
 | Charcoal background, safety orange accents | Clean white/light grey, blue or green accents |
 | Same `@repo/tailwind` theme, minimal overrides | Custom theme tokens |
@@ -73,20 +73,20 @@
 
 - **Background**: Full-width gradient or hero image (construction site or equipment).
 - **Company name**: "Livhu and Musa Enterprise"
-- **Tagline**: `"Reliable Construction & Civil Engineering — Since 2014"`
+- **Tagline**: `"Reliable Construction & Civil Engineering - Since 2014"`
 - **Subheadline**: "CIDB-registered contractor (1CE, 1GB, 1EP) serving Gauteng with excellence, integrity, and innovation."
-- **Primary CTA**: `"Call 012 880 1893"` — tel link.
-- **Secondary CTA**: `"View Our Services"` — scrolls to services section.
-- **Trust badges row**: CIDB grades (1CE, 1GB, 1EP), SARS Compliant, 10+ years experience — compact badge row below CTAs.
+- **Primary CTA**: `"Call 012 880 1893"` - tel link.
+- **Secondary CTA**: `"View Our Services"` - scrolls to services section.
+- **Trust badges row**: CIDB grades (1CE, 1GB, 1EP), SARS Compliant, 10+ years experience - compact badge row below CTAs.
 
 ### 5.2 Services / What We Do
 
 - **Heading**: `"Our Services"`
 - **Layout**: 3-card responsive grid.
 - **Cards**:
-  1. **Civil Engineering (1CE)** — "Design, construction, and maintenance of infrastructure including roads, earthworks, and structural projects."
-  2. **General Building (1GB)** — "Residential and commercial construction — new builds, renovations, alterations, and maintenance."
-  3. **Electrical Engineering (1EP)** — "Electrical installations, cabling, and infrastructure for municipal and private-sector projects."
+  1. **Civil Engineering (1CE)** - "Design, construction, and maintenance of infrastructure including roads, earthworks, and structural projects."
+  2. **General Building (1GB)** - "Residential and commercial construction - new builds, renovations, alterations, and maintenance."
+  3. **Electrical Engineering (1EP)** - "Electrical installations, cabling, and infrastructure for municipal and private-sector projects."
 - Each card: icon (construction/building/electrical), title, 1–2 sentence description.
 
 ### 5.3 Equipment Fleet (Optional / Post-MVP)
@@ -99,10 +99,10 @@
 
 - **Heading**: `"Why Livhu and Musa Enterprise?"`
 - **Layout**: 4 value props as icon + text items:
-  - 🏗️ **10+ Years Experience** — Established 2014, 10+ employees
-  - ✅ **CIDB Registered** — 1CE, 1GB, 1EP — fully compliant for public tenders
-  - 🏛️ **Active Municipal Contracts** — City of Tshwane preferred supplier
-  - 🤝 **Core Values** — Excellence, Partnership, Sustainability, Integrity
+  - 🏗️ **10+ Years Experience** - Established 2014, 10+ employees
+  - ✅ **CIDB Registered** - 1CE, 1GB, 1EP - fully compliant for public tenders
+  - 🏛️ **Active Municipal Contracts** - City of Tshwane preferred supplier
+  - 🤝 **Core Values** - Excellence, Partnership, Sustainability, Integrity
 
 ### 5.5 Active Projects / Credibility
 
@@ -138,7 +138,7 @@
 | Email (if form) | Resend (shared pattern from STP) |
 | Icons | Inline SVGs or emoji |
 | Fonts | Inter (via existing theme) |
-| Deployment | Static (SSG) — no server needed for MVP |
+| Deployment | Static (SSG) - no server needed for MVP |
 
 ### 6.2 Files to Create
 
@@ -165,7 +165,7 @@ apps/lme/src/
 
 ### 6.4 SEO (MVP)
 
-- `<title>`: `"Livhu and Musa Enterprise | Construction & Civil Engineering — Centurion, Gauteng"`
+- `<title>`: `"Livhu and Musa Enterprise | Construction & Civil Engineering - Centurion, Gauteng"`
 - `<meta description>`: Descriptive summary incorporating CIDB grades, services, and location.
 - Semantic HTML: `<header>`, `<main>`, `<section>`, `<footer>`.
 - JSON-LD `LocalBusiness` schema (reuse pattern from STP).
