@@ -115,7 +115,7 @@ const isHome = currentPath === "/" || currentPath === "";
       }
     });
 
-    // Active section tracking — find section closest to viewport centre
+    // Active section tracking — highlight section with most visible area in viewport
     const navLinks = document.querySelectorAll<HTMLAnchorElement>("[data-nav]");
     const sections = Array.from(navLinks)
       .map((link) => {
@@ -127,17 +127,20 @@ const isHome = currentPath === "/" || currentPath === "";
 
     function updateActive() {
       if (navLinks.length === 0) return;
-      const viewportCentre = window.innerHeight / 2;
+      const viewportHeight = window.innerHeight;
       let currentId = "home";
-      let minDistance = Infinity;
+      let maxVisible = 0;
 
       for (const section of sections) {
         if (!section) continue;
         const rect = section.getBoundingClientRect();
-        const sectionCentre = rect.top + rect.height / 2;
-        const distance = Math.abs(sectionCentre - viewportCentre);
-        if (distance < minDistance) {
-          minDistance = distance;
+        // What portion of the section is visible inside the viewport (0-1)
+        const visibleTop = Math.max(0, rect.top);
+        const visibleBottom = Math.min(viewportHeight, rect.bottom);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+        const visibleRatio = rect.height > 0 ? visibleHeight / rect.height : 0;
+        if (visibleRatio > maxVisible) {
+          maxVisible = visibleRatio;
           currentId = section.id;
         }
       }
