@@ -1,15 +1,23 @@
 ---
 import StpLayout from "@/layouts/StpLayout.astro";
 import TrustBadges from "@/components/TrustBadges.astro";
-import Testimonials from "@/components/Testimonials.astro";
 import ProjectShowcase from "@/components/ProjectShowcase.astro";
-import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE, absoluteUrl } from "@/data/site";
+import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE, absoluteUrl, formatBusinessHours } from "@/data/site";
 import { getFeaturedProjects } from "@/data/projects";
+import { ABOUT } from "@/data/about";
 
 const featuredProjects = getFeaturedProjects(3);
+const hours = formatBusinessHours();
 
-const title = "Sithembe | Plant Hire & Site Services";
+const title = "Sithembe | Municipal Contractor — Plant Hire, Grass Cutting & Desludging";
 const description = SITE.description;
+
+const iconPaths: Record<string, string> = {
+  clock: "M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM12 6v6l4 2",
+  shield: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+  eye: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zM12 9a3 3 0 100 6 3 3 0 000-6z",
+  map: "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0zM12 7a3 3 0 100 6 3 3 0 000-6z",
+};
 
 const orgSchema = {
   "@context": "https://schema.org",
@@ -31,99 +39,197 @@ const orgSchema = {
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
   </Fragment>
-    <section class="relative overflow-hidden bg-gradient-to-b from-slate to-charcoal">
-      <!-- Subtle texture overlay -->
-      <div class="pointer-events-none absolute inset-0 opacity-[0.04]" aria-hidden="true"
-        style="background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");">
-      </div>
-      <div class="relative mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
-        <p class="text-sm font-medium tracking-wider text-safety uppercase">Sithembe Group</p>
-        <h1 class="mt-4 max-w-2xl text-4xl font-bold tracking-tight text-white md:text-5xl">
-          Equipment on site when you need it. Across Pretoria &amp; Gauteng.
-        </h1>
-        <p class="mt-4 max-w-2xl text-lg text-neutral-300">
-          Downtime costs money. That&rsquo;s why we deliver reliable wet and dry hire plant,
-          commercial vehicles, and grounds maintenance equipment &mdash; with accredited operators,
-          full insurance, and no runaround. CIDB-registered and ready to roll.
-        </p>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a
-            href={`tel:${SITE.phoneTel}`}
-            class="rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover"
-          >
-            Call {SITE.phone}
-          </a>
-          <a
-            href="/plant-hire"
-            class="rounded-lg border border-white/20 px-6 py-3 font-semibold text-white hover:bg-white/5"
-          >
-            Browse plant hire
-          </a>
-          <a
-            href={whatsappUrl(WHATSAPP_DEFAULT_MESSAGE)}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="rounded-lg border border-whatsapp/50 px-6 py-3 font-semibold text-whatsapp hover:bg-whatsapp/10"
-          >
-            WhatsApp dispatch
-          </a>
-        </div>
-        <div class="mt-8">
-          <TrustBadges />
-        </div>
-      </div>
-    </section>
 
-    <!-- Featured Projects -->
-    <section class="mx-auto max-w-6xl px-4 py-12 md:px-6">
-      <h2 class="text-2xl font-bold text-white">Featured contracts</h2>
-      <p class="mt-2 text-neutral-400">Real projects we&rsquo;re proud to have been awarded.</p>
-      <div class="mt-8 grid gap-6 md:grid-cols-3">
-        {featuredProjects.map((p) => <ProjectShowcase title={p.title} client={p.client} description={p.description} stats={p.stats} />)}
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-charcoal">
+    <svg
+      class="pointer-events-none absolute inset-0 h-full w-full opacity-[0.04]"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <pattern id="hero-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#hero-grid)" />
+    </svg>
+
+    <div class="relative mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+      <p class="mb-3 text-sm font-semibold tracking-wider uppercase text-brand">Sithembe Group</p>
+      <h1 class="text-4xl font-bold tracking-tight text-white md:text-5xl">
+        Municipal contracts. Reliable delivery.
+      </h1>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-neutral-400">
+        CIDB-registered across grades 6CE, 6EP, 6SH, 5GB and 4SK — we deliver plant hire,
+        vegetation management, and sanitation services for municipalities and industry across
+        {SITE.region}. Accredited operators, full insurance, proven track record.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href="/services"
+          class="rounded-lg bg-brand px-6 py-3 font-semibold text-charcoal hover:bg-brand-hover"
+        >
+          View our services
+        </a>
+        <a
+          href="/projects"
+          class="rounded-lg border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white/5"
+        >
+          See our projects
+        </a>
+        <a
+          href={whatsappUrl(WHATSAPP_DEFAULT_MESSAGE)}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-lg border border-whatsapp/50 px-6 py-3 font-semibold text-whatsapp hover:bg-whatsapp/10"
+        >
+          WhatsApp us
+        </a>
       </div>
-    </section>
+      <div class="mt-8">
+        <TrustBadges />
+      </div>
+    </div>
+  </section>
 
-    <Testimonials />
+  <!-- Featured Projects -->
+  <section class="mx-auto max-w-6xl px-4 py-12 md:px-6">
+    <p class="text-sm font-semibold tracking-wider uppercase text-brand">Our track record</p>
+    <h2 class="mt-2 text-3xl font-bold text-white">Featured contracts</h2>
+    <p class="mt-2 text-neutral-400">Real projects we&rsquo;re proud to have been awarded.</p>
+    <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {featuredProjects.map((p) => (
+        <ProjectShowcase title={p.title} client={p.client} description={p.description} stats={p.stats} />
+      ))}
+    </div>
+    <a href="/projects" class="mt-8 inline-block font-semibold text-brand hover:underline">
+      View all projects →
+    </a>
+  </section>
 
-    <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
-      <h2 class="text-2xl font-bold text-white">Our services</h2>
-      <div class="mt-8 grid gap-6 md:grid-cols-3">
-        <article class="rounded-xl border border-white/10 bg-slate/80 p-8">
-          <h3 class="text-xl font-semibold text-white">Plant hire</h3>
-          <p class="mt-3 text-neutral-400">
-            Dropside trucks, bobcats, tractors, mowers, and handheld tools - with wet
-            hire operators where required.
+  <!-- Our Services -->
+  <section class="border-y border-white/10 bg-slate/40 py-16">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <p class="text-sm font-semibold tracking-wider uppercase text-brand">What we do</p>
+      <h2 class="mt-2 text-3xl font-bold text-white">Our services</h2>
+      <p class="mt-3 max-w-2xl text-neutral-400">
+        Three service lines backed by CIDB registration, accredited operators, and a
+        proven track record across municipal and private-sector contracts.
+      </p>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <article class="group rounded-xl border border-white/10 bg-slate p-8 transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg hover:shadow-black/30">
+          <h3 class="text-xl font-bold text-white">Plant hire &amp; equipment</h3>
+          <p class="mt-3 text-sm leading-relaxed text-neutral-400">
+            Dropside trucks, vacuum tankers, bobcats, tractors, and mowers — with wet hire
+            operators where required for municipal and construction projects.
           </p>
-          <a href="/plant-hire" class="mt-6 inline-block font-semibold text-safety hover:underline">
-            View fleet →
-          </a>
         </article>
-        <article class="rounded-xl border border-white/10 bg-slate/80 p-8">
-          <h3 class="text-xl font-semibold text-white">Grass cutting & clearing</h3>
-          <p class="mt-3 text-neutral-400">
+        <article class="group rounded-xl border border-white/10 bg-slate p-8 transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg hover:shadow-black/30">
+          <h3 class="text-xl font-bold text-white">Grass cutting &amp; clearing</h3>
+          <p class="mt-3 text-sm leading-relaxed text-neutral-400">
             Commercial estates, highway verges, and overgrown plot reclamation using industrial
             tractors and ride-on mowers.
           </p>
-          <a
-            href="/services/grass-cutting"
-            class="mt-6 inline-block font-semibold text-safety hover:underline"
-          >
-            Grass cutting services →
-          </a>
         </article>
-        <article class="rounded-xl border border-white/10 bg-slate/80 p-8">
-          <h3 class="text-xl font-semibold text-white">Septic & desludging</h3>
-          <p class="mt-3 text-neutral-400">
-            Septic tank emptying, toilet desludging, grease trap cleaning, and liquid
-            waste extraction with accredited operators.
+        <article class="group rounded-xl border border-white/10 bg-slate p-8 transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg hover:shadow-black/30">
+          <h3 class="text-xl font-bold text-white">Septic &amp; desludging</h3>
+          <p class="mt-3 text-sm leading-relaxed text-neutral-400">
+            Septic tank emptying, toilet desludging, grease trap cleaning, and liquid waste
+            extraction with accredited operators.
           </p>
-          <a
-            href="/services/desludging"
-            class="mt-6 inline-block font-semibold text-safety hover:underline"
-          >
-            Desludging services →
-          </a>
         </article>
       </div>
-    </section>
+    </div>
+  </section>
+
+  <!-- Why Sithembe -->
+  <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
+    <p class="text-sm font-semibold tracking-wider uppercase text-brand">Why choose us</p>
+    <h2 class="mt-2 text-3xl font-bold text-white">Why Sithembe</h2>
+    <p class="mt-3 max-w-2xl text-neutral-400">
+      Municipal trust, accredited operators, and a commitment to showing up — here&rsquo;s what sets us apart.
+    </p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+      {
+        ABOUT.values.map((v) => (
+          <div class="flex gap-4 rounded-xl border border-white/10 bg-slate p-6">
+            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15">
+              <svg
+                class="h-6 w-6 text-brand"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d={iconPaths[v.icon]} />
+              </svg>
+            </span>
+            <div>
+              <h3 class="font-semibold text-white">{v.title}</h3>
+              <p class="mt-1 text-sm text-neutral-400">{v.text}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="border-t border-white/10 bg-slate/50 py-16">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <p class="text-sm font-semibold tracking-wider uppercase text-brand">Get in touch</p>
+      <h2 class="mt-2 text-3xl font-bold text-white">Contact us</h2>
+      <p class="mt-3 max-w-2xl text-neutral-400">
+        For tenders, contracts, or project enquiries — we respond {SITE.responseTime}.
+      </p>
+      <div class="mt-10 grid gap-8 md:grid-cols-3">
+        <a
+          href={`tel:${SITE.phoneTel}`}
+          class="group flex items-start gap-4 rounded-xl border border-white/10 bg-slate p-6 transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg hover:shadow-black/30"
+        >
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15 transition-colors group-hover:bg-brand/25">
+            <svg class="h-6 w-6 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+            </svg>
+          </span>
+          <div>
+            <h3 class="font-semibold text-white group-hover:text-brand">Call us</h3>
+            <p class="mt-1 text-sm text-neutral-400">{SITE.phone}</p>
+            <p class="text-xs text-neutral-500">Mobile &amp; WhatsApp</p>
+          </div>
+        </a>
+        <a
+          href={`mailto:${SITE.email}`}
+          class="group flex items-start gap-4 rounded-xl border border-white/10 bg-slate p-6 transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg hover:shadow-black/30"
+        >
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15 transition-colors group-hover:bg-brand/25">
+            <svg class="h-6 w-6 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zM22 6l-10 7L2 6" />
+            </svg>
+          </span>
+          <div>
+            <h3 class="font-semibold text-white group-hover:text-brand">Email us</h3>
+            <p class="mt-1 text-sm text-neutral-400">{SITE.email}</p>
+          </div>
+        </a>
+        <div class="flex items-start gap-4 rounded-xl border border-white/10 bg-slate p-6">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15">
+            <svg class="h-6 w-6 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </span>
+          <div>
+            <h3 class="font-semibold text-white">Visit us</h3>
+            <p class="mt-1 text-sm leading-relaxed text-neutral-400">{SITE.region}</p>
+            <p class="text-xs text-neutral-500">{hours}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </StpLayout>

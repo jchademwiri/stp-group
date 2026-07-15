@@ -29,7 +29,7 @@ const { title, client, description, stats, imageSrc, imageAlt = title } = Astro.
       </div>
   }
   <div class="p-5">
-    <p class="text-xs font-medium tracking-wider text-safety uppercase">{client}</p>
+    <p class="text-xs font-medium tracking-wider text-brand uppercase">{client}</p>
     <h3 class="mt-1 text-lg font-semibold text-white">{title}</h3>
     <p class="mt-2 text-sm text-neutral-400">{description}</p>
     <div class="mt-4 flex flex-col gap-2">
@@ -37,7 +37,7 @@ const { title, client, description, stats, imageSrc, imageAlt = title } = Astro.
         <div class="rounded-lg border border-white/10 bg-charcoal/60 px-4 py-3">
           <div class="flex items-center justify-between gap-3">
             <p class="text-sm text-neutral-400">{stat.label}</p>
-            <p class="text-sm font-bold text-safety whitespace-nowrap">{stat.value}</p>
+            <p class="text-sm font-bold text-brand whitespace-nowrap">{stat.value}</p>
           </div>
         </div>
       ))}

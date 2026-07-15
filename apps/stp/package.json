@@ -12,10 +12,8 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/node": "^10.1.1",
     "@astrojs/sitemap": "^3.7.2",
     "@repo/tailwind": "workspace:*",
-    "astro": "^6.3.7",
-    "resend": "^6.12.3"
+    "astro": "^6.3.7"
   }
 }

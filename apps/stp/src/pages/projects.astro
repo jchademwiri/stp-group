@@ -1,0 +1,118 @@
+---
+import StpLayout from "@/layouts/StpLayout.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import ProjectShowcase from "@/components/ProjectShowcase.astro";
+import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE, breadcrumbSchema } from "@/data/site";
+import { getProjectsGroupedByCategory } from "@/data/projects";
+
+const title = "Projects & Contract Awards | Sithembe";
+const description =
+  "Track record of municipal and private-sector contracts awarded to Sithembe Transportation and Projects — plant hire, grass cutting, and sanitation across Gauteng.";
+
+const groupedProjects = getProjectsGroupedByCategory();
+---
+
+<StpLayout {title} {description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema([{ label: "Projects" }], Astro.site))} />
+  </Fragment>
+  <Breadcrumbs crumbs={[{ label: "Projects" }]} />
+
+  <section class="relative overflow-hidden border-b border-white/10 bg-gradient-to-b from-slate to-charcoal">
+    <svg
+      class="pointer-events-none absolute inset-0 h-full w-full opacity-[0.04]"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <pattern id="projects-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#projects-grid)" />
+    </svg>
+
+    <div class="relative mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-28">
+      <p class="mb-3 text-sm font-semibold tracking-wider uppercase text-brand">Our track record</p>
+      <h1 class="max-w-3xl text-4xl font-bold tracking-tight text-white md:text-5xl">
+        Projects &amp; Contract Awards
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg text-neutral-400">
+        Active and past contracts awarded to Sithembe by municipalities, utilities, and infrastructure
+        authorities across {SITE.region} and beyond.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-12 md:px-6">
+    <div class="rounded-xl border border-white/10 bg-slate/80 p-6 md:p-8">
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15" aria-hidden="true">
+          <svg class="h-6 w-6 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+        </span>
+        <div class="flex-1">
+          <p class="text-sm text-neutral-300">
+            <strong class="text-white">CIDB Registered</strong> — Grades 6CE, 6EP, 6SH, 5GB, 4SK &bull;
+            <strong class="text-white">COIDA Registered</strong> &bull;
+            <strong class="text-white">Public Liability Insured</strong> &bull;
+            <strong class="text-white">Service Area:</strong> {SITE.region}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    groupedProjects.map(({ label, projects }) => (
+      <section class="mx-auto max-w-6xl px-4 py-8 md:px-6">
+        <h2 class="text-2xl font-bold text-white">{label}</h2>
+        <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((p) => (
+            <ProjectShowcase
+              title={p.title}
+              client={p.client}
+              description={p.description}
+              stats={p.stats}
+            />
+          ))}
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
+    <div class="rounded-2xl border border-white/10 bg-slate/80 p-8 md:p-12">
+      <div class="max-w-2xl">
+        <h2 class="text-2xl font-bold text-white">Looking for a trusted contractor?</h2>
+        <p class="mt-3 text-neutral-400">
+          If you&rsquo;re evaluating tenders or need a CIDB-registered partner for plant hire,
+          vegetation management, or sanitation services — we&rsquo;d welcome the opportunity to discuss your project.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            href={`tel:${SITE.phoneTel}`}
+            class="rounded-lg bg-brand px-6 py-3 font-semibold text-charcoal hover:bg-brand-hover"
+          >
+            Call {SITE.phone}
+          </a>
+          <a
+            href={whatsappUrl(WHATSAPP_DEFAULT_MESSAGE)}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg border border-whatsapp/50 px-6 py-3 font-semibold text-whatsapp hover:bg-whatsapp/10"
+          >
+            WhatsApp us
+          </a>
+          <a
+            href={`mailto:${SITE.email}`}
+            class="rounded-lg border border-white/20 px-6 py-3 font-semibold text-white hover:bg-white/5"
+          >
+            Email us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</StpLayout>

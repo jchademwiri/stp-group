@@ -9,11 +9,10 @@ interface Props {
   canonical?: string;
 }
 
-const { title, description = "", bodyClass = "", ogImage = "/og-image.svg", canonical } = Astro.props;
+const { title, description = "", bodyClass = "", ogImage, canonical } = Astro.props;
 // TODO: Create /og-image.svg in public/ (1200×630px) for social sharing
 
-const canonicalUrl = canonical ?? Astro.url.href;
-const imageUrl = new URL(ogImage, Astro.site ?? Astro.url).href;
+const imageUrl = ogImage ? new URL(ogImage, Astro.site ?? Astro.url).href : undefined;
 ---
 
 <!doctype html>
@@ -23,12 +22,12 @@ const imageUrl = new URL(ogImage, Astro.site ?? Astro.url).href;
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={imageUrl} />
-    <meta property="og:url" content={canonicalUrl} />
+    {title && <meta property="og:title" content={title} />}
+    {description && <meta property="og:description" content={description} />}
+    {imageUrl && <meta property="og:image" content={imageUrl} />}
+    {canonical && <meta property="og:url" content={canonical} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />

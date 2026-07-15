@@ -10,9 +10,15 @@
     "./vite": "./vite.mjs",
     "./layouts/BaseLayout.astro": "./src/layouts/BaseLayout.astro"
   },
+  "scripts": {
+    "test": "vitest run"
+  },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
     "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
     "astro": "^6.0.0"

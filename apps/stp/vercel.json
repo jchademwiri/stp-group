@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/plant-hire",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/plant-hire/:path*",
+      "destination": "/services",
+      "permanent": true
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+@import "@repo/tailwind/styles.css";
+
+@theme {
+    --color-brand: #0898c8;
+    /* teal-blue */
+    --color-brand-hover: #0a6a8a;
+    --color-accent: #f59e0b;
+    /* amber — primary CTAs */
+    --color-accent-hover: #d97706;
+}

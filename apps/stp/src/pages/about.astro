@@ -5,9 +5,9 @@ import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE, breadcrumbSchema } from "@/data/site";
 import { ABOUT } from "@/data/about";
 
-const title = "About Sithembe Plant Hire | Our Story & Team";
+const title = "About Sithembe | Our Story & Credentials";
 const description =
-  "Learn about Sithembe Plant Hire - CIDB-registered, fully insured equipment hire and site services company based in Pretoria, serving Gauteng since inception.";
+  "Learn about Sithembe Transportation and Projects — CIDB-registered, fully insured contractor delivering plant hire, grass cutting, and desludging across Gauteng.";
 
 const iconPaths: Record<string, string> = {
   clock:
@@ -45,9 +45,9 @@ const iconPaths: Record<string, string> = {
       {
         ABOUT.values.map((v) => (
           <div class="flex gap-4 rounded-xl border border-white/10 bg-slate/80 p-6">
-            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-safety/15">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand/15">
               <svg
-                class="h-5 w-5 text-safety"
+                class="h-5 w-5 text-brand"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -79,7 +79,7 @@ const iconPaths: Record<string, string> = {
         {
           ABOUT.team.map((t) => (
             <article class="rounded-xl border border-white/10 bg-charcoal/60 p-6">
-              <p class="text-xs font-medium tracking-wider text-safety uppercase">{t.role}</p>
+              <p class="text-xs font-medium tracking-wider text-brand uppercase">{t.role}</p>
               <h3 class="mt-2 text-lg font-semibold text-white">{t.name}</h3>
               <p class="mt-2 text-sm text-neutral-400">{t.description}</p>
             </article>
@@ -100,7 +100,7 @@ const iconPaths: Record<string, string> = {
         ABOUT.credentials.map((c) => (
           <div class="flex items-start gap-3 rounded-lg border border-white/10 bg-slate/50 p-4">
             <svg
-              class="mt-0.5 h-5 w-5 shrink-0 text-safety"
+              class="mt-0.5 h-5 w-5 shrink-0 text-brand"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -123,12 +123,12 @@ const iconPaths: Record<string, string> = {
   <section class="mx-auto max-w-6xl px-4 pb-16 md:px-6">
     <h2 class="text-lg font-semibold text-white">Ready to work with us?</h2>
     <p class="mt-2 text-neutral-400">
-      Whether you need a single machine for a day or a full-service contract, we're here to help.
+      Whether you need a municipal contract partner or site services support, we&rsquo;re here to help.
     </p>
     <div class="mt-6 flex flex-wrap gap-3">
       <a
         href={`tel:${SITE.phoneTel}`}
-        class="rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover"
+        class="rounded-lg bg-brand px-6 py-3 font-semibold text-charcoal hover:bg-brand-hover"
       >
         Call {SITE.phone}
       </a>
@@ -141,10 +141,10 @@ const iconPaths: Record<string, string> = {
         WhatsApp us
       </a>
       <a
-        href="/plant-hire"
+        href="/projects"
         class="rounded-lg border border-white/20 px-6 py-3 font-semibold text-white hover:bg-white/5"
       >
-        Browse fleet
+        View our projects
       </a>
     </div>
   </section>

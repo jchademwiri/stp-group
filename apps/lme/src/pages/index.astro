@@ -1,5 +1,6 @@
 ---
 import LmeLayout from '@/layouts/LmeLayout.astro';
+import LmeTrustBadges from '@/components/LmeTrustBadges.astro';
 import { LME, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE } from '@/data/site';
 
 const title =
@@ -26,95 +27,86 @@ const icons = {
 <LmeLayout {title} {description}>
   <!-- Hero Section -->
   <section
-    class='relative overflow-hidden bg-gradient-to-br from-slate to-charcoal'
+    class='relative overflow-hidden bg-linear-to-br from-slate to-charcoal'
   >
+    <!-- SVG texture overlay ≤6% opacity -->
     <div
-      class='absolute inset-0 opacity-[0.06]'
+      class='absolute inset-0 opacity-[0.04]'
       aria-hidden='true'
-      style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&quot;);"
     >
+      <svg
+        width='100%'
+        height='100%'
+        xmlns='http://www.w3.org/2000/svg'
+        aria-hidden='true'
+      >
+        <defs>
+          <pattern
+            id='hero-grid'
+            width='40'
+            height='40'
+            patternUnits='userSpaceOnUse'
+          >
+            <path
+              d='M 40 0 L 0 0 0 40'
+              fill='none'
+              stroke='white'
+              stroke-width='0.5'
+            />
+          </pattern>
+        </defs>
+        <rect width='100%' height='100%' fill='url(#hero-grid)' />
+      </svg>
     </div>
+
     <div class='relative mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-28'>
+      <!-- Section label -->
+      <p class='mb-3 text-sm font-semibold tracking-wider uppercase text-brand'>
+        Construction &amp; Civil Engineering
+      </p>
+
       <h1
         class='max-w-3xl text-4xl font-bold tracking-tight text-white md:text-5xl'
       >
-        {LME.tagline}
+        Building Infrastructure.<br class='hidden md:block' /> Delivering Results.
       </h1>
-      <p class='mt-4 max-w-2xl text-lg text-white/70'>
-        CIDB-registered contractor (1CE, 1GB, 1EP) serving {LME.region} with excellence,
-        integrity, and innovation.
+
+      <p class='mt-4 max-w-2xl text-lg text-neutral-400'>
+        CIDB-registered contractor graded <strong class='font-semibold text-white'>1CE</strong>,
+        <strong class='font-semibold text-white'>1GB</strong>, and
+        <strong class='font-semibold text-white'>1EP</strong> — serving {LME.serviceArea} with
+        proven expertise in civil engineering, general building, and electrical works since {LME.foundingYear}.
       </p>
+
       <div class='mt-8 flex flex-wrap gap-3'>
+        <!-- Primary CTA: amber accent -->
         <a
           href={`tel:${LME.phoneTel}`}
-          class='rounded-lg bg-white px-6 py-3 font-semibold text-safety transition-colors hover:bg-neutral-100'
+          class='rounded-lg bg-accent px-6 py-3 font-semibold text-charcoal transition-colors hover:bg-accent-hover'
         >
-          Call {LME.phone}
+          Call now
         </a>
+        <!-- Secondary CTA: outlined -->
         <a
-          href='#services'
-          class='rounded-lg border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10'
+          href='/services'
+          class='rounded-lg border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/5'
         >
-          View Our Services
+          View our services
         </a>
+        <!-- WhatsApp CTA: whatsapp-coloured outline -->
         <a
           href={whatsappUrl(WHATSAPP_DEFAULT_MESSAGE)}
           target='_blank'
           rel='noopener noreferrer'
-          class='rounded-lg border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10'
+          class='rounded-lg border border-whatsapp/50 px-6 py-3 font-semibold text-whatsapp transition-colors hover:bg-whatsapp/10'
         >
-          WhatsApp Us
+          WhatsApp us
         </a>
       </div>
-      <!-- Trust Badges -->
-      <div class='mt-10 flex flex-wrap gap-2'>
-        {
-          LME.cidb.grades.map((g) => (
-            <span class='flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white'>
-              <svg
-                class='h-3.5 w-3.5 shrink-0 text-safety'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                stroke-width='2.5'
-                aria-hidden='true'
-              >
-                <path d='M9 12l2 2 4-4' />
-              </svg>
-              {g.code} - {g.name}
-            </span>
-          ))
-        }
-        <span
-          class='flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white'
-        >
-          <svg
-            class='h-3.5 w-3.5 shrink-0 text-safety'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2.5'
-            aria-hidden='true'
-          >
-            <path d='M9 12l2 2 4-4'></path>
-          </svg>
-          SARS Compliant
-        </span>
-        <span
-          class='flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white'
-        >
-          <svg
-            class='h-3.5 w-3.5 shrink-0 text-safety'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2.5'
-            aria-hidden='true'
-          >
-            <path d='M9 12l2 2 4-4'></path>
-          </svg>
-          Since {LME.foundingYear}
-        </span>
+
+      <!-- Trust badges -->
+      <div class='mt-10'>
+        <LmeTrustBadges />
       </div>
     </div>
   </section>
@@ -124,7 +116,7 @@ const icons = {
     id='services'
     class='mx-auto max-w-6xl scroll-mt-28 px-4 pt-24 pb-20 md:px-6'
   >
-    <p class='text-sm font-semibold tracking-wider text-safety uppercase'>
+    <p class='text-sm font-semibold tracking-wider text-brand uppercase'>
       What we do
     </p>
     <h2 class='mt-2 text-3xl font-bold text-white'>Our Services</h2>
@@ -135,10 +127,10 @@ const icons = {
     <div class='mt-10 grid gap-6 md:grid-cols-3'>
       {
         LME.services.map((s) => (
-          <article class='group rounded-xl border border-white/10 bg-slate p-8 transition-all duration-200 hover:-translate-y-1 hover:border-safety/30 hover:shadow-lg hover:shadow-black/30'>
-            <span class='flex h-12 w-12 items-center justify-center rounded-lg bg-safety/15 transition-colors group-hover:bg-safety/25'>
+          <article class='group rounded-xl border border-white/10 bg-slate p-8 transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg hover:shadow-black/30'>
+            <span class='flex h-12 w-12 items-center justify-center rounded-lg bg-brand/15 transition-colors group-hover:bg-brand/25'>
               <svg
-                class='h-6 w-6 text-safety'
+                class='h-6 w-6 text-brand'
                 viewBox='0 0 24 24'
                 fill='none'
                 stroke='currentColor'
@@ -165,7 +157,7 @@ const icons = {
   <!-- Equipment Fleet Section -->
   <section id='fleet' class='border-y border-white/10 bg-slate/50'>
     <div    class='mx-auto max-w-6xl scroll-mt-28 px-4 pt-24 pb-20 md:px-6'>
-      <p class='text-sm font-semibold tracking-wider text-safety uppercase'>
+      <p class='text-sm font-semibold tracking-wider text-brand uppercase'>
         Our capability
       </p>
       <h2 class='mt-2 text-3xl font-bold text-white'>Fleet &amp; Equipment</h2>
@@ -180,7 +172,7 @@ const icons = {
           LME.fleet.map((item) => (
             <div class='flex items-center gap-2 rounded-lg border border-white/10 bg-charcoal px-4 py-3 text-sm text-neutral-300'>
               <svg
-                class='h-4 w-4 shrink-0 text-safety'
+                class='h-4 w-4 shrink-0 text-brand'
                 viewBox='0 0 24 24'
                 fill='none'
                 stroke='currentColor'
@@ -199,7 +191,7 @@ const icons = {
 
   <!-- Why LME Section -->
   <section class='mx-auto max-w-6xl px-4 pt-24 pb-20 md:px-6'>
-    <p class='text-sm font-semibold tracking-wider text-safety uppercase'>
+    <p class='text-sm font-semibold tracking-wider text-brand uppercase'>
       Why choose us
     </p>
     <h2 class='mt-2 text-3xl font-bold text-white'>
@@ -213,9 +205,9 @@ const icons = {
       {
         LME.values.map((v) => (
           <div class='flex gap-4 rounded-xl border border-white/10 bg-slate p-6'>
-            <span class='flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-safety/15'>
+            <span class='flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15'>
               <svg
-                class='h-6 w-6 text-safety'
+                class='h-6 w-6 text-brand'
                 viewBox='0 0 24 24'
                 fill='none'
                 stroke='currentColor'
@@ -242,7 +234,7 @@ const icons = {
   <!-- Active Projects / Credibility Section -->
   <section id='projects' class='border-y border-white/10 bg-slate/50'>
     <div    class='mx-auto max-w-6xl scroll-mt-28 px-4 pt-24 pb-20 md:px-6'>
-      <p class='text-sm font-semibold tracking-wider text-safety uppercase'>
+      <p class='text-sm font-semibold tracking-wider text-brand uppercase'>
         Contract awards
       </p>
       <h2 class='mt-2 text-3xl font-bold text-white'>
@@ -257,7 +249,7 @@ const icons = {
           LME.contracts.map((contract) => (
             <div class='flex items-start gap-3 rounded-lg border border-white/10 bg-charcoal px-5 py-4'>
               <svg
-                class='mt-0.5 h-5 w-5 shrink-0 text-safety'
+                class='mt-0.5 h-5 w-5 shrink-0 text-brand'
                 viewBox='0 0 24 24'
                 fill='none'
                 stroke='currentColor'
@@ -280,7 +272,7 @@ const icons = {
     id='contact'
     class='mx-auto max-w-6xl scroll-mt-28 px-4 pt-24 pb-20 md:px-6'
   >
-    <p class='text-sm font-semibold tracking-wider text-safety uppercase'>
+    <p class='text-sm font-semibold tracking-wider text-brand uppercase'>
       Get in touch
     </p>
     <h2 class='mt-2 text-3xl font-bold text-white'>Contact Us</h2>
@@ -291,13 +283,13 @@ const icons = {
     <div class='mt-10 grid gap-8 md:grid-cols-3'>
       <a
         href={`tel:${LME.phoneTel}`}
-        class='group flex items-start gap-4 rounded-xl border border-white/10 bg-slate p-6 transition-all hover:-translate-y-1 hover:border-safety/30 hover:shadow-lg hover:shadow-black/30'
+        class='group flex items-start gap-4 rounded-xl border border-white/10 bg-slate p-6 transition-all hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg hover:shadow-black/30'
       >
         <span
-          class='flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-safety/15 transition-colors group-hover:bg-safety/25'
+          class='flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15 transition-colors group-hover:bg-brand/25'
         >
           <svg
-            class='h-6 w-6 text-safety'
+            class='h-6 w-6 text-brand'
             viewBox='0 0 24 24'
             fill='none'
             stroke='currentColor'
@@ -310,20 +302,20 @@ const icons = {
           </svg>
         </span>
         <div>
-          <h3 class='font-semibold text-white group-hover:text-safety'>Call us</h3>
+          <h3 class='font-semibold text-white group-hover:text-brand'>Call us</h3>
           <p class='mt-1 text-sm text-neutral-400'>{LME.phone}</p>
           <p class='text-xs text-neutral-500'>{LME.businessHours.weekdays}</p>
         </div>
       </a>
       <a
         href={`mailto:${LME.email}`}
-        class='group flex items-start gap-4 rounded-xl border border-white/10 bg-slate p-6 transition-all hover:-translate-y-1 hover:border-safety/30 hover:shadow-lg hover:shadow-black/30'
+        class='group flex items-start gap-4 rounded-xl border border-white/10 bg-slate p-6 transition-all hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg hover:shadow-black/30'
       >
         <span
-          class='flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-safety/15 transition-colors group-hover:bg-safety/25'
+          class='flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15 transition-colors group-hover:bg-brand/25'
         >
           <svg
-            class='h-6 w-6 text-safety'
+            class='h-6 w-6 text-brand'
             viewBox='0 0 24 24'
             fill='none'
             stroke='currentColor'
@@ -336,7 +328,7 @@ const icons = {
           </svg>
         </span>
         <div>
-          <h3 class='font-semibold text-white group-hover:text-safety'>
+          <h3 class='font-semibold text-white group-hover:text-brand'>
             Email us
           </h3>
           <p class='mt-1 text-sm text-neutral-400'>{LME.email}</p>
@@ -346,10 +338,10 @@ const icons = {
         class='flex items-start gap-4 rounded-xl border border-white/10 bg-slate p-6'
       >
         <span
-          class='flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-safety/15'
+          class='flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15'
         >
           <svg
-            class='h-6 w-6 text-safety'
+            class='h-6 w-6 text-brand'
             viewBox='0 0 24 24'
             fill='none'
             stroke='currentColor'

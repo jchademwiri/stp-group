@@ -9,10 +9,14 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test": "vitest run"
   },
   "dependencies": {
     "@repo/tailwind": "workspace:*",
     "astro": "^6.3.7"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
   }
 }

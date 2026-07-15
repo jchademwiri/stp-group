@@ -8,17 +8,18 @@ import {
   breadcrumbSchema,
 } from '@/data/site';
 
-const title = 'Our Services | Sithembe Plant Hire, Grass Cutting & Desludging';
+const title = 'Our Services | Sithembe Transportation and Projects';
 const description =
-  'From plant hire and equipment rental to commercial grass cutting and septic desludging - Sithembe delivers reliable site services across Pretoria and Gauteng.';
+  'Plant hire, commercial grass cutting, and septic desludging — Sithembe delivers reliable site services for municipalities and industry across Pretoria and Gauteng.';
 
 const offerings = [
   {
-    title: 'Plant Hire & Equipment Rental',
-    slug: '/plant-hire',
+    title: 'Plant Hire & Heavy Equipment',
+    slug: '/services',
+    sectionId: 'plant-hire',
     icon: 'machinery',
     summary:
-      'Dropside trucks, vacuum tankers, bobcats, utility tractors, ride-on mowers, and handheld tools - with wet hire operators available on all major plant.',
+      'Dropside trucks, vacuum tankers, bobcats, utility tractors, ride-on mowers, and handheld tools — with wet hire operators available on all major plant.',
     highlights: [
       '8-Ton dropside trucks for bulk material delivery',
       '10,000-litre honey sucker vacuum tanker',
@@ -93,44 +94,25 @@ const iconSvgs: Record<string, string> = {
         Three service lines. One reliable team. CIDB-registered, fully insured,
         and ready to support your next project across {SITE.region}.
       </p>
-      <div class='mt-8 flex flex-wrap gap-3'>
-        <a
-          href='#plant-hire'
-          class='rounded-lg bg-safety px-5 py-2.5 font-semibold text-charcoal hover:bg-safety-hover'
-        >
-          Plant Hire
-        </a>
-        <a
-          href='#grass-cutting'
-          class='rounded-lg border border-white/20 px-5 py-2.5 font-semibold text-white hover:bg-white/5'
-        >
-          Grass Cutting
-        </a>
-        <a
-          href='#desludging'
-          class='rounded-lg border border-white/20 px-5 py-2.5 font-semibold text-white hover:bg-white/5'
-        >
-          Desludging
-        </a>
-      </div>
+
     </div>
   </section>
 
   {
     offerings.map((offering, i) => (
       <section
-        id={offering.slug.split('/').pop()}
+        id={offering.sectionId ?? offering.slug.split('/').pop()}
         class:list={['scroll-mt-32', i % 2 === 0 ? '' : 'bg-slate/40']}
       >
         <div class='mx-auto max-w-6xl px-4 py-16 md:px-6'>
           <div class='grid gap-10 md:grid-cols-5'>
             <div class='md:col-span-2'>
               <span
-                class='flex h-14 w-14 items-center justify-center rounded-xl bg-safety/15'
+                class='flex h-14 w-14 items-center justify-center rounded-xl bg-brand/15'
                 aria-hidden='true'
               >
                 <svg
-                  class='h-7 w-7 text-safety'
+                  class='h-7 w-7 text-brand'
                   viewBox='0 0 24 24'
                   fill='none'
                   stroke='currentColor'
@@ -145,20 +127,7 @@ const iconSvgs: Record<string, string> = {
                 {offering.title}
               </h2>
               <p class='mt-3 text-neutral-400'>{offering.summary}</p>
-              <div class='mt-6 flex flex-wrap gap-3'>
-                <a
-                  href={offering.slug}
-                  class='rounded-lg bg-safety px-5 py-2.5 font-semibold text-charcoal hover:bg-safety-hover'
-                >
-                  View full details
-                </a>
-                <a
-                  href={`tel:${SITE.phoneTel}`}
-                  class='rounded-lg border border-white/20 px-5 py-2.5 font-semibold text-white hover:bg-white/5'
-                >
-                  Call {SITE.phone}
-                </a>
-              </div>
+
             </div>
             <div class='md:col-span-3'>
               <h3 class='text-sm font-semibold tracking-wider text-neutral-300 uppercase'>
@@ -168,7 +137,7 @@ const iconSvgs: Record<string, string> = {
                 {offering.highlights.map((h) => (
                   <li class='flex items-start gap-3 rounded-lg border border-white/10 bg-charcoal/60 px-4 py-3'>
                     <svg
-                      class='mt-0.5 h-4 w-4 shrink-0 text-safety'
+                      class='mt-0.5 h-4 w-4 shrink-0 text-brand'
                       viewBox='0 0 24 24'
                       fill='none'
                       stroke='currentColor'
@@ -188,39 +157,5 @@ const iconSvgs: Record<string, string> = {
     ))
   }
 
-  <section class='mx-auto max-w-6xl px-4 py-16 md:px-6'>
-    <div class='rounded-2xl border border-white/10 bg-slate/80 p-8 md:p-12'>
-      <div class='max-w-2xl'>
-        <h2 class='text-2xl font-bold text-white'>
-          Not sure which service you need?
-        </h2>
-        <p class='mt-3 text-neutral-400'>
-          Tell us about your site and we&rsquo;ll recommend the right equipment
-          and crew. We respond {SITE.responseTime}.
-        </p>
-        <div class='mt-6 flex flex-wrap gap-3'>
-          <a
-            href={`tel:${SITE.phoneTel}`}
-            class='rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover'
-          >
-            Call {SITE.phone}
-          </a>
-          <a
-            href={whatsappUrl(WHATSAPP_DEFAULT_MESSAGE)}
-            target='_blank'
-            rel='noopener noreferrer'
-            class='rounded-lg border border-whatsapp/50 px-6 py-3 font-semibold text-whatsapp hover:bg-whatsapp/10'
-          >
-            WhatsApp us
-          </a>
-          <a
-            href='/plant-hire'
-            class='rounded-lg border border-white/20 px-6 py-3 font-semibold text-white hover:bg-white/5'
-          >
-            Browse equipment fleet
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+
 </StpLayout>

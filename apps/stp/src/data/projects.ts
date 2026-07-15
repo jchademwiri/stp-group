@@ -170,3 +170,26 @@ export function getProjectsByCategory(category: ProjectCategory): STPProject[] {
 export function getFeaturedProjects(limit = 3): STPProject[] {
   return stpProjects.slice(0, limit);
 }
+
+export const projectCategoryLabels: Record<ProjectCategory, string> = {
+  "grass-cutting": "Grass Cutting & Vegetation",
+  desludging: "Desludging & Sanitation",
+  "plant-hire": "Plant Hire & Equipment",
+  general: "General Infrastructure",
+};
+
+const categoryOrder: ProjectCategory[] = [
+  "grass-cutting",
+  "desludging",
+  "plant-hire",
+  "general",
+];
+
+export function getProjectsGroupedByCategory(): { label: string; projects: STPProject[] }[] {
+  return categoryOrder
+    .map((category) => ({
+      label: projectCategoryLabels[category],
+      projects: getProjectsByCategory(category),
+    }))
+    .filter((group) => group.projects.length > 0);
+}

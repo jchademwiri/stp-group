@@ -4,8 +4,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Accordion from '@/components/Accordion.astro';
 import BeforeAfter from '@/components/BeforeAfter.astro';
 import ProjectShowcase from '@/components/ProjectShowcase.astro';
-import GrassQuoteForm from '@/components/GrassQuoteForm.astro';
-import { SITE, breadcrumbSchema } from '@/data/site';
+import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE, breadcrumbSchema } from '@/data/site';
 import { getProjectsByCategory } from '@/data/projects';
 
 const title = 'Commercial Grass Cutting & Plot Clearing Services | Sithembe';
@@ -80,7 +79,7 @@ const beforeAfterProjects = [
             name: 'How is pricing calculated?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Pricing depends on plot size, terrain, vegetation density, and service frequency. Submit the form or WhatsApp us for a tailored quote.',
+              text: 'Pricing depends on plot size, terrain, vegetation density, and service frequency. Call or WhatsApp us to discuss your requirements.',
             },
           },
           {
@@ -121,12 +120,7 @@ const beforeAfterProjects = [
         Professional clearing, firebreak establishment, and site maintenance
         using agricultural tractors and ride-on mowers in {SITE.region}.
       </p>
-      <a
-        href='#grass-quote'
-        class='mt-8 inline-block rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover'
-      >
-        Get Clearing Estimate
-      </a>
+
     </div>
   </section>
 
@@ -186,18 +180,9 @@ const beforeAfterProjects = [
   <section class='mx-auto max-w-6xl px-4 py-8 md:px-6'>
     <h2 class='text-xl font-semibold text-white'>Equipment deployed</h2>
     <p class='mt-2 text-neutral-400'>
-      Utility tractors, ride-on mowers, and brush cutters from our{' '}
-      <a href='/plant-hire' class='text-safety hover:underline'
-        >plant hire fleet</a
-      >.
+      Utility tractors, ride-on mowers, and brush cutters operated by accredited crews across
+      municipal and commercial contracts.
     </p>
-  </section>
-
-  <section
-    id='grass-quote'
-    class='mx-auto max-w-6xl scroll-mt-32 px-4 py-12 md:px-6'
-  >
-    <GrassQuoteForm />
   </section>
 
   <section class='mx-auto max-w-6xl px-4 pb-16 md:px-6'>
@@ -207,10 +192,7 @@ const beforeAfterProjects = [
         We primarily serve {SITE.region}. Contact us for large contracts or
         sites outside this area.
       </Accordion>
-      <Accordion question='How is pricing calculated?'>
-        Pricing depends on plot size, terrain, vegetation density, and service
-        frequency. Submit the form or WhatsApp us for a tailored quote.
-      </Accordion>
+
       <Accordion question='Do you handle very large plots (10+ hectares)?'>
         Yes - we deploy tractors, ride-on mowers, and clearing crews suited to
         large-scale reclamation and maintenance contracts.

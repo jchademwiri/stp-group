@@ -6,8 +6,8 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
 
 ## Tasks
 
-- [ ] 1. Update shared design system tokens in `packages/tailwind/src/theme.css`
-  - [~] 1.1 Add typography scale, layout, and semantic brand token skeleton to `theme.css`
+- [x] 1. Update shared design system tokens in `packages/tailwind/src/theme.css`
+  - [x] 1.1 Add typography scale, layout, and semantic brand token skeleton to `theme.css`
     - Define `--font-sans: "Inter", system-ui, sans-serif`
     - Define named text-scale steps: xs, sm, base, lg, xl, 2xl, 3xl, 4xl, 5xl
     - Define `--max-w-content: 72rem`
@@ -17,24 +17,24 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - Do NOT define any site-specific colour values (`#ff9f1c`, `#0898c8`) in this file
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7_
 
-  - [~] 1.2 Update `packages/tailwind/src/styles.css` `@source` directives
+  - [x] 1.2 Update `packages/tailwind/src/styles.css` `@source` directives
     - Ensure `@source` covers both `apps/stp/src` and `apps/lme/src` so Tailwind v4 generates all used utilities
     - _Requirements: 1.7_
 
-  - [~] 1.3 Write smoke tests for shared token existence
+  - [x] 1.3 Write smoke tests for shared token existence
     - Create `packages/tailwind/src/__tests__/theme-tokens.test.ts`
     - Assert `theme.css` contains `--color-charcoal`, `--color-slate`, `--color-whatsapp`, `--font-sans`, `--max-w-content`, `--color-brand`
     - Assert `theme.css` does NOT contain `#ff9f1c` or `#0898c8`
     - Assert `styles.css` `@source` covers both app `src` directories
     - _Requirements: 1.3, 1.5, 1.6_
 
-- [ ] 2. Create STP brand CSS entry point and update StpLayout
-  - [~] 2.1 Create `apps/stp/src/styles/stp.css`
+- [x] 2. Create STP brand CSS entry point and update StpLayout
+  - [x] 2.1 Create `apps/stp/src/styles/stp.css`
     - Import `@repo/tailwind/styles.css`
     - Add `@theme` block overriding `--color-brand: #ff9f1c` and `--color-brand-hover: #e88f10`
     - _Requirements: 2.1, 2.2, 1.6_
 
-  - [~] 2.2 Update `apps/stp/src/layouts/StpLayout.astro`
+  - [x] 2.2 Update `apps/stp/src/layouts/StpLayout.astro`
     - Import `stp.css` in place of any direct `@repo/tailwind/styles.css` reference
     - Replace all `text-safety` / `bg-safety` / `border-safety` references with `text-brand` / `bg-brand` / `border-brand` equivalents
     - Update nav active state from `text-safety font-semibold` → `text-brand font-semibold`
@@ -48,7 +48,7 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - _Requirements: 2.3, 2.4, 12.1, 12.2, 12.3, 17.1, 17.3, 17.4_
 
 - [ ] 3. Update STP homepage (`apps/stp/src/pages/index.astro`)
-  - [~] 3.1 Rework Hero section markup and content
+  - [x] 3.1 Rework Hero section markup and content
     - Add SVG texture overlay at ≤6% opacity with `aria-hidden="true"`
     - Add Section_Label "Sithembe Group" using `text-sm font-semibold tracking-wider uppercase text-brand` pattern
     - Set `<h1>` to "Equipment on site when you need it" with `text-4xl font-bold tracking-tight md:text-5xl`
@@ -57,20 +57,20 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - Ensure reading flow: Hero → Trust → Featured Contracts → Services → Testimonials → Footer
     - _Requirements: 6.1, 6.6, 6.8, 5.3_
 
-  - [~] 3.2 Update `apps/stp/src/components/TrustBadges.astro`
+  - [x] 3.2 Update `apps/stp/src/components/TrustBadges.astro`
     - Update badge list to: CIDB 6CE, 6EP, 6SH, 5GB, 4SK + COIDA + Public Liability Insurance
     - Change icon colour from `text-safety` → `text-brand`
     - Apply Trust_Badge pill pattern: `flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium`
     - _Requirements: 6.2, 2.3, 14.3_
 
-  - [~] 3.3 Add Featured Contracts section to STP homepage
+  - [-] 3.3 Add Featured Contracts section to STP homepage
     - Import `getFeaturedProjects` from `apps/stp/src/data/projects.ts`
     - Render `ProjectShowcase` cards in a responsive grid for all featured projects
     - Section heading `<h2>` with `text-3xl font-bold`; always render the heading even when no projects exist
     - Grid must use single-column base with `md:grid-cols-2 lg:grid-cols-3` pattern
     - _Requirements: 6.3, 6.7, 5.4_
 
-  - [~] 3.4 Add/update Our Services section on STP homepage
+  - [-] 3.4 Add/update Our Services section on STP homepage
     - Render three ServiceCards linking to `/plant-hire`, `/services/grass-cutting`, `/services/desludging`
     - Apply card pattern: `rounded-xl border border-white/10 bg-slate p-8 hover:-translate-y-1 hover:border-brand/30`
     - Grid: single-column base, `md:grid-cols-3`
@@ -86,12 +86,12 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 5. Create LME brand CSS entry point and update LmeLayout
-  - [~] 5.1 Create `apps/lme/src/styles/lme.css`
+  - [x] 5.1 Create `apps/lme/src/styles/lme.css`
     - Import `@repo/tailwind/styles.css`
     - Add `@theme` block with: `--color-brand: #0898c8`, `--color-brand-hover: #0a6a8a`, `--color-accent: #f59e0b`, `--color-accent-hover: #d97706`
     - _Requirements: 3.1, 3.2, 3.3, 1.6_
 
-  - [~] 5.2 Update `apps/lme/src/layouts/LmeLayout.astro`
+  - [x] 5.2 Update `apps/lme/src/layouts/LmeLayout.astro`
     - Import `lme.css` as the CSS entry point
     - Replace all `text-safety` / `bg-safety` references with `text-brand` / `bg-brand` variants
     - Update nav links from anchor-only to page routes: Home `/`, About `/about`, Services `/services`, Projects `/projects`, Contact `#contact`
@@ -107,14 +107,14 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - Fix any `text-safety` references in `StickyMobileBar.astro` for LME → `text-brand`
     - _Requirements: 3.4, 3.6, 3.7, 11.1, 11.2, 11.3, 11.4, 11.5, 13.3, 17.1, 17.3, 17.4_
 
-  - [~] 5.3 Write property test for LME navigation mutual exclusion
+  - [-] 5.3 Write property test for LME navigation mutual exclusion
     - Create or update test file in `apps/lme/src/__tests__/`
     - **Property 2: Navigation mutual exclusion — exactly one active link**
     - Test that for any path in `["/", "/about", "/services", "/projects", "/unknown"]`, `lmeNavLinks.filter(link => link.match(path)).length <= 1`
     - **Validates: Requirements 11.3**
 
-- [ ] 6. Create LME-specific components
-  - [~] 6.1 Create `apps/lme/src/components/LmeTrustBadges.astro`
+- [x] 6. Create LME-specific components
+  - [x] 6.1 Create `apps/lme/src/components/LmeTrustBadges.astro`
     - Read from `LME` data constant (no props)
     - Render pills for: CIDB 1CE, CIDB 1GB, CIDB 1EP, SARS Compliant, Founded 2014
     - Icon colour: `text-brand` (teal-blue)
@@ -122,13 +122,13 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - All decorative SVG icons must carry `aria-hidden="true"`
     - _Requirements: 7.2, 3.4, 14.3, 17.5_
 
-  - [~] 6.2 Verify `apps/lme/src/components/LocalBusinessSchema.astro`
+  - [x] 6.2 Verify `apps/lme/src/components/LocalBusinessSchema.astro`
     - Confirm it reads from the `LME` data object
     - Ensure all required JSON-LD fields present: `name`, `telephone`, `email`, `address`, `geo`, `areaServed`, `openingHours`, `url`
     - _Requirements: 16.2_
 
 - [ ] 7. Update LME homepage (`apps/lme/src/pages/index.astro`)
-  - [~] 7.1 Rework LME Hero section
+  - [-] 7.1 Rework LME Hero section
     - `<h1>` with construction/civil engineering headline using `text-4xl font-bold tracking-tight md:text-5xl`
     - Sub-headline listing CIDB grades 1CE, 1GB, 1EP
     - Three CTAs: "Call now" (`bg-accent text-charcoal` — amber primary), "View our services" (outlined), "WhatsApp us" (outlined)
@@ -152,26 +152,26 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - Test that `renderFleetSection(fleet).sectionVisible === (fleet.length > 0)` for any array length 0..30
     - **Validates: Requirements 7.4**
 
-- [ ] 8. Create LME data files
-  - [~] 8.1 Add `contractCategories` map to `apps/lme/src/data/site.ts`
+- [x] 8. Create LME data files
+  - [x] 8.1 Add `contractCategories` map to `apps/lme/src/data/site.ts`
     - Add `export const contractCategories: Record<string, string[]>` mapping category names to contract strings
     - Categories: "Water & Sanitation", "Emergency Services", "Electrical", "Equipment Hire"
     - Populate with all current `LME.contracts` items as defined in the design
     - _Requirements: 10.3_
 
-  - [~] 8.2 Create `apps/lme/src/data/services.ts`
+  - [x] 8.2 Create `apps/lme/src/data/services.ts`
     - Define `LmeServiceDetail` interface: `{ code: "1CE" | "1GB" | "1EP"; title: string; expandedDescription: string; projectTypes: string[] }`
     - Export `lmeServiceDetails: LmeServiceDetail[]` with entries for Civil Engineering (1CE), General Building (1GB), Electrical Engineering (1EP)
     - Include representative project types per service
     - _Requirements: 9.2, 9.3_
 
-  - [~] 8.3 Write unit test for contractCategories coverage
+  - [x] 8.3 Write unit test for contractCategories coverage
     - Create `apps/lme/src/__tests__/data.test.ts`
     - Test that all items in `LME.contracts` are present in at least one category of `contractCategories`
     - _Requirements: 10.3_
 
 - [ ] 9. Create LME About page (`apps/lme/src/pages/about.astro`)
-  - [~] 9.1 Implement LME About page structure and content
+  - [-] 9.1 Implement LME About page structure and content
     - Use `LmeLayout` with `title="About Us | LME"` and appropriate `description` prop
     - Hero/Intro section: Section_Label "About us", `<h1>` "About Livhu and Musa Enterprise", founding story paragraph
     - Company Stats row: Founded 2014 | 10+ Employees | Centurion, Gauteng | CIDB Registered
@@ -186,7 +186,7 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - _Requirements: 8.6_
 
 - [ ] 10. Create LME Services page (`apps/lme/src/pages/services.astro`)
-  - [~] 10.1 Implement LME Services page structure and content
+  - [-] 10.1 Implement LME Services page structure and content
     - Use `LmeLayout` with `title="Services | LME"` and appropriate `description` prop
     - Page Hero: Section_Label "What we deliver", `<h1>` "Our Services"
     - For each entry in `lmeServiceDetails`: render a service block with CIDB grade badge, `<h2>` title, expanded description, project types list, and "Inquire about this service" CTA (→ `#contact` or `tel:`)
@@ -199,7 +199,7 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - _Requirements: 9.6_
 
 - [ ] 11. Create LME Projects page (`apps/lme/src/pages/projects.astro`)
-  - [~] 11.1 Implement LME Projects page structure and content
+  - [-] 11.1 Implement LME Projects page structure and content
     - Use `LmeLayout` with `title="Projects | LME"` and appropriate `description` prop
     - Page Hero: Section_Label "Our track record", `<h1>` "Projects & Contract Awards"
     - Credibility statement referencing CIDB registration and SARS compliance
@@ -219,7 +219,7 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - _Requirements: 10.6_
 
 - [ ] 12. Update BaseLayout for SEO, performance, and accessibility (`packages/tailwind/src/layouts/BaseLayout.astro`)
-  - [~] 12.1 Add font preconnect, canonical link, and Open Graph tags to BaseLayout
+  - [x] 12.1 Add font preconnect, canonical link, and Open Graph tags to BaseLayout
     - Add `<link rel="preconnect" href="https://fonts.googleapis.com">` and `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>` before the stylesheet link
     - Load Inter font with `display=swap`
     - Add `<link rel="canonical" href={canonical}>` when `canonical` prop is provided
@@ -229,7 +229,7 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - Wrap `<slot />` in `<main id="main-content">`
     - _Requirements: 15.1, 15.2, 16.4, 16.5, 17.1, 5.7_
 
-  - [~] 12.2 Write property test for Open Graph independent rendering
+  - [-] 12.2 Write property test for Open Graph independent rendering
     - **Property 8: Open Graph tags render available props independently**
     - Test that for any combination of defined/undefined `(title, description, ogImage, canonical)`, each defined prop produces its corresponding tag and undefined props do not suppress others
     - **Validates: Requirements 16.5**
@@ -277,7 +277,7 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - **Validates: Requirements 15.5, 17.5**
 
 - [ ] 15. WCAG contrast verification tests
-  - [~] 15.1 Create contrast ratio utility and unit tests
+  - [x] 15.1 Create contrast ratio utility and unit tests
     - Create `packages/tailwind/src/__tests__/contrast.test.ts`
     - Implement `wcagContrastRatio(hex1: string, hex2: string): number` using WCAG relative luminance formula
     - Write example-based tests for all key colour pairs:
@@ -290,7 +290,7 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
       - `#ffffff` on `#1e1e24` ≥ 4.5 (white text on charcoal)
     - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
-  - [~] 15.2 Write property test for WCAG body text contrast — parameterised pairs
+  - [ ] 15.2 Write property test for WCAG body text contrast — parameterised pairs
     - **Property 1: WCAG body text contrast — all dark surfaces**
     - Test each declared body text colour / dark surface pair meets 4.5:1 using parameterised `test.each`:
       - `["#e5e5e5", "#1e1e24"]`, `["#a3a3a3", "#1e1e24"]`, `["#ffffff", "#1e1e24"]`, `["#e5e5e5", "#2a2a32"]`

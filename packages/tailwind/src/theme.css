@@ -1,14 +1,46 @@
 /**
  * Shared Tailwind v4 theme - edit design tokens here.
  * Imported by styles.css; consumed by all apps via BaseLayout.
+ *
+ * Site-specific colour overrides (--color-brand, --color-accent, etc.)
+ * are defined in each app's own CSS entry point, NOT here.
  */
 @theme {
+  /* Fonts */
   --font-sans: "Inter", system-ui, sans-serif;
 
-  /* Sithembe industrial palette */
+  /* Typography scale */
+  --text-xs: 0.75rem;
+  /* 12px */
+  --text-sm: 0.875rem;
+  /* 14px */
+  --text-base: 1rem;
+  /* 16px */
+  --text-lg: 1.125rem;
+  /* 18px */
+  --text-xl: 1.25rem;
+  /* 20px */
+  --text-2xl: 1.5rem;
+  /* 24px */
+  --text-3xl: 1.875rem;
+  /* 30px */
+  --text-4xl: 2.25rem;
+  /* 36px */
+  --text-5xl: 3rem;
+  /* 48px */
+
+  /* Layout */
+  --max-w-content: 72rem;
+  /* ~1152px — content column */
+
+  /* Neutral surfaces (shared dark background foundation) */
   --color-charcoal: #1e1e24;
   --color-slate: #2a2a32;
-  --color-safety: #ff9f1c;
-  --color-safety-hover: #e88f10;
+
+  /* Utility */
   --color-whatsapp: #25d366;
+
+  /* Semantic brand pair — MUST be overridden in each site's CSS entry point */
+  --color-brand: unset;
+  --color-brand-hover: unset;
 }

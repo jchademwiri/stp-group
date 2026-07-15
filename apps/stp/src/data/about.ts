@@ -2,9 +2,9 @@ export const ABOUT = {
   story: {
     headline: "Built on trust, driven by reliability",
     paragraphs: [
-      "Sithembe Plant Hire was founded to solve a simple problem: construction sites and property managers in Gauteng needed reliable equipment and skilled operators - without the complexity of dealing with multiple suppliers.",
-      "We started with a single dropside truck and a commitment to showing up on time, every time. Today, we operate a diverse fleet of heavy machinery, commercial vehicles, and grounds maintenance equipment, serving contractors, municipalities, estates, and industrial facilities across Pretoria and greater Gauteng.",
-      "Our name means 'we are here' in isiZulu - and that's exactly what our clients count on.",
+      "Sithembe Transportation and Projects was founded to deliver dependable site services for municipalities, contractors, and property managers across Gauteng — plant hire, vegetation management, and sanitation under one accountable team.",
+      "From municipal grass-cutting contracts to waste management and plant hire for infrastructure projects, we show up on time with accredited operators, compliant equipment, and full insurance coverage.",
+      "Our name means 'we are here' in isiZulu — and that's exactly what our clients count on.",
     ],
   },
   values: [

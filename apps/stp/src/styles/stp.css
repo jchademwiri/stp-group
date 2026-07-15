@@ -1,0 +1,7 @@
+@import "@repo/tailwind/styles.css";
+
+@theme {
+    --color-brand: #ff9f1c;
+    /* safety orange */
+    --color-brand-hover: #e88f10;
+}

@@ -1,13 +1,13 @@
 export const SITE = {
   name: "Sithembe",
   legalName: "Sithembe Transportation and Projects (Pty) Ltd",
-  tradingName: "Sithembe Plant Hire",
+  tradingName: "Sithembe Transportation and Projects",
   socialLinks: {
     facebook: "https://www.facebook.com/people/Sithembe-Plant-Hire/61574452205967/",
   },
   url: "https://sithembe.co.za",
   description:
-    "Construction and plant hire - dropside trucks, vacuum tankers, bobcats, tractors, mowers and tools with qualified operators in Pretoria and Gauteng.",
+    "CIDB-registered contractor delivering plant hire, vegetation management, and sanitation services for municipalities and industry across Pretoria and Gauteng.",
   phone: "079 758 1297",
   phoneTel: "+27797581297",
   whatsapp: "27797581297",
@@ -35,14 +35,10 @@ export function formatBusinessHours(): string {
 }
 
 export const WHATSAPP_DEFAULT_MESSAGE =
-  "Hi Sithembe Team, I am looking to inquire about your plant hire options. Please assist with availability and rates.";
+  "Hi Sithembe Team, I'd like to enquire about your services. Please assist.";
 
 export function whatsappUrl(message: string): string {
   return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
-}
-
-export function equipmentWhatsappMessage(title: string, slug: string): string {
-  return `Hi Sithembe, I'd like to check availability for the ${title} (ref: ${slug}).`;
 }
 
 export function absoluteUrl(path: string, site?: URL | string): string {

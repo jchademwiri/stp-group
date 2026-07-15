@@ -1,4 +1,5 @@
 ---
+import "@/styles/lme.css";
 import BaseLayout from "@repo/tailwind/layouts/BaseLayout.astro";
 import WhatsAppButton from "@/components/WhatsAppButton.astro";
 import StickyMobileBar from "@/components/StickyMobileBar.astro";
@@ -14,15 +15,28 @@ interface Props {
 
 const { title, description = "", whatsappMessage, ogImage } = Astro.props;
 const hours = formatBusinessHours();
-const currentPath = Astro.url.pathname;
-const isHome = currentPath === "/" || currentPath === "";
----}
+
+const p = Astro.url.pathname;
+
+const navLinks = [
+  { href: "/",         label: "Home",     match: (path: string) => path === "/" || path === "" },
+  { href: "/about",    label: "About",    match: (path: string) => path.startsWith("/about") },
+  { href: "/services", label: "Services", match: (path: string) => path.startsWith("/services") },
+  { href: "/projects", label: "Projects", match: (path: string) => path.startsWith("/projects") },
+  { href: "#contact",  label: "Contact",  match: () => false },
+];
+---
 
 <BaseLayout {title} {description} {ogImage} canonical={Astro.url.href} bodyClass="bg-charcoal text-neutral-100">
   <LocalBusinessSchema slot="head" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="alternate icon" href="/lme-logo.png" type="image/png" sizes="68x68" />
   <slot name="head" slot="head" />
+
+  {/* Skip to content */}
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-brand focus:px-4 focus:py-2 focus:text-white focus:outline-none">
+    Skip to content
+  </a>
 
   <header class="sticky top-0 z-30 border-b border-white/10 bg-charcoal/95 backdrop-blur">
     <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
@@ -32,17 +46,26 @@ const isHome = currentPath === "/" || currentPath === "";
 
       {/* Desktop nav */}
       <nav class="hidden items-center gap-1 text-sm font-medium md:flex" aria-label="Main">
-        <a href="/" data-nav="home" class:list={["rounded-lg px-3 py-2 transition-colors hover:text-safety", isHome ? "font-semibold text-safety" : "text-neutral-400"]}>Home</a>
-        <a href="#services" data-nav="services" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-safety">Services</a>
-        <a href="#fleet" data-nav="fleet" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-safety">Fleet</a>
-        <a href="#projects" data-nav="projects" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-safety">Projects</a>
-        <a href="#contact" data-nav="contact" class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-safety">Contact</a>
+        {navLinks.map((link) => {
+          const isActive = link.match(p);
+          return (
+            <a
+              href={link.href}
+              class:list={[
+                "rounded-lg px-3 py-2 transition-colors hover:text-brand",
+                isActive ? "font-semibold text-brand" : "text-neutral-400",
+              ]}
+            >
+              {link.label}
+            </a>
+          );
+        })}
       </nav>
 
       {/* Desktop CTAs */}
       <div class="hidden items-center gap-2 md:flex">
-        <a href={`tel:${LME.phoneTel}`} class="rounded-lg bg-safety px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-safety-hover">
-          Call {LME.phone}
+        <a href={`tel:${LME.phoneTel}`} class="rounded-lg bg-accent px-3 py-1.5 text-sm font-semibold text-charcoal transition-colors hover:bg-accent-hover">
+          Call now
         </a>
       </div>
 
@@ -60,14 +83,25 @@ const isHome = currentPath === "/" || currentPath === "";
 
     <div id="mobile-nav" class="absolute left-0 right-0 top-full z-40 md:hidden">
       <nav class="border-t border-white/10 bg-charcoal px-4 pb-4 pt-2" aria-label="Mobile navigation">
-        <a href="/" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-safety">Home</a>
-        <a href="#services" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-safety">Services</a>
-        <a href="#fleet" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-safety">Fleet</a>
-        <a href="#projects" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-safety">Projects</a>
-        <a href="#contact" class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-safety">Contact</a>
+        {navLinks.map((link) => {
+          const isActive = link.match(p);
+          return (
+            <a
+              href={link.href}
+              class:list={[
+                "block rounded-lg px-3 py-2.5 text-sm transition-colors hover:text-brand",
+                isActive ? "font-semibold text-brand" : "font-medium text-neutral-400",
+              ]}
+            >
+              {link.label}
+            </a>
+          );
+        })}
       </nav>
       <div class="border-t border-white/10 bg-charcoal px-4 pb-4 pt-3">
-        <a href={`tel:${LME.phoneTel}`} class="block rounded-lg bg-safety px-3 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-safety-hover">Call {LME.phone}</a>
+        <a href={`tel:${LME.phoneTel}`} class="block rounded-lg bg-accent px-3 py-2.5 text-center text-sm font-semibold text-charcoal transition-colors hover:bg-accent-hover">
+          Call {LME.phone}
+        </a>
       </div>
     </div>
   </header>
@@ -90,13 +124,14 @@ const isHome = currentPath === "/" || currentPath === "";
 
   <script>
     // Mobile nav toggle
-    const toggle = document.getElementById("nav-toggle");
+    const toggle = document.getElementById("nav-toggle") as HTMLButtonElement | null;
     const panel = document.getElementById("mobile-nav");
     const iconOpen = document.getElementById("nav-icon-open");
     const iconClose = document.getElementById("nav-icon-close");
+
     function closeMenu() {
       panel?.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
+      toggle?.setAttribute("aria-expanded", "false");
       iconOpen?.classList.remove("hidden");
       iconClose?.classList.add("hidden");
     }
@@ -109,56 +144,14 @@ const isHome = currentPath === "/" || currentPath === "";
     });
 
     panel?.addEventListener("click", (e) => {
-      const link = e.target.closest("a");
+      const link = (e.target as Element)?.closest("a");
       if (link && panel.classList.contains("open")) {
         closeMenu();
       }
     });
-
-    // Active section tracking — highlight section with most visible area in viewport
-    const navLinks = document.querySelectorAll<HTMLAnchorElement>("[data-nav]");
-    const sections = Array.from(navLinks)
-      .map((link) => {
-        const id = link.dataset.nav;
-        if (!id || id === "home") return null;
-        return document.getElementById(id) ?? null;
-      })
-      .filter(Boolean);
-
-    function updateActive() {
-      if (navLinks.length === 0) return;
-      const viewportHeight = window.innerHeight;
-      let currentId = "home";
-      let maxVisible = 0;
-
-      for (const section of sections) {
-        if (!section) continue;
-        const rect = section.getBoundingClientRect();
-        // What portion of the section is visible inside the viewport (0-1)
-        const visibleTop = Math.max(0, rect.top);
-        const visibleBottom = Math.min(viewportHeight, rect.bottom);
-        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-        const visibleRatio = rect.height > 0 ? visibleHeight / rect.height : 0;
-        if (visibleRatio > maxVisible) {
-          maxVisible = visibleRatio;
-          currentId = section.id;
-        }
-      }
-
-      for (const link of navLinks) {
-        const isActive = link.dataset.nav === currentId;
-        link.classList.toggle("text-safety", isActive);
-        link.classList.toggle("font-semibold", isActive);
-        link.classList.toggle("text-neutral-400", !isActive);
-        link.classList.toggle("font-medium", !isActive);
-      }
-    }
-
-    window.addEventListener("scroll", updateActive, { passive: true });
-    updateActive();
   </script>
 
-  <main>
+  <main id="main-content">
     <slot />
   </main>
 
@@ -174,10 +167,10 @@ const isHome = currentPath === "/" || currentPath === "";
           <p class="mt-1">{hours}</p>
           <p class="mt-4 space-y-1">
             <span class="block">
-              <a href={`tel:${LME.phoneTel}`} class="text-safety hover:underline">{LME.phone}</a>
+              <a href={`tel:${LME.phoneTel}`} class="text-brand hover:underline">{LME.phone}</a>
             </span>
             <span class="block">
-              <a href={`mailto:${LME.email}`} class="text-safety hover:underline">{LME.email}</a>
+              <a href={`mailto:${LME.email}`} class="text-brand hover:underline">{LME.email}</a>
             </span>
           </p>
           <p class="mt-4 text-xs text-neutral-500">
@@ -189,7 +182,7 @@ const isHome = currentPath === "/" || currentPath === "";
           <p class="mt-2">{LME.address.street}</p>
           <p>{LME.address.suburb}</p>
           <p>{LME.address.city}, {LME.address.province}</p>
-          <a href={LME.mapsUrl} target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-xs text-safety hover:underline">
+          <a href={LME.mapsUrl} target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-xs text-brand hover:underline">
             Open in Google Maps →
           </a>
         </div>

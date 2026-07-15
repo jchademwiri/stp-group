@@ -1,19 +1,17 @@
 ---
+import { LME } from "../data/site";
+
 const badges = [
-  "CIDB 6CE",
-  "CIDB 6EP",
-  "CIDB 6SH",
-  "CIDB 5GB",
-  "CIDB 4SK",
-  "COIDA",
-  "Public Liability",
+  ...LME.cidb.grades.map((g) => `CIDB ${g.code}`),
+  "SARS Compliant",
+  `Est. ${LME.foundingYear}`,
 ] as const;
 ---
 
 <div class="flex flex-wrap gap-2">
   {
     badges.map((badge) => (
-      <span class="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-neutral-200">
+      <span class="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white">
         <svg
           class="h-3.5 w-3.5 shrink-0 text-brand"
           viewBox="0 0 24 24"

@@ -3,8 +3,7 @@ import StpLayout from '@/layouts/StpLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import Accordion from '@/components/Accordion.astro';
 import ProjectShowcase from '@/components/ProjectShowcase.astro';
-import DesludgeQuoteForm from '@/components/DesludgeQuoteForm.astro';
-import { SITE, breadcrumbSchema } from '@/data/site';
+import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE, breadcrumbSchema } from '@/data/site';
 import { getProjectsByCategory } from '@/data/projects';
 
 const desludgeProjects = getProjectsByCategory('desludging');
@@ -48,12 +47,12 @@ const process = [
   {
     step: '1',
     title: 'Enquire',
-    text: 'Submit the form or WhatsApp us with your site details and requirements.',
+    text: 'Call or WhatsApp us with your site details and requirements.',
   },
   {
     step: '2',
-    title: 'Quote & schedule',
-    text: 'We assess your needs, provide a quote, and book a convenient time slot.',
+    title: 'Assess & schedule',
+    text: 'We assess your needs, confirm scope, and book a convenient time slot.',
   },
   {
     step: '3',
@@ -200,66 +199,9 @@ const faqs = [
         industrial-grade equipment.
       </p>
 
-      <div
-        class='mt-8 flex flex-wrap items-center gap-4 rounded-xl border border-amber-600/30 bg-amber-500/10 px-5 py-4'
-      >
-        <div class='flex items-center gap-3'>
-          <span
-            class='flex h-9 w-9 items-center justify-center rounded-full bg-amber-500/20'
-            aria-hidden='true'
-          >
-            <svg
-              class='h-5 w-5 text-amber-400'
-              viewBox='0 0 24 24'
-              fill='none'
-              stroke='currentColor'
-              stroke-width='2'
-              stroke-linecap='round'
-              stroke-linejoin='round'
-            >
-              <path
-                d='M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z'
-              ></path>
-              <path d='M12 9v4M12 17h.01'></path>
-            </svg>
-          </span>
-          <div>
-            <p class='text-sm font-semibold text-amber-300'>
-              Emergency callout?
-            </p>
-            <p class='text-xs text-amber-400/80'>
-              We respond within 2 hours during business hours
-            </p>
-          </div>
-        </div>
-        <a
-          href={`tel:${SITE.phoneTel}`}
-          class='ml-auto flex items-center gap-2 rounded-lg bg-amber-500 px-4 py-2.5 font-bold text-charcoal transition-colors hover:bg-amber-400'
-        >
-          <svg
-            class='h-4 w-4'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2.5'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            aria-hidden='true'
-          >
-            <path
-              d='M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z'
-            ></path>
-          </svg>
-          Call {SITE.phone}
-        </a>
-      </div>
 
-      <a
-        href='#desludge-quote'
-        class='mt-6 inline-block rounded-lg bg-safety px-6 py-3 font-semibold text-charcoal hover:bg-safety-hover'
-      >
-        Get a Desludging Quote
-      </a>
+
+
     </div>
   </section>
 
@@ -277,36 +219,13 @@ const faqs = [
     </div>
   </section>
 
-  <section class='mx-auto max-w-6xl px-4 py-12 md:px-6'>
-    <h2 class='text-2xl font-bold text-white'>How it works</h2>
-    <div class='mt-8 grid gap-6 sm:grid-cols-3'>
-      {
-        process.map((p) => (
-          <div class='flex gap-4'>
-            <span class='flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-safety text-sm font-bold text-charcoal'>
-              {p.step}
-            </span>
-            <div>
-              <h3 class='font-semibold text-white'>{p.title}</h3>
-              <p class='mt-1 text-sm text-neutral-400'>{p.text}</p>
-            </div>
-          </div>
-        ))
-      }
-    </div>
-  </section>
+
 
   <section class='mx-auto max-w-6xl px-4 py-8 md:px-6'>
     <h2 class='text-xl font-semibold text-white'>Equipment deployed</h2>
     <p class='mt-2 text-neutral-400'>
-      Our 10,000-litre vacuum tanker (honey sucker) is available from our{' '}
-      <a
-        href='/plant-hire/septic-tank-truck'
-        class='text-safety hover:underline'
-      >
-        plant hire fleet
-      </a>{' '}
-      - or book our full-service desludging with accredited operators included.
+      Our 10,000-litre vacuum tanker (honey sucker) and support fleet, operated by accredited
+      crews for municipal and commercial desludging contracts.
     </p>
   </section>
 
@@ -330,14 +249,6 @@ const faqs = [
       }
     </div>
   </section>
-
-  <section
-    id='desludge-quote'
-    class='mx-auto max-w-6xl scroll-mt-32 px-4 py-12 md:px-6'
-  >
-    <DesludgeQuoteForm />
-  </section>
-
   <section class='mx-auto max-w-6xl px-4 pb-16 md:px-6'>
     <h2 class='text-lg font-semibold text-white'>Frequently asked questions</h2>
     <div class='mt-4 flex flex-col gap-3'>

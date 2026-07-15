@@ -1,4 +1,5 @@
 ---
+import "@/styles/stp.css";
 import BaseLayout from "@repo/tailwind/layouts/BaseLayout.astro";
 import WhatsAppButton from "@/components/WhatsAppButton.astro";
 import StickyMobileBar from "@/components/StickyMobileBar.astro";
@@ -16,20 +17,25 @@ const { title, description = "", whatsappMessage, ogImage } = Astro.props;
 const currentPath = Astro.url.pathname;
 const hours = formatBusinessHours();
 
-// Determine the correct quote form anchor for the sticky mobile bar
-const quoteHref =
-  currentPath.startsWith("/services/grass-cutting")
-    ? "#grass-quote"
-    : currentPath.startsWith("/services/desludging")
-      ? "#desludge-quote"
-      : currentPath.startsWith("/plant-hire")
-        ? "#quote-form"
-        : undefined;
+function isActive(href: string): boolean {
+  if (href === "/") return currentPath === "/" || currentPath === "";
+  if (href === "#contact") return false;
+  return currentPath.startsWith(href);
+}
+
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Projects", href: "/projects" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "#contact" },
+];
 ---
 
 <BaseLayout {title} {description} {ogImage} canonical={Astro.url.href} bodyClass="bg-charcoal text-neutral-100">
   <LocalBusinessSchema slot="head" />
   <slot name="head" slot="head" />
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-brand focus:px-4 focus:py-2 focus:text-white focus:outline-none">Skip to content</a>
   <header class="sticky top-0 z-30 border-b border-white/10 bg-charcoal/95 backdrop-blur">
     <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
       <a href="/" class="shrink-0">
@@ -38,48 +44,31 @@ const quoteHref =
 
       {/* Desktop nav */}
       <nav class="hidden items-center gap-1 text-sm font-medium md:flex" aria-label="Main">
-        <a
-          href="/plant-hire"
-          class:list={["rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-safety",
-            currentPath.startsWith("/plant-hire") ? "font-semibold text-safety" : "text-neutral-300",
-          ]}
-        >Plant Hire</a>
-        <a
-          href="/services"
-          class:list={["rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-safety",
-            currentPath === "/services" || currentPath === "/services/" ? "font-semibold text-safety" : "text-neutral-300",
-          ]}
-        >Services</a>
-        <a
-          href="/services/grass-cutting"
-          class:list={["rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-safety",
-            currentPath.startsWith("/services/grass-cutting") ? "font-semibold text-safety" : "text-neutral-300",
-          ]}
-        >Grass Cutting</a>
-        <a
-          href="/services/desludging"
-          class:list={["rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-safety",
-            currentPath.startsWith("/services/desludging") ? "font-semibold text-safety" : "text-neutral-300",
-          ]}
-        >Desludging</a>
-        <a
-          href="/about"
-          class:list={["rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-safety",
-            currentPath.startsWith("/about") ? "font-semibold text-safety" : "text-neutral-300",
-          ]}
-        >About</a>
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                "rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-brand",
+                isActive(link.href) ? "font-semibold text-brand" : "text-neutral-300",
+              ]}
+            >
+              {link.label}
+            </a>
+          ))
+        }
       </nav>
 
       {/* Desktop CTAs */}
       <div class="hidden items-center gap-2 md:flex">
         <span class="h-5 w-px bg-white/10" aria-hidden="true"></span>
         <a
-          href={quoteHref ?? "/services"}
-          class="rounded-lg border border-safety px-3 py-1.5 text-sm font-semibold text-safety transition-colors hover:bg-safety hover:text-charcoal"
-        >Get a quote</a>
+          href="#contact"
+          class="rounded-lg border border-brand px-3 py-1.5 text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-charcoal"
+        >Contact us</a>
         <a
           href={`tel:${SITE.phoneTel}`}
-          class="rounded-lg bg-safety px-3 py-1.5 font-semibold text-charcoal hover:bg-safety-hover"
+          class="rounded-lg bg-brand px-3 py-1.5 font-semibold text-charcoal hover:bg-brand-hover"
         >Call now</a>
       </div>
 
@@ -101,25 +90,23 @@ const quoteHref =
 
     <div id="mobile-nav" class="absolute left-0 right-0 top-full z-40 md:hidden">
       <nav class="border-t border-white/10 bg-charcoal px-4 pb-4 pt-2" aria-label="Mobile navigation">
-        <a href="/plant-hire" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
-          currentPath.startsWith("/plant-hire") ? "text-safety" : "text-neutral-300",
-        ]}>Plant Hire</a>
-        <a href="/services" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
-          currentPath === "/services" || currentPath === "/services/" ? "text-safety" : "text-neutral-300",
-        ]}>Services</a>
-        <a href="/services/grass-cutting" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
-          currentPath.startsWith("/services/grass-cutting") ? "text-safety" : "text-neutral-300",
-        ]}>Grass Cutting</a>
-        <a href="/services/desludging" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
-          currentPath.startsWith("/services/desludging") ? "text-safety" : "text-neutral-300",
-        ]}>Desludging</a>
-        <a href="/about" class:list={["block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
-          currentPath.startsWith("/about") ? "text-safety" : "text-neutral-300",
-        ]}>About</a>
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                "block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
+                isActive(link.href) ? "text-brand" : "text-neutral-300",
+              ]}
+            >
+              {link.label}
+            </a>
+          ))
+        }
       </nav>
       <div class="border-t border-white/10 bg-charcoal px-4 pb-4 pt-3">
-        <a href={quoteHref ?? "/services"} class="block rounded-lg border border-safety px-3 py-2.5 text-center text-sm font-semibold text-safety transition-colors hover:bg-safety hover:text-charcoal">Get a quote</a>
-        <a href={`tel:${SITE.phoneTel}`} class="mt-2 block rounded-lg bg-safety px-3 py-2.5 text-center text-sm font-semibold text-charcoal hover:bg-safety-hover">Call {SITE.phone}</a>
+        <a href="#contact" class="block rounded-lg border border-brand px-3 py-2.5 text-center text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-charcoal">Contact us</a>
+        <a href={`tel:${SITE.phoneTel}`} class="mt-2 block rounded-lg bg-brand px-3 py-2.5 text-center text-sm font-semibold text-charcoal hover:bg-brand-hover">Call {SITE.phone}</a>
       </div>
     </div>
   </header>
@@ -147,7 +134,7 @@ const quoteHref =
     const iconClose = document.getElementById("nav-icon-close");
     function closeMenu() {
       panel?.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
+      toggle?.setAttribute("aria-expanded", "false");
       iconOpen?.classList.remove("hidden");
       iconClose?.classList.add("hidden");
     }
@@ -159,7 +146,6 @@ const quoteHref =
       iconClose?.classList.toggle("hidden", !isOpen);
     });
 
-    // Close menu when any link inside mobile nav is clicked
     panel?.addEventListener("click", (e) => {
       const link = e.target.closest("a");
       if (link && panel.classList.contains("open")) {
@@ -168,27 +154,29 @@ const quoteHref =
     });
   </script>
 
-  <main>
+  <main id="main-content">
     <slot />
   </main>
 
-  <footer class="border-t border-white/10 bg-charcoal py-10 pb-24 md:pb-10">
+  <footer id="contact" class="scroll-mt-28 border-t border-white/10 bg-charcoal py-10 pb-24 md:pb-10">
     <div class="mx-auto max-w-6xl px-4 md:px-6">
-      <div class="grid gap-8 md:grid-cols-2">
+      <p class="text-sm font-semibold tracking-wider uppercase text-brand">Get in touch</p>
+      <h2 class="mt-2 text-2xl font-bold text-white">Contact us</h2>
+      <div class="mt-8 grid gap-8 md:grid-cols-2">
         <div class="text-sm text-neutral-400">
           <p class="font-semibold text-white">{SITE.tradingName ?? SITE.legalName}</p>
           <p class="mt-2">Serving {SITE.region}</p>
           <p class="mt-1">{hours}</p>
           <p class="mt-4 space-y-1">
             <span class="block">
-              <a href={`tel:${SITE.phoneTel}`} class="text-safety hover:underline">{SITE.phone}</a>
+              <a href={`tel:${SITE.phoneTel}`} class="text-brand hover:underline">{SITE.phone}</a>
               <span class="ml-1.5 text-xs text-neutral-500">Mobile &amp; WhatsApp</span>
             </span>
             <span class="block text-sm text-neutral-400">
-              Office: <a href={`tel:${SITE.phoneOfficeTel}`} class="text-safety hover:underline">{SITE.phoneOffice}</a>
+              Office: <a href={`tel:${SITE.phoneOfficeTel}`} class="text-brand hover:underline">{SITE.phoneOffice}</a>
             </span>
             <span class="block">
-              <a href={`mailto:${SITE.email}`} class="text-safety hover:underline">{SITE.email}</a>
+              <a href={`mailto:${SITE.email}`} class="text-brand hover:underline">{SITE.email}</a>
             </span>
           </p>
           <p class="mt-4 text-xs text-neutral-500">
@@ -214,7 +202,7 @@ const quoteHref =
             href={SITE.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-2 inline-block text-xs text-safety hover:underline"
+            class="mt-2 inline-block text-xs text-brand hover:underline"
           >
             Open in Google Maps →
           </a>
@@ -224,5 +212,5 @@ const quoteHref =
   </footer>
 
   <WhatsAppButton message={whatsappMessage} />
-  <StickyMobileBar quoteHref={quoteHref} />
+  <StickyMobileBar />
 </BaseLayout>
