@@ -3,14 +3,12 @@ export const LME = {
   shortName: "LME",
   url: "https://livhuandmusa.co.za",
   description:
-    "CIDB-registered construction and civil engineering contractor (1CE, 1GB, 1EP) based in Centurion, Gauteng. Residential and commercial projects since 2014.",
+    "CIDB-registered construction and civil engineering contractor (CE, GB, EP) based in Centurion, Gauteng. Residential and commercial projects since 2014.",
   foundingYear: 2014,
-  founder: "Johannes Mduduzi Mahlangu",
   employees: "10+",
   tagline: "Reliable Construction & Civil Engineering - Since 2014",
   phone: "012 880 1893",
   phoneTel: "+27128801893",
-  whatsapp: "27128801893",
   email: "info@livhuandmusa.co.za",
   address: {
     street: "3138B Crane Street, Thatchfield Hills",
@@ -24,9 +22,9 @@ export const LME = {
   serviceArea: "Gauteng & beyond",
   cidb: {
     grades: [
-      { code: "1CE", name: "Civil Engineering" },
-      { code: "1GB", name: "General Building" },
-      { code: "1EP", name: "Electrical Engineering" },
+      { code: "CE", name: "Civil Engineering" },
+      { code: "GB", name: "General Building" },
+      { code: "EP", name: "Electrical Engineering" },
     ],
   },
   sarsStatus: "Compliant",
@@ -57,7 +55,7 @@ export const LME = {
     },
     {
       title: "CIDB Registered",
-      text: "Graded 1CE, 1GB, 1EP - fully compliant for public and private sector tenders.",
+      text: "Graded CE, GB, EP - fully compliant for public and private sector tenders.",
       icon: "shield",
     },
     {
@@ -74,17 +72,17 @@ export const LME = {
   // Services
   services: [
     {
-      title: "Civil Engineering (1CE)",
+      title: "Civil Engineering (CE)",
       description: "Design, construction, and maintenance of infrastructure including roads, earthworks, and structural projects.",
       icon: "roads",
     },
     {
-      title: "General Building (1GB)",
+      title: "General Building (GB)",
       description: "Residential and commercial construction - new builds, renovations, alterations, and maintenance.",
       icon: "building",
     },
     {
-      title: "Electrical Engineering (1EP)",
+      title: "Electrical Engineering (EP)",
       description: "Electrical installations, cabling, and infrastructure for municipal and private-sector projects.",
       icon: "bolt",
     },
@@ -117,30 +115,23 @@ export const LME = {
   ],
   // Equipment fleet highlights
   fleet: [
-    "4x 8-ton trucks",
-    "3x 1,000L water tankers",
-    "2x LDV bakkies",
-    "1x excavator",
-    "2x tipper trucks",
-    "1x TLB",
-    "1x tractor",
-    "2x lowbed trucks",
-    "4x stump grinding machines",
-    "3x graders",
-    "20x brush cutters",
-    "3x ride-on mowers",
-    "5x chainsaws",
-    "4x pole pruners",
-    "8x leaf blowers",
+    "8-ton trucks",
+    "1,000L water tankers",
+    "LDV bakkies",
+    "Excavator",
+    "Tipper trucks",
+    "TLB",
+    "Tractor",
+    "Lowbed trucks",
+    "Stump grinding machines",
+    "Graders",
+    "Brush cutters",
+    "Ride-on mowers",
+    "Chainsaws",
+    "Pole pruners",
+    "Leaf blowers",
   ],
 } as const;
-
-export const WHATSAPP_DEFAULT_MESSAGE =
-  "Hi Livhu and Musa Enterprise, I'd like to inquire about your construction and civil engineering services.";
-
-export function whatsappUrl(message: string): string {
-  return `https://wa.me/${LME.whatsapp}?text=${encodeURIComponent(message)}`;
-}
 
 export function formatBusinessHours(): string {
   return LME.businessHours.weekdays;

@@ -1,7 +1,7 @@
 ---
 import "@/styles/lme.css";
 import BaseLayout from "@repo/tailwind/layouts/BaseLayout.astro";
-import WhatsAppButton from "@/components/WhatsAppButton.astro";
+import FloatingCallButton from "@/components/FloatingCallButton.astro";
 import StickyMobileBar from "@/components/StickyMobileBar.astro";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema.astro";
 import { LME, formatBusinessHours } from "@/data/site";
@@ -9,11 +9,10 @@ import { LME, formatBusinessHours } from "@/data/site";
 interface Props {
   title: string;
   description?: string;
-  whatsappMessage?: string;
   ogImage?: string;
 }
 
-const { title, description = "", whatsappMessage, ogImage } = Astro.props;
+const { title, description = "", ogImage } = Astro.props;
 const hours = formatBusinessHours();
 
 const navLinks = [
@@ -190,18 +189,18 @@ const navLinks = [
         <div class="text-sm text-ink/60">
           <p class="font-semibold text-ink">Services</p>
           <ul class="mt-2 space-y-1">
-            <li>Civil Engineering (1CE)</li>
-            <li>General Building (1GB)</li>
-            <li>Electrical Engineering (1EP)</li>
+            <li>Civil Engineering (CE)</li>
+            <li>General Building (GB)</li>
+            <li>Electrical Engineering (EP)</li>
           </ul>
         </div>
       </div>
       <p class="mt-8 border-t border-ink/10 pt-6 font-sans text-[0.65rem] tracking-[0.25em] text-ink/30 uppercase">
-        Level 1 B-BBEE &middot; CIDB 1CE, 1GB, 1EP &middot; Centurion, South Africa &middot; Est. {LME.foundingYear}
+        Level 1 B-BBEE &middot; CIDB CE, GB, EP &middot; Centurion, South Africa &middot; Est. {LME.foundingYear}
       </p>
     </div>
   </footer>
 
-  <WhatsAppButton message={whatsappMessage} />
+  <FloatingCallButton />
   <StickyMobileBar />
 </BaseLayout>

@@ -11,7 +11,6 @@ const schema = {
   priceRange: LME.priceRange,
   description: LME.description,
   foundingDate: String(LME.foundingYear),
-  founder: { "@type": "Person", name: LME.founder },
   areaServed: {
     "@type": "AdministrativeArea",
     name: LME.serviceArea,
