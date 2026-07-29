@@ -3,12 +3,12 @@ import { SITE, WHATSAPP_DEFAULT_MESSAGE, whatsappUrl } from "@/data/site";
 ---
 
 <nav
-  class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 border-t border-white/10 bg-charcoal/95 backdrop-blur md:hidden"
+  class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 border-t border-ink/10 bg-bg/95 backdrop-blur md:hidden"
   aria-label="Quick contact"
 >
   <a
     href={`tel:${SITE.phoneTel}`}
-    class="flex flex-col items-center justify-center gap-1 py-3 text-xs font-medium text-white hover:bg-white/5"
+    class="flex flex-col items-center justify-center gap-1 py-3 text-xs font-medium text-ink hover:bg-ink/5"
   >
     <span aria-hidden="true">📞</span>
     Call
@@ -17,7 +17,7 @@ import { SITE, WHATSAPP_DEFAULT_MESSAGE, whatsappUrl } from "@/data/site";
     href={whatsappUrl(WHATSAPP_DEFAULT_MESSAGE)}
     target="_blank"
     rel="noopener noreferrer"
-    class="flex flex-col items-center justify-center gap-1 bg-whatsapp/20 py-3 text-xs font-medium text-white hover:bg-whatsapp/30"
+    class="flex flex-col items-center justify-center gap-1 bg-whatsapp/20 py-3 text-xs font-medium text-ink hover:bg-whatsapp/30"
   >
     <span aria-hidden="true">💬</span>
     WhatsApp

@@ -55,26 +55,22 @@ const orgSchema = {
   </Fragment>
 
   <!-- Hero -->
-  <section class="relative overflow-hidden bg-charcoal">
-    <svg
-      class="pointer-events-none absolute inset-0 h-full w-full opacity-[0.04]"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
+  <section class="relative overflow-hidden bg-bg">
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background: radial-gradient(ellipse 60% 55% at 50% 15%, color-mix(in srgb, var(--color-brand) 12%, transparent) 0%, transparent 70%);"
     >
-      <defs>
-        <pattern id="hero-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5" />
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#hero-grid)" />
-    </svg>
+    </div>
 
-    <div class="relative mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
-      <p class="mb-3 text-sm font-semibold tracking-wider uppercase text-brand">Sithembe Group</p>
-      <h1 class="text-4xl font-bold tracking-tight text-white md:text-5xl">
-        Municipal contracts. Reliable delivery.
+    <div class="relative mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-28">
+      <div class="mb-5 flex items-center gap-3">
+        <span class="h-px w-6 bg-brand/50"></span>
+        <span class="font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase">Sithembe Group</span>
+      </div>
+      <h1 class="font-display text-4xl font-medium tracking-tight text-ink md:text-6xl">
+        Municipal contracts.<br /> <em class="text-brand italic">Reliable</em> delivery.
       </h1>
-      <p class="mt-4 max-w-2xl text-base leading-relaxed text-neutral-400">
+      <p class="mt-6 max-w-2xl text-base leading-relaxed text-ink/60">
         CIDB-registered across grades 6CE, 6EP, 6SH, 5GB and 4SK — we deliver plant hire,
         vegetation management, and sanitation services for municipalities and industry across
         {SITE.region}. Accredited operators, full insurance, proven track record.
@@ -82,7 +78,7 @@ const orgSchema = {
       <div class="mt-8 flex flex-wrap gap-3">
         <a
           href={`tel:${SITE.phoneTel}`}
-          class="rounded-lg bg-brand px-6 py-3 font-semibold text-charcoal hover:bg-brand-hover"
+          class="rounded-lg bg-brand px-6 py-3 font-sans text-xs font-medium tracking-wide text-bg uppercase hover:bg-brand-hover"
         >
           Call {SITE.phone}
         </a>
@@ -90,31 +86,34 @@ const orgSchema = {
           href={whatsappUrl(WHATSAPP_DEFAULT_MESSAGE)}
           target="_blank"
           rel="noopener noreferrer"
-          class="rounded-lg border border-whatsapp/50 px-6 py-3 font-semibold text-whatsapp hover:bg-whatsapp/10"
+          class="rounded-lg border border-whatsapp/50 px-6 py-3 font-sans text-xs font-medium tracking-wide text-whatsapp uppercase hover:bg-whatsapp/10"
         >
           WhatsApp us
         </a>
       </div>
-      <div class="mt-8">
+      <div class="mt-10">
         <TrustBadges />
       </div>
     </div>
   </section>
 
   <!-- Our Services -->
-  <section id="services" class="scroll-mt-24 border-y border-white/10 bg-slate/40 py-16">
+  <section id="services" class="scroll-mt-24 border-y border-ink/10 bg-bg-elevated/40 py-16">
     <div class="mx-auto max-w-6xl px-4 md:px-6">
-      <p class="text-sm font-semibold tracking-wider uppercase text-brand">What we do</p>
-      <h2 class="mt-2 text-3xl font-bold text-white">Our services</h2>
-      <p class="mt-3 max-w-2xl text-neutral-400">
+      <div class="mb-3 flex items-center gap-3">
+        <span class="h-px w-6 bg-brand/50"></span>
+        <span class="font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase">What we do</span>
+      </div>
+      <h2 class="font-display text-3xl font-medium text-ink md:text-4xl">Our services</h2>
+      <p class="mt-3 max-w-2xl text-ink/60">
         Three service lines backed by CIDB registration, accredited operators, and a
         proven track record across municipal and private-sector contracts.
       </p>
       <div class="mt-10 grid gap-6 md:grid-cols-3">
         {services.map((service) => (
-          <article class="rounded-xl border border-white/10 bg-slate p-8">
-            <h3 class="text-xl font-bold text-white">{service.title}</h3>
-            <p class="mt-3 text-sm leading-relaxed text-neutral-400">{service.description}</p>
+          <article class="rounded-lg border border-ink/10 bg-bg p-8">
+            <h3 class="font-display text-xl font-medium text-ink">{service.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ink/60">{service.description}</p>
           </article>
         ))}
       </div>
@@ -122,17 +121,20 @@ const orgSchema = {
   </section>
 
   <!-- Track Record -->
-  <section id="projects" class="scroll-mt-24 border-y border-white/10 bg-slate/50 py-16">
+  <section id="projects" class="scroll-mt-24 border-b border-ink/10 bg-bg py-16">
     <div class="mx-auto max-w-6xl px-4 md:px-6">
-      <p class="text-sm font-semibold tracking-wider uppercase text-brand">Contract awards</p>
-      <h2 class="mt-2 text-3xl font-bold text-white">Our track record</h2>
-      <p class="mt-3 max-w-2xl text-neutral-400">
+      <div class="mb-3 flex items-center gap-3">
+        <span class="h-px w-6 bg-brand/50"></span>
+        <span class="font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase">Contract awards</span>
+      </div>
+      <h2 class="font-display text-3xl font-medium text-ink md:text-4xl">Our track record</h2>
+      <p class="mt-3 max-w-2xl text-ink/60">
         Active contracts with the City of Tshwane Metropolitan Municipality — we're trusted
         with municipal fleet, equipment, and community infrastructure services.
       </p>
       <div class="mt-10 grid gap-4 md:grid-cols-2">
         {stpContracts.map((contract) => (
-          <div class="flex items-start gap-3 rounded-lg border border-white/10 bg-charcoal px-5 py-4">
+          <div class="flex items-start gap-3 rounded-lg border border-ink/10 bg-bg-elevated/40 px-5 py-4">
             <svg
               class="mt-0.5 h-5 w-5 shrink-0 text-brand"
               viewBox="0 0 24 24"
@@ -145,8 +147,8 @@ const orgSchema = {
               <path d="M22 4L12 14.01l-3-3" />
             </svg>
             <div>
-              <span class="text-sm text-neutral-300">{contract.title}</span>
-              <p class="mt-1 text-xs text-neutral-500">
+              <span class="text-sm text-ink/80">{contract.title}</span>
+              <p class="mt-1 font-sans text-xs tracking-wide text-ink/40 uppercase">
                 Tender {contract.ref} &middot; {contract.department}
               </p>
             </div>
@@ -158,15 +160,18 @@ const orgSchema = {
 
   <!-- Why Sithembe -->
   <section id="why" class="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 md:px-6">
-    <p class="text-sm font-semibold tracking-wider uppercase text-brand">Why choose us</p>
-    <h2 class="mt-2 text-3xl font-bold text-white">Why Sithembe</h2>
-    <p class="mt-3 max-w-2xl text-neutral-400">
+    <div class="mb-3 flex items-center gap-3">
+      <span class="h-px w-6 bg-brand/50"></span>
+      <span class="font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase">Why choose us</span>
+    </div>
+    <h2 class="font-display text-3xl font-medium text-ink md:text-4xl">Why Sithembe</h2>
+    <p class="mt-3 max-w-2xl text-ink/60">
       Municipal trust, accredited operators, and a commitment to showing up — here&rsquo;s what sets us apart.
     </p>
     <div class="mt-10 grid gap-6 sm:grid-cols-2">
       {
         ABOUT.values.map((v) => (
-          <div class="flex gap-4 rounded-xl border border-white/10 bg-slate p-6">
+          <div class="flex gap-4 rounded-lg border border-ink/10 bg-bg-elevated/40 p-6">
             <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15">
               <svg
                 class="h-6 w-6 text-brand"
@@ -182,8 +187,8 @@ const orgSchema = {
               </svg>
             </span>
             <div>
-              <h3 class="font-semibold text-white">{v.title}</h3>
-              <p class="mt-1 text-sm text-neutral-400">{v.text}</p>
+              <h3 class="font-display text-lg font-medium text-ink">{v.title}</h3>
+              <p class="mt-1 text-sm text-ink/60">{v.text}</p>
             </div>
           </div>
         ))
@@ -192,11 +197,14 @@ const orgSchema = {
   </section>
 
   <!-- About -->
-  <section id="about" class="scroll-mt-24 border-t border-white/10 bg-slate/40 py-16">
+  <section id="about" class="scroll-mt-24 border-t border-ink/10 bg-bg-elevated/40 py-16">
     <div class="mx-auto max-w-6xl px-4 md:px-6">
-      <p class="text-sm font-semibold tracking-wider uppercase text-brand">About us</p>
-      <h2 class="mt-2 text-3xl font-bold text-white">{ABOUT.story.headline}</h2>
-      <p class="mt-4 max-w-2xl text-neutral-400">{ABOUT.story.blurb}</p>
+      <div class="mb-3 flex items-center gap-3">
+        <span class="h-px w-6 bg-brand/50"></span>
+        <span class="font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase">About us</span>
+      </div>
+      <h2 class="font-display text-3xl font-medium text-ink md:text-4xl">{ABOUT.story.headline}</h2>
+      <p class="mt-4 max-w-2xl text-ink/60">{ABOUT.story.blurb}</p>
     </div>
   </section>
 </StpLayout>

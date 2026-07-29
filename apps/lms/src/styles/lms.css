@@ -1,0 +1,13 @@
+@import "@repo/tailwind/styles.css";
+
+@theme {
+    /* Warm red-orange accent + warm near-black base — fuel/energy association for a gas retail holding co. */
+    --font-sans: "Space Mono", ui-monospace, monospace;
+    --color-brand: #e2472c;
+    --color-brand-hover: #c93c23;
+    --color-bg: #120b09;
+    /* warm near-black — page background */
+    --color-bg-elevated: #1c1310;
+    --color-ink: #f5ece7;
+    /* warm off-white — body text */
+}

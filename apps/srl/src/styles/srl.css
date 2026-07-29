@@ -1,0 +1,13 @@
+@import "@repo/tailwind/styles.css";
+
+@theme {
+    /* Teal-green accent + dark green-black base — matches SRL's actual logo colours */
+    --font-sans: "IBM Plex Mono", ui-monospace, monospace;
+    --color-brand: #46b5ac;
+    --color-brand-hover: #33a89e;
+    --color-bg: #041210;
+    /* dark green-black — page background */
+    --color-bg-elevated: #0a201b;
+    --color-ink: #eef5f3;
+    /* cool off-white — body text */
+}

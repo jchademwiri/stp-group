@@ -26,85 +26,53 @@ const icons = {
 
 <LmeLayout {title} {description}>
   <!-- Hero Section -->
-  <section
-    class='relative overflow-hidden bg-linear-to-br from-slate to-charcoal'
-  >
-    <!-- SVG texture overlay ≤6% opacity -->
+  <section class='relative overflow-hidden bg-bg'>
     <div
-      class='absolute inset-0 opacity-[0.04]'
-      aria-hidden='true'
+      class='pointer-events-none absolute inset-0'
+      style='background: radial-gradient(ellipse 60% 55% at 50% 15%, color-mix(in srgb, var(--color-brand) 10%, transparent) 0%, transparent 70%);'
     >
-      <svg
-        width='100%'
-        height='100%'
-        xmlns='http://www.w3.org/2000/svg'
-        aria-hidden='true'
-      >
-        <defs>
-          <pattern
-            id='hero-grid'
-            width='40'
-            height='40'
-            patternUnits='userSpaceOnUse'
-          >
-            <path
-              d='M 40 0 L 0 0 0 40'
-              fill='none'
-              stroke='white'
-              stroke-width='0.5'
-            />
-          </pattern>
-        </defs>
-        <rect width='100%' height='100%' fill='url(#hero-grid)' />
-      </svg>
     </div>
 
     <div class='relative mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-28'>
-      <!-- Section label -->
-      <p class='mb-3 text-sm font-semibold tracking-wider uppercase text-brand'>
-        Construction &amp; Civil Engineering
-      </p>
+      <div class='mb-5 flex items-center gap-3'>
+        <span class='h-px w-6 bg-brand/50'></span>
+        <span class='font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase'>Construction &amp; Civil Engineering</span>
+      </div>
 
-      <h1
-        class='max-w-3xl text-4xl font-bold tracking-tight text-white md:text-5xl'
-      >
-        Building Infrastructure.<br class='hidden md:block' /> Delivering Results.
+      <h1 class='max-w-3xl font-display text-4xl font-semibold tracking-tight text-ink md:text-6xl'>
+        Crafting <em class='text-brand italic'>Spaces</em>.<br class='hidden md:block' /> Building <em class='text-brand italic'>Futures</em>.
       </h1>
 
-      <p class='mt-4 max-w-2xl text-lg text-neutral-400'>
-        CIDB-registered contractor graded <strong class='font-semibold text-white'>1CE</strong>,
-        <strong class='font-semibold text-white'>1GB</strong>, and
-        <strong class='font-semibold text-white'>1EP</strong> — serving {LME.serviceArea} with
+      <p class='mt-6 max-w-2xl text-lg text-ink/55'>
+        CIDB-registered contractor graded <strong class='font-semibold text-ink'>1CE</strong>,
+        <strong class='font-semibold text-ink'>1GB</strong>, and
+        <strong class='font-semibold text-ink'>1EP</strong> — serving {LME.serviceArea} with
         proven expertise in civil engineering, general building, and electrical works since {LME.foundingYear}.
       </p>
 
       <div class='mt-8 flex flex-wrap gap-3'>
-        <!-- Primary CTA: amber accent -->
         <a
           href={`tel:${LME.phoneTel}`}
-          class='rounded-lg bg-accent px-6 py-3 font-semibold text-charcoal transition-colors hover:bg-accent-hover'
+          class='rounded-lg bg-brand px-6 py-3 font-sans text-xs font-medium tracking-wide text-ink uppercase transition-colors hover:bg-brand-hover'
         >
           Call now
         </a>
-        <!-- Secondary CTA: outlined -->
         <a
           href='#services'
-          class='rounded-lg border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/5'
+          class='rounded-lg border border-ink/20 px-6 py-3 font-sans text-xs font-medium tracking-wide text-ink uppercase transition-colors hover:bg-ink/5'
         >
           View our services
         </a>
-        <!-- WhatsApp CTA: whatsapp-coloured outline -->
         <a
           href={whatsappUrl(WHATSAPP_DEFAULT_MESSAGE)}
           target='_blank'
           rel='noopener noreferrer'
-          class='rounded-lg border border-whatsapp/50 px-6 py-3 font-semibold text-whatsapp transition-colors hover:bg-whatsapp/10'
+          class='rounded-lg border border-whatsapp/50 px-6 py-3 font-sans text-xs font-medium tracking-wide text-whatsapp uppercase transition-colors hover:bg-whatsapp/10'
         >
           WhatsApp us
         </a>
       </div>
 
-      <!-- Trust badges -->
       <div class='mt-10'>
         <LmeTrustBadges />
       </div>
@@ -116,19 +84,20 @@ const icons = {
     id='services'
     class='mx-auto max-w-6xl scroll-mt-28 px-4 pt-24 pb-20 md:px-6'
   >
-    <p class='text-sm font-semibold tracking-wider text-brand uppercase'>
-      What we do
-    </p>
-    <h2 class='mt-2 text-3xl font-bold text-white'>Our Services</h2>
-    <p class='mt-3 max-w-2xl text-neutral-400'>
+    <div class='mb-3 flex items-center gap-3'>
+      <span class='h-px w-6 bg-brand/50'></span>
+      <span class='font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase'>What we do</span>
+    </div>
+    <h2 class='font-display text-3xl font-semibold text-ink md:text-4xl'>Our Services</h2>
+    <p class='mt-3 max-w-2xl text-ink/55'>
       From infrastructure to electrical installations - we deliver quality
       construction services across {LME.region}.
     </p>
     <div class='mt-10 grid gap-6 md:grid-cols-3'>
       {
         LME.services.map((s) => (
-          <article class='group rounded-xl border border-white/10 bg-slate p-8 transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg hover:shadow-black/30'>
-            <span class='flex h-12 w-12 items-center justify-center rounded-lg bg-brand/15 transition-colors group-hover:bg-brand/25'>
+          <article class='rounded-lg border border-ink/10 bg-bg-elevated p-8'>
+            <span class='flex h-12 w-12 items-center justify-center rounded-lg bg-brand/15'>
               <svg
                 class='h-6 w-6 text-brand'
                 viewBox='0 0 24 24'
@@ -144,8 +113,8 @@ const icons = {
                 />
               </svg>
             </span>
-            <h3 class='mt-5 text-xl font-bold text-white'>{s.title}</h3>
-            <p class='mt-3 text-sm leading-relaxed text-neutral-400'>
+            <h3 class='mt-5 font-display text-xl font-semibold text-ink'>{s.title}</h3>
+            <p class='mt-3 text-sm leading-relaxed text-ink/55'>
               {s.description}
             </p>
           </article>
@@ -155,13 +124,14 @@ const icons = {
   </section>
 
   <!-- Equipment Fleet Section -->
-  <section id='fleet' class='border-y border-white/10 bg-slate/50'>
+  <section id='fleet' class='border-y border-ink/10 bg-bg-elevated/60'>
     <div    class='mx-auto max-w-6xl scroll-mt-28 px-4 pt-24 pb-20 md:px-6'>
-      <p class='text-sm font-semibold tracking-wider text-brand uppercase'>
-        Our capability
-      </p>
-      <h2 class='mt-2 text-3xl font-bold text-white'>Fleet &amp; Equipment</h2>
-      <p class='mt-3 max-w-2xl text-neutral-400'>
+      <div class='mb-3 flex items-center gap-3'>
+        <span class='h-px w-6 bg-brand/50'></span>
+        <span class='font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase'>Our capability</span>
+      </div>
+      <h2 class='font-display text-3xl font-semibold text-ink md:text-4xl'>Fleet &amp; Equipment</h2>
+      <p class='mt-3 max-w-2xl text-ink/55'>
         Over {LME.fleet.length} equipment items - from heavy machinery to handheld
         tools - ready for deployment.
       </p>
@@ -170,7 +140,7 @@ const icons = {
       >
         {
           LME.fleet.map((item) => (
-            <div class='flex items-center gap-2 rounded-lg border border-white/10 bg-charcoal px-4 py-3 text-sm text-neutral-300'>
+            <div class='flex items-center gap-2 rounded-lg border border-ink/10 bg-bg px-4 py-3 text-sm text-ink/70'>
               <svg
                 class='h-4 w-4 shrink-0 text-brand'
                 viewBox='0 0 24 24'
@@ -191,20 +161,21 @@ const icons = {
 
   <!-- Why LME Section -->
   <section class='mx-auto max-w-6xl px-4 pt-24 pb-20 md:px-6'>
-    <p class='text-sm font-semibold tracking-wider text-brand uppercase'>
-      Why choose us
-    </p>
-    <h2 class='mt-2 text-3xl font-bold text-white'>
+    <div class='mb-3 flex items-center gap-3'>
+      <span class='h-px w-6 bg-brand/50'></span>
+      <span class='font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase'>Why choose us</span>
+    </div>
+    <h2 class='font-display text-3xl font-semibold text-ink md:text-4xl'>
       Why Livhu and Musa Enterprise?
     </h2>
-    <p class='mt-3 max-w-2xl text-neutral-400'>
+    <p class='mt-3 max-w-2xl text-ink/55'>
       A decade of experience, municipal trust, and a commitment to quality -
       here's what sets us apart.
     </p>
     <div class='mt-10 grid gap-6 sm:grid-cols-2'>
       {
         LME.values.map((v) => (
-          <div class='flex gap-4 rounded-xl border border-white/10 bg-slate p-6'>
+          <div class='flex gap-4 rounded-lg border border-ink/10 bg-bg-elevated p-6'>
             <span class='flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15'>
               <svg
                 class='h-6 w-6 text-brand'
@@ -222,8 +193,8 @@ const icons = {
               </svg>
             </span>
             <div>
-              <h3 class='font-semibold text-white'>{v.title}</h3>
-              <p class='mt-1 text-sm text-neutral-400'>{v.text}</p>
+              <h3 class='font-display text-lg font-semibold text-ink'>{v.title}</h3>
+              <p class='mt-1 text-sm text-ink/55'>{v.text}</p>
             </div>
           </div>
         ))
@@ -232,22 +203,23 @@ const icons = {
   </section>
 
   <!-- Active Projects / Credibility Section -->
-  <section id='projects' class='border-y border-white/10 bg-slate/50'>
+  <section id='projects' class='border-y border-ink/10 bg-bg-elevated/60'>
     <div    class='mx-auto max-w-6xl scroll-mt-28 px-4 pt-24 pb-20 md:px-6'>
-      <p class='text-sm font-semibold tracking-wider text-brand uppercase'>
-        Contract awards
-      </p>
-      <h2 class='mt-2 text-3xl font-bold text-white'>
+      <div class='mb-3 flex items-center gap-3'>
+        <span class='h-px w-6 bg-brand/50'></span>
+        <span class='font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase'>Contract awards</span>
+      </div>
+      <h2 class='font-display text-3xl font-semibold text-ink md:text-4xl'>
         Current &amp; Past Projects
       </h2>
-      <p class='mt-3 max-w-2xl text-neutral-400'>
+      <p class='mt-3 max-w-2xl text-ink/55'>
         Active contracts with the City of Tshwane Metropolitan Municipality -
         our team is trusted with critical municipal infrastructure.
       </p>
       <div class='mt-10 grid gap-4 md:grid-cols-2'>
         {
           LME.contracts.map((contract) => (
-            <div class='flex items-start gap-3 rounded-lg border border-white/10 bg-charcoal px-5 py-4'>
+            <div class='flex items-start gap-3 rounded-lg border border-ink/10 bg-bg px-5 py-4'>
               <svg
                 class='mt-0.5 h-5 w-5 shrink-0 text-brand'
                 viewBox='0 0 24 24'
@@ -260,9 +232,9 @@ const icons = {
                 <path d='M22 4L12 14.01l-3-3' />
               </svg>
               <div>
-                <span class='text-sm text-neutral-300'>{contract.title}</span>
+                <span class='text-sm text-ink/80'>{contract.title}</span>
                 {contract.ref && (
-                  <p class='mt-1 text-xs text-neutral-500'>
+                  <p class='mt-1 font-sans text-xs tracking-wide text-ink/40 uppercase'>
                     Tender {contract.ref} &middot; {contract.department}
                   </p>
                 )}
@@ -275,12 +247,15 @@ const icons = {
   </section>
 
   <!-- About Section -->
-  <section id='about' class='scroll-mt-28 border-t border-white/10 bg-slate/40 py-16'>
+  <section id='about' class='scroll-mt-28 border-t border-ink/10 bg-bg-elevated/60 py-16'>
     <div class='mx-auto max-w-6xl px-4 md:px-6'>
-      <p class='text-sm font-semibold tracking-wider text-brand uppercase'>About us</p>
-      <h2 class='mt-2 text-3xl font-bold text-white'>About Livhu and Musa Enterprise</h2>
-      <p class='mt-4 max-w-2xl text-neutral-400'>
-        Founded in {LME.foundingYear} by <strong class='font-semibold text-white'>{LME.founder}</strong> in
+      <div class='mb-3 flex items-center gap-3'>
+        <span class='h-px w-6 bg-brand/50'></span>
+        <span class='font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase'>About us</span>
+      </div>
+      <h2 class='font-display text-3xl font-semibold text-ink md:text-4xl'>About Livhu and Musa Enterprise</h2>
+      <p class='mt-4 max-w-2xl text-ink/55'>
+        Founded in {LME.foundingYear} by <strong class='font-semibold text-ink'>{LME.founder}</strong> in
         Centurion, Gauteng, LME has grown from municipal grass-roots contracts into a
         {LME.employees}-employee, CIDB-registered contractor and City of Tshwane preferred
         supplier — SARS compliant, and built on excellence, partnership, sustainability, and
@@ -294,18 +269,19 @@ const icons = {
     id='contact'
     class='mx-auto max-w-6xl scroll-mt-28 px-4 pt-24 pb-20 md:px-6'
   >
-    <p class='text-sm font-semibold tracking-wider text-brand uppercase'>
-      Get in touch
-    </p>
-    <h2 class='mt-2 text-3xl font-bold text-white'>Contact Us</h2>
-    <p class='mt-3 max-w-2xl text-neutral-400'>
+    <div class='mb-3 flex items-center gap-3'>
+      <span class='h-px w-6 bg-brand/50'></span>
+      <span class='font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase'>Get in touch</span>
+    </div>
+    <h2 class='font-display text-3xl font-semibold text-ink md:text-4xl'>Contact Us</h2>
+    <p class='mt-3 max-w-2xl text-ink/55'>
       Call, WhatsApp, or email us for tenders, equipment hire, or project
       inquiries.
     </p>
     <div class='mt-10 grid gap-8 md:grid-cols-3'>
       <a
         href={`tel:${LME.phoneTel}`}
-        class='group flex items-start gap-4 rounded-xl border border-white/10 bg-slate p-6 transition-all hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg hover:shadow-black/30'
+        class='group flex items-start gap-4 rounded-lg border border-ink/10 bg-bg-elevated p-6 transition-colors hover:border-brand/30'
       >
         <span
           class='flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15 transition-colors group-hover:bg-brand/25'
@@ -324,14 +300,14 @@ const icons = {
           </svg>
         </span>
         <div>
-          <h3 class='font-semibold text-white group-hover:text-brand'>Call us</h3>
-          <p class='mt-1 text-sm text-neutral-400'>{LME.phone}</p>
-          <p class='text-xs text-neutral-500'>{LME.businessHours.weekdays}</p>
+          <h3 class='font-semibold text-ink group-hover:text-brand'>Call us</h3>
+          <p class='mt-1 text-sm text-ink/55'>{LME.phone}</p>
+          <p class='text-xs text-ink/35'>{LME.businessHours.weekdays}</p>
         </div>
       </a>
       <a
         href={`mailto:${LME.email}`}
-        class='group flex items-start gap-4 rounded-xl border border-white/10 bg-slate p-6 transition-all hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg hover:shadow-black/30'
+        class='group flex items-start gap-4 rounded-lg border border-ink/10 bg-bg-elevated p-6 transition-colors hover:border-brand/30'
       >
         <span
           class='flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15 transition-colors group-hover:bg-brand/25'
@@ -350,14 +326,14 @@ const icons = {
           </svg>
         </span>
         <div>
-          <h3 class='font-semibold text-white group-hover:text-brand'>
+          <h3 class='font-semibold text-ink group-hover:text-brand'>
             Email us
           </h3>
-          <p class='mt-1 text-sm text-neutral-400'>{LME.email}</p>
+          <p class='mt-1 text-sm text-ink/55'>{LME.email}</p>
         </div>
       </a>
       <div
-        class='flex items-start gap-4 rounded-xl border border-white/10 bg-slate p-6'
+        class='flex items-start gap-4 rounded-lg border border-ink/10 bg-bg-elevated p-6'
       >
         <span
           class='flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand/15'
@@ -377,8 +353,8 @@ const icons = {
           </svg>
         </span>
         <div>
-          <h3 class='font-semibold text-white'>Visit us</h3>
-          <p class='mt-1 text-sm leading-relaxed text-neutral-400'>
+          <h3 class='font-semibold text-ink'>Visit us</h3>
+          <p class='mt-1 text-sm leading-relaxed text-ink/55'>
             {LME.address.street}<br />{LME.address.suburb}<br />{
               LME.address.city
             }, {LME.address.province}

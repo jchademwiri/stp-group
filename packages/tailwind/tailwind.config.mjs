@@ -7,5 +7,7 @@ export default {
     "./src/**/*.{astro,html,js,ts}",
     "../../apps/stp/src/**/*.{astro,html,js,ts}",
     "../../apps/lme/src/**/*.{astro,html,js,ts}",
+    "../../apps/lms/src/**/*.{astro,html,js,ts}",
+    "../../apps/srl/src/**/*.{astro,html,js,ts}",
   ],
 };

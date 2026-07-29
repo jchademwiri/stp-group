@@ -1,10 +1,14 @@
 @import "@repo/tailwind/styles.css";
 
 @theme {
-    --color-brand: #0898c8;
-    /* teal-blue */
-    --color-brand-hover: #0a6a8a;
-    --color-accent: #f59e0b;
-    /* amber — primary CTAs */
-    --color-accent-hover: #d97706;
+    /* Blue accent + near-black base — LME's original "coming soon" palette */
+    --font-sans: "Jost", sans-serif;
+    --color-brand: #3b6ef8;
+    --color-brand-hover: #5585fa;
+    --color-bg: #060810;
+    /* near-black — page background */
+    --color-bg-elevated: #0d1120;
+    /* slightly lifted — section/card background */
+    --color-ink: #f0f2fc;
+    /* near-white — body text */
 }

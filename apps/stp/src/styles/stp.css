@@ -1,7 +1,14 @@
 @import "@repo/tailwind/styles.css";
 
 @theme {
-    --color-brand: #ff9f1c;
-    /* safety orange */
-    --color-brand-hover: #e88f10;
+    /* Gold accent + navy base — Sithembe's original "coming soon" palette */
+    --font-sans: "DM Mono", ui-monospace, monospace;
+    --color-brand: #f78d11;
+    --color-brand-hover: #e07d0a;
+    --color-bg: #041c36;
+    /* deep navy — page background */
+    --color-bg-elevated: #062d54;
+    /* navy — section/card background */
+    --color-ink: #e8eaf0;
+    /* cream — body text */
 }

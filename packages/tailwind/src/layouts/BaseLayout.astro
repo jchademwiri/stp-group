@@ -1,5 +1,9 @@
 ---
-import "@repo/tailwind/styles.css";
+// styles.css is intentionally NOT imported here — every consuming app
+// imports its own themed CSS file (which itself imports styles.css and
+// overrides the per-site tokens) before rendering this layout. Importing
+// it again here would emit a second, un-overridden @theme block that wins
+// the cascade and nulls out every site's colors/fonts.
 
 interface Props {
   title: string;
@@ -7,9 +11,10 @@ interface Props {
   bodyClass?: string;
   ogImage?: string;
   canonical?: string;
+  themeColor?: string;
 }
 
-const { title, description = "", bodyClass = "", ogImage, canonical } = Astro.props;
+const { title, description = "", bodyClass = "", ogImage, canonical, themeColor = "#000000" } = Astro.props;
 // TODO: Create /og-image.svg in public/ (1200×630px) for social sharing
 
 const imageUrl = ogImage ? new URL(ogImage, Astro.site ?? Astro.url).href : undefined;
@@ -34,12 +39,8 @@ const imageUrl = ogImage ? new URL(ogImage, Astro.site ?? Astro.url).href : unde
     <meta name="twitter:image" content={imageUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
     <title>{title}</title>
-    <meta name="theme-color" content="#1e1e24" />
+    <meta name="theme-color" content={themeColor} />
     <slot name="head" />
   </head>
   <body class:list={["min-h-screen font-sans antialiased scroll-pb-16", bodyClass]}>

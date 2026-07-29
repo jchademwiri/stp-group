@@ -4,6 +4,8 @@
 /* Scan class names in monorepo apps + this package */
 @source "../../../apps/stp/src/**/*.{astro,html,js,ts}";
 @source "../../../apps/lme/src/**/*.{astro,html,js,ts}";
+@source "../../../apps/lms/src/**/*.{astro,html,js,ts}";
+@source "../../../apps/srl/src/**/*.{astro,html,js,ts}";
 @source "./**/*.{astro,html,js,ts}";
 
 /* Respect reduced motion preferences */
