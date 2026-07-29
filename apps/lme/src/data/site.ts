@@ -89,15 +89,31 @@ export const LME = {
       icon: "bolt",
     },
   ],
-  // Active contracts / credibility
+  // Active contracts / credibility — ref/department set only where backed by a City of Tshwane appointment letter
   contracts: [
-    "Supply, delivery & offloading of manhole covers (Water & Sanitation)",
-    "Hire of mobile drinking water tankers (10,000–15,000L) for informal settlements",
-    "Supply & delivery of emergency services rope rescue equipment",
-    "Supply & delivery of HAZMAT equipment",
-    "Supply, delivery & offloading of electrical cables, wire & conductors",
-    "Corporate hire of general construction machines & equipment",
-    "Corporate hire of general construction vehicles & refuse removal vehicles",
+    {
+      title: "Corporate hire of general construction & refuse removal vehicles",
+      ref: "SS 01-2023/24",
+      department: "Corporate Fleet Management",
+    },
+    {
+      title: "Corporate hire of general construction machines & equipment",
+      ref: "SS 02-2023/24",
+      department: "Corporate Fleet Management",
+    },
+    {
+      title: "Hire of mobile drinking water tankers (10,000–15,000L) for informal settlements",
+      ref: "HHS 10-2023/24",
+      department: "Human Settlements",
+    },
+    {
+      title: "Supply, delivery & off-loading of electrical cables, wire & conductors",
+      ref: "EED 05-2023/24",
+      department: "Energy and Electricity",
+    },
+    { title: "Supply, delivery & offloading of manhole covers (Water & Sanitation)" },
+    { title: "Supply & delivery of emergency services rope rescue equipment" },
+    { title: "Supply & delivery of HAZMAT equipment" },
   ],
   // Equipment fleet highlights
   fleet: [

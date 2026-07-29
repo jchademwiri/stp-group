@@ -27,7 +27,7 @@
     },
     {
       "source": "/projects",
-      "destination": "/",
+      "destination": "/#projects",
       "permanent": true
     }
   ]

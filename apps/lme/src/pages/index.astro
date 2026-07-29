@@ -259,7 +259,14 @@ const icons = {
                 <path d='M22 11.08V12a10 10 0 11-5.93-9.14' />
                 <path d='M22 4L12 14.01l-3-3' />
               </svg>
-              <span class='text-sm text-neutral-300'>{contract}</span>
+              <div>
+                <span class='text-sm text-neutral-300'>{contract.title}</span>
+                {contract.ref && (
+                  <p class='mt-1 text-xs text-neutral-500'>
+                    Tender {contract.ref} &middot; {contract.department}
+                  </p>
+                )}
+              </div>
             </div>
           ))
         }

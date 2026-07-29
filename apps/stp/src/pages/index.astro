@@ -3,6 +3,7 @@ import StpLayout from "@/layouts/StpLayout.astro";
 import TrustBadges from "@/components/TrustBadges.astro";
 import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE, absoluteUrl } from "@/data/site";
 import { ABOUT } from "@/data/about";
+import { stpContracts } from "@/data/contracts";
 
 const title = "Sithembe | Municipal Contractor — Plant Hire, Grass Cutting & Desludging";
 const description = SITE.description;
@@ -115,6 +116,41 @@ const orgSchema = {
             <h3 class="text-xl font-bold text-white">{service.title}</h3>
             <p class="mt-3 text-sm leading-relaxed text-neutral-400">{service.description}</p>
           </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Track Record -->
+  <section id="projects" class="scroll-mt-24 border-y border-white/10 bg-slate/50 py-16">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <p class="text-sm font-semibold tracking-wider uppercase text-brand">Contract awards</p>
+      <h2 class="mt-2 text-3xl font-bold text-white">Our track record</h2>
+      <p class="mt-3 max-w-2xl text-neutral-400">
+        Active contracts with the City of Tshwane Metropolitan Municipality — we're trusted
+        with municipal fleet, equipment, and community infrastructure services.
+      </p>
+      <div class="mt-10 grid gap-4 md:grid-cols-2">
+        {stpContracts.map((contract) => (
+          <div class="flex items-start gap-3 rounded-lg border border-white/10 bg-charcoal px-5 py-4">
+            <svg
+              class="mt-0.5 h-5 w-5 shrink-0 text-brand"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+              <path d="M22 4L12 14.01l-3-3" />
+            </svg>
+            <div>
+              <span class="text-sm text-neutral-300">{contract.title}</span>
+              <p class="mt-1 text-xs text-neutral-500">
+                Tender {contract.ref} &middot; {contract.department}
+              </p>
+            </div>
+          </div>
         ))}
       </div>
     </div>

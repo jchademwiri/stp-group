@@ -15,7 +15,7 @@ export default defineConfig({
     "/plant-hire": "/#services",
     "/services": "/#services",
     "/about": "/#about",
-    "/projects": "/",
+    "/projects": "/#projects",
   },
   server: { port: 4321 },
   preview: { port: 4321 },
