@@ -63,26 +63,26 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - Apply Trust_Badge pill pattern: `flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium`
     - _Requirements: 6.2, 2.3, 14.3_
 
-  - [-] 3.3 Add Featured Contracts section to STP homepage
+  - [ ] 3.3 Add Featured Contracts section to STP homepage
     - Import `getFeaturedProjects` from `apps/stp/src/data/projects.ts`
     - Render `ProjectShowcase` cards in a responsive grid for all featured projects
     - Section heading `<h2>` with `text-3xl font-bold`; always render the heading even when no projects exist
     - Grid must use single-column base with `md:grid-cols-2 lg:grid-cols-3` pattern
     - _Requirements: 6.3, 6.7, 5.4_
 
-  - [-] 3.4 Add/update Our Services section on STP homepage
+  - [ ] 3.4 Add/update Our Services section on STP homepage
     - Render three ServiceCards linking to `/plant-hire`, `/services/grass-cutting`, `/services/desludging`
     - Apply card pattern: `rounded-xl border border-white/10 bg-slate p-8 hover:-translate-y-1 hover:border-brand/30`
     - Grid: single-column base, `md:grid-cols-3`
     - _Requirements: 6.4, 6.7, 14.1, 14.5_
 
-  - [~] 3.5 Write property test for featured projects render count
+  - [ ] 3.5 Write property test for featured projects render count
     - Create or update test file in `apps/stp/src/__tests__/`
     - **Property 3: Featured projects render count equals data count**
     - Test that `renderProjectGrid(projects).cardCount === projects.length` for any array length 0..20
     - **Validates: Requirements 6.3**
 
-- [~] 4. Checkpoint — STP work complete
+- [ ] 4. Checkpoint — STP work complete
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 5. Create LME brand CSS entry point and update LmeLayout
@@ -107,7 +107,7 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - Fix any `text-safety` references in `StickyMobileBar.astro` for LME → `text-brand`
     - _Requirements: 3.4, 3.6, 3.7, 11.1, 11.2, 11.3, 11.4, 11.5, 13.3, 17.1, 17.3, 17.4_
 
-  - [-] 5.3 Write property test for LME navigation mutual exclusion
+  - [ ] 5.3 Write property test for LME navigation mutual exclusion
     - Create or update test file in `apps/lme/src/__tests__/`
     - **Property 2: Navigation mutual exclusion — exactly one active link**
     - Test that for any path in `["/", "/about", "/services", "/projects", "/unknown"]`, `lmeNavLinks.filter(link => link.match(path)).length <= 1`
@@ -128,7 +128,7 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - _Requirements: 16.2_
 
 - [ ] 7. Update LME homepage (`apps/lme/src/pages/index.astro`)
-  - [-] 7.1 Rework LME Hero section
+  - [ ] 7.1 Rework LME Hero section
     - `<h1>` with construction/civil engineering headline using `text-4xl font-bold tracking-tight md:text-5xl`
     - Sub-headline listing CIDB grades 1CE, 1GB, 1EP
     - Three CTAs: "Call now" (`bg-accent text-charcoal` — amber primary), "View our services" (outlined), "WhatsApp us" (outlined)
@@ -136,7 +136,7 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - SVG texture overlay at ≤6% opacity with `aria-hidden="true"`
     - _Requirements: 7.1, 7.2, 3.5, 5.3_
 
-  - [~] 7.2 Add Services, Fleet, Why LME, Projects, and Contact sections to LME homepage
+  - [ ] 7.2 Add Services, Fleet, Why LME, Projects, and Contact sections to LME homepage
     - Services (`id="services"`): 3 cards (Civil Engineering 1CE, General Building 1GB, Electrical Engineering 1EP) with teal-blue icon backgrounds; single-column base, `md:grid-cols-3`
     - Fleet (`id="fleet"`): conditionally render `{LME.fleet.length > 0 && <section>...</section>}`; responsive grid with teal-blue check icons; omit entirely if empty
     - Why LME: all four `LME.values` items as icon cards; single-column base, `md:grid-cols-2 lg:grid-cols-4`
@@ -147,7 +147,7 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - All cards: `rounded-xl border border-white/10 bg-slate p-8 hover:-translate-y-1 hover:border-brand/30`
     - _Requirements: 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 14.1, 14.4_
 
-  - [~] 7.3 Write property test for LME fleet section conditional presence
+  - [ ] 7.3 Write property test for LME fleet section conditional presence
     - **Property 4: LME fleet section conditional presence**
     - Test that `renderFleetSection(fleet).sectionVisible === (fleet.length > 0)` for any array length 0..30
     - **Validates: Requirements 7.4**
@@ -171,7 +171,7 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - _Requirements: 10.3_
 
 - [ ] 9. Create LME About page (`apps/lme/src/pages/about.astro`)
-  - [-] 9.1 Implement LME About page structure and content
+  - [ ] 9.1 Implement LME About page structure and content
     - Use `LmeLayout` with `title="About Us | LME"` and appropriate `description` prop
     - Hero/Intro section: Section_Label "About us", `<h1>` "About Livhu and Musa Enterprise", founding story paragraph
     - Company Stats row: Founded 2014 | 10+ Employees | Centurion, Gauteng | CIDB Registered
@@ -180,13 +180,13 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - CTA section with links to `/services` and `#contact`
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 16.6_
 
-  - [~] 9.2 Verify LME About page navigation active state
+  - [ ] 9.2 Verify LME About page navigation active state
     - Confirm that when path starts with `/about`, the LmeLayout highlights "About" nav item as active
     - This is covered by the path-based match logic implemented in task 5.2
     - _Requirements: 8.6_
 
 - [ ] 10. Create LME Services page (`apps/lme/src/pages/services.astro`)
-  - [-] 10.1 Implement LME Services page structure and content
+  - [ ] 10.1 Implement LME Services page structure and content
     - Use `LmeLayout` with `title="Services | LME"` and appropriate `description` prop
     - Page Hero: Section_Label "What we deliver", `<h1>` "Our Services"
     - For each entry in `lmeServiceDetails`: render a service block with CIDB grade badge, `<h2>` title, expanded description, project types list, and "Inquire about this service" CTA (→ `#contact` or `tel:`)
@@ -194,12 +194,12 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - Apply Section_Label pattern and brand token classes throughout
     - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5, 16.6_
 
-  - [~] 10.2 Verify LME Services page navigation active state
+  - [ ] 10.2 Verify LME Services page navigation active state
     - Confirm path `/services` triggers active state on "Services" nav link via task 5.2 logic
     - _Requirements: 9.6_
 
 - [ ] 11. Create LME Projects page (`apps/lme/src/pages/projects.astro`)
-  - [-] 11.1 Implement LME Projects page structure and content
+  - [ ] 11.1 Implement LME Projects page structure and content
     - Use `LmeLayout` with `title="Projects | LME"` and appropriate `description` prop
     - Page Hero: Section_Label "Our track record", `<h1>` "Projects & Contract Awards"
     - Credibility statement referencing CIDB registration and SARS compliance
@@ -209,12 +209,12 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - All decorative SVGs carry `aria-hidden="true"`
     - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5, 16.6, 17.5_
 
-  - [~] 11.2 Write property test for LME contracts render count
+  - [ ] 11.2 Write property test for LME contracts render count
     - **Property 5: LME contracts render count equals data count**
     - Test that total contract items rendered on the Projects page equals `LME.contracts.length` for any contracts array
     - **Validates: Requirements 10.2**
 
-  - [~] 11.3 Verify LME Projects page navigation active state
+  - [ ] 11.3 Verify LME Projects page navigation active state
     - Confirm path `/projects` triggers active state on "Projects" nav link via task 5.2 logic
     - _Requirements: 10.6_
 
@@ -229,47 +229,47 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
     - Wrap `<slot />` in `<main id="main-content">`
     - _Requirements: 15.1, 15.2, 16.4, 16.5, 17.1, 5.7_
 
-  - [-] 12.2 Write property test for Open Graph independent rendering
+  - [ ] 12.2 Write property test for Open Graph independent rendering
     - **Property 8: Open Graph tags render available props independently**
     - Test that for any combination of defined/undefined `(title, description, ogImage, canonical)`, each defined prop produces its corresponding tag and undefined props do not suppress others
     - **Validates: Requirements 16.5**
 
 - [ ] 13. Add LME LocalBusiness JSON-LD schema to LME pages
-  - [~] 13.1 Verify and update LME `LocalBusinessSchema.astro`
+  - [ ] 13.1 Verify and update LME `LocalBusinessSchema.astro`
     - Confirm the component reads from the `LME` data object
     - Ensure all required fields are present: `name`, `telephone`, `email`, `address`, `geo`, `areaServed`, `openingHours`, `url`
     - Add `<LocalBusinessSchema />` to `LmeLayout.astro` via `<slot name="head" />` or directly in layout so it renders on every LME page
     - _Requirements: 16.2_
 
-  - [~] 13.2 Verify STP `LocalBusinessSchema.astro` and `Organization` schema
+  - [ ] 13.2 Verify STP `LocalBusinessSchema.astro` and `Organization` schema
     - Confirm STP `LocalBusinessSchema.astro` reads from `SITE` with all required fields (name, telephone, email, address, geo, areaServed, openingHours, url)
     - Confirm STP homepage outputs `Organization` JSON-LD with: name, legalName, url, logo, telephone, email, areaServed, foundingDate, sameAs
     - _Requirements: 16.1, 16.3_
 
 - [ ] 14. Accessibility and performance hardening
-  - [~] 14.1 Audit and fix all decorative SVG icons across both sites
+  - [ ] 14.1 Audit and fix all decorative SVG icons across both sites
     - Search both `apps/stp/src` and `apps/lme/src` for inline `<svg>` elements lacking `aria-hidden="true"`
     - Add `aria-hidden="true"` to every decorative SVG (icons, texture overlays, decorative shapes)
     - Ensure all interactive image links carry descriptive `alt` text on `<img>` elements (e.g. logo links)
     - _Requirements: 17.5, 17.6, 15.5_
 
-  - [~] 14.2 Audit and fix `<img>` elements for `alt` attributes and lazy loading
+  - [ ] 14.2 Audit and fix `<img>` elements for `alt` attributes and lazy loading
     - Ensure every `<img>` in both sites has an `alt` attribute (empty string `""` for decorative images)
     - Add `loading="lazy"` and explicit `width`/`height` to appropriate images
     - Add `loading="lazy"` to any `<iframe>` elements (e.g. OpenStreetMap in STP footer)
     - _Requirements: 15.3, 15.5_
 
-  - [~] 14.3 Add `prefers-reduced-motion` CSS block to theme.css or styles.css
+  - [ ] 14.3 Add `prefers-reduced-motion` CSS block to theme.css or styles.css
     - Add `@media (prefers-reduced-motion: reduce)` block setting `animation-duration`, `transition-duration`, and `animation-iteration-count` to minimal values
     - _Requirements: 15.4_
 
-  - [~] 14.4 Verify keyboard navigation focus rings on both sites
+  - [ ] 14.4 Verify keyboard navigation focus rings on both sites
     - Confirm all interactive elements have a visible focus ring with sufficient contrast (3:1 minimum for WCAG AA)
     - Verify mobile nav toggle has `aria-expanded` (true/false) and `aria-controls` referencing the mobile nav panel `id`
     - Verify mobile nav panel is hidden from assistive technology when closed (`visibility: hidden` or equivalent)
     - _Requirements: 17.2, 17.3, 17.4, 17.7_
 
-  - [~] 14.5 Write property tests for img alt attributes and decorative SVG aria-hidden
+  - [ ] 14.5 Write property tests for img alt attributes and decorative SVG aria-hidden
     - **Property 6: All img elements have alt attributes**
     - Test that every `<img>` element in rendered HTML of STP and LME pages has an `alt` attribute
     - **Property 7: All decorative SVGs carry aria-hidden**
@@ -296,12 +296,12 @@ Implement a Shared Visual Identity System with distinct per-site brand expressio
       - `["#e5e5e5", "#1e1e24"]`, `["#a3a3a3", "#1e1e24"]`, `["#ffffff", "#1e1e24"]`, `["#e5e5e5", "#2a2a32"]`
     - **Validates: Requirements 4.1**
 
-  - [~] 15.3 Write property test for responsive grid sections single-column at mobile
+  - [ ] 15.3 Write property test for responsive grid sections single-column at mobile
     - **Property 9: Responsive grid sections are single-column at mobile**
     - Test that every grid element's class list has a single-column base (no bare `grid-cols-[2-9]`) and a `md:grid-cols-*` expansion variant
     - **Validates: Requirements 13.2**
 
-- [~] 16. Final checkpoint — all sites and tests
+- [ ] 16. Final checkpoint — all sites and tests
   - Ensure all tests pass across `packages/tailwind`, `apps/stp`, and `apps/lme`. Ask the user if any questions arise.
 
 ## Notes
