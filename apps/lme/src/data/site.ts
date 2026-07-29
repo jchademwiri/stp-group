@@ -60,7 +60,7 @@ export const LME = {
     },
     {
       title: "Active Municipal Contracts",
-      text: "City of Tshwane preferred supplier for water, sanitation, electrical, and construction services.",
+      text: "Preferred supplier status with municipal clients for water, sanitation, electrical, and construction services.",
       icon: "building",
     },
     {
@@ -87,7 +87,7 @@ export const LME = {
       icon: "bolt",
     },
   ],
-  // Active contracts / credibility — ref/department set only where backed by a City of Tshwane appointment letter
+  // Active contracts / credibility — ref/department set only where backed by a signed appointment letter
   contracts: [
     {
       title: "Corporate hire of general construction & refuse removal vehicles",

@@ -1,5 +1,4 @@
-// Active contracts, all with the City of Tshwane Metropolitan Municipality —
-// each backed by a signed appointment letter with the tender reference shown.
+// Active contracts, each backed by a signed appointment letter with the tender reference shown.
 export const stpContracts = [
   {
     title: "Corporate hire of general construction & refuse removal vehicles",
@@ -22,7 +21,7 @@ export const stpContracts = [
     department: "Human Settlements",
   },
   {
-    title: "Horticultural maintenance of sport facilities across seven regions of Tshwane",
+    title: "Horticultural maintenance of sport facilities across seven municipal regions",
     ref: "ROC 07-2022/23",
     department: "Regional Operational & Coordination",
   },
