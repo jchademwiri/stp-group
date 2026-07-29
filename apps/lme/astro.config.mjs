@@ -8,6 +8,11 @@ const root = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   site: "https://livhuandmusa.co.za",
+  redirects: {
+    "/about": "/#about",
+    "/services": "/#services",
+    "/projects": "/#projects",
+  },
   server: { port: 4322 },
   preview: { port: 4322 },
   vite: {

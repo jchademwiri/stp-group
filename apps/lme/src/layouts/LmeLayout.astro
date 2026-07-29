@@ -16,14 +16,11 @@ interface Props {
 const { title, description = "", whatsappMessage, ogImage } = Astro.props;
 const hours = formatBusinessHours();
 
-const p = Astro.url.pathname;
-
 const navLinks = [
-  { href: "/",         label: "Home",     match: (path: string) => path === "/" || path === "" },
-  { href: "/about",    label: "About",    match: (path: string) => path.startsWith("/about") },
-  { href: "/services", label: "Services", match: (path: string) => path.startsWith("/services") },
-  { href: "/projects", label: "Projects", match: (path: string) => path.startsWith("/projects") },
-  { href: "#contact",  label: "Contact",  match: () => false },
+  { href: "#services", label: "Services" },
+  { href: "#fleet", label: "Fleet" },
+  { href: "#about", label: "About" },
+  { href: "#contact", label: "Contact" },
 ];
 ---
 
@@ -46,20 +43,14 @@ const navLinks = [
 
       {/* Desktop nav */}
       <nav class="hidden items-center gap-1 text-sm font-medium md:flex" aria-label="Main">
-        {navLinks.map((link) => {
-          const isActive = link.match(p);
-          return (
-            <a
-              href={link.href}
-              class:list={[
-                "rounded-lg px-3 py-2 transition-colors hover:text-brand",
-                isActive ? "font-semibold text-brand" : "text-neutral-400",
-              ]}
-            >
-              {link.label}
-            </a>
-          );
-        })}
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="rounded-lg px-3 py-2 text-neutral-400 transition-colors hover:text-brand"
+          >
+            {link.label}
+          </a>
+        ))}
       </nav>
 
       {/* Desktop CTAs */}
@@ -83,20 +74,14 @@ const navLinks = [
 
     <div id="mobile-nav" class="absolute left-0 right-0 top-full z-40 md:hidden">
       <nav class="border-t border-white/10 bg-charcoal px-4 pb-4 pt-2" aria-label="Mobile navigation">
-        {navLinks.map((link) => {
-          const isActive = link.match(p);
-          return (
-            <a
-              href={link.href}
-              class:list={[
-                "block rounded-lg px-3 py-2.5 text-sm transition-colors hover:text-brand",
-                isActive ? "font-semibold text-brand" : "font-medium text-neutral-400",
-              ]}
-            >
-              {link.label}
-            </a>
-          );
-        })}
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-brand"
+          >
+            {link.label}
+          </a>
+        ))}
       </nav>
       <div class="border-t border-white/10 bg-charcoal px-4 pb-4 pt-3">
         <a href={`tel:${LME.phoneTel}`} class="block rounded-lg bg-accent px-3 py-2.5 text-center text-sm font-semibold text-charcoal transition-colors hover:bg-accent-hover">

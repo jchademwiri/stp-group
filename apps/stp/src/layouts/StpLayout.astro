@@ -14,20 +14,12 @@ interface Props {
 }
 
 const { title, description = "", whatsappMessage, ogImage } = Astro.props;
-const currentPath = Astro.url.pathname;
 const hours = formatBusinessHours();
 
-function isActive(href: string): boolean {
-  if (href === "/") return currentPath === "/" || currentPath === "";
-  if (href === "#contact") return false;
-  return currentPath.startsWith(href);
-}
-
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "Projects", href: "/projects" },
-  { label: "About", href: "/about" },
+  { label: "Services", href: "#services" },
+  { label: "Why us", href: "#why" },
+  { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
 ---
@@ -48,10 +40,7 @@ const navLinks = [
           navLinks.map((link) => (
             <a
               href={link.href}
-              class:list={[
-                "rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-brand",
-                isActive(link.href) ? "font-semibold text-brand" : "text-neutral-300",
-              ]}
+              class="rounded-lg px-3 py-2 text-neutral-300 transition-colors hover:bg-white/5 hover:text-brand"
             >
               {link.label}
             </a>
@@ -94,10 +83,7 @@ const navLinks = [
           navLinks.map((link) => (
             <a
               href={link.href}
-              class:list={[
-                "block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/5",
-                isActive(link.href) ? "text-brand" : "text-neutral-300",
-              ]}
+              class="block rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-300 transition-colors hover:bg-white/5"
             >
               {link.label}
             </a>

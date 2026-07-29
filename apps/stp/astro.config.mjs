@@ -12,7 +12,10 @@ export default defineConfig({
   output: "static",
   integrations: [sitemap()],
   redirects: {
-    "/plant-hire": "/services",
+    "/plant-hire": "/#services",
+    "/services": "/#services",
+    "/about": "/#about",
+    "/projects": "/",
   },
   server: { port: 4321 },
   preview: { port: 4321 },

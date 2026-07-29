@@ -135,25 +135,3 @@ export function absoluteUrl(path: string, site?: URL | string): string {
   return `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-export interface BreadcrumbItem {
-  label: string;
-  href?: string;
-}
-
-export const contractCategories: Record<string, string[]> = {
-  "Water & Sanitation": [
-    "Supply, delivery & offloading of manhole covers (Water & Sanitation)",
-    "Hire of mobile drinking water tankers (10,000–15,000L) for informal settlements",
-  ],
-  "Emergency Services": [
-    "Supply & delivery of emergency services rope rescue equipment",
-    "Supply & delivery of HAZMAT equipment",
-  ],
-  "Electrical": [
-    "Supply, delivery & offloading of electrical cables, wire & conductors",
-  ],
-  "Equipment Hire": [
-    "Corporate hire of general construction machines & equipment",
-    "Corporate hire of general construction vehicles & refuse removal vehicles",
-  ],
-};

@@ -2,12 +2,32 @@
   "redirects": [
     {
       "source": "/plant-hire",
-      "destination": "/services",
+      "destination": "/#services",
       "permanent": true
     },
     {
       "source": "/plant-hire/:path*",
-      "destination": "/services",
+      "destination": "/#services",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/#services",
+      "permanent": true
+    },
+    {
+      "source": "/services/:path*",
+      "destination": "/#services",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/#about",
+      "permanent": true
+    },
+    {
+      "source": "/projects",
+      "destination": "/",
       "permanent": true
     }
   ]
