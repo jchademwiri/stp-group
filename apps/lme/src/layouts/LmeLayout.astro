@@ -64,6 +64,7 @@ const navLinks = [
         {navLinks.map((link) => (
           <a
             href={link.href}
+            data-nav-link={link.href}
             class="rounded-lg px-3 py-2 text-ink/60 uppercase transition-colors hover:text-brand"
           >
             {link.label}
@@ -95,6 +96,7 @@ const navLinks = [
         {navLinks.map((link) => (
           <a
             href={link.href}
+            data-nav-link={link.href}
             class="block rounded-lg px-3 py-2.5 font-sans text-xs font-medium tracking-wide text-ink/60 uppercase transition-colors hover:text-brand"
           >
             {link.label}
@@ -123,9 +125,38 @@ const navLinks = [
       visibility: visible;
       transition: opacity 300ms ease-in-out, transform 300ms ease-in-out, visibility 0s;
     }
+    [data-nav-link].is-active {
+      color: var(--color-brand);
+      font-weight: 500;
+    }
   </style>
 
   <script>
+    const navAnchors = document.querySelectorAll("[data-nav-link]");
+    const sections = Array.from(navAnchors)
+      .map((a) => a.getAttribute("data-nav-link"))
+      .filter((href): href is string => !!href && href.startsWith("#"))
+      .map((href) => document.querySelector(href))
+      .filter((el): el is HTMLElement => el !== null);
+
+    function setActiveLink(id: string) {
+      navAnchors.forEach((a) => {
+        a.classList.toggle("is-active", a.getAttribute("data-nav-link") === `#${id}`);
+      });
+    }
+
+    if (sections.length) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) setActiveLink(entry.target.id);
+          }
+        },
+        { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+      );
+      sections.forEach((section) => observer.observe(section));
+    }
+
     // Mobile nav toggle
     const toggle = document.getElementById("nav-toggle") as HTMLButtonElement | null;
     const panel = document.getElementById("mobile-nav");

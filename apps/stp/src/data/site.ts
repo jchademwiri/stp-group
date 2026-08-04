@@ -21,11 +21,14 @@ export const SITE = {
     saturday: "Sat 08:00–13:00",
     sunday: "Sun 08:00–12:00",
   },
-  geo: {
-    latitude: -25.7479,
-    longitude: 28.2293,
+  address: {
+    street: "285 Erasmus Ave",
+    suburb: "Raslouw AH",
+    city: "Centurion",
+    province: "Gauteng",
+    full: "285 Erasmus Ave, Raslouw AH, Centurion, Gauteng",
   },
-  mapsUrl: "https://maps.google.com/?q=Pretoria+Gauteng+South+Africa",
+  mapsUrl: "https://maps.google.com/?q=" + encodeURIComponent("285 Erasmus Ave, Raslouw AH, Centurion, Gauteng, South Africa"),
   priceRange: "$$",
 } as const;
 

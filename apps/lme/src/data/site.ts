@@ -59,8 +59,8 @@ export const LME = {
       icon: "shield",
     },
     {
-      title: "Active Municipal Contracts",
-      text: "Preferred supplier status with municipal clients for water, sanitation, electrical, and construction services.",
+      title: "Public Sector Track Record",
+      text: "Preferred supplier status with municipal clients, backed by the same capability for water, sanitation, electrical, and construction work in the private sector.",
       icon: "building",
     },
     {

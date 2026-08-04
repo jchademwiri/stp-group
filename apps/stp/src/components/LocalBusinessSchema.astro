@@ -18,10 +18,12 @@ const schema = {
     "@type": "AdministrativeArea",
     name: "Pretoria and Gauteng, South Africa",
   },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: SITE.geo.latitude,
-    longitude: SITE.geo.longitude,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: SITE.address.street,
+    addressLocality: SITE.address.city,
+    addressRegion: SITE.address.province,
+    addressCountry: "ZA",
   },
   openingHoursSpecification: [
     {
