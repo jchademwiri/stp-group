@@ -156,11 +156,11 @@ const icons = {
         Over {LME.fleet.length} equipment items - from heavy machinery to handheld
         tools - ready for deployment.
       </p>
-      <div class='mt-10 divide-y divide-ink/10 border-y border-ink/10'>
+      <div class='mt-10 grid grid-cols-1 gap-px border-y border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         {
           LME.fleet.map((item, i) => (
-            <div class='flex items-center gap-4 px-2 py-3 text-sm text-ink/70'>
-              <span class='w-8 shrink-0 font-sans text-xs text-accent'>{String(i + 1).padStart(2, "0")}</span>
+            <div class='flex items-center gap-3 bg-bg-elevated px-4 py-3 text-sm text-ink/70'>
+              <span class='shrink-0 font-sans text-xs text-accent'>{String(i + 1).padStart(2, "0")}</span>
               <span>{item}</span>
             </div>
           ))
