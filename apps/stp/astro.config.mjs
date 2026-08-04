@@ -12,8 +12,7 @@ export default defineConfig({
   output: "static",
   integrations: [sitemap()],
   redirects: {
-    "/plant-hire": "/#services",
-    "/services": "/#services",
+    "/plant-hire": "/services#plant-hire",
     "/about": "/#about",
     "/projects": "/#projects",
   },

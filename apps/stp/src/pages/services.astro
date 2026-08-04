@@ -1,0 +1,259 @@
+---
+import StpLayout from "@/layouts/StpLayout.astro";
+import { SITE, whatsappUrl, WHATSAPP_DEFAULT_MESSAGE } from "@/data/site";
+import { stpContracts } from "@/data/contracts";
+
+const title = "Plant Hire, Sanitation & Grass Cutting Services | Sithembe";
+const description =
+  "Plant hire (trucks, water tankers, drain jetting), sanitation & desludging (mobile toilets, septic tanks), and grass cutting & tree services — CIDB-registered, for municipal and private clients across Pretoria & Gauteng.";
+
+const findContract = (ref: string) => stpContracts.find((c) => c.ref === ref);
+const ss01 = findContract("SS 01-2023/24");
+const hs02 = findContract("HS 02-2025/26");
+const roc07 = findContract("ROC 07-2022/23");
+
+const checkIcon = "M22 11.08V12a10 10 0 11-5.93-9.14 M22 4L12 14.01l-3-3";
+
+const plantHire = [
+  {
+    title: "8-ton dropside trucks",
+    description: "Bulk material delivery for construction, municipal, and private-sector sites.",
+    tender: ss01,
+  },
+  {
+    title: "Mobile water tankers, 10,000L",
+    description: "Dust suppression and bulk water supply, delivered where and when you need it.",
+    tender: ss01,
+  },
+  {
+    title: "Vacuum tankers / honey suckers",
+    description: "High-capacity liquid waste extraction — see Sanitation & Desludging below.",
+  },
+  {
+    title: "High-pressure drain jetting",
+    description: "Unblocks plumbing pipes and drains, and can assist with draining septic tanks.",
+  },
+  {
+    title: "Bobcats & skid steer loaders",
+    description: "Compact earthmoving for tight sites and general groundwork.",
+  },
+  {
+    title: "Tractors",
+    description: "Utility tractors with a range of implements for site and grounds work.",
+  },
+];
+
+const sanitation = [
+  {
+    title: "Mobile toilet hire",
+    description: "Chemical toilets hired, serviced, delivered, and relocated for construction sites and events.",
+    tender: hs02,
+  },
+  {
+    title: "Septic tank desludging",
+    description: "Scheduled and emergency vacuum-tanker emptying for septic tanks and pit latrines.",
+  },
+  {
+    title: "Blocked drain unblocking",
+    description: "High-pressure jetting clears blocked plumbing and drain lines.",
+  },
+  {
+    title: "Grease trap cleaning",
+    description: "Kitchen and commercial grease trap cleaning and disposal.",
+  },
+  {
+    title: "Industrial & liquid waste extraction",
+    description: "Liquid waste removal for commercial and industrial sites.",
+  },
+];
+
+const grassCutting = [
+  {
+    title: "Grass cutting & clearing",
+    description: "Estates, highway verges, and overgrown plot reclamation — any size job, residential to municipal.",
+    tender: roc07,
+  },
+  {
+    title: "Tree cutting & pruning",
+    description: "Tree felling, cutting, and pruning as part of a site or an ongoing grounds contract.",
+  },
+];
+
+const grassEquipment = [
+  "Brush cutters",
+  "Lawn mowers",
+  "Ride-on mowers",
+  "Tractors with mower & slasher implements",
+  "Chainsaws",
+];
+---
+
+<StpLayout {title} {description}>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-bg">
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background: radial-gradient(ellipse 60% 55% at 50% 15%, color-mix(in srgb, var(--color-brand) 12%, transparent) 0%, transparent 70%);"
+    >
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-28">
+      <div class="mb-5 flex items-center gap-3">
+        <span class="h-px w-6 bg-brand/50"></span>
+        <span class="font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase">What we offer</span>
+      </div>
+      <h1 class="font-display text-4xl font-medium tracking-tight text-ink md:text-6xl">
+        Plant hire, sanitation,<br /> and <em class="text-brand italic">grass cutting</em>.
+      </h1>
+      <p class="mt-6 max-w-2xl text-base leading-relaxed text-ink/60">
+        CIDB-registered equipment and accredited operators, available for municipal and
+        private-sector work across {SITE.region}. Dry hire or full service — whatever the job needs.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href={`tel:${SITE.phoneTel}`}
+          class="rounded-lg bg-brand px-6 py-3 font-sans text-xs font-medium tracking-wide text-bg uppercase hover:bg-brand-hover"
+        >
+          Call {SITE.phone}
+        </a>
+        <a
+          href={whatsappUrl(WHATSAPP_DEFAULT_MESSAGE)}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-lg border border-whatsapp/50 px-6 py-3 font-sans text-xs font-medium tracking-wide text-whatsapp uppercase hover:bg-whatsapp/10"
+        >
+          WhatsApp us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plant Hire & Equipment -->
+  <section id="plant-hire" class="scroll-mt-24 border-y border-ink/10 bg-bg-elevated/40 py-16">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <div class="mb-3 flex items-center gap-3">
+        <span class="h-px w-6 bg-brand/50"></span>
+        <span class="font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase">Plant hire</span>
+      </div>
+      <h2 class="font-display text-3xl font-medium text-ink md:text-4xl">Plant Hire &amp; Equipment</h2>
+      <p class="mt-3 max-w-2xl text-ink/60">
+        Wet hire, with accredited TETA/SAMA operators where required, or dry hire for teams who
+        bring their own.
+      </p>
+      <div class="mt-10 grid gap-4 md:grid-cols-2">
+        {plantHire.map((item) => (
+          <div class="flex items-start gap-3 rounded-lg border border-ink/10 bg-bg px-5 py-4">
+            <svg class="mt-0.5 h-5 w-5 shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d={checkIcon} />
+            </svg>
+            <div>
+              <span class="text-sm font-medium text-ink/90">{item.title}</span>
+              <p class="mt-1 text-sm text-ink/60">{item.description}</p>
+              {item.tender && (
+                <p class="mt-1 font-sans text-xs tracking-wide text-ink/40 uppercase">
+                  Tender {item.tender.ref} &middot; {item.tender.department}
+                </p>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sanitation & Desludging -->
+  <section id="sanitation" class="scroll-mt-24 border-b border-ink/10 bg-bg py-16">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <div class="mb-3 flex items-center gap-3">
+        <span class="h-px w-6 bg-brand/50"></span>
+        <span class="font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase">Sanitation</span>
+      </div>
+      <h2 class="font-display text-3xl font-medium text-ink md:text-4xl">Sanitation &amp; Desludging Services</h2>
+      <p class="mt-3 max-w-2xl text-ink/60">
+        Accredited operators and high-capacity equipment for scheduled and emergency callouts.
+      </p>
+      <div class="mt-10 grid gap-4 md:grid-cols-2">
+        {sanitation.map((item) => (
+          <div class="flex items-start gap-3 rounded-lg border border-ink/10 bg-bg-elevated/40 px-5 py-4">
+            <svg class="mt-0.5 h-5 w-5 shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d={checkIcon} />
+            </svg>
+            <div>
+              <span class="text-sm font-medium text-ink/90">{item.title}</span>
+              <p class="mt-1 text-sm text-ink/60">{item.description}</p>
+              {item.tender && (
+                <p class="mt-1 font-sans text-xs tracking-wide text-ink/40 uppercase">
+                  Tender {item.tender.ref} &middot; {item.tender.department}
+                </p>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Grass Cutting & Vegetation Management -->
+  <section id="grass-cutting" class="scroll-mt-24 border-b border-ink/10 bg-bg-elevated/40 py-16">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <div class="mb-3 flex items-center gap-3">
+        <span class="h-px w-6 bg-brand/50"></span>
+        <span class="font-sans text-[0.65rem] font-medium tracking-[0.3em] text-brand uppercase">Grounds &amp; vegetation</span>
+      </div>
+      <h2 class="font-display text-3xl font-medium text-ink md:text-4xl">Grass Cutting &amp; Vegetation Management</h2>
+      <p class="mt-3 max-w-2xl text-ink/60">
+        Any size job — from a single residential plot to ongoing municipal-scale contracts.
+      </p>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-2">
+        {grassCutting.map((item) => (
+          <div class="flex items-start gap-3 rounded-lg border border-ink/10 bg-bg px-5 py-4">
+            <svg class="mt-0.5 h-5 w-5 shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d={checkIcon} />
+            </svg>
+            <div>
+              <span class="text-sm font-medium text-ink/90">{item.title}</span>
+              <p class="mt-1 text-sm text-ink/60">{item.description}</p>
+              {item.tender && (
+                <p class="mt-1 font-sans text-xs tracking-wide text-ink/40 uppercase">
+                  Tender {item.tender.ref} &middot; {item.tender.department}
+                </p>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h3 class="mt-10 font-display text-lg font-medium text-ink">Equipment — also available for standalone hire</h3>
+      <div class="mt-4 flex flex-wrap gap-2">
+        {grassEquipment.map((item) => (
+          <span class="rounded-full border border-ink/15 bg-ink/5 px-3 py-1.5 text-xs font-medium text-ink/80">
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
+    <h2 class="font-display text-2xl font-medium text-ink">Need equipment or a job scheduled?</h2>
+    <p class="mt-2 max-w-2xl text-ink/60">Call or WhatsApp us — we usually respond {SITE.responseTime}.</p>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a
+        href={`tel:${SITE.phoneTel}`}
+        class="rounded-lg bg-brand px-6 py-3 font-sans text-xs font-medium tracking-wide text-bg uppercase hover:bg-brand-hover"
+      >
+        Call {SITE.phone}
+      </a>
+      <a
+        href={whatsappUrl(WHATSAPP_DEFAULT_MESSAGE)}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-lg border border-whatsapp/50 px-6 py-3 font-sans text-xs font-medium tracking-wide text-whatsapp uppercase hover:bg-whatsapp/10"
+      >
+        WhatsApp us
+      </a>
+    </div>
+  </section>
+</StpLayout>

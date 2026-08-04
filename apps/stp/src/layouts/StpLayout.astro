@@ -17,12 +17,13 @@ const { title, description = "", whatsappMessage, ogImage } = Astro.props;
 const hours = formatBusinessHours();
 
 const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Projects", href: "#projects" },
-  { label: "Why us", href: "#why" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/services" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Why us", href: "/#why" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
 ];
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
 <BaseLayout {title} {description} {ogImage} canonical={Astro.url.href} themeColor="#041c36" bodyClass="bg-bg text-ink">
@@ -63,7 +64,10 @@ const navLinks = [
             <a
               href={link.href}
               data-nav-link={link.href}
-              class="rounded-lg px-3 py-2 text-ink/70 uppercase transition-colors hover:bg-ink/5 hover:text-brand"
+              class:list={[
+                "rounded-lg px-3 py-2 text-ink/70 uppercase transition-colors hover:bg-ink/5 hover:text-brand",
+                !link.href.includes("#") && link.href === currentPath && "is-active",
+              ]}
             >
               {link.label}
             </a>
@@ -107,7 +111,10 @@ const navLinks = [
             <a
               href={link.href}
               data-nav-link={link.href}
-              class="block rounded-lg px-3 py-2.5 font-sans text-xs font-medium tracking-wide text-ink/70 uppercase transition-colors hover:bg-ink/5"
+              class:list={[
+                "block rounded-lg px-3 py-2.5 font-sans text-xs font-medium tracking-wide text-ink/70 uppercase transition-colors hover:bg-ink/5",
+                !link.href.includes("#") && link.href === currentPath && "is-active",
+              ]}
             >
               {link.label}
             </a>
@@ -145,13 +152,15 @@ const navLinks = [
     const navAnchors = document.querySelectorAll("[data-nav-link]");
     const sections = Array.from(navAnchors)
       .map((a) => a.getAttribute("data-nav-link"))
-      .filter((href): href is string => !!href && href.startsWith("#"))
-      .map((href) => document.querySelector(href))
+      .filter((href): href is string => !!href && href.includes("#"))
+      .map((href) => document.querySelector(href.slice(href.indexOf("#"))))
       .filter((el): el is HTMLElement => el !== null);
 
     function setActiveLink(id: string) {
       navAnchors.forEach((a) => {
-        a.classList.toggle("is-active", a.getAttribute("data-nav-link") === `#${id}`);
+        const href = a.getAttribute("data-nav-link") ?? "";
+        const fragment = href.includes("#") ? href.slice(href.indexOf("#")) : "";
+        a.classList.toggle("is-active", fragment === `#${id}`);
       });
     }
 

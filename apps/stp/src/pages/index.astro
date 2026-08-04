@@ -20,16 +20,19 @@ const services = [
     title: "Plant hire & equipment",
     description:
       "Dropside trucks, vacuum tankers, bobcats, tractors, and mowers — with wet hire operators where required for municipal and private-sector projects.",
+    href: "/services#plant-hire",
   },
   {
     title: "Grass cutting & clearing",
     description:
       "Commercial estates, highway verges, and overgrown plot reclamation using industrial tractors and ride-on mowers.",
+    href: "/services#grass-cutting",
   },
   {
     title: "Septic & desludging",
     description:
       "Septic tank emptying, toilet desludging, grease trap cleaning, and liquid waste extraction with accredited operators.",
+    href: "/services#sanitation",
   },
 ];
 
@@ -114,6 +117,9 @@ const orgSchema = {
           <article class="rounded-lg border border-ink/10 bg-bg p-8">
             <h3 class="font-display text-xl font-medium text-ink">{service.title}</h3>
             <p class="mt-3 text-sm leading-relaxed text-ink/60">{service.description}</p>
+            <a href={service.href} class="mt-4 inline-block text-sm font-medium text-brand hover:underline">
+              Learn more →
+            </a>
           </article>
         ))}
       </div>
