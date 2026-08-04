@@ -3,8 +3,12 @@
 @theme {
     /* Blue accent + near-black base — LME's original "coming soon" palette */
     --font-sans: "Jost", sans-serif;
+    /* Industrial/blueprint display face — distinct from STP's Cormorant Garamond serif */
+    --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
     --color-brand: #3b6ef8;
     --color-brand-hover: #5585fa;
+    /* Safety-amber secondary accent — used for detail/technical accents, never as the primary CTA color */
+    --color-accent: #f5a623;
     --color-bg: #060810;
     /* near-black — page background */
     --color-bg-elevated: #0d1120;
