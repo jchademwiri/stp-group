@@ -6,9 +6,25 @@
     --color-brand: #f78d11;
     --color-brand-hover: #e07d0a;
     --color-bg: #041c36;
-    /* deep navy — page background */
+    /* deep navy — page background (dark mode default) */
     --color-bg-elevated: #062d54;
-    /* navy — section/card background */
+    /* navy — section/card background (dark mode default) */
     --color-ink: #e8eaf0;
-    /* cream — body text */
+    /* cream — body text (dark mode default) */
+
+    /* Text sitting on a solid brand-gold surface (buttons, pills) — fixed
+       navy, independent of light/dark so on-brand contrast never breaks */
+    --color-on-brand: #041c36;
+}
+
+/* Light mode — opt-in via .light on <html>, set by ThemeToggle/BaseLayout.
+   Dark values above stay the default so dark mode is pixel-identical to
+   before this feature existed. */
+:root.light {
+    --color-bg: #f7f3ea;
+    /* warm parchment — page background */
+    --color-bg-elevated: #ffffff;
+    /* white — section/card background */
+    --color-ink: #0a2540;
+    /* dark navy — body text */
 }

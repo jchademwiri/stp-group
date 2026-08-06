@@ -8,6 +8,16 @@
 @source "../../../apps/srl/src/**/*.{astro,html,js,ts}";
 @source "./**/*.{astro,html,js,ts}";
 
+/* Theme (light/dark) — default is dark; .light on <html> opts into the light
+   palette each site defines in its own CSS entry point. Set by the blocking
+   script in BaseLayout.astro before first paint, defaulting to system preference. */
+:root {
+  color-scheme: dark;
+}
+:root.light {
+  color-scheme: light;
+}
+
 /* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,

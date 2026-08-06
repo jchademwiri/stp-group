@@ -1,0 +1,88 @@
+---
+// Shared light/dark/system toggle, reused by every site's layout.
+// Default state is "system" (no stored preference) — resolved before first
+// paint by the blocking script in BaseLayout.astro. This component only
+// handles the click-to-cycle interaction and keeps its icon in sync.
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={[
+    "theme-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-ink/70 transition-colors hover:bg-ink/10 hover:text-ink",
+    className,
+  ]}
+>
+  <svg data-icon="system" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="2" y="4" width="20" height="14" rx="2"></rect>
+    <path d="M8 20h8M12 18v2"></path>
+  </svg>
+  <svg data-icon="light" class="hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+  </svg>
+  <svg data-icon="dark" class="hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+  </svg>
+</button>
+
+<script>
+  const STORAGE_KEY = "theme";
+  type Mode = "system" | "light" | "dark";
+  const order: Mode[] = ["system", "light", "dark"];
+
+  function currentMode(): Mode {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored === "light" || stored === "dark" ? stored : "system";
+  }
+
+  function systemPrefersDark() {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+
+  function labelFor(mode: Mode) {
+    if (mode === "system") return "Theme: system (click for light)";
+    if (mode === "light") return "Theme: light (click for dark)";
+    return "Theme: dark (click for system)";
+  }
+
+  function updateButtons(mode: Mode) {
+    document.querySelectorAll<HTMLButtonElement>(".theme-toggle").forEach((btn) => {
+      btn.querySelectorAll<HTMLElement>("svg").forEach((icon) => {
+        icon.classList.toggle("hidden", icon.dataset.icon !== mode);
+      });
+      const label = labelFor(mode);
+      btn.setAttribute("aria-label", label);
+      btn.title = label;
+    });
+  }
+
+  function apply(mode: Mode) {
+    const isLight = mode === "light" || (mode === "system" && !systemPrefersDark());
+    document.documentElement.classList.toggle("light", isLight);
+    updateButtons(mode);
+  }
+
+  function setMode(mode: Mode) {
+    if (mode === "system") localStorage.removeItem(STORAGE_KEY);
+    else localStorage.setItem(STORAGE_KEY, mode);
+    apply(mode);
+  }
+
+  updateButtons(currentMode());
+
+  document.querySelectorAll<HTMLButtonElement>(".theme-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const next = order[(order.indexOf(currentMode()) + 1) % order.length];
+      setMode(next);
+    });
+  });
+
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    if (currentMode() === "system") apply("system");
+  });
+</script>

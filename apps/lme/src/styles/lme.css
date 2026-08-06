@@ -3,12 +3,33 @@
 @theme {
     /* Blue accent + near-black base — LME's original "coming soon" palette */
     --font-sans: "Jost", sans-serif;
+    /* Industrial/blueprint display face — distinct from STP's Cormorant Garamond serif */
+    --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
     --color-brand: #3b6ef8;
     --color-brand-hover: #5585fa;
+    /* Safety-amber secondary accent — used for detail/technical accents, never as the primary CTA color */
+    --color-accent: #f5a623;
     --color-bg: #060810;
-    /* near-black — page background */
+    /* near-black — page background (dark mode default) */
     --color-bg-elevated: #0d1120;
-    /* slightly lifted — section/card background */
+    /* slightly lifted — section/card background (dark mode default) */
     --color-ink: #f0f2fc;
-    /* near-white — body text */
+    /* near-white — body text (dark mode default) */
+
+    /* Text sitting on a solid brand-blue surface (buttons, pills) — fixed
+       white, independent of light/dark so on-brand contrast never breaks */
+    --color-on-brand: #ffffff;
+}
+
+/* Light mode — opt-in via .light on <html>, set by ThemeToggle/BaseLayout.
+   Dark values above stay the default so dark mode is pixel-identical to
+   before this feature existed. Pale blueprint-paper palette, matching the
+   industrial/technical-drawing identity in light mode too. */
+:root.light {
+    --color-bg: #f2f4fa;
+    /* pale blueprint paper — page background */
+    --color-bg-elevated: #ffffff;
+    /* white — section/card background */
+    --color-ink: #0a0d1a;
+    /* near-black — body text */
 }
