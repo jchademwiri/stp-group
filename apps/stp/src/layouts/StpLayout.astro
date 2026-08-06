@@ -1,6 +1,7 @@
 ---
 import "@/styles/stp.css";
 import BaseLayout from "@repo/tailwind/layouts/BaseLayout.astro";
+import ThemeToggle from "@repo/tailwind/components/ThemeToggle.astro";
 import WhatsAppButton from "@/components/WhatsAppButton.astro";
 import StickyMobileBar from "@/components/StickyMobileBar.astro";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema.astro";
@@ -36,7 +37,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
   </Fragment>
   <slot name="head" slot="head" />
 
-  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-brand focus:px-4 focus:py-2 focus:text-bg focus:outline-none">Skip to content</a>
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-brand focus:px-4 focus:py-2 focus:text-on-brand focus:outline-none">Skip to content</a>
 
   {/* Decorative frame — hairline corner brackets + grain texture, shared visual motif across sites */}
   <div class="pointer-events-none fixed inset-0 z-40">
@@ -54,7 +55,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
   <header class="sticky top-0 z-30 border-b border-ink/10 bg-bg/95 backdrop-blur">
     <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
       <a href="/" class="shrink-0">
-        <img src="/logo-white.svg" alt="STP - Sithembe Transportation and Projects" class="h-10 w-auto md:h-12" />
+        <img src="/logo-white.svg" alt="STP - Sithembe Transportation and Projects" class="logo-dark-mode h-10 w-auto md:h-12" />
+        <img src="/logo-dark.svg" alt="STP - Sithembe Transportation and Projects" class="logo-light-mode hidden h-10 w-auto md:h-12" />
       </a>
 
       {/* Desktop nav */}
@@ -78,13 +80,14 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
       {/* Desktop CTAs */}
       <div class="hidden items-center gap-2 md:flex">
         <span class="h-5 w-px bg-ink/10" aria-hidden="true"></span>
+        <ThemeToggle />
         <a
           href="#contact"
-          class="rounded-lg border border-brand px-3 py-1.5 font-sans text-xs font-medium tracking-wide text-brand uppercase transition-colors hover:bg-brand hover:text-bg"
+          class="rounded-lg border border-brand px-3 py-1.5 font-sans text-xs font-medium tracking-wide text-brand uppercase transition-colors hover:bg-brand hover:text-on-brand"
         >Contact us</a>
         <a
           href={`tel:${SITE.phoneTel}`}
-          class="rounded-lg bg-brand px-3 py-1.5 font-sans text-xs font-medium tracking-wide text-bg uppercase hover:bg-brand-hover"
+          class="rounded-lg bg-brand px-3 py-1.5 font-sans text-xs font-medium tracking-wide text-on-brand uppercase hover:bg-brand-hover"
         >Call now</a>
       </div>
 
@@ -122,13 +125,26 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
         }
       </nav>
       <div class="border-t border-ink/10 bg-bg px-4 pb-4 pt-3">
-        <a href="#contact" class="block rounded-lg border border-brand px-3 py-2.5 text-center font-sans text-xs font-medium tracking-wide text-brand uppercase transition-colors hover:bg-brand hover:text-bg">Contact us</a>
-        <a href={`tel:${SITE.phoneTel}`} class="mt-2 block rounded-lg bg-brand px-3 py-2.5 text-center font-sans text-xs font-medium tracking-wide text-bg uppercase hover:bg-brand-hover">Call {SITE.phone}</a>
+        <div class="mb-3 flex items-center justify-between">
+          <span class="font-sans text-[0.65rem] font-medium tracking-[0.2em] text-ink/50 uppercase">Theme</span>
+          <ThemeToggle />
+        </div>
+        <a href="#contact" class="block rounded-lg border border-brand px-3 py-2.5 text-center font-sans text-xs font-medium tracking-wide text-brand uppercase transition-colors hover:bg-brand hover:text-on-brand">Contact us</a>
+        <a href={`tel:${SITE.phoneTel}`} class="mt-2 block rounded-lg bg-brand px-3 py-2.5 text-center font-sans text-xs font-medium tracking-wide text-on-brand uppercase hover:bg-brand-hover">Call {SITE.phone}</a>
       </div>
     </div>
   </header>
 
   <style>
+    /* The white wordmark reads fine on the dark-mode navy header but
+       disappears on the light-mode cream header — swap for the dark
+       wordmark when .light is active on <html>. */
+    :global(html.light) .logo-dark-mode {
+      display: none;
+    }
+    :global(html.light) .logo-light-mode {
+      display: block;
+    }
     #mobile-nav {
       opacity: 0;
       transform: translateY(-100%);
