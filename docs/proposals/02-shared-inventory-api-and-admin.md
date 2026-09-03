@@ -4,6 +4,18 @@
 **Dependency:** Proposal 01 validates the public catalogue and enquiry flow  
 **Consumers:** STP website, LME website, shared admin application
 
+## Technology decisions
+
+- **Application stack:** Next.js with TypeScript
+- **Authentication:** Better Auth
+- **Database:** Neon Postgres
+- **ORM:** Drizzle ORM
+- **Hosting:** Vercel
+
+The API and shared admin should be implemented as a Next.js application. Public
+catalogue apps can consume its typed endpoints, while authenticated admin
+routes remain protected by Better Auth.
+
 ## 1. Purpose
 
 Create one operational source of truth for plant and equipment used by both STP
@@ -26,8 +38,7 @@ Recommended monorepo shape:
 apps/
   stp/
   lme/
-  admin/
-  inventory-api/
+  operations/        # Next.js admin and API
 
 packages/
   inventory-types/
@@ -36,10 +47,15 @@ packages/
   tailwind/
 ```
 
-The API should be a database-backed application with explicit endpoints. It
-does not need to begin as a separately deployed microservice; it can be
-deployed with the admin application initially if that keeps operations simpler.
-The boundary should remain clear so it can be separated later.
+The `operations` app should own the shared admin interface, Better Auth setup,
+Drizzle schema, and API route handlers. Deploying these together on Vercel
+keeps the first backend release straightforward. If traffic or team
+boundaries later justify it, the API can be extracted without changing the
+public client contract.
+
+Neon should be the single database for STP and LME operational data. Drizzle
+schema and migrations must be versioned in the repository, and production
+database credentials must remain in Vercel environment variables.
 
 ## 3. Core domain model
 
@@ -145,6 +161,11 @@ Public consumers should receive only fields intended for customers. Internal
 ownership notes, costs, and operational details must stay behind authenticated
 admin endpoints.
 
+Better Auth should protect the admin application and private API operations.
+The first release can use staff accounts managed by the shared operations
+team; role-based permissions can be added when responsibilities become more
+specialised.
+
 ## 6. Migration from Proposal 01
 
 1. Preserve the public catalogue component interfaces.
@@ -176,6 +197,9 @@ experience.
   overlapping dates.
 - Public responses do not expose internal fields.
 - Existing static catalogue pages continue to work during migration.
+- Staff authentication works through Better Auth.
+- Data persists in Neon Postgres through Drizzle ORM.
+- The operations app deploys successfully to Vercel.
 
 ## 9. Benefits
 

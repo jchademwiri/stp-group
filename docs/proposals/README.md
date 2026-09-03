@@ -13,6 +13,7 @@ capability.
 2. [Proposal 02: Shared Inventory API and Administration](./02-shared-inventory-api-and-admin.md)
    - Adds the shared backend and admin application.
    - Supports equipment owned by STP or LME.
+   - Uses Next.js, Better Auth, Neon Postgres, Drizzle ORM, and Vercel.
    - Replaces the static data source without requiring a redesign of the public catalogue.
 
 ## Recommended sequence
