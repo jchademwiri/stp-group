@@ -1,15 +1,15 @@
 # API Design — Operations Platform
 
-**Project:** STP Group Operations Platform
-**Version:** 1.0
-**Status:** Proposed
-**API:** REST
-**Framework:** Next.js
-**Language:** TypeScript
-**Authentication:** Better Auth
-**Database:** Neon PostgreSQL
-**ORM:** Drizzle ORM
-**Validation:** Zod
+**Project:** STP Group Operations Platform  
+**Version:** 1.1  
+**Status:** Proposed  
+**API:** REST  
+**Framework:** Next.js  
+**Language:** TypeScript  
+**Authentication:** Better Auth  
+**Database:** Neon PostgreSQL  
+**ORM:** Drizzle ORM  
+**Validation:** Zod  
 **Hosting:** Vercel
 
 ---
@@ -20,18 +20,20 @@ The Operations API provides the central application interface between the STP/LM
 
 The API is responsible for:
 
-* Equipment catalogue
-* Equipment types
-* Physical assets
-* Companies
-* Customers
-* Enquiries
-* Quotes
-* Allocations
-* Maintenance
-* Availability
-* Authentication and authorization
-* Operational business rules
+- Equipment catalogue
+- Equipment types
+- Physical assets
+- Companies
+- Customers
+- Enquiries
+- Quotes
+- Allocations
+- Maintenance
+- Availability
+- Authentication and authorization
+- Operational business rules
+- Resource lifecycle management
+- Auditability of important operational changes
 
 The API is the **business and security boundary** between applications and the database.
 
@@ -65,6 +67,9 @@ The API follows these principles:
 12. Pagination for collection endpoints
 13. Filtering and sorting for administration endpoints
 14. Auditability of important operational changes
+15. Explicit lifecycle operations for business state transitions
+16. Transactions for multi-record business operations
+17. Concurrency protection for availability and allocation
 
 ---
 
@@ -88,7 +93,7 @@ The production domain will be finalised during deployment.
 
 # 4. API Versioning
 
-All API endpoints will use a version prefix:
+All API endpoints use a version prefix:
 
 ```text
 /api/v1
@@ -96,7 +101,7 @@ All API endpoints will use a version prefix:
 
 Example:
 
-```text
+```http
 GET /api/v1/catalogue
 ```
 
@@ -111,8 +116,6 @@ Existing consumers can continue using `/api/v1` during migration.
 ---
 
 # 5. API Consumers
-
-The API will have three primary consumers.
 
 ## Public Websites
 
@@ -133,9 +136,7 @@ Authenticated staff use the API to manage operational data.
 
 ## Future Integrations
 
-The API should be designed so future applications can consume the same services.
-
-Potential integrations:
+Potential consumers include:
 
 ```text
 Mobile Application
@@ -150,37 +151,25 @@ Third-Party Integrations
 
 # 6. Authentication
 
-Better Auth will provide authentication for administration users.
+Better Auth provides authentication for administration users.
 
 Public endpoints do not require authentication unless specifically configured otherwise.
 
 Private endpoints require an authenticated session.
 
 ```text
-Public Request
-      │
-      ▼
- API Route
-      │
-      ▼
- Public Data
-```
-
-Authenticated request:
-
-```text
 Admin User
-      │
-      ▼
+    │
+    ▼
 Better Auth
-      │
-      ▼
+    │
+    ▼
 Session
-      │
-      ▼
+    │
+    ▼
 Authorization
-      │
-      ▼
+    │
+    ▼
 API Route
 ```
 
@@ -208,15 +197,15 @@ viewer
 
 Example permissions:
 
-| Role       | Catalogue | Assets | Enquiries | Quotes | Allocations | Maintenance |
-| ---------- | --------: | -----: | --------: | -----: | ----------: | ----------: |
-| Admin      |      Full |   Full |      Full |   Full |        Full |        Full |
-| Manager    |      Full |   Full |      Full |   Full |        Full |        Full |
-| Operations |      View | Manage |    Manage |   View |      Manage |      Manage |
-| Sales      |      View |   View |    Manage | Manage |        View |        View |
-| Viewer     |      View |   View |      View |   View |        View |        View |
+| Role | Catalogue | Assets | Enquiries | Quotes | Allocations | Maintenance |
+|---|---|---|---|---|---|---|
+| Admin | Full | Full | Full | Full | Full | Full |
+| Manager | Full | Full | Full | Full | Full | Full |
+| Operations | View | Manage | Manage | View | Manage | Manage |
+| Sales | View | View | Manage | Manage | View | View |
+| Viewer | View | View | View | View | View | View |
 
-Authorization rules will be enforced by the API.
+Authorization rules are enforced by the API.
 
 ---
 
@@ -226,13 +215,11 @@ Authorization rules will be enforced by the API.
 /api/v1
 │
 ├── catalogue
-│
 ├── enquiries
-│
+├── availability
 ├── auth
 │
 └── admin
-    │
     ├── companies
     ├── users
     ├── customers
@@ -245,6 +232,8 @@ Authorization rules will be enforced by the API.
     └── audit-logs
 ```
 
+Lifecycle actions are exposed under the relevant resource rather than allowing clients to arbitrarily change status fields.
+
 ---
 
 # 9. Public Catalogue API
@@ -255,8 +244,6 @@ Authorization rules will be enforced by the API.
 GET /api/v1/catalogue
 ```
 
-Returns equipment available for public catalogue display.
-
 ### Query Parameters
 
 ```text
@@ -265,12 +252,6 @@ search
 location
 page
 limit
-```
-
-Example:
-
-```http
-GET /api/v1/catalogue?category=earthmoving&page=1&limit=20
 ```
 
 ### Response
@@ -297,29 +278,19 @@ GET /api/v1/catalogue?category=earthmoving&page=1&limit=20
 }
 ```
 
-Internal ownership and operational information must not be returned.
+Internal ownership, costs, operational notes and other restricted information must not be returned.
 
----
-
-# 10. Catalogue Details
+## Catalogue Details
 
 ```http
 GET /api/v1/catalogue/:slug
 ```
 
-Example:
-
-```http
-GET /api/v1/catalogue/excavator
-```
-
 Returns the public representation of an equipment type.
-
-The response must contain only customer-safe information.
 
 ---
 
-# 11. Public Enquiries
+# 10. Public Enquiries
 
 ## Create Enquiry
 
@@ -362,57 +333,40 @@ POST /api/v1/enquiries
 }
 ```
 
-The public API should not expose internal assignment, ownership or operational notes.
+The public API must not expose internal assignment, ownership or operational notes.
 
 ---
 
-# 12. Administration — Companies
-
-## List Companies
+# 11. Administration — Companies
 
 ```http
-GET /api/v1/admin/companies
-```
-
-## Create Company
-
-```http
-POST /api/v1/admin/companies
-```
-
-## Get Company
-
-```http
-GET /api/v1/admin/companies/:id
-```
-
-## Update Company
-
-```http
+GET   /api/v1/admin/companies
+POST  /api/v1/admin/companies
+GET   /api/v1/admin/companies/:id
 PATCH /api/v1/admin/companies/:id
 ```
 
-Example:
+Companies may be deactivated and reactivated through lifecycle operations.
 
-```json
-{
-  "name": "Sithembe Transportation & Projects",
-  "code": "STP",
-  "active": true
-}
+```http
+POST /api/v1/admin/companies/:id/deactivate
+POST /api/v1/admin/companies/:id/reactivate
 ```
+
+Deactivated companies cannot receive new assignments. Historical records remain intact.
 
 ---
 
-# 13. Administration — Customers
-
-## List Customers
+# 12. Administration — Customers
 
 ```http
-GET /api/v1/admin/customers
+GET   /api/v1/admin/customers
+POST  /api/v1/admin/customers
+GET   /api/v1/admin/customers/:id
+PATCH /api/v1/admin/customers/:id
 ```
 
-### Filters
+Filters:
 
 ```text
 search
@@ -422,84 +376,42 @@ page
 limit
 ```
 
-## Create Customer
+Customer records should normally be archived rather than physically deleted.
 
 ```http
-POST /api/v1/admin/customers
-```
-
-## Get Customer
-
-```http
-GET /api/v1/admin/customers/:id
-```
-
-## Update Customer
-
-```http
-PATCH /api/v1/admin/customers/:id
+POST /api/v1/admin/customers/:id/archive
 ```
 
 ---
 
-# 14. Administration — Equipment Types
-
-## List Equipment Types
+# 13. Administration — Equipment Types
 
 ```http
-GET /api/v1/admin/equipment-types
-```
-
-### Filters
-
-```text
-search
-category
-active
-page
-limit
-```
-
-## Create Equipment Type
-
-```http
-POST /api/v1/admin/equipment-types
-```
-
-### Request
-
-```json
-{
-  "name": "Excavator",
-  "slug": "excavator",
-  "category": "earthmoving",
-  "description": "Heavy-duty excavator.",
-  "specifications": {},
-  "images": [],
-  "active": true
-}
-```
-
-## Get Equipment Type
-
-```http
-GET /api/v1/admin/equipment-types/:id
-```
-
-## Update Equipment Type
-
-```http
+GET   /api/v1/admin/equipment-types
+POST  /api/v1/admin/equipment-types
+GET   /api/v1/admin/equipment-types/:id
 PATCH /api/v1/admin/equipment-types/:id
 ```
 
----
-
-# 15. Administration — Assets
-
-## List Assets
+Lifecycle operations:
 
 ```http
-GET /api/v1/admin/assets
+POST /api/v1/admin/equipment-types/:id/publish
+POST /api/v1/admin/equipment-types/:id/unpublish
+POST /api/v1/admin/equipment-types/:id/archive
+```
+
+An archived equipment type is removed from the public catalogue and cannot be used for new enquiries or allocations.
+
+---
+
+# 14. Administration — Assets
+
+```http
+GET   /api/v1/admin/assets
+POST  /api/v1/admin/assets
+GET   /api/v1/admin/assets/:id
+PATCH /api/v1/admin/assets/:id
 ```
 
 ### Filters
@@ -516,246 +428,247 @@ page
 limit
 ```
 
-Example:
+### Asset Lifecycle
+
+```text
+available
+   │
+   ▼
+reserved
+   │
+   ▼
+on_hire
+   │
+   ▼
+available
+```
+
+Alternative terminal state:
+
+```text
+retired
+```
+
+Lifecycle actions:
 
 ```http
-GET /api/v1/admin/assets?status=available&ownerCompanyId=uuid
+POST /api/v1/admin/assets/:id/reserve
+POST /api/v1/admin/assets/:id/release
+POST /api/v1/admin/assets/:id/retire
+POST /api/v1/admin/assets/:id/restore
 ```
 
-## Create Asset
+An asset cannot be retired while on hire, actively allocated or subject to an unresolved operational commitment.
 
-```http
-POST /api/v1/admin/assets
-```
-
-### Request
-
-```json
-{
-  "assetNumber": "STP-EXC-001",
-  "equipmentTypeId": "uuid",
-  "ownerCompanyId": "uuid",
-  "managedByCompanyId": "uuid",
-  "status": "available",
-  "location": "Pretoria",
-  "condition": "good",
-  "notes": "Ready for hire."
-}
-```
-
-## Get Asset
-
-```http
-GET /api/v1/admin/assets/:id
-```
-
-## Update Asset
-
-```http
-PATCH /api/v1/admin/assets/:id
-```
+Ownership and management changes must be audited.
 
 ---
 
-# 16. Administration — Enquiries
-
-## List Enquiries
+# 15. Administration — Enquiries
 
 ```http
-GET /api/v1/admin/enquiries
-```
-
-### Filters
-
-```text
-status
-customerId
-assignedCompanyId
-startDate
-endDate
-search
-page
-limit
-```
-
-## Get Enquiry
-
-```http
-GET /api/v1/admin/enquiries/:id
-```
-
-## Update Enquiry
-
-```http
+GET   /api/v1/admin/enquiries
+GET   /api/v1/admin/enquiries/:id
 PATCH /api/v1/admin/enquiries/:id
 ```
 
+### Enquiry Lifecycle
+
+```text
+new
+  ↓
+reviewing
+  ↓
+quoted
+  ↓
+awaiting_customer
+  ↓
+confirmed
+```
+
+Alternative terminal states:
+
+```text
+declined
+cancelled
+```
+
+### Lifecycle Operations
+
+```http
+POST /api/v1/admin/enquiries/:id/start-review
+POST /api/v1/admin/enquiries/:id/assign
+POST /api/v1/admin/enquiries/:id/convert-to-quote
+POST /api/v1/admin/enquiries/:id/decline
+POST /api/v1/admin/enquiries/:id/cancel
+```
+
+Assignment request:
+
+```json
+{
+  "companyId": "uuid",
+  "userId": "uuid"
+}
+```
+
+---
+
+# 16. Administration — Quotes
+
+```http
+GET   /api/v1/admin/quotes
+POST  /api/v1/admin/quotes
+GET   /api/v1/admin/quotes/:id
+PATCH /api/v1/admin/quotes/:id
+```
+
+### Quote Lifecycle
+
+```text
+draft
+  ↓
+issued
+  ↓
+awaiting_customer
+  ↓
+accepted
+```
+
+Alternative states:
+
+```text
+rejected
+expired
+cancelled
+```
+
+### Lifecycle Operations
+
+```http
+POST /api/v1/admin/quotes/:id/issue
+POST /api/v1/admin/quotes/:id/accept
+POST /api/v1/admin/quotes/:id/reject
+POST /api/v1/admin/quotes/:id/cancel
+POST /api/v1/admin/quotes/:id/expire
+POST /api/v1/admin/quotes/:id/revise
+```
+
+Only draft quotes may be directly edited. Issued quotes must be revised through versioning.
+
+Example:
+
+```text
+Q-2026-001 v1
+Q-2026-001 v2
+Q-2026-001 v3
+```
+
+### Quote Calculation
+
+```text
+Line Total = Quantity × Unit Price × Duration
+
+Subtotal = Sum of Line Totals
+
+Total = Subtotal - Discount + VAT
+```
+
+The server calculates authoritative quote totals.
+
+---
+
+# 17. Administration — Allocations
+
+An allocation represents the operational commitment of a specific asset to a customer/request.
+
+```http
+GET   /api/v1/admin/allocations
+POST  /api/v1/admin/allocations
+GET   /api/v1/admin/allocations/:id
+PATCH /api/v1/admin/allocations/:id
+```
+
+### Allocation Lifecycle
+
+```text
+requested
+   ↓
+reserved
+   ↓
+confirmed
+   ↓
+active
+   ↓
+completed
+```
+
+Alternative terminal state:
+
+```text
+cancelled
+```
+
+### Lifecycle Operations
+
+```http
+POST /api/v1/admin/allocations/:id/reserve
+POST /api/v1/admin/allocations/:id/confirm
+POST /api/v1/admin/allocations/:id/start
+POST /api/v1/admin/allocations/:id/complete
+POST /api/v1/admin/allocations/:id/cancel
+```
+
+Before reservation or confirmation, the API must verify:
+
+```text
+Asset exists
+AND
+Asset is not retired
+AND
+No overlapping allocation
+AND
+No overlapping maintenance
+```
+
+Conflicts return:
+
+```http
+409 Conflict
+```
+
 Example:
 
 ```json
 {
-  "status": "reviewing",
-  "assignedCompanyId": "uuid",
-  "notes": "Assigned to STP operations."
+  "error": {
+    "code": "ASSET_ALLOCATION_CONFLICT",
+    "message": "Asset is already allocated for the requested period."
+  }
 }
 ```
 
----
+Starting a hire should transactionally update:
 
-# 17. Administration — Quotes
-
-## List Quotes
-
-```http
-GET /api/v1/admin/quotes
+```text
+allocation.status = active
+asset.status = on_hire
 ```
 
-## Create Quote
+Completing a hire should transactionally update:
 
-```http
-POST /api/v1/admin/quotes
+```text
+allocation.status = completed
+asset.status = available
 ```
 
-### Request
-
-```json
-{
-  "enquiryId": "uuid",
-  "version": 1,
-  "validUntil": "2026-09-30",
-  "lines": [
-    {
-      "equipmentTypeId": "uuid",
-      "assetId": "uuid",
-      "description": "Excavator hire",
-      "quantity": 1,
-      "unitPrice": 15000,
-      "duration": 5
-    }
-  ],
-  "discount": 0,
-  "vat": 0,
-  "terms": "Payment terms..."
-}
-```
-
-The server calculates quote totals.
-
-The client must not be trusted to calculate authoritative totals.
-
-## Get Quote
-
-```http
-GET /api/v1/admin/quotes/:id
-```
-
-## Update Quote
-
-```http
-PATCH /api/v1/admin/quotes/:id
-```
+The API should also record completion timestamp, return condition and operational notes where applicable.
 
 ---
 
-# 18. Quote Calculation
+# 18. Availability API
 
-The API should calculate:
-
-```text
-Line Total
-    =
-Quantity × Unit Price × Duration
-```
-
-Then:
-
-```text
-Subtotal
-    =
-Sum of Line Totals
-```
-
-Then:
-
-```text
-Total
-    =
-Subtotal - Discount + VAT
-```
-
-The API is responsible for the final authoritative values.
-
----
-
-# 19. Administration — Allocations
-
-## List Allocations
-
-```http
-GET /api/v1/admin/allocations
-```
-
-### Filters
-
-```text
-assetId
-customerId
-companyId
-status
-startDate
-endDate
-```
-
-## Create Allocation
-
-```http
-POST /api/v1/admin/allocations
-```
-
-### Request
-
-```json
-{
-  "assetId": "uuid",
-  "enquiryId": "uuid",
-  "customerId": "uuid",
-  "companyId": "uuid",
-  "startDate": "2026-10-01",
-  "endDate": "2026-10-15",
-  "status": "confirmed",
-  "notes": "Confirmed hire."
-}
-```
-
-Before creating a confirmed allocation, the API must check:
-
-```text
-Asset exists
-      AND
-Asset is not retired
-      AND
-No conflicting allocation
-      AND
-No conflicting maintenance
-```
-
-## Get Allocation
-
-```http
-GET /api/v1/admin/allocations/:id
-```
-
-## Update Allocation
-
-```http
-PATCH /api/v1/admin/allocations/:id
-```
-
----
-
-# 20. Availability API
-
-Availability should be exposed as a dedicated API operation rather than requiring clients to reproduce business rules.
+Availability is calculated rather than stored as a permanent independent state.
 
 ```http
 GET /api/v1/availability
@@ -777,67 +690,69 @@ Example:
 GET /api/v1/availability?equipmentTypeId=uuid&startDate=2026-10-01&endDate=2026-10-15&quantity=2
 ```
 
-### Response
+An asset is available for a requested period when:
 
-```json
-{
-  "data": {
-    "available": true,
-    "quantityRequested": 2,
-    "quantityAvailable": 4
-  }
-}
+```text
+Asset status allows hire
+AND
+No overlapping allocation
+AND
+No overlapping maintenance
 ```
 
-The API remains the authoritative source for availability.
+Availability must always use current database state and must not rely on stale cache.
 
 ---
 
-# 21. Administration — Maintenance
-
-## List Maintenance
+# 19. Administration — Maintenance
 
 ```http
-GET /api/v1/admin/maintenance
-```
-
-## Create Maintenance
-
-```http
-POST /api/v1/admin/maintenance
-```
-
-### Request
-
-```json
-{
-  "assetId": "uuid",
-  "type": "scheduled_maintenance",
-  "description": "500-hour service",
-  "startDate": "2026-10-05",
-  "endDate": "2026-10-07",
-  "status": "scheduled",
-  "notes": "Workshop service."
-}
-```
-
-## Get Maintenance
-
-```http
-GET /api/v1/admin/maintenance/:id
-```
-
-## Update Maintenance
-
-```http
+GET   /api/v1/admin/maintenance
+POST  /api/v1/admin/maintenance
+GET   /api/v1/admin/maintenance/:id
 PATCH /api/v1/admin/maintenance/:id
 ```
 
+### Maintenance Lifecycle
+
+```text
+scheduled
+   ↓
+in_progress
+   ↓
+completed
+```
+
+Alternative:
+
+```text
+cancelled
+```
+
+### Lifecycle Operations
+
+```http
+POST /api/v1/admin/maintenance/:id/start
+POST /api/v1/admin/maintenance/:id/complete
+POST /api/v1/admin/maintenance/:id/cancel
+```
+
+Starting maintenance should update:
+
+```text
+maintenance.status = in_progress
+asset.status = maintenance
+```
+
+Completing maintenance should update the asset to `available` only when no other active operational condition prevents availability.
+
+Maintenance scheduling must check for conflicting allocations.
+
 ---
 
-# 22. Authentication Endpoints
+# 20. Authentication Endpoints
 
-Better Auth will manage authentication endpoints.
+Better Auth manages authentication endpoints.
 
 Conceptually:
 
@@ -845,17 +760,182 @@ Conceptually:
 /api/auth/*
 ```
 
-Authentication implementation should follow Better Auth's configured route structure.
-
-The Operations API should use the authenticated session when processing private requests.
+The Operations API uses the authenticated session when processing private requests.
 
 ---
 
-# 23. Request Validation
+# 21. Lifecycle Operation Pattern
 
-All incoming request data must be validated server-side using Zod.
+Standard resource operations use:
+
+```http
+GET     /api/v1/resource
+GET     /api/v1/resource/:id
+POST    /api/v1/resource
+PATCH   /api/v1/resource/:id
+```
+
+Business lifecycle operations use explicit action endpoints:
+
+```http
+POST /api/v1/resource/:id/{action}
+```
+
+For administration resources, the actual route is normally:
+
+```http
+POST /api/v1/admin/resource/:id/{action}
+```
+
+Examples:
+
+```text
+POST /api/v1/admin/enquiries/:id/assign
+POST /api/v1/admin/enquiries/:id/convert-to-quote
+POST /api/v1/admin/quotes/:id/issue
+POST /api/v1/admin/quotes/:id/accept
+POST /api/v1/admin/allocations/:id/reserve
+POST /api/v1/admin/allocations/:id/start
+POST /api/v1/admin/allocations/:id/complete
+POST /api/v1/admin/maintenance/:id/start
+POST /api/v1/admin/maintenance/:id/complete
+```
+
+Clients must not bypass lifecycle rules by directly setting arbitrary status values.
+
+---
+
+# 22. Delete vs Archive
+
+The API should avoid physical deletion of operational records.
+
+Prefer archive/deactivate for:
+
+- companies
+- customers
+- equipment types
+- assets
+- users
+
+Avoid deletion for:
+
+- enquiries
+- quotes
+- allocations
+- maintenance records
+- audit logs
+
+Historical operational records form part of the audit trail.
+
+Where deletion is technically required, it must be authenticated, authorized, audited and protected by foreign-key constraints.
+
+---
+
+# 23. Lifecycle Transition Validation
+
+Every lifecycle action must validate the current state.
 
 Example:
+
+```text
+POST /api/v1/admin/quotes/:id/accept
+```
+
+is valid only when:
+
+```text
+status = issued
+```
+
+It must reject:
+
+```text
+draft
+rejected
+expired
+cancelled
+```
+
+Similarly:
+
+```text
+POST /api/v1/admin/allocations/:id/start
+```
+
+must verify:
+
+```text
+allocation.status = confirmed
+asset.status = reserved
+```
+
+Invalid transitions return:
+
+```http
+409 Conflict
+```
+
+Example:
+
+```json
+{
+  "error": {
+    "code": "INVALID_LIFECYCLE_TRANSITION",
+    "message": "Allocation cannot be started from its current state."
+  }
+}
+```
+
+---
+
+# 24. Idempotency
+
+Lifecycle operations that may be retried should be idempotent where practical.
+
+Examples:
+
+```text
+POST /quotes/:id/accept
+POST /allocations/:id/confirm
+POST /allocations/:id/complete
+```
+
+For externally initiated operations, the API may support:
+
+```http
+Idempotency-Key: <unique-request-id>
+```
+
+Repeated requests must not create duplicate business effects.
+
+---
+
+# 25. Bulk Operations
+
+Bulk operations may be introduced where operational efficiency requires them.
+
+Examples:
+
+```http
+POST /api/v1/admin/assets/bulk-import
+POST /api/v1/admin/assets/bulk-update
+POST /api/v1/admin/enquiries/bulk-assign
+POST /api/v1/admin/maintenance/bulk-schedule
+```
+
+Bulk operations must:
+
+- validate every record
+- execute transactionally where appropriate
+- return per-record errors
+- create audit records
+- explicitly document partial-failure behavior
+
+---
+
+# 26. Request Validation
+
+All incoming request data must be validated server-side using Zod.
 
 ```text
 HTTP Request
@@ -886,7 +966,7 @@ Frontend validation improves user experience but is not a security mechanism.
 
 ---
 
-# 24. Response Structure
+# 27. Response Structure
 
 Successful single-resource response:
 
@@ -915,9 +995,9 @@ Successful collection response:
 
 ---
 
-# 25. Error Response
+# 28. Error Response
 
-All API errors should use a consistent structure.
+All API errors use a consistent structure.
 
 ```json
 {
@@ -933,65 +1013,31 @@ All API errors should use a consistent structure.
 
 ---
 
-# 26. HTTP Status Codes
+# 29. HTTP Status Codes
 
-| Status | Meaning                                  |
-| -----: | ---------------------------------------- |
-|  `200` | Successful request                       |
-|  `201` | Resource created                         |
-|  `204` | Successful request with no response body |
-|  `400` | Invalid request                          |
-|  `401` | Authentication required                  |
-|  `403` | Insufficient permissions                 |
-|  `404` | Resource not found                       |
-|  `409` | Conflict                                 |
-|  `422` | Validation/business rule failure         |
-|  `429` | Too many requests                        |
-|  `500` | Internal server error                    |
-
----
-
-# 27. Business Rule Errors
-
-Business conflicts should return `409 Conflict` where appropriate.
-
-Example:
-
-```json
-{
-  "error": {
-    "code": "ASSET_ALLOCATION_CONFLICT",
-    "message": "The selected asset is already allocated during the requested period."
-  }
-}
-```
-
-Maintenance conflict:
-
-```json
-{
-  "error": {
-    "code": "ASSET_MAINTENANCE_CONFLICT",
-    "message": "The selected asset is scheduled for maintenance during the requested period."
-  }
-}
-```
+| Status | Meaning |
+|---:|---|
+| `200` | Successful request |
+| `201` | Resource created |
+| `204` | Successful request with no response body |
+| `400` | Invalid request |
+| `401` | Authentication required |
+| `403` | Insufficient permissions |
+| `404` | Resource not found |
+| `409` | Resource or lifecycle conflict |
+| `422` | Validation/business rule failure |
+| `429` | Too many requests |
+| `500` | Internal server error |
 
 ---
 
-# 28. Pagination
+# 30. Pagination, Filtering and Sorting
 
-Collection endpoints should support:
+Collection endpoints support pagination where appropriate:
 
 ```text
 page
 limit
-```
-
-Example:
-
-```http
-GET /api/v1/admin/assets?page=2&limit=25
 ```
 
 Default:
@@ -1007,55 +1053,26 @@ Maximum:
 limit = 100
 ```
 
----
+Filtering uses query parameters, for example:
 
-# 29. Sorting
+```http
+GET /api/v1/admin/assets?status=available&location=Pretoria
+```
 
-Administration endpoints may support:
+Sorting may use:
 
 ```text
 sortBy
 sortOrder
 ```
 
-Example:
-
-```http
-GET /api/v1/admin/assets?sortBy=createdAt&sortOrder=desc
-```
-
-Allowed sort fields must be explicitly defined by each endpoint.
-
----
-
-# 30. Filtering
-
-Filtering should use query parameters.
-
-Example:
-
-```http
-GET /api/v1/admin/assets
-    ?status=available
-    &location=Pretoria
-    &equipmentTypeId=uuid
-```
-
-The API must validate filter parameters before querying the database.
+Allowed fields must be explicitly defined by each endpoint.
 
 ---
 
 # 31. Search
 
-Search should support relevant human-readable fields.
-
-Example:
-
-```http
-GET /api/v1/admin/assets?search=STP-EXC
-```
-
-Potential searchable fields:
+Search should support relevant human-readable fields such as:
 
 ```text
 Asset Number
@@ -1067,30 +1084,36 @@ Enquiry Number
 Location
 ```
 
+Example:
+
+```http
+GET /api/v1/admin/assets?search=STP-EXC
+```
+
 ---
 
 # 32. API Security
 
 The API must implement:
 
-* HTTPS in production
-* Better Auth sessions
-* Server-side authorization
-* Input validation
-* Rate limiting for public endpoints
-* Request size limits
-* Secure environment variables
-* Safe error messages
-* Database parameterization through Drizzle
-* Protection against unauthorized data exposure
+- HTTPS in production
+- Better Auth sessions
+- Server-side authorization
+- Input validation
+- Rate limiting for public endpoints
+- Request size limits
+- Secure environment variables
+- Safe error messages
+- Parameterized database access through Drizzle
+- Protection against unauthorized data exposure
 
-Sensitive values must never be returned in public API responses.
+Sensitive internal values must never be returned in public API responses.
 
 ---
 
 # 33. Public API Data Boundary
 
-The public catalogue API should return a deliberately defined DTO.
+Public DTOs must be explicitly defined.
 
 Example:
 
@@ -1106,15 +1129,13 @@ specifications
 images
 ```
 
-It should **not** return the complete database `Asset` model.
-
-This prevents accidental exposure of internal fields.
+The public API must not expose the complete internal `Asset` model.
 
 ---
 
-# 34. API Business Logic
+# 34. Business Logic Architecture
 
-Business logic should not be implemented directly inside individual page components.
+Business logic must not be implemented directly inside frontend page components.
 
 Recommended structure:
 
@@ -1140,10 +1161,10 @@ Drizzle ORM
 PostgreSQL
 ```
 
-Example:
+Example allocation operation:
 
 ```text
-POST /api/v1/admin/allocations
+POST /api/v1/admin/allocations/:id/start
               │
               ▼
        Validate Request
@@ -1152,26 +1173,24 @@ POST /api/v1/admin/allocations
       Check Authorization
               │
               ▼
-      Check Asset Status
+      Validate Lifecycle
               │
               ▼
-    Check Allocation Conflict
+       Check Asset State
               │
               ▼
-    Check Maintenance Conflict
+      Execute Transaction
               │
-              ▼
-       Create Allocation
-              │
-              ▼
-       Write Audit Log
+              ├── Update Allocation
+              ├── Update Asset
+              └── Write Audit Log
 ```
 
 ---
 
 # 35. API Modules
 
-The API should be organised by domain.
+The API should be organised by domain:
 
 ```text
 modules/
@@ -1189,17 +1208,7 @@ modules/
 └── audit/
 ```
 
-Each module should contain its own:
-
-```text
-schemas
-services
-queries
-types
-business rules
-```
-
-where appropriate.
+Each module should contain its own schemas, services, queries, types and business rules where appropriate.
 
 ---
 
@@ -1226,7 +1235,7 @@ type PublicEquipment = {
 };
 ```
 
-The shared types package should contain API-facing contracts, not direct database models.
+Shared types should contain API-facing contracts, not direct database models.
 
 ---
 
@@ -1236,17 +1245,6 @@ STP and LME should consume the API through:
 
 ```text
 packages/api-client
-```
-
-Example:
-
-```text
-STP
- │
- └── @repo/api-client
-          │
-          ▼
-     Operations API
 ```
 
 This avoids duplicating API request logic across applications.
@@ -1263,9 +1261,7 @@ The following architecture is required:
                  └──────┬──────┘
                         │
                  ┌──────▼──────┐
-                 │             │
                  │     API     │
-                 │             │
                  └──────┬──────┘
                         │
                  ┌──────▼──────┐
@@ -1297,13 +1293,19 @@ Change Asset Status
 Change Ownership
 Change Management Company
 Create Allocation
+Reserve Allocation
 Cancel Allocation
 Create Quote
 Update Quote
+Issue Quote
 Accept Quote
 Change Enquiry Status
+Assign Enquiry
 Create Maintenance
 Update Maintenance
+Start Maintenance
+Complete Maintenance
+Retire Asset
 ```
 
 Audit records should capture:
@@ -1320,67 +1322,106 @@ Timestamp
 
 ---
 
-# 40. API Caching
+# 40. Notification Hooks
 
-Public catalogue endpoints may be cached.
+Notifications should be triggered by lifecycle events rather than directly from frontend clients.
 
-Potential strategy:
+Examples:
+
+```text
+Enquiry created
+    → notify operations
+
+Quote issued
+    → notify customer
+
+Quote accepted
+    → notify operations
+
+Allocation confirmed
+    → notify responsible company
+
+Hire completed
+    → notify operations
+```
+
+Notification delivery may use Resend or another provider behind an internal service boundary.
+
+---
+
+# 41. Lifecycle Events
+
+Important transitions should produce domain events where appropriate.
+
+Examples:
+
+```text
+ENQUIRY_CREATED
+ENQUIRY_ASSIGNED
+QUOTE_ISSUED
+QUOTE_ACCEPTED
+QUOTE_REJECTED
+ALLOCATION_RESERVED
+ALLOCATION_CONFIRMED
+HIRE_STARTED
+HIRE_COMPLETED
+MAINTENANCE_STARTED
+MAINTENANCE_COMPLETED
+ASSET_RETIRED
+```
+
+This provides a foundation for notifications, reporting and future integrations.
+
+---
+
+# 42. Transactions
+
+Operations that modify multiple related records must use database transactions.
+
+Example:
+
+```text
+Accept Quote
+    │
+    ├── Update Quote
+    ├── Update Enquiry
+    ├── Create/confirm Allocation
+    ├── Reserve Asset
+    └── Create Audit Log
+```
+
+These changes should succeed or fail as a unit where appropriate.
+
+The API must never leave the system in a partially transitioned state.
+
+---
+
+# 43. Concurrency
+
+Availability checks must account for concurrent requests.
+
+The API/database must prevent two concurrent requests from creating conflicting confirmed allocations for the same asset and period.
+
+PostgreSQL transactions and appropriate locking or exclusion constraints should be used where necessary.
+
+---
+
+# 44. Caching
+
+Public catalogue endpoints may be cached:
 
 ```text
 GET /api/v1/catalogue
 GET /api/v1/catalogue/:slug
 ```
 
-can use appropriate caching/revalidation.
+Operational endpoints should generally return current data.
 
-Operational endpoints should generally return current data and must not rely on stale cache for availability decisions.
-
-Availability and allocation operations must always use current database state.
+Availability, allocation and lifecycle operations must always use current database state.
 
 ---
 
-# 41. Transaction Requirements
-
-Operations that modify multiple related records should use database transactions.
-
-Example:
-
-```text
-Confirm Allocation
-       │
-       ├── Validate asset
-       ├── Validate availability
-       ├── Create allocation
-       ├── Update asset status
-       └── Create audit record
-```
-
-These operations should succeed or fail as a unit where appropriate.
-
----
-
-# 42. Concurrency
-
-Availability checks must account for concurrent requests.
-
-Example:
-
-```text
-Admin A ──► Check Asset ──► Available
-                              │
-Admin B ──► Check Asset ──────┘
-                              │
-                         Both attempt
-                         allocation
-```
-
-The database/API must prevent both requests from creating conflicting confirmed allocations.
-
-PostgreSQL transactions and appropriate locking/exclusion constraints should be used where necessary.
-
----
-
-# 43. API Deployment
+# 45. Deployment
 
 The Operations API will be deployed with the Operations Next.js application.
 
@@ -1406,20 +1447,13 @@ BETTER_AUTH_SECRET
 BETTER_AUTH_URL
 ```
 
-Additional environment variables may be introduced for:
-
-```text
-Email
-Storage
-Monitoring
-External Integrations
-```
+Additional variables may be introduced for email, storage, monitoring and integrations.
 
 Secrets must never be committed to GitHub.
 
 ---
 
-# 44. Proposed API Route Map
+# 46. Proposed API Route Map
 
 ```text
 /api/v1
@@ -1442,55 +1476,84 @@ Secrets must never be committed to GitHub.
     │   ├── POST
     │   └── /:id
     │       ├── GET
-    │       └── PATCH
+    │       ├── PATCH
+    │       ├── /deactivate
+    │       └── /reactivate
     │
     ├── /customers
     │   ├── GET
     │   ├── POST
     │   └── /:id
     │       ├── GET
-    │       └── PATCH
+    │       ├── PATCH
+    │       └── /archive
     │
     ├── /equipment-types
     │   ├── GET
     │   ├── POST
     │   └── /:id
     │       ├── GET
-    │       └── PATCH
+    │       ├── PATCH
+    │       ├── /publish
+    │       ├── /unpublish
+    │       └── /archive
     │
     ├── /assets
     │   ├── GET
     │   ├── POST
     │   └── /:id
     │       ├── GET
-    │       └── PATCH
+    │       ├── PATCH
+    │       ├── /reserve
+    │       ├── /release
+    │       ├── /retire
+    │       └── /restore
     │
     ├── /enquiries
     │   ├── GET
     │   └── /:id
     │       ├── GET
-    │       └── PATCH
+    │       ├── PATCH
+    │       ├── /start-review
+    │       ├── /assign
+    │       ├── /convert-to-quote
+    │       ├── /decline
+    │       └── /cancel
     │
     ├── /quotes
     │   ├── GET
     │   ├── POST
     │   └── /:id
     │       ├── GET
-    │       └── PATCH
+    │       ├── PATCH
+    │       ├── /issue
+    │       ├── /accept
+    │       ├── /reject
+    │       ├── /cancel
+    │       ├── /expire
+    │       └── /revise
     │
     ├── /allocations
     │   ├── GET
     │   ├── POST
     │   └── /:id
     │       ├── GET
-    │       └── PATCH
+    │       ├── PATCH
+    │       ├── /reserve
+    │       ├── /confirm
+    │       ├── /start
+    │       ├── /complete
+    │       └── /cancel
     │
     ├── /maintenance
     │   ├── GET
     │   ├── POST
     │   └── /:id
     │       ├── GET
-    │       └── PATCH
+    │       ├── PATCH
+    │       ├── /start
+    │       ├── /complete
+    │       └── /cancel
     │
     └── /audit-logs
         └── GET
@@ -1498,9 +1561,9 @@ Secrets must never be committed to GitHub.
 
 ---
 
-# 45. Implementation Sequence
+# 47. Implementation Sequence
 
-The API should be implemented in the following order:
+The API should be implemented in this order:
 
 ```text
 1. Database schema
@@ -1531,51 +1594,59 @@ The API should be implemented in the following order:
        ↓
 14. Maintenance API
        ↓
-15. Audit logging
+15. Lifecycle services
        ↓
-16. API client package
+16. Audit logging
        ↓
-17. STP integration
+17. API client package
        ↓
-18. LME integration
+18. STP integration
+       ↓
+19. LME integration
 ```
 
 ---
 
-# 46. Acceptance Criteria
+# 48. Acceptance Criteria
 
 The API implementation is considered successful when:
 
-* API is available under `/api/v1`.
-* STP can retrieve public catalogue data.
-* LME can retrieve public catalogue data.
-* Public users can submit enquiries.
-* Administration users can authenticate.
-* Private endpoints require authentication.
-* Authorization is enforced.
-* Companies can be managed.
-* Equipment types can be managed.
-* Assets can be registered and managed.
-* Ownership and management companies are separate.
-* Customers can be managed.
-* Enquiries can be reviewed and assigned.
-* Quotes can be created and versioned.
-* Quote totals are calculated server-side.
-* Availability can be checked through the API.
-* Allocations can be created.
-* Conflicting allocations are rejected.
-* Maintenance conflicts are rejected.
-* Public API responses do not expose internal data.
-* Important operational actions are audited.
-* API validation is performed server-side.
-* Database operations use Drizzle ORM.
-* Production data is stored in Neon PostgreSQL.
-* API can be deployed through Vercel.
-* STP and LME do not directly access the database.
+- API is available under `/api/v1`.
+- STP can retrieve public catalogue data.
+- LME can retrieve public catalogue data.
+- Public users can submit enquiries.
+- Administration users can authenticate.
+- Private endpoints require authentication.
+- Authorization is enforced.
+- Companies can be managed and deactivated/reactivated.
+- Equipment types can be managed and published/unpublished/archived.
+- Assets can be registered and managed.
+- Ownership and management companies are separate.
+- Assets can be reserved, released, retired and restored.
+- Customers can be managed and archived.
+- Enquiries can be reviewed, assigned, converted, declined and cancelled.
+- Quotes can be created, issued, accepted, rejected, cancelled, expired and revised.
+- Quote totals are calculated server-side.
+- Availability can be checked through the API.
+- Allocations can be reserved, confirmed, started, completed and cancelled.
+- Conflicting allocations are rejected.
+- Maintenance can be scheduled, started, completed and cancelled.
+- Maintenance conflicts are rejected.
+- Invalid lifecycle transitions return `409 Conflict`.
+- Multi-record lifecycle operations use transactions.
+- Important lifecycle operations are audited.
+- Public API responses do not expose internal data.
+- API validation is performed server-side.
+- Database operations use Drizzle ORM.
+- Production data is stored in Neon PostgreSQL.
+- API can be deployed through Vercel.
+- STP and LME do not directly access the database.
+- Lifecycle operations are protected by authentication and authorization.
+- Concurrent allocation attempts cannot create conflicting confirmed allocations.
 
 ---
 
-# 47. Final Architecture
+# 49. Final Architecture
 
 ```text
                          PUBLIC USERS
@@ -1599,7 +1670,9 @@ The API implementation is considered successful when:
                   │ Authorization       │
                   │ Validation          │
                   │ Business Logic      │
+                  │ Lifecycle Rules     │
                   │ Availability        │
+                  │ Audit Events        │
                   │ API Responses       │
                   └──────────┬──────────┘
                              │
@@ -1638,9 +1711,49 @@ The API implementation is considered successful when:
 
 ---
 
-# 48. Design Principle
+# 50. Final Principle
 
-The Operations API is the **authoritative business layer** of the STP Group platform.
+> **CRUD manages resources. Lifecycle operations manage the business.**
+
+CRUD answers:
+
+```text
+What data do we have?
+How do we create it?
+How do we read it?
+How do we update it?
+How do we archive it?
+```
+
+Lifecycle operations answer:
+
+```text
+What is happening to the resource?
+Is this transition allowed?
+What business rules must be checked?
+What related records must change?
+What must be audited?
+```
+
+For example:
+
+```http
+PATCH /api/v1/admin/assets/:id
+```
+
+can update asset information.
+
+But:
+
+```http
+POST /api/v1/admin/assets/:id/reserve
+```
+
+represents a business operation because the API must check availability, conflicting allocations, maintenance, authorization and then perform the required state changes.
+
+The API is therefore **not simply a CRUD interface to the database**. It is the authoritative operational layer that controls how the business moves from one state to another.
+
+The final separation is:
 
 ```text
 Websites
@@ -1652,10 +1765,8 @@ Business Rules
 Database
 ```
 
-The websites should know **how to display and collect information**.
+The websites know **how to display and collect information**.
 
-The API should know **how the business operates**.
+The API knows **how the business operates**.
 
-The database should know **how the data is stored and related**.
-
-This separation allows the STP and LME websites, Operations Administration and future applications to evolve independently while using the same operational data and business rules.
+The database knows **how the data is stored and related**.
